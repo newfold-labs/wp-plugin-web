@@ -1,4 +1,5 @@
 import './stylesheet.scss';
+import graphicUrl from '../../../../assets/svg/large-star.svg';
 import CacheSettings from './cacheSettings';
 import ClearCache from './clearCache';
 import SettingsCallout from './settingsCallout';
@@ -10,6 +11,9 @@ const Performance = () => {
 	return (
 		<div className="wppw-Performance grid col2 has-page-graphic">
 			<CacheSettings />
+			{isWideViewport && (
+				<div><img src={graphicUrl} style={{ float: 'right', width: '80%', height: 'auto' }} alt={__('Star illustration', 'wp-plugin-web')} /></div>
+			)}
 			<ClearCache />
 			<SettingsCallout />
 		</div>
