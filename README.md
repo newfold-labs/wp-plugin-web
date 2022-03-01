@@ -1,5 +1,5 @@
 <a href="https://web.com/" target="_blank">
-    <img src="https://www.web.com/content/experience-fragments/webdotcom/site-header/master/_jcr_content/root/header/logo.coreimg.svg/1605898468526.svg" alt="Web.com Logo" title="Web.com" align="right" height="32" />
+    <img src="https://raw.githubusercontent.com/newfold-labs/wp-plugin-web/main/assets/svg/web-logo.svg" alt="Web.com Logo" title="Web.com" align="right" height="32" />
 </a>
 
 # Web.com WordPress Plugin
