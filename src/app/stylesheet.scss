@@ -1,16 +1,66 @@
 :root {
-    --hgbrand-color-primary: #1f2044;
-    --hgbrand-color-primary-dark: #191936;
-    --hgbrand-color-secondary: #2e93ee;
-    --hgbrand-color-secondary-dark: #3c97ff;
-    --hgbrand-color-yellow: #ffcf00;
-    --hgbrand-color-orange: #ff9144;
-    --hgbrand-color-foreground: #363636;
-    --hgbrand-color-foreground-dark: #303030;
-    --hgbrand-color-accent: #cdd8df;
-    --hgbrand-color-background: #f5f6f8;
-    --hgbrand-color-green: #38c174;
-    --hgbrand-color-white: #fff;
+    --mdc-theme-primary: #0D47FB;
+    --mdc-theme-primary--light1: #4A75FC;
+    --mdc-theme-primary--light2: #6E91FD;
+    --mdc-theme-primary--light3: #CFDAFE;
+    --mdc-theme-primary--light4: #E6ECFF;
+    --mdc-theme-primary--dark1: #0A39C9;
+
+    --mdc-theme-secondary: #0BB073;
+    --mdc-theme-secondary--light1: #48C496;
+    --mdc-theme-secondary--light2: #6DD0AB;
+    --mdc-theme-secondary--light3: #CEEFE3;
+    --mdc-theme-secondary--light4: #E6F7F1;
+    --mdc-theme-secondary--dark1: #098D5C;
+
+    --dc-theme-ter: #14C1B3;
+    --dc-theme-ter--light1: #4FD1C6;
+    --dc-theme-ter--light2: #72DAD1;
+    --dc-theme-ter--light3: #D0F3F0;
+    --dc-theme-ter--light4: #E7F9F7;
+    --dc-theme-ter--dark1: #109A8F;
+
+    --dc-theme-qua: #FEC101;
+    --dc-theme-qua--light1: #FED141;
+    --dc-theme-qua--light2: #FEDA67;
+    --dc-theme-qua--light3: #FFF3CC;
+    --dc-theme-qua--light4: #FCF6E9;
+    --dc-theme-qua--dark1: #CB9A01;
+
+    --dc-theme-qui: #CC482E;
+    --dc-theme-qui--light1: #D97662;
+    --dc-theme-qui--light2: #E09182;
+    --dc-theme-qui--light3: #F5DAD5;
+    --dc-theme-qui--light4: #FFF9E5;
+    --dc-theme-qui--dark1: #A33A25;
+
+    --dc-theme-sen: #DF5361;
+    --dc-theme-sen--light1: #E77E89;
+    --dc-theme-sen--light2: #EC98A0;
+    --dc-theme-sen--light3: #F9DDDF;
+    --dc-theme-sen--light4: #FCEDEF;
+    --dc-theme-sen--dark1: #B2424E;
+
+    --dc-theme-black: #000;
+    --dc-theme-grey: #353738;
+    --dc-theme-grey--light1: #55585A;
+    --dc-theme-grey--light2: #AAAFB3;
+    --dc-theme-grey--light3: #D4DBE0;
+    --dc-theme-grey--light4: #F5F7F8;
+    --dc-theme-white: #fff;
+
+    --mdc-theme-error: #ff182f;
+    --mdc-theme-error--light: #ffebea;
+    --mdc-theme-error--dark: #701116;
+
+    --dc-theme-warning: #f2b61b;
+    --dc-theme-warning--light: #fae2af;
+    --dc-theme-warning--dark: #be5a00;
+
+    --dc-theme-success: #23c161;
+    --dc-theme-success--light: #ebf9ed;
+    --dc-theme-success--dark: #034a1d;
+
 }
 
 html {
@@ -21,14 +71,14 @@ html {
 }
 
 body.toplevel_page_web {
-    --wp-admin-theme-color: var(--hgbrand-color-primary);
-    --wp-admin-theme-color-darker-10: var(--hgbrand-color-primary-dark);
-    --wp-admin-theme-color-darker-20: var(--hgbrand-color-foreground);
+    --wp-admin-theme-color: var(--mdc-theme-primary);
+    --wp-admin-theme-color-darker-10: var(--dc-theme-black);
+    --wp-admin-theme-color-darker-20: var(--dc-theme-black);
     --wp-admin-border-width-focus: 2px;
-    --hgbrand-focus: inset 0 0 0 1px var(--hgbrand-color-white),0 0 0 var(--wp-admin-border-width-focus) var(--hgbrand-color-secondary);
+    --webbrand-focus: inset 0 0 0 1px var(--dc-theme-white),0 0 0 var(--wp-admin-border-width-focus) var(--mdc-theme-primary);
     
     a {
-        color: var(--hgbrand-color-secondary);
+        color: var(--mdc-theme-primary);
     }
     
     @media screen and (max-width:782px) {
@@ -37,7 +87,7 @@ body.toplevel_page_web {
         }
     }
     #wpwrap {
-        background-color: var(--hgbrand-color-background);
+        background-color: var(--dc-theme-grey--light4);
     }
     #wpcontent {
         padding-left: 0 !important;
@@ -57,37 +107,54 @@ body.toplevel_page_web {
     }
 }
 .wppw {
-    color: #363636;
-    h1, h2, h3, h4, h5, h6, .wppw-nav a {
-        font-weight: 800;
-        color: var(--hgbrand-color-primary);
+    color: var(--dc-theme-grey);
+
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--dc-theme-black);
+        font-weight: 700;
+    }
+    .wppw-nav a {
+        color: var(--dc-theme-black);
     }
     p, .wppw-nav a, div {
         font-size: 15px;
-        color: var(--hgbrand-color-foreground);
+        color: var(--dc-theme-grey);
     }
     .components-card__body .components-toggle-control .components-base-control__field .components-toggle-control__label,
     .components-card__body .components-input-control__label,
     .components-card__body .components-input-control__label *,
     .components-card__body .components-radio-control__option label strong {
-        font-weight: 800;
-        color: var(--hgbrand-color-primary);
+        color: var(--dc-theme-black);
     }
     .components-button {
-        font-weight: 800;
         font-size: 15px;
+        transition: all 0.25s ease;
+
+        .dashicons, .dashicons-before:before {
+            transition: all .25s ease;
+        }
 
         &:focus:not(:disabled) {
-            box-shadow: var(--hgbrand-focus);
+            box-shadow: var(--webbrand-focus);
+        }
+
+        &.is-primary {
+            background-color: var(--mdc-theme-primary);
+        }
+
+        &.is-secondary {
+            border-color: var(--mdc-theme-primary);
+            box-shadow: inset 0 0 0 1px var(--mdc-theme-primary);
+            color: var(--mdc-theme-primary);
         }
     }
     a:focus {
-        box-shadow: var(--hgbrand-focus);
+        box-shadow: var(--webbrand-focus);
         outline: 0;
     }
     .components-base-control__help,
     .components-radio-control__option label span span {
-        color: var(--hgbrand-color-foreground-dark);
+        color: var(--dc-theme-grey);
     }
 }
 .wppw, .wppw * {
@@ -108,7 +175,7 @@ body.toplevel_page_web {
     padding-right: 1rem;
 }
 .components-snackbar__content {
-    color: var(--hgbrand-color-background) !important;
+    color: var(--dc-theme-grey--light4) !important;
 }
 
 .grid {

@@ -1,4 +1,4 @@
-// import snappyUrl from '../../../../assets/svg/snappy-holding-site-left.svg';
+import graphicUrl from '../../../../assets/svg/small-blue-star.svg';
 import {
 	Button,
 	Card,
@@ -112,7 +112,7 @@ const ComingSoonSection = () => {
 	}
 	return (
 		<section className="wppw-section wppw-section-coming-soon">
-			{/* <img src={snappyUrl} className={getComingSoonGraphicClass()} style={{ top: 0 }} alt={__('Web.com`s Snappy holding site', 'hostagtor-wordpress-plugin')}/> */}
+			<img src={graphicUrl} className={getComingSoonGraphicClass()} style={{ top: 0 }} alt={__('Web.com`s Snappy holding site', 'wp-plugin-web')}/>
 			<Card size="large" className="wppw-section-card">
 				<CardHeader>
 					<Heading level="3">

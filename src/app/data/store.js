@@ -9,7 +9,7 @@ const DEFAULT = {
 
 const AppStore = createContext(DEFAULT);
 
-export const hgApiFetchSettings = async (options = {}) => {
+export const webApiFetchSettings = async (options = {}) => {
 	return await apiFetch({
 		url: window.WPPW.resturl + '/web/v1/settings',
 		...options,
@@ -35,7 +35,7 @@ export const AppStoreProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (false === booted) {
-			hgApiFetchSettings()
+			webApiFetchSettings()
 			.then((settings) => {
 				setStore({ ...store, ...window.WPPW, ...settings });
 				window.WPPW.migrated = true;

@@ -1,5 +1,6 @@
 .wppw .error-card {
-    border-color: var(--hgbrand-color-orange);
+    background-color: var(--mdc-theme-error--light);
+    border-color: var(--mdc-theme-error);
     border-width: 1px 1px 1px 4px;
     border-style: solid;
 }

@@ -18,7 +18,7 @@
     top: 2rem;
     transition: all .5s ease;
     z-index: 0;
-    display:none;
+    display: none;
     @media screen and (min-width: 882px) {
         display: block;
         max-width: 200px;
@@ -55,8 +55,8 @@
                 align-items: center;
                 .dashicons, svg {
                     margin-right: 8px;
-                    color: var(--hgbrand-color-secondary);
-                    fill: var(--hgbrand-color-secondary);
+                    color: var(--mdc-theme-primary);
+                    fill: var(--mdc-theme-primary);
                 }
             }
             @media screen and (max-width: 700px) {

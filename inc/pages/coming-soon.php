@@ -153,13 +153,13 @@
 				color: #2e66ba;
 			}
 
-			.hg_subscription_widget #subscribe-text p {
+			.web_subscription_widget #subscribe-text p {
 				line-height: 24px;
 				margin-bottom: 25px;
 			}
 
-			.hg_subscription_widget #success,
-			.hg_subscription_widget #error {
+			.web_subscription_widget #success,
+			.web_subscription_widget #error {
 				border-radius: 4px;
 				font-size: 14px;
 				line-height: 24px;
@@ -169,24 +169,24 @@
 				padding: 8px 40px;
 			}
 
-			.hg_subscription_widget #success {
+			.web_subscription_widget #success {
 				background: #CCE9D0;
 				border: 1px solid #009013;
 			}
 
-			.hg_subscription_widget #error {
+			.web_subscription_widget #error {
 				background: #FFEAE9;
 				border: 1px solid #FE3E15;
 			}
 
-			.hg_subscription_widget form .hg-inputs {
+			.web_subscription_widget form .web-inputs {
 				display: inline-block;
 				position: relative;
 				vertical-align: middle;
 				transition: all 0.1s ease;
 			}
 
-			.hg_subscription_widget form .hg-inputs.email input[type="email"] {
+			.web_subscription_widget form .web-inputs.email input[type="email"] {
 				background-color: #fff;
 				border: 1px solid #5B5B5B;
 				color: #5B5B5B;
@@ -197,7 +197,7 @@
 				transition: all 0.05s ease;
 			}
 
-			.hg_subscription_widget form .hg-inputs.submit input[type="submit"] {
+			.web_subscription_widget form .web-inputs.submit input[type="submit"] {
 				background-color: #5EADF3;
 				border: none;
 				color: #fff;
@@ -209,7 +209,7 @@
 				transition: all 0.1s ease;
 			}
 
-			.hg_subscription_widget form .hg-inputs.submit input[type="submit"]:hover {
+			.web_subscription_widget form .web-inputs.submit input[type="submit"]:hover {
 				background-color: #2E93EE;
 				transition: all 0.1s ease;
 			}
@@ -218,7 +218,7 @@
 	<body>
 		<div id="wrap">
 			<main class="content">
-				<div class="hg_subscription_widget">
+				<div class="web_subscription_widget">
 					<h1><?php esc_html_e( 'A New WordPress Site', 'wp-plugin-web' ); ?></h1>
 					<h2><?php esc_html_e( 'Coming Soon!', 'wp-plugin-web' ); ?></h2>	
 					<?php if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'subscriptions' ) ) { ?>
@@ -231,11 +231,11 @@
 						<div id="error">
 							<?php esc_html_e( 'There was an error with your submission and you were not subscribed. Please try again with a different email address.', 'wp-plugin-web' ); ?>
 						</div>
-						<form action="" method="post" accept-charset="utf-8" id="subscribe-hg">
+						<form action="" method="post" accept-charset="utf-8" id="subscribe-web">
 							<input type="hidden" name="action" value="mojo_coming_soon_subscribe">
 							<?php wp_nonce_field( 'mojo_coming_soon_subscribe_nonce', 'mm_nonce-coming-soon-subscribe' ); ?>
-							<span class="hg-inputs email" id="subscribe-email">
-								<label id="hg-subscribe-label" for="subscribe-field-hg">
+							<span class="web-inputs email" id="subscribe-email">
+								<label id="web-subscribe-label" for="subscribe-field-web">
 									<?php esc_html_e( 'Email', 'wp-plugin-web' ); ?>
 								</label>
 								<input
@@ -243,12 +243,12 @@
 									name="email"
 									required="required"
 									value=""
-									id="subscribe-field-hg"
+									id="subscribe-field-web"
 									placeholder="Enter your email address"
 								>
 							</span>
-							<span class="hg-inputs submit" id="subscribe-submit">
-								<input class="btn" type="submit" value="Subscribe" name="hg_subscriptions_widget">
+							<span class="web-inputs submit" id="subscribe-submit">
+								<input class="btn" type="submit" value="Subscribe" name="web_subscriptions_widget">
 							</span>
 						</form>
 						<?php } //endif ?>
@@ -285,7 +285,7 @@
 					$('#success').hide();
 					$('#error').hide();
 
-					var email = $('#subscribe-field-hg').val();
+					var email = $('#subscribe-field-web').val();
 					var nonce = $('#mm_nonce-coming-soon-subscribe').val();
 					var ajaxscript = {ajax_url: '<?php echo esc_url( admin_url() ); ?>admin-ajax.php'}
 

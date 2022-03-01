@@ -2,9 +2,9 @@
     position: relative;
     
     .price {
-        background-color: var(--hgbrand-color-primary);
+        background-color: var(--dc-theme-success--light);
         border-radius: 0.5rem;
-        color: var(--hgbrand-color-green);
+        color: var(--dc-theme-success--dark);
         font-size: 1rem;
         font-weight: 800;
         min-width: 3rem;
@@ -20,7 +20,7 @@
     display: flex;
     border-width: 1px 0 0 0;
     border-style: solid;
-    border-color: var(--hgbrand-color-secondary);
+    border-color: var(--mdc-theme-primary--light4);
 
     .components-tab-panel__tabs {
         min-width: 10rem;
@@ -29,18 +29,18 @@
     }
     
     .components-tab-panel__tabs-item {
-        background-color: var(--hgbrand-color-white);
+        background-color: var(--dc-theme-white);
         border-width: 0 1px 0 0;
         border-style: solid;
-        border-color: var(--hgbrand-color-secondary);
+        border-color: var(--mdc-theme-primary--light4);
         font-size: 15px;
 
         &:focus:not(:disabled) {
-            box-shadow: inset 0 1px var(--hgbrand-color-primary), inset 0 -1px var(--hgbrand-color-primary);
+            box-shadow: inset 0 1px var(--mdc-theme-primary), inset 0 -1px var(--mdc-theme-primary);
         }
 
         &:hover {
-            color: var(--hgbrand-color-secondary);
+            color: var(--mdc-theme-primary);
         }
 
         &.current-tab {
