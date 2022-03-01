@@ -1,4 +1,4 @@
-// import graphicUrl from '../../../../assets/svg/a-illustration__gator-scales-image-3_-notext.svg';
+import graphicUrl from '../../../../assets/images/marketing-overview-hero.png';
 import {
 	Button,
 	Card,
@@ -12,7 +12,7 @@ import {
 const WebContentSection = () => {
 	return (
 		<section className="wppw-section wppw-section-home-content">
-			{/* <img src={graphicUrl} className='section-graphic' alt={__('Website illustration', 'wp-plugin-web')} /> */}
+			<img src={graphicUrl} className='section-graphic' alt={__('Website illustration', 'wp-plugin-web')} />
 			<Card size="large" className="wppw-section-card">
 				<CardHeader>
 					<Heading level="3">

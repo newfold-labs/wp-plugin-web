@@ -1,4 +1,4 @@
-// import graphicUrl from '../../../../assets/svg/a-illustration__checklist.svg';
+import graphicUrl from '../../../../assets/images/8-hero-image.png';
 import {
 	Button,
 	Card,
@@ -13,7 +13,7 @@ import { Icon, settings, store } from '@wordpress/icons';
 const SettingsSection = () => {
 	return (
 		<section className="wppw-section wppw-section-home-settings">
-			{/* <img src={graphicUrl} className='section-graphic' alt={__('Settings illustration', 'wp-plugin-web')} /> */}
+			<img src={graphicUrl} className='section-graphic' alt={__('Settings illustration', 'wp-plugin-web')} />
 			<Card size="large" className="wppw-section-card">
 				<CardHeader>
 					<Heading level="3">

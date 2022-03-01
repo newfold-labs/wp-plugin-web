@@ -1,4 +1,5 @@
 import './stylesheet.scss';
+import graphicUrl from '../../../../assets/svg/small-blue-star.svg';
 import AutomaticUpdates from './automaticUpdates';
 import ComingSoon from './comingSoon';
 import CommentSettings from './commentSettings';
@@ -11,6 +12,9 @@ const Settings = () => {
 	return (
 		<div className="wppw-Settings grid col2 has-page-graphic">
 			<AutomaticUpdates />
+			{isWideViewport && (
+				<div><img src={graphicUrl} style={{ float: 'right', width: '80%', height: 'auto' }} alt={__('Settings illustration', 'wp-plugin-web')} /></div>
+			)}
 			<ComingSoon />
 			<ContentSettings />
 			<CommentSettings />

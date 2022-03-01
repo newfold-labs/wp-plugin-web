@@ -112,7 +112,7 @@ const ComingSoonSection = () => {
 	}
 	return (
 		<section className="wppw-section wppw-section-coming-soon">
-			<img src={graphicUrl} className={getComingSoonGraphicClass()} style={{ top: 0 }} alt={__('Web.com`s Snappy holding site', 'wp-plugin-web')}/>
+			<img src={graphicUrl} className={getComingSoonGraphicClass()} style={{ top: 0, width: '280px', height: 'auto' }} alt={__('Launch site', 'wp-plugin-web')}/>
 			<Card size="large" className="wppw-section-card">
 				<CardHeader>
 					<Heading level="3">
