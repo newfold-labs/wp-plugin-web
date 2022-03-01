@@ -1,0 +1,178 @@
+:root {
+    --hgbrand-color-primary: #1f2044;
+    --hgbrand-color-primary-dark: #191936;
+    --hgbrand-color-secondary: #2e93ee;
+    --hgbrand-color-secondary-dark: #3c97ff;
+    --hgbrand-color-yellow: #ffcf00;
+    --hgbrand-color-orange: #ff9144;
+    --hgbrand-color-foreground: #363636;
+    --hgbrand-color-foreground-dark: #303030;
+    --hgbrand-color-accent: #cdd8df;
+    --hgbrand-color-background: #f5f6f8;
+    --hgbrand-color-green: #38c174;
+    --hgbrand-color-white: #fff;
+}
+
+html {
+    @media screen and (min-width: 782px) {
+        overflow: -moz-scrollbars-vertical; 
+        overflow-y: scroll;
+    }
+}
+
+body.toplevel_page_web {
+    --wp-admin-theme-color: var(--hgbrand-color-primary);
+    --wp-admin-theme-color-darker-10: var(--hgbrand-color-primary-dark);
+    --wp-admin-theme-color-darker-20: var(--hgbrand-color-foreground);
+    --wp-admin-border-width-focus: 2px;
+    --hgbrand-focus: inset 0 0 0 1px var(--hgbrand-color-white),0 0 0 var(--wp-admin-border-width-focus) var(--hgbrand-color-secondary);
+    
+    a {
+        color: var(--hgbrand-color-secondary);
+    }
+    
+    @media screen and (max-width:782px) {
+        .wp-responsive-open #wpbody {
+            right: -190px; // only when mobile admin menu open
+        }
+    }
+    #wpwrap {
+        background-color: var(--hgbrand-color-background);
+    }
+    #wpcontent {
+        padding-left: 0 !important;
+    }
+
+    #wpadminbar .ab-top-menu {
+        li {
+            transition: opacity .33s ease;
+        }
+        .hideme {
+            max-height: 32px;
+            opacity: 0;
+            overflow: hidden;
+            pointer-events: none;
+            width: 0;
+        }
+    }
+}
+.wppw {
+    color: #363636;
+    h1, h2, h3, h4, h5, h6, .wppw-nav a {
+        font-weight: 800;
+        color: var(--hgbrand-color-primary);
+    }
+    p, .wppw-nav a, div {
+        font-size: 15px;
+        color: var(--hgbrand-color-foreground);
+    }
+    .components-card__body .components-toggle-control .components-base-control__field .components-toggle-control__label,
+    .components-card__body .components-input-control__label,
+    .components-card__body .components-input-control__label *,
+    .components-card__body .components-radio-control__option label strong {
+        font-weight: 800;
+        color: var(--hgbrand-color-primary);
+    }
+    .components-button {
+        font-weight: 800;
+        font-size: 15px;
+
+        &:focus:not(:disabled) {
+            box-shadow: var(--hgbrand-focus);
+        }
+    }
+    a:focus {
+        box-shadow: var(--hgbrand-focus);
+        outline: 0;
+    }
+    .components-base-control__help,
+    .components-radio-control__option label span span {
+        color: var(--hgbrand-color-foreground-dark);
+    }
+}
+.wppw, .wppw * {
+    box-sizing: border-box;
+}
+
+.wppw-app-body {
+    padding: 18px 24px 0;
+    &-inner {
+        max-width: 1290px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+}
+
+.components-button.has-icon {
+    padding-right: 1rem;
+}
+.components-snackbar__content {
+    color: var(--hgbrand-color-background) !important;
+}
+
+.grid {
+    display: grid;
+    gap: clamp(0.5rem, calc(1rem + 1vw), 2rem);
+    padding: 0.5rem;
+    &.col2,
+    &.col3,
+    &.col4 {
+        @media screen and (min-width: 600px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+    &.col3,
+    &.col4 {
+        @media screen and (min-width: 800px) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+    &.col4 {
+        @media screen and (min-width: 1020px) {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+}
+
+.wppw-app-snackbar {
+    padding: 0 24px;
+    position: relative;
+
+    .components-snackbar-list {
+        bottom: .5rem;
+        position: fixed;
+    }
+}
+
+
+.has-page-graphic {
+    padding-bottom: 26rem;
+}
+
+.wppw-page-graphic {
+    bottom: 3.5rem;
+    opacity: .5;
+    position: absolute;
+    right: 1rem;
+    z-index: -1;
+}
+
+
+.components-card {
+    
+    &.short {
+        margin-bottom: auto;
+    }
+
+    &.disabled {
+        opacity: .5;
+    }
+}
+
+.components-card-body {
+
+    &.disabled {
+        opacity: .5;
+    }
+}
