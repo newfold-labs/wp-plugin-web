@@ -233,47 +233,56 @@ msgstr ""
 msgid "Web.com WordPress Plugin"
 msgstr ""
 
-#: src/app/data/help.js:11
+#: src/app/data/help.js:4
+#: src/app/data/help.js:10
+msgid "Email Us"
+msgstr ""
+
+#: src/app/data/help.js:5
+msgid "Log in to your Account Manager to submit a support ticket. Once you open a ticket, we'll respond promptly to get it resolved."
+msgstr ""
+
+#: src/app/data/help.js:15
 msgid "Phone"
 msgstr ""
 
-#: src/app/data/help.js:12
-msgid "Give us a ring at 1-866-655-7679"
+#: src/app/data/help.js:16
+msgid "Speak to our award-winning support team over the phone at 866-923-8821. Our customer service hours are 7:00am - 12:00am ET."
 msgstr ""
 
-#: src/app/data/help.js:18
+#: src/app/data/help.js:21
 msgid "Call Us"
 msgstr ""
 
-#: src/app/data/help.js:23
+#: src/app/data/help.js:26
 msgid "Chat"
 msgstr ""
 
-#: src/app/data/help.js:24
-msgid "Have a question? We're here 24/7/365"
+#: src/app/data/help.js:27
+msgid "Chat with our sales and support team for quick, helpful answers to questions about product features, pricing and more. Our chat agents are available 24/7."
 msgstr ""
 
-#: src/app/data/help.js:30
+#: src/app/data/help.js:32
 msgid "Live Chat"
 msgstr ""
 
-#: src/app/data/help.js:35
+#: src/app/data/help.js:37
 msgid "Tweet"
 msgstr ""
 
-#: src/app/data/help.js:36
+#: src/app/data/help.js:38
 msgid "Tweet us at @webdotcom for support"
 msgstr ""
 
-#: src/app/data/help.js:42
+#: src/app/data/help.js:43
 msgid "Tweet Us"
 msgstr ""
 
-#: src/app/data/help.js:47
+#: src/app/data/help.js:48
 msgid "Knowledge Base"
 msgstr ""
 
-#: src/app/data/help.js:48
+#: src/app/data/help.js:49
 msgid "Know what the pros know."
 msgstr ""
 
@@ -290,19 +299,19 @@ msgstr ""
 msgid "Get our tips and in-depth articles."
 msgstr ""
 
-#: src/app/data/help.js:66
+#: src/app/data/help.js:65
 msgid "Learn Stuff"
 msgstr ""
 
-#: src/app/data/help.js:71
+#: src/app/data/help.js:70
 msgid "Video Tutorials"
 msgstr ""
 
-#: src/app/data/help.js:72
+#: src/app/data/help.js:71
 msgid "Step-by-step tutorials and additional guides."
 msgstr ""
 
-#: src/app/data/help.js:78
+#: src/app/data/help.js:76
 msgid "Watch Now"
 msgstr ""
 
@@ -467,6 +476,14 @@ msgstr ""
 msgid "Coming soon deactivated."
 msgstr ""
 
+#: src/app/pages/home/comingSoonSection.js:115
+msgid "Launch site"
+msgstr ""
+
+#: src/app/pages/home/settingsSection.js:16
+msgid "Settings illustration"
+msgstr ""
+
 #: src/app/pages/home/settingsSection.js:20
 msgid "Settings and Performance"
 msgstr ""
@@ -495,6 +512,10 @@ msgstr ""
 
 #: src/app/pages/home/settingsSection.js:98
 msgid "Visit Marketplace"
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:15
+msgid "Website illustration"
 msgstr ""
 
 #: src/app/pages/home/webContentSection.js:19
@@ -535,6 +556,10 @@ msgstr ""
 
 #: src/app/pages/home/webContentSection.js:91
 msgid "Manage Categories"
+msgstr ""
+
+#: src/app/pages/home/webHostingSection.js:15
+msgid "Hosting illustration"
 msgstr ""
 
 #: src/app/pages/home/webHostingSection.js:19
@@ -666,6 +691,11 @@ msgstr ""
 
 #: src/app/pages/performance/clearCache.js:54
 msgid "Clear All Cache Now"
+msgstr ""
+
+#: src/app/pages/performance/index.js:15
+#: src/app/pages/settings/index.js:16
+msgid "Star illustration"
 msgstr ""
 
 #: src/app/pages/settings/automaticUpdates.js:37
