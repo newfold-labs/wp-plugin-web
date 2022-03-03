@@ -101,21 +101,21 @@ final class Admin {
 
 		echo '<!-- Web.com -->' . PHP_EOL;
 
-		if ( version_compare($wp_version, '5.4', '>=') ) {
+		if ( version_compare( $wp_version, '5.4', '>=' ) ) {
 			echo '<div id="wppw-app" class="wppw wppw_app"></div>' . PHP_EOL;
 		} else {
 			// fallback messaging for WordPress older than 5.4
 			echo '<div id="wppw-app" class="wppw wppw_app">' . PHP_EOL;
 			echo '<header class="wppw-header" style="min-height: 90px; padding: 1rem; margin-bottom: 1.5rem;"><div class="wppw-header-inner"><div class="wppw-logo-wrap">' . PHP_EOL;
-			echo '<img src="' . WEB_PLUGIN_URL . 'assets/svg/web-logo.svg" alt="Web.com logo" />' . PHP_EOL;
+			echo '<img src="' . esc_url( WEB_PLUGIN_URL . 'assets/svg/web-logo.svg' ) . '" alt="Web.com logo" />' . PHP_EOL;
 			echo '</div></div></header>' . PHP_EOL;
 			echo '<div class="wrap">' . PHP_EOL;
-			echo '<div class="card" style="margin-left: 20px;"><h2 class="title">' . __('Please update to a newer WordPress version.', 'wp-plugin-web') . '</h2>' . PHP_EOL;
-			echo '<p>' . __('There are new WordPress components which this plugin requires in order to render the interface.', 'wp-plugin-web') . '</p>' . PHP_EOL;
-			echo '<p><a href="' . admin_url( 'update-core.php' ).'" class="button component-button is-primary button-primary" variant="primary">' . __('Please update now', 'wp-plugin-web') . '</a></p>' . PHP_EOL;
+			echo '<div class="card" style="margin-left: 20px;"><h2 class="title">' . esc_html__( 'Please update to a newer WordPress version.', 'wp-plugin-web' ) . '</h2>' . PHP_EOL;
+			echo '<p>' . esc_html__( 'There are new WordPress components which this plugin requires in order to render the interface.', 'wp-plugin-web' ) . '</p>' . PHP_EOL;
+			echo '<p><a href="' . esc_url( admin_url( 'update-core.php' ) ) . '" class="button component-button is-primary button-primary" variant="primary">' . esc_html__( 'Please update now', 'wp-plugin-web' ) . '</a></p>' . PHP_EOL;
 			echo '</div></div></div>'. PHP_EOL;
 		}
-		
+
 		echo '<!-- /Web.com -->' . PHP_EOL;
 	}
 
