@@ -31,11 +31,11 @@ const WebHostingSection = () => {
 					<div className="wppw-cardlist-content">
 						<Heading level="4">
 							<Dashicon icon="desktop" />{' '}
-							{__('Manage Sites', 'wp-plugin-web')}
+							{__('Manage Hosting', 'wp-plugin-web')}
 						</Heading>
 						<p>
 							{__(
-								'Manage your site from the control panel. You can create backups, set security, and improve performance.',
+								'Manage your site from the control panel. You can also create backups and improve performance.',
 								'wp-plugin-web'
 							)}
 						</p>
@@ -43,7 +43,7 @@ const WebHostingSection = () => {
 					<Button
 						variant="primary"
 						href={
-							`https://portal.web.com/packages?`+
+							`https://www.web.com/my-account/home?`+
 							`&utm_campaign=`+
 							`&utm_content=home_hosting_sites_link`+
 							`&utm_term=manage_sites`+
@@ -72,7 +72,7 @@ const WebHostingSection = () => {
 					<Button
 						variant="primary"
 						href={
-							`https://portal.web.com/email?`+
+							`https://www.web.com/manage-it/email-overview.jsp?`+
 							`&utm_campaign=`+
 							`&utm_content=home_hosting_email_link`+
 							`&utm_term=manage_email`+
@@ -101,7 +101,7 @@ const WebHostingSection = () => {
 					<Button
 						variant="secondary"
 						href={
-							`https://portal.web.com/domain/purchase/registration?`+
+							`https://www.web.com/domains?`+
 							`&utm_campaign=`+
 							`&utm_content=home_hosting_domain_link`+
 							`&utm_term=find_domain`+
