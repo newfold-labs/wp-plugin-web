@@ -35,7 +35,7 @@ msgid "Please install the Web.com Plugin dependencies."
 msgstr ""
 
 #: inc/Admin.php:42
-#: inc/Admin.php:157
+#: inc/Admin.php:174
 #: src/app/data/routes.js:51
 msgid "Home"
 msgstr ""
@@ -56,7 +56,7 @@ msgid "Performance"
 msgstr ""
 
 #: inc/Admin.php:45
-#: inc/Admin.php:158
+#: inc/Admin.php:175
 #: src/app/data/routes.js:69
 #: src/app/pages/home/settingsSection.js:54
 #: src/app/pages/performance/settingsCallout.js:17
@@ -70,7 +70,19 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: inc/Admin.php:171
+#: inc/Admin.php:113
+msgid "Please update to a newer WordPress version."
+msgstr ""
+
+#: inc/Admin.php:114
+msgid "There are new WordPress components which this plugin requires in order to render the interface."
+msgstr ""
+
+#: inc/Admin.php:115
+msgid "Please update now"
+msgstr ""
+
+#: inc/Admin.php:188
 msgid "Thank you for creating with <a href=\"https://wordpress.org/\">WordPress</a> and <a href=\"https://web.com/about\">Web.com</a>."
 msgstr ""
 
@@ -213,23 +225,23 @@ msgstr ""
 msgid "Auto-updates enabled"
 msgstr ""
 
-#: src/app/components/errorCard/index.js:24
+#: src/app/components/errorCard/index.js:23
 msgid "Oh No, An Error!"
 msgstr ""
 
-#: src/app/components/errorCard/index.js:28
+#: src/app/components/errorCard/index.js:27
 msgid "You found an error, please refresh the page and try again!"
 msgstr ""
 
-#: src/app/components/errorCard/index.js:29
+#: src/app/components/errorCard/index.js:28
 msgid "If the error persists, please contact support."
 msgstr ""
 
-#: src/app/components/errorCard/index.js:34
+#: src/app/components/errorCard/index.js:33
 msgid " Error code: "
 msgstr ""
 
-#: src/app/components/header/logo.js:17
+#: src/app/components/header/logo.js:15
 msgid "Web.com WordPress Plugin"
 msgstr ""
 
@@ -571,12 +583,15 @@ msgid "Manage hosting in your Web.com portal account"
 msgstr ""
 
 #: src/app/pages/home/webHostingSection.js:34
-#: src/app/pages/home/webHostingSection.js:56
-msgid "Manage Sites"
+msgid "Manage Hosting"
 msgstr ""
 
 #: src/app/pages/home/webHostingSection.js:37
-msgid "Manage your site from the control panel. You can create backups, set security, and improve performance."
+msgid "Manage your site from the control panel. You can also create backups and improve performance."
+msgstr ""
+
+#: src/app/pages/home/webHostingSection.js:56
+msgid "Manage Sites"
 msgstr ""
 
 #: src/app/pages/home/webHostingSection.js:66
