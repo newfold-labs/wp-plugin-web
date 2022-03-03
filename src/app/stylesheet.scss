@@ -105,6 +105,12 @@ body.toplevel_page_web {
             width: 0;
         }
     }
+    
+    #wpbody-content .notice,
+    #wpbody-content .update-nag {
+        display: none;
+    }
+
 }
 .wppw {
     color: var(--dc-theme-grey);
