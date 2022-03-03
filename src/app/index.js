@@ -55,7 +55,7 @@ const AppBody = (props) => {
 	return (
 		<main
 			id="wppw-app-rendered"
-			className={classnames('wpadmin-brand-web', props.className)}
+			className={classnames('wpadmin-brand-web', `wppw-wp-${WPPW.wpversion}`, props.className)}
 		>
 			<Header />
 			<div className="wppw-app-body">
