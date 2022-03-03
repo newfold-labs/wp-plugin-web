@@ -2,9 +2,9 @@ import {
 	Card,
 	CardBody,
 	CardHeader,
-	SelectControl,
-	__experimentalHeading as Heading,
+	SelectControl
 } from '@wordpress/components';
+import Heading from '../../components/heading';
 import { useState } from '@wordpress/element';
 import { useUpdateEffect } from 'react-use';
 import AppStore from '../../data/store';

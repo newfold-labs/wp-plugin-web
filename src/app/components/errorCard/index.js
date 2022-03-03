@@ -1,13 +1,12 @@
 import './stylesheet.scss';
 import {
-	Button,
 	Card,
 	CardBody,
 	CardHeader,
 	CardFooter,
-	Dashicon,
-	__experimentalHeading as Heading,
+	Dashicon
 } from '@wordpress/components';
+import Heading from '../heading';
 import {
 	dispatchUpdateSnackbar,
 } from '../../util/helpers';

@@ -7,7 +7,7 @@ import {
 	CardFooter,
 	Dashicon,
 } from '@wordpress/components';
-import { __experimentalHeading as Heading } from '@wordpress/components';
+import Heading from '../../components/heading';
 import help from '../../data/help';
 
 const Help = () => {

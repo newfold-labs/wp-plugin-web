@@ -3,9 +3,9 @@ import {
 	CardBody,
 	CardHeader,
     CardFooter,
-    Button,
-	__experimentalHeading as Heading,
+    Button
 } from '@wordpress/components';
+import Heading from '../../components/heading';
 import { settings } from '@wordpress/icons';
 
 const SettingsCallout = () => {

@@ -3,9 +3,9 @@ import {
 	CardBody,
 	CardHeader,
 	CardDivider,
-	ToggleControl,
-	__experimentalHeading as Heading,
+	ToggleControl
 } from '@wordpress/components';
+import Heading from '../../components/heading';
 import { useState } from '@wordpress/element';
 import { useEffect } from 'react';
 import { useUpdateEffect } from 'react-use';

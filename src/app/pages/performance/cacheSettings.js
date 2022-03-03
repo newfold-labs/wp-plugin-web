@@ -2,9 +2,9 @@ import {
 	Card,
 	CardBody,
 	CardHeader,
-	RadioControl,
-	__experimentalHeading as Heading,
+	RadioControl
 } from '@wordpress/components';
+import Heading from '../../components/heading';
 import { useState } from '@wordpress/element';
 import { useUpdateEffect } from 'react-use';
 import AppStore from '../../data/store';

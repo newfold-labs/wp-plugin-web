@@ -5,9 +5,9 @@ import {
 	CardBody,
 	CardHeader,
 	CardFooter,
-	Dashicon,
-	__experimentalHeading as Heading,
+	Dashicon
 } from '@wordpress/components';
+import Heading from '../../components/heading';
 
 const WebContentSection = () => {
 	return (

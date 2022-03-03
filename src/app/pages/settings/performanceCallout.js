@@ -4,9 +4,9 @@ import {
 	CardHeader,
     CardFooter,
 	Dashicon,
-    Button,
-	__experimentalHeading as Heading,
+    Button
 } from '@wordpress/components';
+import Heading from '../../components/heading';
 
 const PerformanceCallout = () => {
 

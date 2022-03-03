@@ -1,6 +1,6 @@
-import { __experimentalHeading as Heading } from '@wordpress/components';
 import MarketplaceItem from '../../components/marketplaceItem';
 import services from '../../data/services';
+import Heading from '../../components/heading';
 
 const Services = () => {
 	return (

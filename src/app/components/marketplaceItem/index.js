@@ -4,9 +4,9 @@ import {
 	CardBody,
 	CardHeader,
 	CardFooter,
-	CardMedia,
-	__experimentalHeading as Heading,
+	CardMedia
 } from '@wordpress/components';
+import Heading from '../heading';
 
 const MarketplaceItem = ({ item }) => {
 	return (

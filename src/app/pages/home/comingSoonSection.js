@@ -4,9 +4,9 @@ import {
 	Card,
 	CardBody,
 	CardHeader,
-	CardFooter,
-	__experimentalHeading as Heading,
+	CardFooter
 } from '@wordpress/components';
+import Heading from '../../components/heading';
 import AppStore from '../../data/store';
 import ErrorCard from '../../components/errorCard';
 import { useState } from '@wordpress/element';

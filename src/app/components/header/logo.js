@@ -1,7 +1,5 @@
-import {
-	Button,
-	__experimentalHeading as Heading,
-} from '@wordpress/components';
+import { Button } from '@wordpress/components';
+import Heading from '../heading';
 import { ReactComponent as Brand } from '../../../../assets/svg/web-logo.svg';
 
 const Logo = () => {
