@@ -113,7 +113,7 @@ final class Admin {
 			echo '<div class="card" style="margin-left: 20px;"><h2 class="title">' . esc_html__( 'Please update to a newer WordPress version.', 'wp-plugin-web' ) . '</h2>' . PHP_EOL;
 			echo '<p>' . esc_html__( 'There are new WordPress components which this plugin requires in order to render the interface.', 'wp-plugin-web' ) . '</p>' . PHP_EOL;
 			echo '<p><a href="' . esc_url( admin_url( 'update-core.php' ) ) . '" class="button component-button is-primary button-primary" variant="primary">' . esc_html__( 'Please update now', 'wp-plugin-web' ) . '</a></p>' . PHP_EOL;
-			echo '</div></div></div>'. PHP_EOL;
+			echo '</div></div></div>' . PHP_EOL;
 		}
 
 		echo '<!-- /Web.com -->' . PHP_EOL;
