@@ -1,3 +1,14 @@
+import AppStore from '../../data/store';
+import { 
+	Heading, 
+	ErrorCard, 
+	Accordion
+} from '../../components';
+import {
+	webSettingsApiFetch,
+	dispatchUpdateSnackbar,
+	comingSoonAdminbarToggle
+} from '../../util/helpers';
 import {
 	Card,
 	CardBody,
@@ -5,17 +16,8 @@ import {
 	CardDivider,
 	ToggleControl
 } from '@wordpress/components';
-import Heading from '../../components/heading';
 import { useState } from '@wordpress/element';
 import { useUpdateEffect } from 'react-use';
-import AppStore from '../../data/store';
-import ErrorCard from '../../components/errorCard';
-import {
-	webSettingsApiFetch,
-	dispatchUpdateSnackbar,
-	comingSoonAdminbarToggle
-} from '../../util/helpers';
-import Accordion from '../../components/accordion';
 
 const ComingSoon = () => {
 	const { store, setStore } = useContext(AppStore);

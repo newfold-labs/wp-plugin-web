@@ -13,7 +13,13 @@ const Settings = () => {
 		<div className="wppw-Settings grid col2 has-page-graphic">
 			<AutomaticUpdates />
 			{isWideViewport && (
-				<div><img src={graphicUrl} style={{ float: 'right', width: '80%', height: 'auto' }} alt={__('Star illustration', 'wp-plugin-web')} /></div>
+				<div>
+					<img 
+						src={graphicUrl} 
+						style={{ float: 'right', width: '80%', height: 'auto', transform: 'rotate3d(0, 0, 1, 90deg)' }} 
+						alt={__('Star illustration', 'wp-plugin-web')} 
+					/>
+				</div>
 			)}
 			<ComingSoon />
 			<ContentSettings />

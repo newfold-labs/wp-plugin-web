@@ -1,3 +1,9 @@
+import { Heading, ErrorCard } from '../../components';
+import AppStore from '../../data/store';
+import {
+	webPurgeCacheApiFetch,
+	dispatchUpdateSnackbar,
+} from '../../util/helpers';
 import {
 	Button,
 	Card,
@@ -5,13 +11,6 @@ import {
 	CardHeader,
 	CardFooter
 } from '@wordpress/components';
-import Heading from '../../components/heading';
-import ErrorCard from '../../components/errorCard';
-import AppStore from '../../data/store';
-import {
-	webPurgeCacheApiFetch,
-	dispatchUpdateSnackbar,
-} from '../../util/helpers';
 
 const ClearCache = () => {
 	const { store, setStore } = useContext(AppStore);

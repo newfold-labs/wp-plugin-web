@@ -6,7 +6,7 @@ import {
 	CardFooter,
 	Dashicon
 } from '@wordpress/components';
-import Heading from '../heading';
+import { Heading } from '../../components';
 import {
 	dispatchUpdateSnackbar,
 } from '../../util/helpers';

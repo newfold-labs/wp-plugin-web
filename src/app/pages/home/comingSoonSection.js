@@ -1,4 +1,11 @@
 import graphicUrl from '../../../../assets/svg/small-blue-star.svg';
+import { Heading, ErrorCard } from '../../components';
+import AppStore from '../../data/store';
+import {
+	webSettingsApiFetch,
+	dispatchUpdateSnackbar,
+	comingSoonAdminbarToggle
+} from '../../util/helpers';
 import {
 	Button,
 	Card,
@@ -6,16 +13,8 @@ import {
 	CardHeader,
 	CardFooter
 } from '@wordpress/components';
-import Heading from '../../components/heading';
-import AppStore from '../../data/store';
-import ErrorCard from '../../components/errorCard';
 import { useState } from '@wordpress/element';
 import { useUpdateEffect } from 'react-use';
-import {
-	webSettingsApiFetch,
-	dispatchUpdateSnackbar,
-	comingSoonAdminbarToggle
-} from '../../util/helpers';
 
 const ComingSoonSection = () => {
 	const { store, setStore } = useContext(AppStore);

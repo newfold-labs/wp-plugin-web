@@ -1,5 +1,5 @@
 import { Button } from '@wordpress/components';
-import Heading from '../heading';
+import { Heading } from '../../components';
 import { ReactComponent as Brand } from '../../../../assets/svg/web-logo.svg';
 
 const Logo = () => {

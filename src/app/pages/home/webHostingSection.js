@@ -1,4 +1,5 @@
 import graphicUrl from '../../../../assets/images/woman-with-coffee-and-website.png';
+import { Heading } from '../../components';
 import {
 	Button,
 	Card,
@@ -7,7 +8,6 @@ import {
 	CardFooter,
 	Dashicon
 } from '@wordpress/components';
-import Heading from '../../components/heading';
 
 const WebHostingSection = () => {
 	return (

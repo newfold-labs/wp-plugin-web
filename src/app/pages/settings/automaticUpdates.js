@@ -1,3 +1,9 @@
+import AppStore from '../../data/store';
+import { Heading, ErrorCard } from '../../components';
+import {
+	webSettingsApiFetch,
+	dispatchUpdateSnackbar,
+} from '../../util/helpers';
 import {
 	Card,
 	CardBody,
@@ -5,16 +11,9 @@ import {
 	CardDivider,
 	ToggleControl
 } from '@wordpress/components';
-import Heading from '../../components/heading';
 import { useState } from '@wordpress/element';
 import { useEffect } from 'react';
 import { useUpdateEffect } from 'react-use';
-import AppStore from '../../data/store';
-import ErrorCard from '../../components/errorCard';
-import {
-	webSettingsApiFetch,
-	dispatchUpdateSnackbar,
-} from '../../util/helpers';
 
 const AutomaticUpdates = () => {
 	const { store, setStore } = useContext(AppStore);

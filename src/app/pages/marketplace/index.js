@@ -1,8 +1,8 @@
 import './stylesheet.scss';
-import { TabPanel, Spinner } from '@wordpress/components';
 import Themes from './themes';
 import Plugins from './plugins';
 import Services from './services';
+import { TabPanel, Spinner } from '@wordpress/components';
 
 const Marketplace = () => {
 	const [isLoading, setIsLoading] = useState(true);

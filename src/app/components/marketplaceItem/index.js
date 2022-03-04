@@ -6,7 +6,7 @@ import {
 	CardFooter,
 	CardMedia
 } from '@wordpress/components';
-import Heading from '../heading';
+import { Heading } from '../../components';
 
 const MarketplaceItem = ({ item }) => {
 	return (

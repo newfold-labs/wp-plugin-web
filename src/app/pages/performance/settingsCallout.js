@@ -1,3 +1,4 @@
+import { Heading } from '../../components';
 import {
 	Card,
 	CardBody,
@@ -5,7 +6,6 @@ import {
     CardFooter,
     Button
 } from '@wordpress/components';
-import Heading from '../../components/heading';
 import { settings } from '@wordpress/icons';
 
 const SettingsCallout = () => {

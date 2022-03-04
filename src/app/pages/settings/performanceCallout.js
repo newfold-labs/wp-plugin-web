@@ -1,3 +1,4 @@
+import { Heading } from '../../components';
 import {
 	Card,
 	CardBody,
@@ -6,7 +7,6 @@ import {
 	Dashicon,
     Button
 } from '@wordpress/components';
-import Heading from '../../components/heading';
 
 const PerformanceCallout = () => {
 
