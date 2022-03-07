@@ -128,46 +128,46 @@ msgstr ""
 msgid "%s &mdash; Coming Soon"
 msgstr ""
 
-#: inc/pages/coming-soon.php:222
-msgid "A New WordPress Site"
+#: inc/pages/coming-soon.php:199
+msgid "Coming soon"
 msgstr ""
 
-#: inc/pages/coming-soon.php:223
-msgid "Coming Soon!"
-msgstr ""
-
-#: inc/pages/coming-soon.php:226
+#: inc/pages/coming-soon.php:202
 msgid "Be the first to know when we launch, enter your email address and we will let you know when we go live and any future website updates we have."
 msgstr ""
 
-#: inc/pages/coming-soon.php:229
+#: inc/pages/coming-soon.php:205
 msgid "Thank you, please check your email to confirm your subscription."
 msgstr ""
 
-#: inc/pages/coming-soon.php:232
+#: inc/pages/coming-soon.php:208
 msgid "There was an error with your submission and you were not subscribed. Please try again with a different email address."
 msgstr ""
 
-#: inc/pages/coming-soon.php:239
+#: inc/pages/coming-soon.php:215
 #: src/app/pages/home/webHostingSection.js:63
 msgid "Email"
 msgstr ""
 
+#: inc/pages/coming-soon.php:231
+msgid "A New WordPress Site"
+msgstr ""
+
 #. translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag
-#: inc/pages/coming-soon.php:265
+#: inc/pages/coming-soon.php:243
 msgid "A %1$sWeb.com%2$s powered website."
 msgstr ""
 
 #. translators: %1$s is replaced with opening link tag taking you to login page, %2$s is replaced with opening link tag taking you to my.web.com, %3$s is replaced with closing link tag
-#: inc/pages/coming-soon.php:271
+#: inc/pages/coming-soon.php:249
 msgid "Is this your website? Log in to %1$sWordPress%3$s or %2$sWeb.com%3$s."
 msgstr ""
 
-#: inc/pages/coming-soon.php:305
+#: inc/pages/coming-soon.php:283
 msgid "Your email address is already subscribed to this website. Stay tuned to your inbox for our updates or try a different email address."
 msgstr ""
 
-#: inc/pages/coming-soon.php:307
+#: inc/pages/coming-soon.php:285
 msgid "There was an error with your submission and you were not subscribed. Please try again with a valid email address."
 msgstr ""
 
