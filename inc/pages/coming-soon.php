@@ -48,7 +48,7 @@
 				overflow-x: hidden;
 				margin: 0;
 			}
-			
+
 			body,
 			input {
 				font-family: "Open Sans",sans-serif;
@@ -81,7 +81,7 @@
 				letter-spacing: 0.15px;
 				line-height: 36px;
 			}
-			
+
 			#wrap h2 {
 				color: var(--dc-theme-grey-dark);
 				font-size: 14px;
@@ -227,9 +227,9 @@
 								<input class="btn" type="submit" value="Subscribe" name="web_subscriptions_widget">
 							</span>
 						</form>
-						<?php } else { //endif ?>
+						<?php } else { // endif ?>
 							<h2><?php esc_html_e( 'A New WordPress Site', 'wp-plugin-web' ); ?></h2>
-						<?php } //end else ?>
+						<?php } // end else ?>
 					</div>
 			</main>
 		</div>
