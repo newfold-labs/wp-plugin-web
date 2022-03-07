@@ -84,7 +84,7 @@ describe('Coming Soon', function () {
 		cy.visit('/');
 		cy
 			.get('body')
-			.contains('h2', 'Coming Soon')
+			.contains('h1', 'Coming soon')
 			.should('be.visible');
 	});
 
@@ -111,7 +111,7 @@ describe('Coming Soon', function () {
 		cy.visit('/');
 		cy
 			.get('body')
-			.contains('h2', 'Coming Soon')
+			.contains('h1', 'Coming soon')
 			.should('not.exist');
 
 		cy.login(Cypress.env('wpUsername'), Cypress.env('wpPassword'));
