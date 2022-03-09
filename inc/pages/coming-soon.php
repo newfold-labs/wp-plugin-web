@@ -23,96 +23,91 @@
 		<script
 			src="<?php echo esc_url( includes_url( 'js/jquery/jquery.js' ) ); //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript ?>"></script>
 		<style type="text/css">
-			body {
-				background-color: #fff;
-				color: #1F2044;
-				font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-				overflow-x: hidden;
-				margin: 0;
-			}
+			:root {
+				--mdc-theme-primary: #0D47FB;
+				--mdc-theme-extra: #BD2380;
+				--dc-theme-black: #000000;
+				--dc-theme-grey: #353738;
+				--dc-theme-grey-dark: #1F2044;
+				--dc-theme-white: #ffffff;
+				--mdc-theme-error: #ff182f;
+				--mdc-theme-error--dark: #701116;
+				--dc-theme-success: #23c161;
+				--dc-theme-success--dark: #034a1d;
 
+			}
 			* {
 				box-sizing: border-box;
 				-moz-box-sizing: border-box;
 				-webkit-box-sizing: border-box;
 			}
 
+			body {
+				background-color: var(--dc-theme-white);
+				color: var(--dc-theme-grey-dark);
+				overflow-x: hidden;
+				margin: 0;
+			}
+
+			body,
 			input {
-				font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-			}
-
-			::-webkit-input-placeholder {
-				color: #686C6E;
-			}
-
-			::-moz-placeholder {
-				color: #686C6E;
-			}
-
-			:-ms-input-placeholder {
-				color: #686C6E;
-			}
-
-			:-moz-placeholder {
-				color: #686C6E;
+				font-family: "Open Sans",sans-serif;
 			}
 
 			#wrap {
 				align-items: center;
-				background-image: url("<?php echo esc_url( WEB_PLUGIN_URL . 'assets/svg/a-illustration__shape.svg' ); ?>");
-				background-position: center center;
-				background-repeat: no-repeat;
-				background-size: cover;
 				display: flex;
 				justify-content: center;
 				min-height: 100vh;
 			}
 
 			.content {
-				background-image: url("<?php echo esc_url( WEB_PLUGIN_URL . 'assets/svg/a-illustration__wordpress-snappy.svg' ); ?>");
+				background-image: url("<?php echo esc_url( WEB_PLUGIN_URL . 'assets/images/coming-soon.png' ); ?>");
 				background-position: center top;
 				background-repeat: no-repeat;
-				background-size: 283px 202px;
+				background-size: 345px 239px;
 				flex: 1;
 				margin: auto 5%;
-				padding: 210px 0 0;
+				padding: 250px 0 0;
 				text-align: center;
 				max-width: 420px;
 			}
 
 			#wrap h1 {
-				font-size: 16px;
-				font-weight: 700;
-				letter-spacing: 1px;
+				color: var(--dc-theme-black);
+				font-weight: 600;
+				font-family: 'Noto Serif', serif;;
+				font-size: 28px;
+				letter-spacing: 0.15px;
+				line-height: 36px;
 			}
 
 			#wrap h2 {
-				color: #FE3E15;
-				font-size: 35px;
+				color: var(--dc-theme-grey-dark);
+				font-size: 14px;
 				font-weight: 700;
-				letter-spacing: -1px;
-				line-height: 54px;
+				line-height: 18px;
+				letter-spacing: 0.75px;
+				text-transform: uppercase;
 			}
 
 			footer {
-				background-color: #fff;
 				width: 100%;
 				position: fixed;
 				bottom: 0;
 				left: 0;
-				color: #666;
 			}
 
 			footer p {
 				font-size: 14px;
 				line-height: 22px;
-				color: #5B5B5B;
+				color: var(--dc-theme-grey);
 				padding: 8px;
 				text-align: center;
 			}
 
 			footer p a {
-				color: #3575D3;
+				color: var(--mdc-theme-primary);
 				text-decoration: none;
 			}
 
@@ -121,36 +116,30 @@
 			}
 
 			.btn {
-				display: inline-block;
-				font-weight: 400;
-				text-align: center;
-				vertical-align: middle;
-				-ms-touch-action: manipulation;
-				touch-action: manipulation;
-				cursor: pointer;
+				background: var(--mdc-theme-extra);
 				background-image: none;
-				border: 1px solid transparent;
-				white-space: nowrap;
-				-webkit-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
-				padding: 8px 16px;
-				font-size: 14px;
-				line-height: 1.5;
-				border: 1px solid #2e66ba;
-				background: #2e66ba;
-				color: #fff;
+				border: 5px solid var(--mdc-theme-extra);
 				box-shadow: none;
+				color: var(--dc-theme-white);
+				cursor: pointer;
+				display: inline-block;
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 1.5;
+				padding: 6px 30px;
+				text-align: center;
 				text-decoration: none;
-				margin-top: 60px;
-				transition: all .2s ease;
+				touch-action: manipulation;
+				transition: all 0.2s ease;
+				user-select: none;
+				vertical-align: middle;
+				white-space: nowrap;
 			}
 
 			.btn:hover {
-				border: 1px solid #2e66ba;
-				background-color: #fff;
-				color: #2e66ba;
+				background-color: var(--dc-theme-white);
+				border-color: var(--mdc-theme-extra);
+				color: var(--mdc-theme-extra);
 			}
 
 			.web_subscription_widget #subscribe-text p {
@@ -163,20 +152,20 @@
 				border-radius: 4px;
 				font-size: 14px;
 				line-height: 24px;
-				color: #5B5B5B;
+				color: var(--dc-theme-grey);
 				margin-bottom: 25px;
 				display: none;
 				padding: 8px 40px;
 			}
 
 			.web_subscription_widget #success {
-				background: #CCE9D0;
-				border: 1px solid #009013;
+				background: var(--dc-theme-success);
+				border: 1px solid var(--dc-theme-success--dark);
 			}
 
 			.web_subscription_widget #error {
-				background: #FFEAE9;
-				border: 1px solid #FE3E15;
+				background: var(--dc-theme-error);
+				border: 1px solid var(--dc-theme-error--dark);
 			}
 
 			.web_subscription_widget form .web-inputs {
@@ -186,10 +175,14 @@
 				transition: all 0.1s ease;
 			}
 
+			.web_subscription_widget form .web-inputs label {
+				display: none;
+			}
+
 			.web_subscription_widget form .web-inputs.email input[type="email"] {
-				background-color: #fff;
-				border: 1px solid #5B5B5B;
-				color: #5B5B5B;
+				background-color: var(--dc-theme-white);
+				border: 1px solid var(--dc-theme-grey);
+				color: var(--dc-theme-grey-dark);
 				font-size: 11px;
 				min-width: 240px;
 				padding: 14px 15px;
@@ -197,30 +190,13 @@
 				transition: all 0.05s ease;
 			}
 
-			.web_subscription_widget form .web-inputs.submit input[type="submit"] {
-				background-color: #5EADF3;
-				border: none;
-				color: #fff;
-				font-size: 14px;
-				font-weight: 600;
-				line-height: 13px;
-				margin: 0;
-				padding: 15px 30px;
-				transition: all 0.1s ease;
-			}
-
-			.web_subscription_widget form .web-inputs.submit input[type="submit"]:hover {
-				background-color: #2E93EE;
-				transition: all 0.1s ease;
-			}
 		</style>
 	</head>
 	<body>
 		<div id="wrap">
 			<main class="content">
 				<div class="web_subscription_widget">
-					<h1><?php esc_html_e( 'A New WordPress Site', 'wp-plugin-web' ); ?></h1>
-					<h2><?php esc_html_e( 'Coming Soon!', 'wp-plugin-web' ); ?></h2>	
+					<h1><?php esc_html_e( 'Coming soon', 'wp-plugin-web' ); ?></h1>
 					<?php if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'subscriptions' ) ) { ?>
 						<div id="subscribe-text">
 							<p><?php esc_html_e( 'Be the first to know when we launch, enter your email address and we will let you know when we go live and any future website updates we have.', 'wp-plugin-web' ); ?></p>
@@ -251,7 +227,9 @@
 								<input class="btn" type="submit" value="Subscribe" name="web_subscriptions_widget">
 							</span>
 						</form>
-						<?php } //endif ?>
+						<?php } else { // endif ?>
+							<h2><?php esc_html_e( 'A New WordPress Site', 'wp-plugin-web' ); ?></h2>
+						<?php } // end else ?>
 					</div>
 			</main>
 		</div>
