@@ -7,7 +7,7 @@ const NavMobile = () => {
     const [isOpen, setIsOpen] = useState(false);
     const MobileMenu = () => {
         return(
-            <ul>
+            <ul className='nav-mobile'>
                 {topRoutes.map((page) => (
                     <li key={page.name}>
                         <NavLink 

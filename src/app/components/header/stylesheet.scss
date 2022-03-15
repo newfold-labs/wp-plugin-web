@@ -162,6 +162,22 @@
     }
 }
 
-.mobile-toggle {
+ul.nav-mobile {
+    li {
+        margin-bottom: 0.5rem;
+    }
+    a.components-button.is-secondary {
+        padding: 1.5rem 1rem 1.66rem 1rem;
+        color: var(--mdc-theme-primary--dark1);
+        box-shadow: inset -2px -2px 0px 4px var(--mdc-theme-primary--dark1);
+        &:hover,
+        &:active {
+            box-shadow: inset -2px -2px 0px 4px var(--mdc-theme-primary--dark1);
+        }
+    }
+}
+
+.components-button.mobile-toggle.has-icon {
     padding-right: 6px;
+    margin-right: 6px;
 }
