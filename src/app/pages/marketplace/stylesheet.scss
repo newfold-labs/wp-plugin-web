@@ -52,12 +52,12 @@
         }
 
         &:hover {
-            color: var(--mdc-theme-secondary--dark1);
+            color: var(--dc-theme-grey);
         }
 
         &.current-tab {
             background-color: transparent;
-            color: var(--mdc-theme-secondary--dark1);
+            color: var(--dc-theme-black);
             border-width: 1px 0;
             cursor: default;
         }
