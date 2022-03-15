@@ -187,7 +187,7 @@ final class Admin {
 	 * @return string
 	 */
 	public static function add_brand_to_admin_footer( $footer_text ) {
-		$footer_text = \sprintf( \__( 'Thank you for creating with <a href="https://wordpress.org/">WordPress</a> and <a href="https://web.com/about">Web.com</a>.', 'wp-plugin-web' ) );
+		$footer_text = \sprintf( \__( 'Thank you for creating with <a href="https://wordpress.org/">WordPress</a> and <a href="https://web.com/about-us">Web.com</a>.', 'wp-plugin-web' ) );
 		return $footer_text;
 	}
 } // END \Web\Admin
