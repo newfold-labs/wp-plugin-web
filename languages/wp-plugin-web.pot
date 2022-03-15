@@ -83,7 +83,7 @@ msgid "Please update now"
 msgstr ""
 
 #: inc/Admin.php:190
-msgid "Thank you for creating with <a href=\"https://wordpress.org/\">WordPress</a> and <a href=\"https://web.com/about\">Web.com</a>."
+msgid "Thank you for creating with <a href=\"https://wordpress.org/\">WordPress</a> and <a href=\"https://web.com/about-us\">Web.com</a>."
 msgstr ""
 
 #: inc/AdminBar.php:35
