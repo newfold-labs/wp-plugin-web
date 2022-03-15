@@ -1,4 +1,4 @@
-import graphicUrl from '../../../../assets/images/woman-with-coffee-and-website.png';
+import graphicUrl from '../../images/section-web-hosting.png';
 import { Heading } from '../../components';
 import {
 	Button,
@@ -18,15 +18,13 @@ const WebHostingSection = () => {
 					<Heading level="3">
 						{__('Web Hosting', 'wp-plugin-web')}
 					</Heading>
-				</CardHeader>
-				<CardBody>
 					<p>
 						{__(
-							'Manage hosting in your Web.com portal account',
+							'Access & manage your Web.com account.',
 							'wp-plugin-web'
 						)}
 					</p>
-				</CardBody>
+				</CardHeader>
 				<CardFooter>
 					<div className="wppw-cardlist-content">
 						<Heading level="4">

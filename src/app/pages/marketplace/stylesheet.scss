@@ -1,18 +1,27 @@
-.components-card__header {
-    position: relative;
-    
-    .price {
-        background-color: var(--dc-theme-success--light);
-        border-radius: 0.5rem;
-        color: var(--dc-theme-success--dark);
-        font-size: 1rem;
-        font-weight: 800;
-        min-width: 3rem;
-        padding: 0.25rem 0.75rem;
-        position: absolute;
-        right: 1rem;
-        text-align: center;
-        top: -2.5rem;
+.wppw-marketplace {
+    .components-card__media {
+        position: relative;
+        left: 2px;
+        top: 2px;
+        max-width: calc(100% - 8px);
+        border-radius: 0 !important;
+    }
+    .components-card__header {
+        position: relative;
+        
+        .price {
+            background-color: var(--dc-theme-success--light);
+            border-radius: 0.5rem;
+            color: var(--dc-theme-success--dark);
+            font-size: 1rem;
+            font-weight: 800;
+            min-width: 3rem;
+            padding: 0.25rem 0.75rem;
+            position: absolute;
+            right: 1rem;
+            text-align: center;
+            top: -2.5rem;
+        }
     }
 }
 
@@ -20,7 +29,7 @@
     display: flex;
     border-width: 1px 0 0 0;
     border-style: solid;
-    border-color: var(--mdc-theme-primary--light4);
+    border-color: var(--mdc-theme-secondary--dark1);
 
     .components-tab-panel__tabs {
         display: flex; /* <= WP 5.4 */
@@ -34,19 +43,21 @@
         background-color: var(--dc-theme-white);
         border-width: 0 1px 0 0;
         border-style: solid;
-        border-color: var(--mdc-theme-primary--light4);
+        border-color: var(--mdc-theme-secondary--dark1);
         font-size: 15px;
-
+        transition: none;
+        
         &:focus:not(:disabled) {
-            box-shadow: inset 0 1px var(--mdc-theme-primary), inset 0 -1px var(--mdc-theme-primary);
+            box-shadow: none !important;
         }
 
         &:hover {
-            color: var(--mdc-theme-primary);
+            color: var(--mdc-theme-secondary--dark1);
         }
 
         &.current-tab {
             background-color: transparent;
+            color: var(--mdc-theme-secondary--dark1);
             border-width: 1px 0;
             cursor: default;
         }

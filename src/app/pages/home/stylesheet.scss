@@ -2,6 +2,38 @@
     margin: 0 0 2rem;
     position: relative;
 
+    .components-card__header {
+        background: var(--dc-theme-black);
+        flex-direction: column;
+        @media screen and (min-width: 1132px) {
+            flex-direction: row;
+        }
+        .heading {
+            color: var(--dc-theme-white);
+            font-size: 1.5rem;
+            margin-bottom: 0 !important; // wp core override
+            @media screen and (min-width: 1132px) {
+                margin-bottom: 24px !important;
+            }
+        }
+        p {
+            color: #FEC101;
+            font-weight: 700;
+            margin-left: 0;
+        }
+    }
+    .components-card__footer {
+        .heading {
+            display: flex;
+            align-items: center;
+            svg,
+            .dashicons {
+                margin-right: 4px;
+            }
+        }
+    }
+
+
     &.wppw-section-coming-soon {
         margin-bottom: 10rem;
 
@@ -10,24 +42,28 @@
             right: -6rem; 
         }
     }
+
+    &:first-of-type { // allows for better reordering and injection
+        margin-top: 1rem;
+    }
 }
 
 .section-graphic {
     position: absolute;
-    right: 1rem;
+    right: 0;
     top: 2rem;
     transition: all .5s ease;
     z-index: 0;
     display: none;
     @media screen and (min-width: 882px) {
         display: block;
-        max-width: 300px;
+        max-width: 260px;
     }
-    @media screen and (min-width: 1080px) {
+    @media screen and (min-width: 1190px) {
+        max-width: 330px;
+    }
+    @media screen and (min-width: 1399px) {
         max-width: 400px;
-    }
-    @media screen and (min-width: 1440px) {
-        max-width: 460px;
     }
 
     &.reverse {

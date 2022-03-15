@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { store as noticesStore } from '@wordpress/notices';
 import { setActiveSubnav } from './util/helpers';
+import { kebabCase } from 'lodash';
 
 const Notices = () => {
 	if ( 'undefined' === typeof noticesStore ) {
@@ -48,6 +49,7 @@ const handlePageLoad = () => {
 };
 
 const AppBody = (props) => {
+	const location = useLocation();
 	const { booted, hasError } = useContext(AppStore);
 
 	handlePageLoad();
@@ -55,7 +57,12 @@ const AppBody = (props) => {
 	return (
 		<main
 			id="wppw-app-rendered"
-			className={classnames('wpadmin-brand-web', `wppw-wp-${WPPW.wpversion}`, props.className)}
+			className={classnames(
+				'wpadmin-brand-web', 
+				`wppw-wp-${WPPW.wpversion}`, 
+				`wppw-page-${kebabCase(location.pathname)}`, 
+				props.className
+			)}
 		>
 			<Header />
 			<div className="wppw-app-body">

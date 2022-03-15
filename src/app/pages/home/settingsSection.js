@@ -1,4 +1,4 @@
-import graphicUrl from '../../../../assets/images/8-hero-image.png';
+import graphicUrl from '../../images/section-settings-and-perf.png';
 import { Heading } from '../../components';
 import {
 	Button,
@@ -22,13 +22,13 @@ const SettingsSection = () => {
 							'wp-plugin-web'
 						)}
 					</Heading>
+					<p>
+						{__(
+							'Customize & fine-tune your site.',
+							'wp-plugin-web'
+						)}
+					</p>
 				</CardHeader>
-				<CardBody>
-					{__(
-						'Manage your site within this dashboard',
-						'wp-plugin-web'
-					)}
-				</CardBody>
 				<CardFooter>
 					<div className="wppw-cardlist-content">
 						<Heading level="4">

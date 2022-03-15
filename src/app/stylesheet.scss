@@ -72,7 +72,7 @@ html {
 
 body.toplevel_page_web {
     --wp-admin-theme-color: var(--mdc-theme-primary);
-    --wp-admin-theme-color-darker-10: var(--dc-theme-black);
+    --wp-admin-theme-color-darker-10: var(--mdc-theme-primary--dark1);
     --wp-admin-theme-color-darker-20: var(--dc-theme-black);
     --wp-admin-border-width-focus: 2px;
     --webbrand-focus: inset 0 0 0 1px var(--dc-theme-white),0 0 0 var(--wp-admin-border-width-focus) var(--mdc-theme-primary);
@@ -87,7 +87,7 @@ body.toplevel_page_web {
         }
     }
     #wpwrap {
-        background-color: var(--dc-theme-grey--light4);
+        background-color: var(--dc-theme-white);
     }
     #wpcontent {
         padding-left: 0 !important;
@@ -122,9 +122,10 @@ body.toplevel_page_web {
     .wppw-nav a {
         color: var(--dc-theme-black);
     }
-    p, .wppw-nav a, div {
-        font-size: 15px;
+    p, div {
         color: var(--dc-theme-grey);
+        font-size: 15px;
+        font-weight: 500;
     }
     .components-card__body .components-toggle-control .components-base-control__field .components-toggle-control__label,
     .components-card__body .components-input-control__label,
@@ -135,6 +136,7 @@ body.toplevel_page_web {
 
     .components-button {
         font-size: 15px;
+        font-weight: 500;
         transition: all 0.25s ease;
         white-space: nowrap;
 
@@ -248,7 +250,8 @@ body.toplevel_page_web {
 
 .wppw {
     .components-card {
-        
+        box-shadow: inset -2px -2px 0px 4px var(--dc-theme-black);
+
         &.short {
             margin-bottom: auto;
         }

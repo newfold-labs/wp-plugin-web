@@ -1,4 +1,4 @@
-import graphicUrl from '../../../../assets/images/marketing-overview-hero.png';
+import graphicUrl from '../../images/section-web-content.png'
 import { Heading } from '../../components';
 import {
 	Button,
@@ -18,15 +18,13 @@ const WebContentSection = () => {
 					<Heading level="3">
 						{__('Website Content', 'wp-plugin-web')}
 					</Heading>
-				</CardHeader>
-				<CardBody>
 					<p>
 						{__(
-							'Manage website content easily with these shortcut links.',
+							'Create, manage & sort your story.',
 							'wp-plugin-web'
 						)}
 					</p>
-				</CardBody>
+				</CardHeader>
 				<CardFooter>
 					<div className="wppw-cardlist-content">
 						<Heading level="4">
