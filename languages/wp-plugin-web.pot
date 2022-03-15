@@ -16,8 +16,8 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #. Author of the plugin
-#: inc/Admin.php:73
-#: inc/Admin.php:74
+#: inc/Admin.php:75
+#: inc/Admin.php:76
 msgid "Web.com"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgid "Please install the Web.com Plugin dependencies."
 msgstr ""
 
 #: inc/Admin.php:42
-#: inc/Admin.php:174
+#: inc/Admin.php:176
 #: src/app/data/routes.js:51
 msgid "Home"
 msgstr ""
@@ -56,7 +56,7 @@ msgid "Performance"
 msgstr ""
 
 #: inc/Admin.php:45
-#: inc/Admin.php:175
+#: inc/Admin.php:177
 #: src/app/data/routes.js:69
 #: src/app/pages/home/settingsSection.js:54
 #: src/app/pages/performance/settingsCallout.js:17
@@ -66,23 +66,23 @@ msgstr ""
 
 #: inc/Admin.php:46
 #: src/app/data/routes.js:75
-#: src/app/pages/home/webHostingSection.js:121
+#: src/app/pages/home/webHostingSection.js:119
 msgid "Help"
 msgstr ""
 
-#: inc/Admin.php:113
+#: inc/Admin.php:115
 msgid "Please update to a newer WordPress version."
 msgstr ""
 
-#: inc/Admin.php:114
+#: inc/Admin.php:116
 msgid "There are new WordPress components which this plugin requires in order to render the interface."
 msgstr ""
 
-#: inc/Admin.php:115
+#: inc/Admin.php:117
 msgid "Please update now"
 msgstr ""
 
-#: inc/Admin.php:188
+#: inc/Admin.php:190
 msgid "Thank you for creating with <a href=\"https://wordpress.org/\">WordPress</a> and <a href=\"https://web.com/about\">Web.com</a>."
 msgstr ""
 
@@ -145,7 +145,7 @@ msgid "There was an error with your submission and you were not subscribed. Plea
 msgstr ""
 
 #: inc/pages/coming-soon.php:215
-#: src/app/pages/home/webHostingSection.js:63
+#: src/app/pages/home/webHostingSection.js:61
 msgid "Email"
 msgstr ""
 
@@ -241,7 +241,7 @@ msgstr ""
 msgid " Error code: "
 msgstr ""
 
-#: src/app/components/header/logo.js:15
+#: src/app/components/header/logo.js:32
 msgid "Web.com WordPress Plugin"
 msgstr ""
 
@@ -303,7 +303,7 @@ msgid "Find Answers"
 msgstr ""
 
 #: src/app/data/help.js:59
-#: src/app/pages/home/webContentSection.js:34
+#: src/app/pages/home/webContentSection.js:32
 msgid "Blog"
 msgstr ""
 
@@ -500,8 +500,8 @@ msgstr ""
 msgid "Settings and Performance"
 msgstr ""
 
-#: src/app/pages/home/settingsSection.js:27
-msgid "Manage your site within this dashboard"
+#: src/app/pages/home/settingsSection.js:26
+msgid "Customize & fine-tune your site."
 msgstr ""
 
 #: src/app/pages/home/settingsSection.js:36
@@ -534,39 +534,39 @@ msgstr ""
 msgid "Website Content"
 msgstr ""
 
-#: src/app/pages/home/webContentSection.js:24
-msgid "Manage website content easily with these shortcut links."
+#: src/app/pages/home/webContentSection.js:22
+msgid "Create, manage & sort your story."
 msgstr ""
 
-#: src/app/pages/home/webContentSection.js:37
+#: src/app/pages/home/webContentSection.js:35
 msgid "Write a new blog post."
 msgstr ""
 
-#: src/app/pages/home/webContentSection.js:49
+#: src/app/pages/home/webContentSection.js:47
 msgid "New Post"
 msgstr ""
 
-#: src/app/pages/home/webContentSection.js:56
+#: src/app/pages/home/webContentSection.js:54
 msgid "Pages"
 msgstr ""
 
-#: src/app/pages/home/webContentSection.js:59
+#: src/app/pages/home/webContentSection.js:57
 msgid "Add fresh pages to your website."
 msgstr ""
 
-#: src/app/pages/home/webContentSection.js:70
+#: src/app/pages/home/webContentSection.js:68
 msgid "New Page"
 msgstr ""
 
-#: src/app/pages/home/webContentSection.js:77
+#: src/app/pages/home/webContentSection.js:75
 msgid "Categories"
 msgstr ""
 
-#: src/app/pages/home/webContentSection.js:80
+#: src/app/pages/home/webContentSection.js:78
 msgid "Organize existing content into categories."
 msgstr ""
 
-#: src/app/pages/home/webContentSection.js:91
+#: src/app/pages/home/webContentSection.js:89
 msgid "Manage Categories"
 msgstr ""
 
@@ -578,47 +578,47 @@ msgstr ""
 msgid "Web Hosting"
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:24
-msgid "Manage hosting in your Web.com portal account"
+#: src/app/pages/home/webHostingSection.js:22
+msgid "Access & manage your Web.com account."
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:34
+#: src/app/pages/home/webHostingSection.js:32
 msgid "Manage Hosting"
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:37
+#: src/app/pages/home/webHostingSection.js:35
 msgid "Manage your site from the control panel. You can also create backups and improve performance."
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:56
+#: src/app/pages/home/webHostingSection.js:54
 msgid "Manage Sites"
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:66
+#: src/app/pages/home/webHostingSection.js:64
 msgid "Create email accounts, compose, send, and receive your email from the control panel."
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:85
+#: src/app/pages/home/webHostingSection.js:83
 msgid "Manage Email"
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:92
+#: src/app/pages/home/webHostingSection.js:90
 msgid "Domains"
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:95
+#: src/app/pages/home/webHostingSection.js:93
 msgid "Find a new domain and assign it to your site or start a new site with a fresh domain."
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:114
+#: src/app/pages/home/webHostingSection.js:112
 msgid "Find a Domain"
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:123
+#: src/app/pages/home/webHostingSection.js:121
 msgid "24/7/365 support. We work when you work."
 msgstr ""
 
-#: src/app/pages/home/webHostingSection.js:131
+#: src/app/pages/home/webHostingSection.js:129
 msgid "Get Help"
 msgstr ""
 
