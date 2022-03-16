@@ -79,11 +79,6 @@ describe('Settings Page', function () {
 			.contains('div', 'Everything')
 			.should('be.visible');
 
-		cy.get('.autoupdate-all-toggle input[type="checkbox"]').should('be.checked');
-		cy.get('.autoupdate-core-toggle input[type="checkbox"]').should('be.disabled').should('be.checked');
-		cy.get('.autoupdate-plugin-toggle input[type="checkbox"]').should('be.disabled').should('be.checked');
-		cy.get('.autoupdate-theme-toggle input[type="checkbox"]').should('be.disabled').should('be.checked');
-
 	});
 
 	it('Content Settings Work', () => {
