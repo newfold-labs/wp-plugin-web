@@ -153,7 +153,7 @@ const ContentSettings = () => {
 			</CardBody>
 			<CardBody>
 				<Accordion
-					className="coming-soon-protip"
+					className="content-protip"
 					summary={ __(
 						'Pro Tip: Keep your site fast with fewer revisions & frequent cleanup',
 						'wp-plugin-web'
