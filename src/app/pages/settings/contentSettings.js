@@ -1,5 +1,5 @@
 import AppStore from '../../data/store';
-import { Heading, ErrorCard } from '../../components';
+import { Heading, ErrorCard, Accordion } from '../../components';
 import {
 	webSettingsApiFetch,
 	dispatchUpdateSnackbar,
@@ -8,34 +8,34 @@ import {
 	Card,
 	CardBody,
 	CardHeader,
-	SelectControl
+	SelectControl,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { useUpdateEffect } from 'react-use';
 
 const ContentSettings = () => {
-	const { store, setStore } = useContext(AppStore);
-	const [contentRevisions, setNumContentRevisions] = useState(
+	const { store, setStore } = useContext( AppStore );
+	const [ contentRevisions, setNumContentRevisions ] = useState(
 		store.contentRevisions
 	);
-	const [emptyTrashDays, setNumEmptyTrashDays] = useState(
+	const [ emptyTrashDays, setNumEmptyTrashDays ] = useState(
 		store.emptyTrashDays
 	);
-	let numTrashWeeks = Math.floor(emptyTrashDays / 7);
-	const [isError, setError] = useState(false);
+	let numTrashWeeks = Math.floor( emptyTrashDays / 7 );
+	const [ isError, setError ] = useState( false );
 
 	const contentRevisionsLabelText = () => {
 		// `Keep ${contentRevisions} latest revision(s)`
 		return (
 			<span>
-				{__('Keep ', 'wp-plugin-web')}
-				<strong>{contentRevisions}</strong>
-				{_n(
+				{ __( 'Keep ', 'wp-plugin-web' ) }
+				<strong>{ contentRevisions }</strong>
+				{ _n(
 					' latest revision',
 					' latest revisions',
-					parseInt(contentRevisions),
+					parseInt( contentRevisions ),
 					'wp-plugin-web'
-				)}
+				) }
 			</span>
 		);
 	};
@@ -43,14 +43,14 @@ const ContentSettings = () => {
 		//`Posts will save ${contentRevisions} revisions.`
 		return (
 			<span>
-				{__('Posts will save ', 'wp-plugin-web')}
-				<strong>{contentRevisions}</strong>
-				{_n(
+				{ __( 'Posts will save ', 'wp-plugin-web' ) }
+				<strong>{ contentRevisions }</strong>
+				{ _n(
 					' revision.',
 					' revisions.',
-					parseInt(contentRevisions),
+					parseInt( contentRevisions ),
 					'wp-plugin-web'
-				)}
+				) }
 			</span>
 		);
 	};
@@ -61,14 +61,9 @@ const ContentSettings = () => {
 		// `Empty trash every ${numTrashWeeks} week(s).`
 		return (
 			<span>
-				{__('Empty trash every ', 'wp-plugin-web')}
-				<strong>{numTrashWeeks}</strong>
-				{_n(
-					' week.',
-					' weeks.',
-					numTrashWeeks,
-					'wp-plugin-web'
-				)}
+				{ __( 'Empty trash every ', 'wp-plugin-web' ) }
+				<strong>{ numTrashWeeks }</strong>
+				{ _n( ' week.', ' weeks.', numTrashWeeks, 'wp-plugin-web' ) }
 			</span>
 		);
 	};
@@ -76,17 +71,12 @@ const ContentSettings = () => {
 		//`The trash will automatically empty every ${numTrashWeeks} week(s).`
 		return (
 			<span>
-				{__(
+				{ __(
 					'The trash will automatically empty every ',
 					'wp-plugin-web'
-				)}
-				<strong>{numTrashWeeks}</strong>
-				{_n(
-					' week.',
-					' weeks.',
-					numTrashWeeks,
-					'wp-plugin-web'
-				)}
+				) }
+				<strong>{ numTrashWeeks }</strong>
+				{ _n( ' week.', ' weeks.', numTrashWeeks, 'wp-plugin-web' ) }
 			</span>
 		);
 	};
@@ -94,74 +84,88 @@ const ContentSettings = () => {
 		return 'Trash setting saved';
 	};
 
-	useUpdateEffect(() => {
-		webSettingsApiFetch({ contentRevisions }, setError, (response) => {
-			setStore({
+	useUpdateEffect( () => {
+		webSettingsApiFetch( { contentRevisions }, setError, ( response ) => {
+			setStore( {
 				...store,
 				contentRevisions,
-			});
-			dispatchUpdateSnackbar(contentRevisionsNoticeText());
-		});
-	}, [contentRevisions]);
+			} );
+			dispatchUpdateSnackbar( contentRevisionsNoticeText() );
+		} );
+	}, [ contentRevisions ] );
 
-	useUpdateEffect(() => {
-		numTrashWeeks = Math.floor(emptyTrashDays / 7);
-		webSettingsApiFetch({ emptyTrashDays }, setError, (response) => {
-			setStore({
+	useUpdateEffect( () => {
+		numTrashWeeks = Math.floor( emptyTrashDays / 7 );
+		webSettingsApiFetch( { emptyTrashDays }, setError, ( response ) => {
+			setStore( {
 				...store,
 				emptyTrashDays,
-			});
-			dispatchUpdateSnackbar(emptyTrashDaysNoticeText());
-		});
-	}, [emptyTrashDays]);
+			} );
+			dispatchUpdateSnackbar( emptyTrashDaysNoticeText() );
+		} );
+	}, [ emptyTrashDays ] );
 
 	if ( isError ) {
-		return <ErrorCard error={isError} />
+		return <ErrorCard error={ isError } />;
 	}
 	return (
 		<Card className="card-content-settings">
 			<CardHeader>
 				<Heading level="3">
-					{__('Content Options', 'wp-plugin-web')}
+					{ __( 'Content Options', 'wp-plugin-web' ) }
 				</Heading>
 			</CardHeader>
-			<CardBody>
-				{__(
-					'Controls for content revisions and how often to empty the trash.',
-					'wp-plugin-web'
-				)}
-			</CardBody>
 			<CardBody className="content-revisions-setting">
 				<SelectControl
-					label={contentRevisionsLabelText()}
+					label={ contentRevisionsLabelText() }
 					className="content-revisions-select"
-					value={contentRevisions}
-					help={contentRevisionsHelpText()}
-					options={[
+					value={ contentRevisions }
+					help={ sprintf(
+						'Saving drafts and updating published content creates revisions. Make changes with confidence, knowing you can take %s steps back.',
+						contentRevisions,
+						'wp-plugin-web'
+					) }
+					options={ [
 						{ label: '1', value: '1' },
 						{ label: '5', value: '5' },
 						{ label: '10', value: '10' },
 						{ label: '20', value: '20' },
 						{ label: '40', value: '40' },
-					]}
-					onChange={(value) => setNumContentRevisions(value)}
+					] }
+					onChange={ ( value ) => setNumContentRevisions( value ) }
 				/>
 			</CardBody>
 
 			<CardBody className="empty-trash-setting">
 				<SelectControl
-					label={emptyTrashDaysLabelText()}
+					label={ emptyTrashDaysLabelText() }
 					className="empty-trash-select"
-					value={emptyTrashDays}
-					help={emptyTrashDaysHelpText()}
-					options={[
+					value={ emptyTrashDays }
+					help={ emptyTrashDaysHelpText() }
+					options={ [
 						{ label: '1', value: '7' },
 						{ label: '2', value: '14' },
 						{ label: '3', value: '21' },
 						{ label: '4', value: '30' },
-					]}
-					onChange={(value) => setNumEmptyTrashDays(value)}
+					] }
+					onChange={ ( value ) => setNumEmptyTrashDays( value ) }
 				/>
+			</CardBody>
+			<CardBody>
+				<Accordion
+					className="coming-soon-protip"
+					summary={ __(
+						'Pro Tip: Keep your site fast with fewer revisions & frequent cleanup',
+						'wp-plugin-web'
+					) }
+				>
+					<p>
+						{ __(
+							'When you have a large site with lots of revisions, it can slightly slow down your public site and WordPress Admin. For the best results, keep only a few revisions and empty the trash frequently.',
+							'wp-plugin-web'
+						) }
+					</p>
+				</Accordion>
 			</CardBody>
 		</Card>
 	);

@@ -9,48 +9,60 @@ import {
 	Card,
 	CardBody,
 	CardHeader,
-	CardFooter
+	CardFooter,
 } from '@wordpress/components';
+import { sprintf } from '@wordpress/i18n';
 
 const ClearCache = () => {
-	const { store, setStore } = useContext(AppStore);
-	const [isError, setError] = useState(false);
+	const { store, setStore } = useContext( AppStore );
+	const [ isError, setError ] = useState( false );
 
 	const getCacheClearNoticeText = () => {
-		return __('Cache cleared', 'wp-plugin-web');
+		return __( 'Cache cleared', 'wp-plugin-web' );
 	};
 
 	const clearCache = () => {
-		webPurgeCacheApiFetch({}, setError, (response) => {
-			dispatchUpdateSnackbar(getCacheClearNoticeText());
-		});
+		webPurgeCacheApiFetch( {}, setError, ( response ) => {
+			dispatchUpdateSnackbar( getCacheClearNoticeText() );
+		} );
 	};
 
 	if ( isError ) {
-		return <ErrorCard error={isError} />
+		return <ErrorCard error={ isError } />;
 	}
 	return (
-		<Card className={`short card-clear-cache ${!store.cacheLevel ? 'disabled' : ''}`}>
+		<Card
+			className={ `short card-clear-cache ${
+				! store.cacheLevel ? 'disabled' : ''
+			}` }
+		>
 			<CardHeader>
 				<Heading level="3">
-					{__('Clear Cache', 'wp-plugin-web')}
+					{ __( 'Clear Cache', 'wp-plugin-web' ) }
 				</Heading>
 			</CardHeader>
 			<CardBody>
-				{__(
-					'If you’ve recently updated your website, we recommend clearing the site cache. We’ll fetch a fresh version of your site to cache.',
-					'wp-plugin-web'
-				)}
+				<strong>
+					{ __(
+						'We automatically clear your cache',
+						'wp-plugin-web'
+					) }
+				</strong>
+				{ ' ' +
+					__(
+						"as you work (creating content, changing settings, installing plugins and more). But you can manually clear it here to be confident it's fresh.",
+						'wp-plugin-web'
+					) }
 			</CardBody>
 			<CardFooter>
 				<Button
 					variant="primary"
-					onClick={() => {
+					onClick={ () => {
 						clearCache();
-					}}
-					disabled={!store.cacheLevel}
+					} }
+					disabled={ ! store.cacheLevel }
 				>
-					{__('Clear All Cache Now', 'wp-plugin-web')}
+					{ __( 'Clear All Cache Now', 'wp-plugin-web' ) }
 				</Button>
 			</CardFooter>
 		</Card>

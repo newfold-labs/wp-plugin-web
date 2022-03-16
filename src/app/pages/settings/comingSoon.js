@@ -1,99 +1,110 @@
 import AppStore from '../../data/store';
-import { 
-	Heading, 
-	ErrorCard, 
-	Accordion
-} from '../../components';
+import { Heading, ErrorCard, Accordion } from '../../components';
 import {
 	webSettingsApiFetch,
 	dispatchUpdateSnackbar,
-	comingSoonAdminbarToggle
+	comingSoonAdminbarToggle,
 } from '../../util/helpers';
 import {
 	Card,
 	CardBody,
 	CardHeader,
 	CardDivider,
-	ToggleControl
+	ToggleControl,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { useUpdateEffect } from 'react-use';
 
 const ComingSoon = () => {
-	const { store, setStore } = useContext(AppStore);
-	const [comingSoon, setComingSoon] = useState(store.comingSoon);
-	const [isError, setError] = useState(false);
+	const { store, setStore } = useContext( AppStore );
+	const [ comingSoon, setComingSoon ] = useState( store.comingSoon );
+	const [ isError, setError ] = useState( false );
 
 	const getComingSoonNoticeText = () => {
 		return comingSoon
-			? __('Coming soon activated.', 'wp-plugin-web')
-			: __('Coming soon deactivated.', 'wp-plugin-web');
+			? __( 'Coming soon activated.', 'wp-plugin-web' )
+			: __( 'Coming soon deactivated.', 'wp-plugin-web' );
 	};
 	const getComingSoonHelpText = () => {
 		return comingSoon
 			? __(
-					'Coming soon page is active and site is protected.',
+					'Coming soon page is active. Site requires login.',
 					'wp-plugin-web'
 			  )
 			: __(
-					'Coming soon page is not active and site is acessible.',
+					'Coming soon page is not active. Site is live to visitors.',
 					'wp-plugin-web'
 			  );
 	};
-	
 
-	useUpdateEffect(() => {
-		webSettingsApiFetch({ comingSoon }, setError, (response) => {
-			setStore({
+	useUpdateEffect( () => {
+		webSettingsApiFetch( { comingSoon }, setError, ( response ) => {
+			setStore( {
 				...store,
 				comingSoon,
-			});
-			dispatchUpdateSnackbar(getComingSoonNoticeText());
+			} );
+			dispatchUpdateSnackbar( getComingSoonNoticeText() );
 			comingSoonAdminbarToggle();
-		});
-	}, [comingSoon]);
+		} );
+	}, [ comingSoon ] );
 
 	if ( isError ) {
-		return <ErrorCard error={isError} />
+		return <ErrorCard error={ isError } />;
 	}
 	return (
 		<Card className="card-coming-soon">
 			<CardHeader>
 				<Heading level="3">
-					{__('Coming Soon', 'wp-plugin-web')}
+					{ __( 'Coming Soon', 'wp-plugin-web' ) }
 				</Heading>
 			</CardHeader>
 			<CardBody>
-				{__(
-					'Not ready for your site to be live? Enable a "Coming Soon" page while you build your website for the public eye. This will disable all parts of your site and show visitors a "coming soon" landing page.',
-					'wp-plugin-web'
-				)}
+				<p>
+					{ __(
+						'Still building your site? Need to make a big change?',
+						'wp-plugin-web'
+					) }
+				</p>
+				<p>
+					{ __(
+						'Your Web.com Coming Soon page lets you hide your site from visitors while you make the magic happen.',
+						'wp-plugin-web'
+					) }
+				</p>
+				<p>
+					{ __(
+						'Come back here anytime to turn it on or off as you want to drop a curtain over your site.',
+						'wp-plugin-web'
+					) }
+				</p>
 			</CardBody>
 			<CardDivider />
 			<CardBody className="coming-soon-setting">
 				<ToggleControl
-					label={__('Coming Soon', 'wp-plugin-web')}
+					label={ __( 'Coming Soon', 'wp-plugin-web' ) }
 					className="coming-soon-toggle"
-					checked={comingSoon}
-					help={getComingSoonHelpText()}
-					onChange={() => {
-						setComingSoon((value) => !value);
-					}}
+					checked={ comingSoon }
+					help={ getComingSoonHelpText() }
+					onChange={ () => {
+						setComingSoon( ( value ) => ! value );
+					} }
 				/>
 				{ comingSoon && (
 					<Accordion
 						className="coming-soon-protip"
-						summary={__(
+						summary={ __(
 							'Pro Tip: Begin collecting subscribers',
 							'wp-plugin-web'
-						)}
+						) }
 					>
-						<p>{__(
-							'First, activate the "Jetpack" plugin, connect your site, and enable the "Subscriptions" module. Then, users can subsribe to be notified when you launch and publish new content.',
-							'wp-plugin-web'
-						)}</p>
+						<p>
+							{ __(
+								'Activate the "Jetpack" plugin, connect your site, and enable the "Subscriptions" module to build your following. Subscribers are notified when you publish new posts.',
+								'wp-plugin-web'
+							) }
+						</p>
 					</Accordion>
-				)}
+				) }
 			</CardBody>
 		</Card>
 	);

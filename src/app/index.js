@@ -20,56 +20,57 @@ const Notices = () => {
 		return null;
 	}
 	const notices = useSelect(
-		(select) =>
-			select(noticesStore)
+		( select ) =>
+			select( noticesStore )
 				.getNotices()
-				.filter((notice) => notice.type === 'snackbar'),
+				.filter( ( notice ) => notice.type === 'snackbar' ),
 		[]
 	);
-	const { removeNotice } = useDispatch(noticesStore);
+	const { removeNotice } = useDispatch( noticesStore );
 	return (
 		<SnackbarList
 			className="edit-site-notices"
-			notices={notices}
-			onRemove={removeNotice}
+			notices={ notices }
+			onRemove={ removeNotice }
 		/>
 	);
 };
 
 const handlePageLoad = () => {
 	const location = useLocation();
-	const routeContents = document.querySelector('.wppw-app-body-inner');
-	useEffect(() => {
-		setActiveSubnav(location.pathname);
-		window.scrollTo(0, 0);
+	const routeContents = document.querySelector( '.wppw-app-body-inner' );
+	useEffect( () => {
+		setActiveSubnav( location.pathname );
+		window.scrollTo( 0, 0 );
 		if ( routeContents ) {
-			routeContents.focus({ preventScroll: true });
+			routeContents.focus( { preventScroll: true } );
 		}
-	}, [location.pathname]);
+	}, [ location.pathname ] );
 };
 
-const AppBody = (props) => {
+const AppBody = ( props ) => {
 	const location = useLocation();
-	const { booted, hasError } = useContext(AppStore);
+	const { booted, hasError } = useContext( AppStore );
 
 	handlePageLoad();
 
 	return (
 		<main
 			id="wppw-app-rendered"
-			className={classnames(
-				'wpadmin-brand-web', 
-				`wppw-wp-${WPPW.wpversion}`, 
-				`wppw-page-${kebabCase(location.pathname)}`, 
+			className={ classnames(
+				'wpadmin-brand-web',
+				`wppw-wp-${ WPPW.wpversion }`,
+				`wppw-page-${ kebabCase( location.pathname ) }`,
 				props.className
-			)}
+			) }
 		>
 			<Header />
 			<div className="wppw-app-body">
 				<div className="wppw-app-body-inner">
-					<ErrorBoundary FallbackComponent={<ErrorCard />}>
-						{ hasError && <ErrorCard error={hasError} /> }
-						{(true === booted && <AppRoutes />) || (!hasError && <Spinner />) }
+					<ErrorBoundary FallbackComponent={ <ErrorCard /> }>
+						{ hasError && <ErrorCard error={ hasError } /> }
+						{ ( true === booted && <AppRoutes /> ) ||
+							( ! hasError && <Spinner /> ) }
 					</ErrorBoundary>
 				</div>
 			</div>

@@ -4,29 +4,27 @@ import {
 	CardBody,
 	CardHeader,
 	CardFooter,
-	CardMedia
+	CardMedia,
 } from '@wordpress/components';
 import { Heading } from '../../components';
 
-const MarketplaceItem = ({ item }) => {
+const MarketplaceItem = ( { item } ) => {
 	return (
-		<Card
-			className={`marketplace-item-${item.name}`}
-		>
-			{item.img && (
+		<Card className={ `marketplace-item-${ item.name }` }>
+			{ item.img && (
 				<CardMedia>
-					<img src={item.img} alt={item.title + ' thumbnail'} />
+					<img src={ item.img } alt={ item.title + ' thumbnail' } />
 				</CardMedia>
-			)}
+			) }
 			<CardHeader>
-				<Heading level="4">{item.title}</Heading>
-				{item.price && <em className="price">${item.price}</em>}
+				<Heading level="4">{ item.title }</Heading>
+				{ item.price && <em className="price">${ item.price }</em> }
 			</CardHeader>
-			{item.description && <CardBody>{item.description}</CardBody>}
+			{ item.description && <CardBody>{ item.description }</CardBody> }
 			<CardFooter>
-				<Button variant="primary" href={item.url}>
-					{' '}
-					{item.cta}{' '}
+				<Button variant="primary" href={ item.url }>
+					{ ' ' }
+					{ item.cta }{ ' ' }
 				</Button>
 			</CardFooter>
 		</Card>

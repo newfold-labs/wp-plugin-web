@@ -7,21 +7,20 @@ import NavUtility from './nav-utility';
 import { useViewportMatch } from '@wordpress/compose';
 
 const Header = () => {
-	const isLargeViewport = useViewportMatch('medium');
+	const isLargeViewport = useViewportMatch( 'medium' );
 	return (
 		<Fragment>
 			<header className="wppw-header">
 				<div className="wppw-header-inner">
 					<Logo />
-					{isLargeViewport && (<NavUtility />) || <NavMobile />}
+					{ ( isLargeViewport && <NavUtility /> ) || <NavMobile /> }
 				</div>
-				
 			</header>
-			{isLargeViewport && (
+			{ isLargeViewport && (
 				<nav className="wppw-nav">
 					<NavLarge />
 				</nav>
-			)}
+			) }
 		</Fragment>
 	);
 };

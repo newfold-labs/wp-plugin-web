@@ -5,26 +5,27 @@ import Services from './services';
 import { TabPanel, Spinner } from '@wordpress/components';
 
 const Marketplace = () => {
-	const [isLoading, setIsLoading] = useState(true);
-	const [initialTab, setInitialTab] = useState('plugins');
+	const [ isLoading, setIsLoading ] = useState( true );
+	const [ initialTab, setInitialTab ] = useState( 'plugins' );
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	const onTabNavigate = (tabName) => navigate( '/marketplace/' + tabName, { replace: true });
+	const onTabNavigate = ( tabName ) =>
+		navigate( '/marketplace/' + tabName, { replace: true } );
 
-	useEffect(() => {
-		if (location.pathname.includes('/services')) {
-			setInitialTab('services');
-		} else if (location.pathname.includes('/themes')) {
-			setInitialTab('themes');
-		} else if (! location.pathname.includes('/plugins')) {
-			navigate('/marketplace/plugins', { replace: true });
+	useEffect( () => {
+		if ( location.pathname.includes( '/services' ) ) {
+			setInitialTab( 'services' );
+		} else if ( location.pathname.includes( '/themes' ) ) {
+			setInitialTab( 'themes' );
+		} else if ( ! location.pathname.includes( '/plugins' ) ) {
+			navigate( '/marketplace/plugins', { replace: true } );
 		}
-		setIsLoading(false);
-	}, [location]);
+		setIsLoading( false );
+	}, [ location ] );
 
 	if ( isLoading ) {
-		return <Spinner />
+		return <Spinner />;
 	}
 
 	return (
@@ -33,9 +34,9 @@ const Marketplace = () => {
 				className="wppw-marketplace-tabs"
 				activeClass="current-tab"
 				orientation="vertical"
-				initialTabName={initialTab}
-				onSelect={onTabNavigate}
-				tabs={[
+				initialTabName={ initialTab }
+				onSelect={ onTabNavigate }
+				tabs={ [
 					{
 						name: 'plugins',
 						className: 'plugins',
@@ -54,9 +55,9 @@ const Marketplace = () => {
 						title: 'Themes',
 						Component: Themes,
 					},
-				]}
+				] }
 			>
-				{(tab) => <tab.Component />}
+				{ ( tab ) => <tab.Component /> }
 			</TabPanel>
 		</div>
 	);

@@ -7,13 +7,13 @@ import { render } from '@wordpress/element';
 
 const WP_ADM_PAGE_ROOT_ELEMENT = 'wppw-app';
 const W_ASCI = `Welcome to Web.com!`;
-console.log(W_ASCI);
+console.log( W_ASCI );
 
 const WPPWRender = () => {
-	const DOM_ELEMENT = document.getElementById(WP_ADM_PAGE_ROOT_ELEMENT);
-	if (null !== DOM_ELEMENT && 'undefined' !== typeof render) {
-		render(<App />, DOM_ELEMENT);
+	const DOM_ELEMENT = document.getElementById( WP_ADM_PAGE_ROOT_ELEMENT );
+	if ( null !== DOM_ELEMENT && 'undefined' !== typeof render ) {
+		render( <App />, DOM_ELEMENT );
 	}
 };
 
-domReady(WPPWRender);
+domReady( WPPWRender );
