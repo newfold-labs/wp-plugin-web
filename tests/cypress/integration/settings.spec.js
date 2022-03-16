@@ -44,9 +44,9 @@ describe('Settings Page', function () {
 	it('Everything Auto Update Toggle Works', () => {
 		cy.get('.autoupdate-all-toggle input[type="checkbox"]').check();
 		cy.get('.autoupdate-all-toggle input[type="checkbox"]').should('be.checked');
-		cy.get('.autoupdate-core-toggle input[type="checkbox"]').should('not.be.visible');
-		cy.get('.autoupdate-plugin-toggle input[type="checkbox"]').should('not.be.visible');
-		cy.get('.autoupdate-theme-toggle input[type="checkbox"]').should('not.be.visible');
+		cy.get('.autoupdate-core-toggle input[type="checkbox"]').should('not.exist');
+		cy.get('.autoupdate-plugin-toggle input[type="checkbox"]').should('not.exist');
+		cy.get('.autoupdate-theme-toggle input[type="checkbox"]').should('not.exist');
 
 		cy.get('.autoupdate-all-toggle input[type="checkbox"]').uncheck();
 		cy.get('.autoupdate-core-toggle input[type="checkbox"]').should('not.be.disabled').should('be.checked');
@@ -114,7 +114,7 @@ describe('Settings Page', function () {
 
 	it('Comment Settings Work', () => {
 		cy.get('.disable-comments-toggle input[type="checkbox"]').uncheck();
-		cy.get('.close-comments-days-select select').should('not.be.visible');
+		cy.get('.close-comments-days-select select').should('not.exist');
 		cy.get('.disable-comments-toggle input[type="checkbox"]').check();
 		cy.wait(100);
 		cy
