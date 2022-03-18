@@ -35,21 +35,21 @@ msgid "Please install the Web.com Plugin dependencies."
 msgstr ""
 
 #. translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag, %3$s is replaced with opening link tag taking you to login page, %4$s is replaced with closing link tag, %5$s is replaced with opening link tag taking you to my.web.com, %6$s is replaced with closing link tag
-#: bootstrap.php:37
+#: bootstrap.php:40
 msgid "A %1$sWeb.com%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sWeb.com%6$s."
 msgstr ""
 
 #. translators: %s: Blog name
-#: bootstrap.php:47
+#: bootstrap.php:50
 msgid "%s &mdash; Coming Soon"
 msgstr ""
 
-#: bootstrap.php:50
+#: bootstrap.php:53
 msgid "Coming Soon Active"
 msgstr ""
 
 #. translators: %1$s is replaced with the opening link tag and %2$s is replaced with the closing link tag, %3$s is the opening link tag to preview the page, %4$s is the closing link tag.
-#: bootstrap.php:53
+#: bootstrap.php:56
 msgid "Your site is currently displaying a %3$s\"Coming Soon\" page%4$s. Once you are ready, %1$slaunch your site%2$s."
 msgstr ""
 
