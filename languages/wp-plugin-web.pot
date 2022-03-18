@@ -30,8 +30,27 @@ msgstr ""
 msgid "WordPress plugin that integrates a WordPress site with the Web.com control panel, including performance, security, and update features."
 msgstr ""
 
-#: bootstrap.php:18
+#: bootstrap.php:20
 msgid "Please install the Web.com Plugin dependencies."
+msgstr ""
+
+#. translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag, %3$s is replaced with opening link tag taking you to login page, %4$s is replaced with closing link tag, %5$s is replaced with opening link tag taking you to my.web.com, %6$s is replaced with closing link tag
+#: bootstrap.php:37
+msgid "A %1$sWeb.com%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sWeb.com%6$s."
+msgstr ""
+
+#. translators: %s: Blog name
+#: bootstrap.php:47
+msgid "%s &mdash; Coming Soon"
+msgstr ""
+
+#: bootstrap.php:50
+msgid "Coming Soon Active"
+msgstr ""
+
+#. translators: %1$s is replaced with the opening link tag and %2$s is replaced with the closing link tag, %3$s is the opening link tag to preview the page, %4$s is the closing link tag.
+#: bootstrap.php:53
+msgid "Your site is currently displaying a %3$s\"Coming Soon\" page%4$s. Once you are ready, %1$slaunch your site%2$s."
 msgstr ""
 
 #: inc/Admin.php:42
@@ -92,83 +111,6 @@ msgstr ""
 
 #: inc/AdminBar.php:38
 msgid "We're here for you!"
-msgstr ""
-
-#. translators: %1$s is replaced with the opening link tag and %2$s is replaced with the closing link tag.
-#: inc/coming-soon.php:25
-msgid "Your site is currently displaying a \"Coming Soon\" page. Once you are ready, %1$slaunch your site%2$s."
-msgstr ""
-
-#: inc/coming-soon.php:49
-msgid "Coming Soon Active"
-msgstr ""
-
-#: inc/coming-soon.php:51
-msgid "Launch Your Site"
-msgstr ""
-
-#: inc/coming-soon.php:93
-msgid "Gotcha!"
-msgstr ""
-
-#: inc/coming-soon.php:100
-msgid "Please provide a valid email address"
-msgstr ""
-
-#: inc/coming-soon.php:123
-msgid "There was an error with the subscription"
-msgstr ""
-
-#: inc/coming-soon.php:128
-msgid "Subscription successful"
-msgstr ""
-
-#. translators: %s: Blog name
-#: inc/pages/coming-soon.php:17
-msgid "%s &mdash; Coming Soon"
-msgstr ""
-
-#: inc/pages/coming-soon.php:199
-msgid "Coming soon"
-msgstr ""
-
-#: inc/pages/coming-soon.php:202
-msgid "Be the first to know when we launch, enter your email address and we will let you know when we go live and any future website updates we have."
-msgstr ""
-
-#: inc/pages/coming-soon.php:205
-msgid "Thank you, please check your email to confirm your subscription."
-msgstr ""
-
-#: inc/pages/coming-soon.php:208
-msgid "There was an error with your submission and you were not subscribed. Please try again with a different email address."
-msgstr ""
-
-#: inc/pages/coming-soon.php:215
-#: src/app/pages/home/webHostingSection.js:65
-msgid "Email"
-msgstr ""
-
-#: inc/pages/coming-soon.php:231
-msgid "A New WordPress Site"
-msgstr ""
-
-#. translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag
-#: inc/pages/coming-soon.php:243
-msgid "A %1$sWeb.com%2$s powered website."
-msgstr ""
-
-#. translators: %1$s is replaced with opening link tag taking you to login page, %2$s is replaced with opening link tag taking you to my.web.com, %3$s is replaced with closing link tag
-#: inc/pages/coming-soon.php:249
-msgid "Is this your website? Log in to %1$sWordPress%3$s or %2$sWeb.com%3$s."
-msgstr ""
-
-#: inc/pages/coming-soon.php:283
-msgid "Your email address is already subscribed to this website. Stay tuned to your inbox for our updates or try a different email address."
-msgstr ""
-
-#: inc/pages/coming-soon.php:285
-msgid "There was an error with your submission and you were not subscribed. Please try again with a valid email address."
 msgstr ""
 
 #. translators: 1: plugin name 2: incompatible plugin name
@@ -598,6 +540,10 @@ msgstr ""
 
 #: src/app/pages/home/webHostingSection.js:58
 msgid "Manage Sites"
+msgstr ""
+
+#: src/app/pages/home/webHostingSection.js:65
+msgid "Email"
 msgstr ""
 
 #: src/app/pages/home/webHostingSection.js:68
