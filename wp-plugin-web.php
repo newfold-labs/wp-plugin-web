@@ -57,13 +57,13 @@ if ( 'plugins.php' === $pagenow ) {
 
 // Check NFD plugin incompaatibilities
 require_once WEB_PLUGIN_DIR . '/inc/plugin-nfd-compat-check.php';
-$nfd_plugins_check                       = new NFD_Plugin_Compat_Check( WEB_PLUGIN_FILE );
-$nfd_plugins_check->legacy_plugins       = array(
-	'Bluehost' => 'bluehost-wordpress-plugin/bluehost-wordpress-plugin.php',
+$nfd_plugins_check                 = new NFD_Plugin_Compat_Check( WEB_PLUGIN_FILE );
+$nfd_plugins_check->legacy_plugins = array(
+	'Bluehost'         => 'bluehost-wordpress-plugin/bluehost-wordpress-plugin.php',
 	'MOJO Marketplace' => 'mojo-marketplace-wp-plugin/mojo-marketplace.php',
-	'HostGator' => 'wp-plugin-hostgator/wp-plugin-hostgator.php'
+	'HostGator'        => 'wp-plugin-hostgator/wp-plugin-hostgator.php',
 );
-$pass_nfd_check                          = $nfd_plugins_check->check_plugin_requirements();
+$pass_nfd_check                    = $nfd_plugins_check->check_plugin_requirements();
 
 // Check PHP version before initializing to prevent errors if plugin is incompatible.
 if ( $pass_nfd_check && version_compare( PHP_VERSION, '5.3', '>=' ) ) {
