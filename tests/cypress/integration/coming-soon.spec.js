@@ -84,7 +84,7 @@ describe('Coming Soon', function () {
 		cy.visit('/');
 		cy
 			.get('body')
-			.contains('h1', 'Coming soon')
+			.contains('h1', 'Coming')
 			.should('be.visible');
 	});
 

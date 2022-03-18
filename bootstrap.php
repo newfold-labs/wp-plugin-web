@@ -23,7 +23,7 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 
 /*
- * Initialize coming soon module via container 
+ * Initialize coming soon module via container
  */
 $nfd_module_container = new Container();
 // Set a value
