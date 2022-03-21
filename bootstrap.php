@@ -10,6 +10,7 @@ namespace Web;
 use Web\UpgradeHandler;
 use WP_Forge\WPUpdateHandler\PluginUpdater;
 use NewfoldLabs\WP\ModuleLoader\Container;
+use NewfoldLabs\WP\ModuleLoader\Plugin;
 use function NewfoldLabs\WP\ModuleLoader\container as setContainer;
 
 // Composer autoloader
@@ -26,7 +27,21 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
  * Initialize coming soon module via container
  */
 $nfd_module_container = new Container();
-// Set a value
+// Set plugin to container
+$nfd_module_container->set(
+	'plugin',
+	$nfd_module_container->service(
+		function() {
+			return new Plugin(
+				[
+					'id'   => 'web',
+					'file' => WEB_PLUGIN_FILE,
+				]
+			);
+		}
+	)
+);
+// Set coming soon values
 $nfd_module_container->set(
 	'comingsoon',
 	array(
