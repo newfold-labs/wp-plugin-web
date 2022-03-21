@@ -33,10 +33,10 @@ $nfd_module_container->set(
 	$nfd_module_container->service(
 		function() {
 			return new Plugin(
-				[
+				array(
 					'id'   => 'web',
 					'file' => WEB_PLUGIN_FILE,
-				]
+				)
 			);
 		}
 	)
