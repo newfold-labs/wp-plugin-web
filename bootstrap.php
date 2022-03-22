@@ -68,7 +68,7 @@ $nfd_module_container->set(
 		'admin_bar_text'      => __( 'Coming Soon Active', 'wp-plugin-web' ),
 		'admin_notice_text'   => sprintf(
 			/* translators: %1$s is replaced with the opening link tag and %2$s is replaced with the closing link tag, %3$s is the opening link tag to preview the page, %4$s is the closing link tag. */
-			__( 'Your site is currently displaying a %3$s"Coming Soon" page%4$s. Once you are ready, %1$slaunch your site%2$s.', 'wp-plugin-web' ),
+			__( 'Your site is currently displaying a %3$sComing Soon page%4$s. Once you are ready, %1$slaunch your site%2$s.', 'wp-plugin-web' ),
 			'<a href="' . esc_url( admin_url( 'admin.php?page=web#/home' ) ) . '">',
 			'</a>',
 			'<a href="' . get_home_url() . '?preview=coming_soon" title="Preview the Coming Soon landing page">',
