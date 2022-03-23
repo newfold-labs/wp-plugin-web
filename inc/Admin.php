@@ -49,8 +49,7 @@ final class Admin {
 
 	/**
 	 * Add inline script to admin screens
-	 * 1. hide extra link in subnav
-	 * 2. style coming soon in adminbar
+	 *  - hide extra link in subnav
 	 */
 	public static function admin_nav_style() {
 		echo '<style>';
@@ -58,8 +57,6 @@ final class Admin {
 		echo 'ul#adminmenu a.toplevel_page_web.wp-has-current-submenu:after, ul#adminmenu>li#toplevel_page_web.current>a.current:after { border-right-color: #fff !important; }';
 		echo 'li#toplevel_page_web > ul > li.wp-first-item { display: none !important; }';
 		echo '#wp-toolbar #wp-admin-bar-web-coming_soon .ab-item { padding: 0; }';
-		echo '#wp-admin-bar-web-coming_soon .coming_soon-highlight{ background-color: #FEC101; color: #000; padding: 0 1rem; }';
-		echo '#wp-admin-bar-web-coming_soon .coming_soon-highlight:hover { color: #1f2044; }';
 		echo '</style>';
 	}
 
