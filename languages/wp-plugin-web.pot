@@ -16,8 +16,8 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #. Author of the plugin
-#: inc/Admin.php:75
-#: inc/Admin.php:76
+#: inc/Admin.php:72
+#: inc/Admin.php:73
 msgid "Web.com"
 msgstr ""
 
@@ -54,7 +54,7 @@ msgid "Your site is currently displaying a %3$sComing Soon page%4$s. Once you ar
 msgstr ""
 
 #: inc/Admin.php:42
-#: inc/Admin.php:176
+#: inc/Admin.php:173
 #: src/app/data/routes.js:52
 msgid "Home"
 msgstr ""
@@ -75,7 +75,7 @@ msgid "Performance"
 msgstr ""
 
 #: inc/Admin.php:45
-#: inc/Admin.php:177
+#: inc/Admin.php:174
 #: src/app/data/routes.js:70
 #: src/app/pages/home/settingsSection.js:52
 #: src/app/pages/performance/settingsCallout.js:16
@@ -89,19 +89,19 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: inc/Admin.php:115
+#: inc/Admin.php:112
 msgid "Please update to a newer WordPress version."
 msgstr ""
 
-#: inc/Admin.php:116
+#: inc/Admin.php:113
 msgid "There are new WordPress components which this plugin requires in order to render the interface."
 msgstr ""
 
-#: inc/Admin.php:117
+#: inc/Admin.php:114
 msgid "Please update now"
 msgstr ""
 
-#: inc/Admin.php:190
+#: inc/Admin.php:187
 msgid "Thank you for creating with <a href=\"https://wordpress.org/\">WordPress</a> and <a href=\"https://web.com/about-us\">Web.com</a>."
 msgstr ""
 
