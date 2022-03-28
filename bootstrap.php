@@ -45,11 +45,9 @@ $nfd_module_container->set(
 $nfd_module_container->set(
 	'comingsoon',
 	array(
-		'option_name'         => 'mm_coming_soon',
-		'admin_screen_id'     => 'web',
 		'admin_app_url'       => admin_url( 'admin.php?page=web#/home' ),
-		'template_h1'         => 'Coming Soon!',
-		'template_h2'         => 'A New WordPress Site',
+		'template_h1'         => __('Coming Soon!', 'wp-plugin-web'),
+		'template_h2'         => __('A New WordPress Site', 'wp-plugin-web'),
 		'template_footer_t'   => sprintf(
 			/* translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag, %3$s is replaced with opening link tag taking you to login page, %4$s is replaced with closing link tag, %5$s is replaced with opening link tag taking you to my.web.com, %6$s is replaced with closing link tag */
 			esc_html__( 'A %1$sWeb.com%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sWeb.com%6$s.', 'wp-plugin-web' ) . '&nbsp;',
@@ -65,13 +63,13 @@ $nfd_module_container->set(
 			__( '%s &mdash; Coming Soon', 'wp-plugin-web' ),
 			esc_html( get_option( 'blogname' ) )
 		),
-		'admin_bar_text'       => '<div style="background-color: #FEC101; color: #000; padding: 0 1rem;">' . __( 'Coming Soon Active', 'wp-plugin-web' ) . '</div>',
+		'admin_bar_text'      => '<div style="background-color: #FEC101; color: #000; padding: 0 1rem;">' . __( 'Coming Soon Active', 'wp-plugin-web' ) . '</div>',
 		'admin_notice_text'   => sprintf(
-			/* translators: %1$s is replaced with the opening link tag and %2$s is replaced with the closing link tag, %3$s is the opening link tag to preview the page, %4$s is the closing link tag. */
-			__( 'Your site is currently displaying a %3$sComing Soon page%4$s. Once you are ready, %1$slaunch your site%2$s.', 'wp-plugin-web' ),
-			'<a href="' . esc_url( admin_url( 'admin.php?page=web#/home' ) ) . '">',
+			/* translators: %1$s is replaced with the opening link tag to preview the page, and %2$s is replaced with the closing link tag, %3$s is the opening link tag, %4$s is the closing link tag. */
+			__( 'Your site is currently displaying a %1$scoming soon page%2$s. Once you are ready, %3$slaunch your site%4$s.', 'wp-plugin-web' ),
+			'<a href="' . get_home_url() . '?preview=coming_soon" title="' . __('Preview the coming soon landing page', 'wp-plugin-web') . '">',
 			'</a>',
-			'<a href="' . get_home_url() . '?preview=coming_soon" title="Preview the Coming Soon landing page">',
+			'<a href="' . esc_url( admin_url( 'admin.php?page=web#/home' ) ) . '">',
 			'</a>'
 		),
 		'template_styles'     => esc_url( WEB_PLUGIN_URL . 'assets/styles/coming-soon.css' ),
@@ -100,7 +98,7 @@ if ( is_admin() ) {
 	require WEB_PLUGIN_DIR . '/inc/UpgradeHandler.php';
 	$upgrade_handler = new UpgradeHandler(
 		WEB_PLUGIN_DIR . '/inc/upgrades',
-		get_option( 'web_plugin_version', '1.0' ),
+		get_option( 'web_plugin_version', '0.9.0' ),
 		WEB_PLUGIN_VERSION
 	);
 
