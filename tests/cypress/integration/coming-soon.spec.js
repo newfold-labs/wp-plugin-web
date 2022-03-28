@@ -75,7 +75,7 @@ describe('Coming Soon', function () {
 		cy.visit('/wp-admin/index.php');
 		cy
 			.get('.notice-warning')
-			.contains('p', 'Coming Soon')
+			.contains('p', 'coming')
 			.should('be.visible');
 	});
 
@@ -84,7 +84,7 @@ describe('Coming Soon', function () {
 		cy.visit('/');
 		cy
 			.get('body')
-			.contains('h1', 'Coming soon')
+			.contains('h1', 'Coming')
 			.should('be.visible');
 	});
 

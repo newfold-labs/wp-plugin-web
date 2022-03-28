@@ -1,0 +1,127 @@
+:root {
+    --mdc-theme-primary: #0D47FB;
+    --mdc-theme-extra: #BD2380;
+    --dc-theme-black: #000000;
+    --dc-theme-grey: #353738;
+    --dc-theme-grey-dark: #1F2044;
+    --dc-theme-white: #ffffff;
+    --mdc-theme-error: #ff182f;
+    --mdc-theme-error--dark: #701116;
+    --dc-theme-success: #23c161;
+    --dc-theme-success--dark: #034a1d;
+}
+
+body {
+    background-color: var(--dc-theme-white);
+    color: var(--dc-theme-grey-dark);
+}
+
+body,
+input {
+    font-family: "Open Sans",sans-serif;
+}
+
+.content {
+    background-image: url("../images/coming-soon.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 345px 239px;
+    padding: 250px 0 0;
+    max-width: 420px;
+}
+
+#wrap h1 {
+    color: var(--dc-theme-black);
+    font-weight: 600;
+    font-family: 'Noto Serif', serif;;
+    font-size: 28px;
+    letter-spacing: 0.15px;
+    line-height: 36px;
+}
+
+#wrap h2 {
+    color: var(--dc-theme-grey-dark);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+}
+
+footer p {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--dc-theme-grey);
+    padding: 8px;
+}
+
+footer p a {
+    color: var(--mdc-theme-primary);
+    text-decoration: none;
+}
+
+footer p a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    background: var(--mdc-theme-extra);
+    border: 5px solid var(--mdc-theme-extra);
+    color: var(--dc-theme-white);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 30px;
+}
+
+.btn:hover {
+    background-color: var(--dc-theme-white);
+    border-color: var(--mdc-theme-extra);
+    color: var(--mdc-theme-extra);
+}
+
+#subscribe-text p {
+    line-height: 24px;
+    margin-bottom: 25px;
+}
+
+.status-message {
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--dc-theme-grey);
+    margin-bottom: 25px;
+    display: none;
+    padding: 8px 40px;
+}
+
+#success {
+    background: var(--dc-theme-success);
+    border: 5px solid var(--dc-theme-success--dark);
+}
+
+#error-invalid,
+#error-active {
+    border: 5px solid var(--mdc-theme-error);
+}
+
+form .inputs {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    transition: all 0.1s ease;
+}
+
+form .inputs label {
+    display: none;
+}
+
+form .inputs.email input[type="email"] {
+    background-color: var(--dc-theme-white);
+    border: 1px solid var(--dc-theme-grey);
+    color: var(--dc-theme-grey-dark);
+    font-size: 11px;
+    min-width: 240px;
+    padding: 14px 15px;
+    max-height: 45px;
+    transition: all 0.05s ease;
+}
