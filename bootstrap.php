@@ -45,8 +45,6 @@ $nfd_module_container->set(
 $nfd_module_container->set(
 	'comingsoon',
 	array(
-		'option_name'         => 'mm_coming_soon',
-		'admin_screen_id'     => 'web',
 		'admin_app_url'       => admin_url( 'admin.php?page=web#/home' ),
 		'template_h1'         => __('Coming Soon!', 'wp-plugin-web'),
 		'template_h2'         => __('A New WordPress Site', 'wp-plugin-web'),
@@ -100,7 +98,7 @@ if ( is_admin() ) {
 	require WEB_PLUGIN_DIR . '/inc/UpgradeHandler.php';
 	$upgrade_handler = new UpgradeHandler(
 		WEB_PLUGIN_DIR . '/inc/upgrades',
-		get_option( 'web_plugin_version', '1.0' ),
+		get_option( 'web_plugin_version', '0.9.0' ),
 		WEB_PLUGIN_VERSION
 	);
 
