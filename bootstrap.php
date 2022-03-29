@@ -26,11 +26,11 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 /*
  * Initialize coming soon module via container
  */
-$nfd_module_container = new Container();
+$web_module_container = new Container();
 // Set plugin to container
-$nfd_module_container->set(
+$web_module_container->set(
 	'plugin',
-	$nfd_module_container->service(
+	$web_module_container->service(
 		function() {
 			return new Plugin(
 				array(
@@ -42,7 +42,7 @@ $nfd_module_container->set(
 	)
 );
 // Set coming soon values
-$nfd_module_container->set(
+$web_module_container->set(
 	'comingsoon',
 	array(
 		'admin_app_url'       => admin_url( 'admin.php?page=web#/home' ),
@@ -75,7 +75,7 @@ $nfd_module_container->set(
 		'template_styles'     => esc_url( WEB_PLUGIN_URL . 'assets/styles/coming-soon.css' ),
 	)
 );
-setContainer( $nfd_module_container );
+setContainer( $web_module_container );
 
 // Set up the updater endpoint and map values
 $updateurl     = 'https://hiive.cloud/workers/release-api/plugins/newfold-labs/wp-plugin-web'; // Custom API GET endpoint
