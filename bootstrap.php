@@ -26,7 +26,12 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 /*
  * Initialize coming soon module via container
  */
-$nfd_module_container = new Container();
+$nfd_module_container = new Container(
+	[
+		'cache_types' => [ 'browser', 'file', 'skip404' ],
+	]
+);
+
 // Set plugin to container
 $nfd_module_container->set(
 	'plugin',
@@ -41,6 +46,7 @@ $nfd_module_container->set(
 		}
 	)
 );
+
 // Set coming soon values
 $nfd_module_container->set(
 	'comingsoon',
