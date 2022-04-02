@@ -27,9 +27,9 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
  * Initialize coming soon module via container
  */
 $web_module_container = new Container(
-	[
-		'cache_types' => [ 'browser', 'file', 'skip404' ],
-	]
+	array(
+		'cache_types' => array( 'browser', 'file', 'skip404' ),
+	)
 );
 
 // Set plugin to container
