@@ -34,34 +34,34 @@ msgstr ""
 msgid "Please install the Web.com Plugin dependencies."
 msgstr ""
 
-#: bootstrap.php:49
+#: bootstrap.php:55
 msgid "Coming Soon!"
 msgstr ""
 
-#: bootstrap.php:50
+#: bootstrap.php:56
 msgid "A New WordPress Site"
 msgstr ""
 
 #. translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag, %3$s is replaced with opening link tag taking you to login page, %4$s is replaced with closing link tag, %5$s is replaced with opening link tag taking you to my.web.com, %6$s is replaced with closing link tag
-#: bootstrap.php:53
+#: bootstrap.php:59
 msgid "A %1$sWeb.com%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sWeb.com%6$s."
 msgstr ""
 
 #. translators: %s: Blog name
-#: bootstrap.php:63
+#: bootstrap.php:69
 msgid "%s &mdash; Coming Soon"
 msgstr ""
 
-#: bootstrap.php:66
+#: bootstrap.php:72
 msgid "Coming Soon Active"
 msgstr ""
 
 #. translators: %1$s is replaced with the opening link tag to preview the page, and %2$s is replaced with the closing link tag, %3$s is the opening link tag, %4$s is the closing link tag.
-#: bootstrap.php:69
+#: bootstrap.php:75
 msgid "Your site is currently displaying a %1$scoming soon page%2$s. Once you are ready, %3$slaunch your site%4$s."
 msgstr ""
 
-#: bootstrap.php:70
+#: bootstrap.php:76
 msgid "Preview the coming soon landing page"
 msgstr ""
 
@@ -159,11 +159,7 @@ msgstr ""
 msgid "The \"%s\" plugin has been deactivated."
 msgstr ""
 
-#: inc/RestApi/CachingController.php:47
-msgid "Endurance Page Cache plugin is not installed."
-msgstr ""
-
-#: inc/RestApi/CachingController.php:67
+#: inc/RestApi/CachingController.php:65
 #: inc/RestApi/SettingsController.php:200
 msgid "Sorry, you are not allowed to access this endpoint."
 msgstr ""
