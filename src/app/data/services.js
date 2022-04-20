@@ -1,36 +1,47 @@
 const services = [
 	{
-		name: 'codeguard',
-		title: __( 'CodeGuard', 'wp-plugin-web' ),
+		name: 'pro',
+		title: __( 'Pro Services', 'wp-plugin-web' ),
 		description: __(
-			'Protect your website with a daily, automatic backup!',
+			'Custom websites and marketing done your way',
 			'wp-plugin-web'
 		),
 		cta: __( 'Learn More', 'wp-plugin-web' ),
-		url: 'https://www.web.com/codeguard',
-		img: WPPW.assets + 'images/services-codeguard.png',
+		url: 'https://www.web.com/websites/pro-website-services',
+		img: WPPW.assets + 'images/services-pro.jpg',
 	},
 	{
 		name: 'ppc',
-		title: __( 'PPC Management', 'wp-plugin-web' ),
+		title: __( 'PPC Advertising', 'wp-plugin-web' ),
 		description: __(
-			'PPC advertising can increase performance and drive more revenue!',
+			'Drive traffic with Pay-Per-Click Advertising',
 			'wp-plugin-web'
 		),
-		cta: __( 'Get More Leads', 'wp-plugin-web' ),
-		url: 'https://www.web.com/services/ppc',
-		img: WPPW.assets + 'images/services-ppc.png',
+		cta: __( 'Learn More', 'wp-plugin-web' ),
+		url: 'https://www.web.com/online-marketing/pay-per-click-advertising',
+		img: WPPW.assets + 'images/services-ppc.jpg',
+	},
+	{
+		name: 'seo',
+		title: __( 'SEO Services', 'wp-plugin-web' ),
+		description: __(
+			'Increase your search ranking',
+			'wp-plugin-web'
+		),
+		cta: __( 'Learn More', 'wp-plugin-web' ),
+		url: 'https://www.web.com/online-marketing/small-business-seo-services',
+		img: WPPW.assets + 'images/services-seo.jpg',
 	},
 	{
 		name: 'webdesign',
 		title: __( 'Web Design Services', 'wp-plugin-web' ),
 		description: __(
-			'Impress potential clients with a professionally-designed website!',
+			'Expert web design that gives you peace of mind',
 			'wp-plugin-web'
 		),
 		cta: __( 'Learn More', 'wp-plugin-web' ),
-		url: 'https://www.web.com/services/web-design',
-		img: WPPW.assets + 'images/services-webdesign.png',
+		url: 'https://www.web.com/websites/website-design-services',
+		img: WPPW.assets + 'images/services-webdesign.jpg',
 	},
 ];
 
