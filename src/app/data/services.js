@@ -7,7 +7,7 @@ const services = [
 			'wp-plugin-web'
 		),
 		cta: __( 'Learn More', 'wp-plugin-web' ),
-		url: 'https://www.web.com/websites/pro-website-services',
+		url: 'https://www.web.com/websites/pro-website-services?utm_campaign=&utm_content=marketplace_services_pro&utm_term=learn_more&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/marketplace/services',
 		img: WPPW.assets + 'images/services-pro.jpg',
 	},
 	{
@@ -18,7 +18,7 @@ const services = [
 			'wp-plugin-web'
 		),
 		cta: __( 'Learn More', 'wp-plugin-web' ),
-		url: 'https://www.web.com/online-marketing/pay-per-click-advertising',
+		url: 'https://www.web.com/online-marketing/pay-per-click-advertising?utm_campaign=&utm_content=marketplace_services_ppc&utm_term=learn_more&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/marketplace/services',
 		img: WPPW.assets + 'images/services-ppc.jpg',
 	},
 	{
@@ -29,7 +29,7 @@ const services = [
 			'wp-plugin-web'
 		),
 		cta: __( 'Learn More', 'wp-plugin-web' ),
-		url: 'https://www.web.com/online-marketing/small-business-seo-services',
+		url: 'https://www.web.com/online-marketing/small-business-seo-services?utm_campaign=&utm_content=marketplace_services_seo&utm_term=learn_more&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/marketplace/services',
 		img: WPPW.assets + 'images/services-seo.jpg',
 	},
 	{
@@ -40,7 +40,7 @@ const services = [
 			'wp-plugin-web'
 		),
 		cta: __( 'Learn More', 'wp-plugin-web' ),
-		url: 'https://www.web.com/websites/website-design-services',
+		url: 'https://www.web.com/websites/website-design-services?utm_campaign=&utm_content=marketplace_services_webdesign&utm_term=learn_more&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/marketplace/services',
 		img: WPPW.assets + 'images/services-webdesign.jpg',
 	},
 ];
