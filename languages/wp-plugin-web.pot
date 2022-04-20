@@ -318,36 +318,42 @@ msgid "There's nothing here!"
 msgstr ""
 
 #: src/app/data/services.js:4
-msgid "CodeGuard"
+msgid "Pro Services"
 msgstr ""
 
 #: src/app/data/services.js:5
-msgid "Protect your website with a daily, automatic backup!"
+msgid "Custom websites and marketing done your way"
 msgstr ""
 
 #: src/app/data/services.js:9
+#: src/app/data/services.js:20
 #: src/app/data/services.js:31
+#: src/app/data/services.js:42
 msgid "Learn More"
 msgstr ""
 
 #: src/app/data/services.js:15
-msgid "PPC Management"
+msgid "PPC Advertising"
 msgstr ""
 
 #: src/app/data/services.js:16
-msgid "PPC advertising can increase performance and drive more revenue!"
-msgstr ""
-
-#: src/app/data/services.js:20
-msgid "Get More Leads"
+msgid "Drive traffic with Pay-Per-Click Advertising"
 msgstr ""
 
 #: src/app/data/services.js:26
-msgid "Web Design Services"
+msgid "SEO Services"
 msgstr ""
 
 #: src/app/data/services.js:27
-msgid "Impress potential clients with a professionally-designed website!"
+msgid "Increase your search ranking"
+msgstr ""
+
+#: src/app/data/services.js:37
+msgid "Web Design Services"
+msgstr ""
+
+#: src/app/data/services.js:38
+msgid "Expert web design that gives you peace of mind"
 msgstr ""
 
 #: src/app/data/themes.js:4
