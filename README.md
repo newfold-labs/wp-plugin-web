@@ -4,6 +4,10 @@
 
 # Web.com WordPress Plugin
 
+[![Version Number](https://img.shields.io/github/v/release/newfold-labs/wp-plugin-web?color=21a0ed&labelColor=333333)](https://github.com/newfold/wp-plugin-web/releases)
+[![Lint PHP](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/lint-php.yml/badge.svg?branch=main)](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/lint-php.yml)
+[![Cypress Tests](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/cypress-tests.yml/badge.svg?branch=main)](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/cypress-tests.yml)
+
 WordPress plugin that integrates a WordPress site with the Web.com control panel, including performance, security, and
 update features.
 
