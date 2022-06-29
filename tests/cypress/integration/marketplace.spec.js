@@ -1,11 +1,15 @@
 // <reference types="Cypress" />
-const marketplace = require('../fixtures/products.json');
 
 describe('Marketplace Page', function () {
 
 	before(() => {
 		cy.server();
-		cy.route('GET', '**/newfold-marketplace/v1/marketplace**', 'fx:marketplace').as('marketplace');
+		cy.intercept({
+			method: 'GET',
+			url: '**/newfold-marketplace/v1/marketplace'
+		}, {
+			fixture: 'products.json'
+		}).as('marketplace');
 		cy.visit('/wp-admin/admin.php?page=web#/marketplace');
 		cy.injectAxe();
 	});
