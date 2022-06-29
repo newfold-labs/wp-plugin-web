@@ -2,7 +2,7 @@
     "name": "wp-plugin-web",
     "description": "WordPress plugin that integrates your WordPress site with the Web.com control panel, including performance, security, and update features.",
     "license": "GPL-2.0-or-later",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "private": true,
     "author": {
         "name": "Evan Mullins",
@@ -37,7 +37,8 @@
         "php-deps": "composer install --no-dev --optimize-autoloader",
         "create:zip": "cd ./wp-plugin-web && zip -r -9 ../wp-plugin-web.zip . && ls -lh ../wp-plugin-web.zip",
         "prebuild:cleanup": "rm -rf ./build ./wp-plugin-web ./wp-plugin-web.zip ./vendor",
-        "simulate-runner-build": "npm run prebuild:cleanup && npm i && npm run php-deps && npm run build && npm run create:dist && npm run create:zip"
+        "simulate-runner-build": "npm run prebuild:cleanup && npm i && npm run php-deps && npm run build && npm run create:dist && npm run create:zip",
+        "srb": "npm run simulate-runner-build"
     },
     "dependencies": {
         "@wordpress/a11y": "^2.5.1",
