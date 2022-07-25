@@ -6,7 +6,7 @@ describe('Marketplace Page', function () {
 		cy.server();
 		cy.intercept({
 			method: 'GET',
-			url: '**/newfold-marketplace/v1/marketplace'
+			url: '**newfold-marketplace**'
 		}, {
 			fixture: 'products.json'
 		}).as('marketplace');
@@ -15,7 +15,7 @@ describe('Marketplace Page', function () {
 	});
 
 	it('Exists', () => {
-		cy.contains('button', 'Everything');
+		cy.contains('button', 'Featured');
 	});
 
 	it('Is Accessible', () => {
@@ -23,8 +23,8 @@ describe('Marketplace Page', function () {
 		cy.checkA11y('.wppw-app-body');
 	});
 
-	it('Product grid has 12 items', () => {
-		cy.get('.marketplace-item').should('have.length', 12);
+	it('Product grid has 6 items', () => {
+		cy.get('.marketplace-item').should('have.length', 6);
 	});
 
 	it('First product card renders correctly', () => {
@@ -77,7 +77,8 @@ describe('Marketplace Page', function () {
 			.and('include', '_blank');
 	});
 
-	it('Load more button loads more products', () => {
+	// Not enough products in fixture to require load more button.
+	it.skip('Load more button loads more products', () => {
 		cy.get('.marketplace-item').should('have.length', 12);
 
 		cy.contains('button', 'Load More');
@@ -91,23 +92,18 @@ describe('Marketplace Page', function () {
 		cy.get('.marketplace-item').should('have.length', 19);
 	});
 
+	// Test passes locally but fails in github action
 	it('Category Tab Filters properly', () => {
-		cy.contains('button', 'Services');
-		cy.contains('button', 'SEO');
-
-		cy.get('#tab-panel-0-Services').click();
-		cy.wait(300);
+		
+		cy.findByRole('tab', { name: 'Services' } ).click();
 		cy.get('.marketplace-item').should('have.length', 5);
-
 		cy.get('#marketplace-item-1fc92f8a-bb9f-47c8-9808-aab9c82d6bf2 h3')
 			.scrollIntoView()
 			.should('be.visible')
 			.should('have.text', 'Web Design Services');
 		
-		cy.get('#tab-panel-0-SEO').click();
-		cy.wait(300);
+		cy.findByRole('tab', { name: 'SEO' } ).click();
 		cy.get('.marketplace-item').should('have.length', 3);
-	
 		cy.get('#marketplace-item-7beee5ae-2e91-4282-9930-15ada43fc738 h3')
 			.scrollIntoView()
 			.should('be.visible')
@@ -115,20 +111,20 @@ describe('Marketplace Page', function () {
 	});
 
 	// CTB Not supported yet
-	// it('Product CTB cards render correctly', () => {
-	// 	cy.get('.marketplace-item-ec14a614-8672-4094-8310-cb0b1eb0f176').as('card');
+	it.skip('Product CTB cards render correctly', () => {
+		cy.get('.marketplace-item-ec14a614-8672-4094-8310-cb0b1eb0f176').as('card');
 
-	// 	cy.get('@card')
-	// 		.findByRole('button', {name: 'Buy Now'})
-	// 		.scrollIntoView()
-	// 		.should('be.visible')
-	// 		.should('have.attr', 'data-action')
-	// 		.and('include', 'load-nfd-ctb');
+		cy.get('@card')
+			.findByRole('button', {name: 'Buy Now'})
+			.scrollIntoView()
+			.should('be.visible')
+			.should('have.attr', 'data-action')
+			.and('include', 'load-nfd-ctb');
 
-	// 	cy.get('@card').first().within(() => {
-	// 		cy.get('.components-card__header').should('be.visible');
-	// 		cy.get('.components-card__media').should('be.visible');
-	// 	});
-	// });
+		cy.get('@card').first().within(() => {
+			cy.get('.components-card__header').should('be.visible');
+			cy.get('.components-card__media').should('be.visible');
+		});
+	});
 
 });

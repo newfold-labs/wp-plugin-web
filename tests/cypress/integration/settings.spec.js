@@ -58,25 +58,21 @@ describe('Settings Page', function () {
 		cy.get('.autoupdate-all-toggle input[type="checkbox"]').should('not.be.checked');
 		cy.wait(100);
 		cy
-			.get('.edit-site-notices .components-snackbar__content')
-			.contains('div', 'Core')
+			.get('.wppw-app-snackbar')
+			.contains('.components-snackbar__content', 'update')
 			.should('be.visible');
 
 		cy.get('.autoupdate-plugin-toggle input[type="checkbox"]').uncheck();
 		cy.get('.autoupdate-plugin-toggle input[type="checkbox"]').should('not.be.disabled').should('not.be.checked');
 		cy.get('.autoupdate-all-toggle input[type="checkbox"]').should('not.be.checked');
-		cy.wait(100);
-		cy
-			.get('.edit-site-notices .components-snackbar__content')
-			.contains('div', 'Plugins')
-			.should('be.visible');
 
 		cy.get('.autoupdate-plugin-toggle input[type="checkbox"]').check();
 		cy.get('.autoupdate-core-toggle input[type="checkbox"]').check();
 		cy.wait(100);
+		cy.get('.autoupdate-all-toggle input[type="checkbox"]').should('be.checked');
 		cy
-			.get('.edit-site-notices .components-snackbar__content')
-			.contains('div', 'Everything')
+			.get('.wppw-app-snackbar')
+			.contains('.components-snackbar__content', 'update')
 			.should('be.visible');
 
 	});
@@ -84,11 +80,6 @@ describe('Settings Page', function () {
 	it('Content Settings Work', () => {
 		cy.get('.content-revisions-select select').select('20');
 		cy.get('.content-revisions-select select').select('1');
-		cy.wait(100);
-		cy
-			.get('.edit-site-notices .components-snackbar__content')
-			.contains('div', 'Post revision setting saved')
-			.should('be.visible');
 		cy
 			.get('.content-revisions-select label')
 			.scrollIntoView()
@@ -99,35 +90,30 @@ describe('Settings Page', function () {
 			.should('be.visible');
 
 		cy.get('.content-revisions-select select').select('40');
+		cy.get('.content-revisions-select label').contains('span', '40').should('be.visible');
 		cy.wait(100);
 		cy
-			.get('.edit-site-notices .components-snackbar__content')
-			.contains('div', 'Post revision setting saved')
+			.get('.wppw-app-snackbar')
+			.contains('.components-snackbar__content', 'revision')
 			.should('be.visible');
-		cy.get('.content-revisions-select label').contains('span', '40').should('be.visible');
 	});
 
 	it('Comment Settings Work', () => {
 		cy.get('.disable-comments-toggle input[type="checkbox"]').uncheck();
 		cy.get('.close-comments-days-select select').should('not.exist');
 		cy.get('.disable-comments-toggle input[type="checkbox"]').check();
-		cy.wait(100);
-		cy
-			.get('.edit-site-notices .components-snackbar__content')
-			.contains('div', 'Old post comments')
-			.should('be.visible');
 
 		cy.get('.close-comments-days-select select').should('not.be.disabled');
 		cy.get('.close-comments-days-select select').select('3');
 		cy.get('.close-comments-days-select label').contains('span', '3').should('be.visible');
-		cy.wait(100);
-		cy
-			.get('.edit-site-notices .components-snackbar__content')
-			.contains('div', 'comments')
-			.should('be.visible');
 
 		cy.get('.comments-per-page-select select').select('10');
 		cy.get('.comments-per-page-select label').contains('span', '10').should('be.visible');
+		cy.wait(100);
+		cy
+			.get('.wppw-app-snackbar')
+			.contains('.components-snackbar__content', 'Comments')
+			.should('be.visible');
 
 	});
 
