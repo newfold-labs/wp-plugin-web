@@ -42,7 +42,7 @@ describe('Marketplace Page', function () {
 				.contains('Web Design Services')
 				.should('be.visible');
 			cy.get('.components-card__media').should('be.visible');
-			cy.get('.components-card__header em.price').should('not.exist');
+			cy.get('.components-card__header .price').should('not.exist');
 		});
 	});
 
@@ -61,7 +61,7 @@ describe('Marketplace Page', function () {
 				.contains('Highend')
 				.should('be.visible');
 			cy.get('.components-card__media').should('be.visible');
-			cy.get('.components-card__header em.price')
+			cy.get('.components-card__header .price')
 				.contains('$59.00')
 				.should('be.visible');
 		});
@@ -97,17 +97,24 @@ describe('Marketplace Page', function () {
 		
 		cy.findByRole('tab', { name: 'Services' } ).click();
 		cy.get('.marketplace-item').should('have.length', 5);
-		cy.get('#marketplace-item-1fc92f8a-bb9f-47c8-9808-aab9c82d6bf2 h3')
+		cy.get('#marketplace-item-1fc92f8a-bb9f-47c8-9808-aab9c82d6bf2 h2')
 			.scrollIntoView()
 			.should('be.visible')
 			.should('have.text', 'Web Design Services');
 		
 		cy.findByRole('tab', { name: 'SEO' } ).click();
 		cy.get('.marketplace-item').should('have.length', 3);
-		cy.get('#marketplace-item-7beee5ae-2e91-4282-9930-15ada43fc738 h3')
+		cy.get('#marketplace-item-7beee5ae-2e91-4282-9930-15ada43fc738 h2')
 			.scrollIntoView()
 			.should('be.visible')
 			.should('have.text', 'Yoast Premium');
+	});
+
+	it('Category tabs update path', () => {
+		cy.findByRole('tab', {name: 'Services'}).click();
+		cy.location().should((loc) => {
+			expect(loc.hash).to.eq('#/marketplace/services')
+		});
 	});
 
 	// CTB Not supported yet
