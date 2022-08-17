@@ -4,7 +4,13 @@ on:
   push:
     branches:
       - main
-
+      - develop
+      - release/*
+      - feature/*
+      - add/*
+      - update/*
+      - fix/*
+      - try/*
 jobs:
   build:
     name: On Push to Main

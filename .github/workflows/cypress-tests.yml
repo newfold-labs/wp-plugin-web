@@ -3,6 +3,13 @@ on:
   push:
     branches:
       - main
+      - develop
+      - release/*
+      - feature/*
+      - add/*
+      - update/*
+      - fix/*
+      - try/*
     paths-ignore:
       - '.github/**'
       - '.gitignore'
