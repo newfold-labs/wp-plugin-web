@@ -23,7 +23,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.1'
           coverage: none
           tools: composer, cs2pr
 
@@ -39,16 +39,17 @@ jobs:
       - name: PHP version
         run: php --version
 
-      - name: Set Node.js 14.x
+      - name: Set Node.js 16.x
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 16.x
 
-      - name: Node version
-        run: node --version
-
-      - name: NPM version
-        run: npm --version
+      - name: Show versions
+        run: |
+          php --version
+          composer --version
+          node --version
+          npm --version
 
       - name: Get npm cache directory
         id: npm-cache
@@ -62,7 +63,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: npm install
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Validate composer.json and composer.lock
         run: composer validate
