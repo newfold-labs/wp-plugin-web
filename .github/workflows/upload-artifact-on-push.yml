@@ -13,7 +13,7 @@ on:
       - try/*
 jobs:
   build:
-    name: On Push to Main
+    name: On Push
     runs-on: ubuntu-latest
     steps:
 
