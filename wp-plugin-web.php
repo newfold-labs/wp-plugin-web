@@ -55,7 +55,7 @@ if ( 'plugins.php' === $pagenow ) {
 	$plugin_check->check_plugin_requirements();
 }
 
-// Check NFD plugin incompaatibilities
+// Check NFD plugin incompatibilities
 require_once WEB_PLUGIN_DIR . '/inc/plugin-nfd-compat-check.php';
 $nfd_plugins_check                 = new NFD_Plugin_Compat_Check( WEB_PLUGIN_FILE );
 $nfd_plugins_check->legacy_plugins = array(

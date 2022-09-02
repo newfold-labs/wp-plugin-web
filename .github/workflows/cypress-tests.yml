@@ -3,6 +3,13 @@ on:
   push:
     branches:
       - main
+      - develop
+      - release/*
+      - feature/*
+      - add/*
+      - update/*
+      - fix/*
+      - try/*
     paths-ignore:
       - '.github/**'
       - '.gitignore'
@@ -32,7 +39,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.1'
           coverage: none
           tools: composer
 
@@ -51,7 +58,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 16.x
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -79,7 +86,7 @@ jobs:
         run: composer install --no-progress --no-dev --optimize-autoloader
 
       - name: Run NPM Install
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build JavaScript
         run: npm run build

@@ -98,10 +98,8 @@
 
 
 .wppw-page {
-    // home and default blue applied in .wppw-nav
-    &-marketplace-plugins,
-    &-marketplace-themes,
-    &-marketplace-services {
+    // marketplace and default blue applied in .wppw-nav
+    &-home {
         .wppw-nav {
             background-color: var(--mdc-theme-secondary);
         }
@@ -122,9 +120,7 @@
         }
     }
     /* Black Links */
-    &-marketplace-plugins,
-    &-marketplace-themes,
-    &-marketplace-services,
+    &-home,
     &-performance {
         .wppw-nav-large {
             .wppw-nav-large__link {
