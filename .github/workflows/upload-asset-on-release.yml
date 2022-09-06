@@ -52,7 +52,7 @@ jobs:
           mkdir dist
           echo ::set-output name=DIST::${PWD}/dist
           echo ::set-output name=PACKAGE::${REPO##*/}
-          
+
       - name: Set Node.js 16.x
         uses: actions/setup-node@v1
         with:
