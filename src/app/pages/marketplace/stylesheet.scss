@@ -1,69 +1,184 @@
 .newfold-marketplace-wrapper {
-    .components-card__media {
-        position: relative;
-        left: 2px;
-        top: 2px;
-        max-width: calc(100% - 8px);
-        border-radius: 0 !important;
+    .grid {
+        display: grid;
+        gap: clamp(0.5rem, calc(1rem + 1vw), 2rem);
+        padding: 0;
+
+        &.col2 {
+            @media screen and (min-width: 600px) {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            @media screen and (min-width: 1100px) {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
     }
-    .components-card__header {
-        position: relative;
-        
-        .price {
-            background-color: var(--dc-theme-success--light);
-            border-radius: 0.5rem;
-            color: var(--dc-theme-success--dark);
-            font-size: 1rem;
-            font-weight: 800;
-            min-width: 3rem;
-            padding: 0.25rem 0.75rem;
-            position: absolute;
-            right: 1rem;
-            text-align: center;
-            top: -2.5rem;
+
+    .newfold-marketplace-tabs {
+        display: flex;
+        flex-direction: column;
+
+        .components-tab-panel__tabs {
+            display: flex;
+            /* <= WP 5.4 */
+            flex-direction: row;
+            /* <= WP 5.6 */
+            gap: 1.5rem;
+            max-width: max-content;
+            height: fit-content;
+            margin-bottom: 1.5rem;
+            padding: 0rem .8rem 0 .8rem;
+            background-color: var(--mdc-theme-primary--light4);
+            box-shadow: 2px 2px 0 4px var(--mdc-theme-primary--light3);
+
+            @media screen and (max-width: 600px) {
+                min-width: initial;
+                overflow-y: scroll;
+            }
+        }
+    }
+
+    .components-tab-panel__tabs-item {
+        font-size: 14px;
+        color: var(--mdc-theme-primary--dark1);
+        padding: 16px 3px 16px 3px;
+        height: auto;
+        transition: all .15s ease-in-out;
+
+        &:hover {
+            color: var(--mdc-theme-primary--light1);
+        }
+
+        &:last-child {
+            padding-right: 3px;
+        }
+
+        &.current-tab {
+            border-bottom: 2.5px solid;
+            border-color: var(--mdc-theme-primary--dark1);
+            cursor: default;
+
+            &:hover {
+                color: var(--mdc-theme-primary--dark1);
+            }
+        }
+
+        &.components-button:focus:not(:disabled) {
+            box-shadow: none;
         }
     }
 }
 
-.newfold-marketplace-tabs {
-    display: flex;
-    border-width: 1px 0 0 0;
+.marketplace-item {
+    border-top: 2px;
+    border-left: 2px;
+    border-bottom: 4px;
+    border-right: 4px;
     border-style: solid;
-    border-color: var(--mdc-theme-secondary--dark1);
+    border-color: var(--dc-theme-black);
+    overflow: hidden;
 
-    .components-tab-panel__tabs {
-        display: flex; /* <= WP 5.4 */
-        flex-direction: column; /* <= WP 5.6 */
-        min-width: 10rem;
-        margin-right: 2rem;
-        margin-top: -1px;
-    }
-    
-    .components-tab-panel__tabs-item {
-        background-color: var(--dc-theme-white);
-        border-width: 0 1px 0 0;
-        border-style: solid;
-        border-color: var(--mdc-theme-secondary--dark1);
-        font-size: 15px;
-        transition: none;
-        
-        &:focus:not(:disabled) {
-            box-shadow: none !important;
-        }
-
-        &:hover {
-            color: var(--dc-theme-grey);
-        }
-
-        &.current-tab {
-            background-color: transparent;
-            color: var(--dc-theme-black);
-            border-width: 1px 0;
-            cursor: default;
-        }
+    &.components-card {
+        box-shadow: unset;
     }
 
-    .components-tab-panel__tab-content {
-        padding-top: 1rem;
+    div:first-child {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .components-card__media {
+        position: relative;
+        background-color: rgba(160, 170, 192, .35);
+
+        &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(90deg,
+                    rgba(#fff, 0) 0,
+                    rgba(#fff, 0.2) 20%,
+                    rgba(#fff, 0.5) 60%,
+                    rgba(#fff, 0));
+            animation: marketplace-skeleton 2s infinite;
+            content: '';
+        }
+
+        @keyframes marketplace-skeleton {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        img {
+            aspect-ratio: 16 / 9;
+            z-index: 2;
+        }
+    }
+
+    .components-card__header {
+        position: relative;
+        border-bottom: none;
+        flex-wrap: wrap;
+        gap: .7rem;
+
+        h2,
+        h3 {
+            font-size: .95rem;
+            min-width: min-content;
+            margin: 0;
+        }
+
+        .price {
+            background-color: rgb(9, 141, 92, .15);
+            box-shadow: 1px 1px 0 2.5px rgb(9, 141, 92, .3);
+            border-radius: 0;
+            color: var(--mdc-theme-secondary--dark1);
+            font-size: .95rem;
+            font-weight: 800;
+            min-width: max-content;
+            margin-left: 0;
+            padding: 0.25rem 0.75rem;
+        }
+    }
+
+    .components-card__body {
+        flex-grow: 1;
+        padding-top: 4px;
+        padding-bottom: 22px;
+    }
+
+    .components-card__footer {
+        justify-content: space-between;
+
+        .is-secondary svg {
+            display: none;
+        }
+
+        .is-secondary[target=_blank] {
+            box-shadow: unset;
+            outline: unset;
+            margin-right: -10px;
+
+            &:hover,
+            &:active,
+            &:focus {
+                box-shadow: unset;
+                outline: unset;
+                background-color: transparent;
+            }
+
+            svg {
+                display: inline;
+                width: 14px;
+                height: auto;
+                margin-top: 2px;
+                margin-left: 4px;
+            }
+        }
     }
 }

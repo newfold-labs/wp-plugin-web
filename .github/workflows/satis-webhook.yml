@@ -26,7 +26,7 @@ jobs:
         with:
           token: ${{ secrets.WEBHOOK_TOKEN }}
           repository: newfold-labs/satis
-          event-type: 'satis-build'
+          event-type: 'Trigger Satis Build'
           client-payload: >-
             {
               "vendor": "${{ github.repository_owner }}",
