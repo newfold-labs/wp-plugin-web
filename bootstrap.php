@@ -7,8 +7,8 @@
 
 namespace Web;
 
-use Web\UpgradeHandler;
 use WP_Forge\WPUpdateHandler\PluginUpdater;
+use WP_Forge\UpgradeHandler\UpgradeHandler;
 use NewfoldLabs\WP\ModuleLoader\Container;
 use NewfoldLabs\WP\ModuleLoader\Plugin;
 use function NewfoldLabs\WP\ModuleLoader\container as setContainer;
@@ -97,19 +97,21 @@ $pluginUpdater->setDataMap(
 	)
 );
 
-// Handle any upgrade routines
+// Handle any upgrade routines (only in the admin)
 if ( is_admin() ) {
 
 	// Handle plugin upgrades
-	require WEB_PLUGIN_DIR . '/inc/UpgradeHandler.php';
 	$upgrade_handler = new UpgradeHandler(
-		WEB_PLUGIN_DIR . '/inc/upgrades',
-		get_option( 'web_plugin_version', '0.9.0' ),
-		WEB_PLUGIN_VERSION
+		WEB_PLUGIN_DIR . '/inc/upgrades',            // Directory where upgrade routines live
+		get_option( 'web_plugin_version', '0.9.0' ), // Old plugin version (from database)
+		WEB_PLUGIN_VERSION                           // New plugin version (from code)
 	);
 
+	// Returns true if the old version doesn't match the new version
 	$did_upgrade = $upgrade_handler->maybe_upgrade();
+
 	if ( $did_upgrade ) {
+		// If an upgrade occurred, update the new version in the database to prevent running the routine(s) again.
 		update_option( 'web_plugin_version', WEB_PLUGIN_VERSION, true );
 	}
 }
