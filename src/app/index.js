@@ -16,9 +16,9 @@ import { setActiveSubnav } from './util/helpers';
 import { kebabCase, filter } from 'lodash';
 
 // component sourced from module
-import { default as NewfoldNotifications } from '../../vendor/newfold-labs/wp-module-notifications/assets/js/components/notifications/'; 
+import { default as NewfoldNotifications } from '../../vendor/newfold-labs/wp-module-notifications/assets/js/components/notifications/';
 // to pass to notifications module
-import apiFetch from '@wordpress/api-fetch'; 
+import apiFetch from '@wordpress/api-fetch';
 import { useState } from '@wordpress/element';
 
 const Notices = () => {
