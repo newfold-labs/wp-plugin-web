@@ -100,7 +100,7 @@ describe('Marketplace Page', function () {
 
 		cy.get('.marketplace-item').should('have.length', 12);
 		cy.contains('button', 'Load More');
-		cy.get('.marketplaceList button')
+		cy.get('.marketplace-list button')
 			.scrollIntoView()
 			.click();
 		cy.wait(300);
