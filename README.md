@@ -4,7 +4,7 @@
 
 # Web.com WordPress Plugin
 
-[![Version Number](https://img.shields.io/github/v/release/newfold-labs/wp-plugin-web?color=21a0ed&labelColor=333333)](https://github.com/newfold/wp-plugin-web/releases)
+[![Version Number](https://img.shields.io/github/v/release/newfold-labs/wp-plugin-web?color=21a0ed&labelColor=333333)](https://github.com/newfold-labs/wp-plugin-web/releases)
 [![Lint PHP](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/lint-php.yml/badge.svg?branch=main)](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/lint-php.yml)
 [![Lint YML](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/lint-yml.yml/badge.svg)](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/lint-yml.yml)
 [![WP Internationalization](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/wp-i18n.yml/badge.svg)](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/wp-i18n.yml)
