@@ -23,8 +23,8 @@ describe('Marketplace Page', function () {
 		cy.checkA11y('.wppw-app-body');
 	});
 
-	it('Product grid has 6 items', () => {
-		cy.get('.marketplace-item').should('have.length', 6);
+	it('Product grid has 4 items', () => {
+		cy.get('.marketplace-item').should('have.length', 4);
 	});
 
 	it('First product card renders correctly', () => {
@@ -77,37 +77,35 @@ describe('Marketplace Page', function () {
 			.and('include', '_blank');
 	});
 
-	// Not enough products in fixture to require load more button.
-	it.skip('Load more button loads more products', () => {
-		cy.get('.marketplace-item').should('have.length', 12);
-
-		cy.contains('button', 'Load More');
-
-		cy.get('.marketplaceList button')
-			.scrollIntoView()
-			.click();
-
-		cy.wait(300);
-
-		cy.get('.marketplace-item').should('have.length', 19);
-	});
-
-	// Test passes locally but fails in github action
 	it('Category Tab Filters properly', () => {
 		
 		cy.findByRole('tab', { name: 'Services' } ).click();
-		cy.get('.marketplace-item').should('have.length', 5);
+		cy.get('.marketplace-item').should('have.length', 12);
 		cy.get('#marketplace-item-1fc92f8a-bb9f-47c8-9808-aab9c82d6bf2 h2')
 			.scrollIntoView()
 			.should('be.visible')
 			.should('have.text', 'Web Design Services');
 		
 		cy.findByRole('tab', { name: 'SEO' } ).click();
-		cy.get('.marketplace-item').should('have.length', 3);
-		cy.get('#marketplace-item-7beee5ae-2e91-4282-9930-15ada43fc738 h2')
+		cy.get('.marketplace-item').should('have.length', 6);
+		cy.get('#marketplace-item-a1ff70f1-9670-4e25-a0e1-a068d3e43a45 h2')
 			.scrollIntoView()
 			.should('be.visible')
 			.should('have.text', 'Yoast Premium');
+	});
+
+	it('Load more button loads more products', () => {
+		cy.findByRole('tab', { name: 'Services' } ).click();
+		cy.wait(300);
+
+		cy.get('.marketplace-item').should('have.length', 12);
+		cy.contains('button', 'Load More');
+		cy.get('.marketplace-list button')
+			.scrollIntoView()
+			.click();
+		cy.wait(300);
+
+		cy.get('.marketplace-item').should('have.length', 14);
 	});
 
 	it('Category tabs update path', () => {
