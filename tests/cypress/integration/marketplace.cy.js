@@ -3,15 +3,14 @@
 describe('Marketplace Page', function () {
 
 	before(() => {
-		cy.server();
 		cy.intercept({
 			method: 'GET',
-			url: '**newfold-marketplace**'
+			url: /newfold-marketplace(\/|%2F)v1(\/|%2F)marketplace/
 		}, {
-			fixture: 'products.json'
-		}).as('marketplace');
+			fixture: 'products'
+		}).as('products');
 		cy.visit('/wp-admin/admin.php?page=web#/marketplace');
-		cy.injectAxe();
+		cy.wait('@products');
 	});
 
 	it('Exists', () => {
@@ -19,6 +18,7 @@ describe('Marketplace Page', function () {
 	});
 
 	it('Is Accessible', () => {
+		cy.injectAxe();
 		cy.wait(1000);
 		cy.checkA11y('.wppw-app-body');
 	});
