@@ -79,14 +79,14 @@ describe('Marketplace Page', function () {
 
 	it('Category Tab Filters properly', () => {
 		
-		cy.findByRole('tab', { name: 'Services' } ).click();
+		cy.get('.newfold-marketplace-tab-services').click();
 		cy.get('.marketplace-item').should('have.length', 12);
 		cy.get('#marketplace-item-1fc92f8a-bb9f-47c8-9808-aab9c82d6bf2 h2')
 			.scrollIntoView()
 			.should('be.visible')
 			.should('have.text', 'Web Design Services');
 		
-		cy.findByRole('tab', { name: 'SEO' } ).click();
+			cy.get('.newfold-marketplace-tab-seo').click();
 		cy.get('.marketplace-item').should('have.length', 6);
 		cy.get('#marketplace-item-a1ff70f1-9670-4e25-a0e1-a068d3e43a45 h2')
 			.scrollIntoView()
@@ -95,7 +95,7 @@ describe('Marketplace Page', function () {
 	});
 
 	it('Load more button loads more products', () => {
-		cy.findByRole('tab', { name: 'Services' } ).click();
+		cy.get('.newfold-marketplace-tab-services').click();
 		cy.wait(300);
 
 		cy.get('.marketplace-item').should('have.length', 12);
@@ -109,7 +109,7 @@ describe('Marketplace Page', function () {
 	});
 
 	it('Category tabs update path', () => {
-		cy.findByRole('tab', {name: 'Services'}).click();
+		cy.get('.newfold-marketplace-tab-services').click();
 		cy.location().should((loc) => {
 			expect(loc.hash).to.eq('#/marketplace/services')
 		});

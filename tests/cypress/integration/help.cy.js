@@ -12,6 +12,12 @@ describe('Help Page', function () {
 		cy.checkA11y('.wppw-app-body');
 	});
 
+	it('Email Card Exists', () => {
+		cy.get('.card-help-ticket').contains('h3', 'Email')
+			.scrollIntoView()
+			.should('be.visible');
+	});
+
 	it('Phone Card Exists', () => {
 		cy.get('.card-help-phone').contains('h3', 'Phone')
 			.scrollIntoView()
