@@ -114,6 +114,6 @@ describe('Coming Soon', function () {
 			.should('not.exist');
 
 		cy.login(Cypress.env('wpUsername'), Cypress.env('wpPassword'));
-		cy.visit('/wp-admin/admin.php?page=hostgator#/settings');
+		cy.visit('/wp-admin/admin.php?page=web#/settings');
 	})
 });
