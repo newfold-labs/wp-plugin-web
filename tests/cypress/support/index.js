@@ -16,10 +16,6 @@
 import 'cypress-axe';
 import './commands';
 
-Cypress.Cookies.defaults({
-	preserve: /wp|wordpress/,
-});
-
 before(() => {
 	cy.login(Cypress.env('wpUsername'), Cypress.env('wpPassword'));
 });
