@@ -8,7 +8,7 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       Web.com
+ * Plugin Name:       The Web.com Plugin
  * Plugin URI:        https://web.com
  * Description:       WordPress plugin that integrates a WordPress site with the Web.com control panel, including performance, security, and update features.
  * Version:           1.2.4
