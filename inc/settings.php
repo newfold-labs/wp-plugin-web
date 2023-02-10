@@ -3,10 +3,10 @@
  * Functionality related to Settings
  * see RestApi/SettingsController.php for implementation
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  */
 
-namespace Web;
+namespace CrazyDomains;
 
 /**
  * Filter wp revisions according to plugin setting

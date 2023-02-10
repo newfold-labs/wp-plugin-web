@@ -9,7 +9,7 @@ const Performance = () => {
 	const isWideViewport = useViewportMatch( 'large' );
 
 	return (
-		<div className="wppw-Performance grid col2 has-page-graphic">
+		<div className="wppcd-Performance grid col2 has-page-graphic">
 			<CacheSettings />
 			{ isWideViewport && (
 				<div>
@@ -20,7 +20,7 @@ const Performance = () => {
 							width: '80%',
 							height: 'auto',
 						} }
-						alt={ __( 'Star illustration', 'wp-plugin-web' ) }
+						alt={ __( 'Star illustration', 'wp-plugin-crazy-domains' ) }
 					/>
 				</div>
 			) }

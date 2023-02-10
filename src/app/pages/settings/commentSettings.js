@@ -1,7 +1,7 @@
 import AppStore from '../../data/store';
 import { Heading, ErrorCard } from '../../components';
 import {
-	webSettingsApiFetch,
+	crazydomainsSettingsApiFetch,
 	dispatchUpdateSnackbar,
 } from '../../util/helpers';
 import { _n } from '@wordpress/i18n';
@@ -31,21 +31,21 @@ const CommentSettings = () => {
 
 	const disableCommentsHelpText = () => {
 		return disableCommentsOldPosts
-			? __( 'Comments on old posts are disabled.', 'wp-plugin-web' )
-			: __( 'Comments are allowed on old posts.', 'wp-plugin-web' );
+			? __( 'Comments on old posts are disabled.', 'wp-plugin-crazy-domains' )
+			: __( 'Comments are allowed on old posts.', 'wp-plugin-crazy-domains' );
 	};
 	const disableCommentsNoticeText = () => {
 		return disableCommentsOldPosts
-			? __( 'Old post comments disabled.', 'wp-plugin-web' )
-			: __( 'Old post comments enabled.', 'wp-plugin-web' );
+			? __( 'Old post comments disabled.', 'wp-plugin-crazy-domains' )
+			: __( 'Old post comments enabled.', 'wp-plugin-crazy-domains' );
 	};
 	const closeCommentsLabelText = () => {
 		// `Close comments after ${closeCommentsDays} day(s)`
 		return (
 			<span>
-				{ __( 'Close comments after ', 'wp-plugin-web' ) }
+				{ __( 'Close comments after ', 'wp-plugin-crazy-domains' ) }
 				<strong>{ closeCommentsDays }</strong>
-				{ _n( ' day.', ' days.', closeCommentsDays, 'wp-plugin-web' ) }
+				{ _n( ' day.', ' days.', closeCommentsDays, 'wp-plugin-crazy-domains' ) }
 			</span>
 		);
 	};
@@ -55,31 +55,31 @@ const CommentSettings = () => {
 			<span>
 				{ __(
 					'Comments on posts are disabled after ',
-					'wp-plugin-web'
+					'wp-plugin-crazy-domains'
 				) }
 				<strong>{ closeCommentsDays }</strong>
-				{ _n( ' day.', ' days.', closeCommentsDays, 'wp-plugin-web' ) }
+				{ _n( ' day.', ' days.', closeCommentsDays, 'wp-plugin-crazy-domains' ) }
 			</span>
 		);
 	};
 	const closeCommentsNoticeText = () => {
 		return (
-			__( 'Disabled comments on posts older than ', 'wp-plugin-web' ) +
+			__( 'Disabled comments on posts older than ', 'wp-plugin-crazy-domains' ) +
 			closeCommentsDays +
-			_n( ' day.', ' days.', closeCommentsDays, 'wp-plugin-web' )
+			_n( ' day.', ' days.', closeCommentsDays, 'wp-plugin-crazy-domains' )
 		);
 	};
 	const commentsPerPageLabelText = () => {
 		// `Display ${commentsPerPage} comment(s) per page`
 		return (
 			<span>
-				{ __( 'Display ', 'wp-plugin-web' ) }
+				{ __( 'Display ', 'wp-plugin-crazy-domains' ) }
 				<strong>{ commentsPerPage }</strong>
 				{ _n(
 					' comment per page.',
 					' comments per page.',
 					commentsPerPage,
-					'wp-plugin-web'
+					'wp-plugin-crazy-domains'
 				) }
 			</span>
 		);
@@ -88,22 +88,22 @@ const CommentSettings = () => {
 		//`Posts will display ${commentsPerPage} comments at a time.`
 		return (
 			<span>
-				{ __( 'Posts will display ', 'wp-plugin-web' ) }
+				{ __( 'Posts will display ', 'wp-plugin-crazy-domains' ) }
 				<strong>{ commentsPerPage }</strong>
 				{ _n(
 					' comment at a time.',
 					' comments at a time.',
 					commentsPerPage,
-					'wp-plugin-web'
+					'wp-plugin-crazy-domains'
 				) }
 			</span>
 		);
 	};
 	const commentsPerPageNoticeText = () => {
-		return __( 'Comments per page setting saved.', 'wp-plugin-web' );
+		return __( 'Comments per page setting saved.', 'wp-plugin-crazy-domains' );
 	};
 	useUpdateEffect( () => {
-		webSettingsApiFetch(
+		crazydomainsSettingsApiFetch(
 			{
 				disableCommentsOldPosts: disableCommentsOldPosts
 					? 'true'
@@ -121,7 +121,7 @@ const CommentSettings = () => {
 	}, [ disableCommentsOldPosts ] );
 
 	useUpdateEffect( () => {
-		webSettingsApiFetch( { closeCommentsDays }, setError, ( response ) => {
+		crazydomainsSettingsApiFetch( { closeCommentsDays }, setError, ( response ) => {
 			setStore( {
 				...store,
 				closeCommentsDays,
@@ -131,7 +131,7 @@ const CommentSettings = () => {
 	}, [ closeCommentsDays ] );
 
 	useUpdateEffect( () => {
-		webSettingsApiFetch( { commentsPerPage }, setError, ( response ) => {
+		crazydomainsSettingsApiFetch( { commentsPerPage }, setError, ( response ) => {
 			setStore( {
 				...store,
 				commentsPerPage,
@@ -147,13 +147,13 @@ const CommentSettings = () => {
 		<Card className="card-comment-settings">
 			<CardHeader>
 				<Heading level="3">
-					{ __( 'Comments', 'wp-plugin-web' ) }
+					{ __( 'Comments', 'wp-plugin-crazy-domains' ) }
 				</Heading>
 			</CardHeader>
 			<CardBody>
 				{ __(
 					'Make blog post comments disabled on older posts and control how many to display.',
-					'wp-plugin-web'
+					'wp-plugin-crazy-domains'
 				) }
 			</CardBody>
 			<CardBody className="disable-comments-setting">
@@ -162,7 +162,7 @@ const CommentSettings = () => {
 					className="disable-comments-toggle"
 					label={ __(
 						'Disable comments for older posts',
-						'wp-plugin-web'
+						'wp-plugin-crazy-domains'
 					) }
 					help={ disableCommentsHelpText() }
 					onChange={ () => {

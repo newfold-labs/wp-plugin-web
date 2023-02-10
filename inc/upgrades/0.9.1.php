@@ -4,7 +4,7 @@
  *
  * Sync the plugin's auto-update settings with the new, WordPress Core options.
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  */
 
 // Migrate any exisint legacy coming soon setting.

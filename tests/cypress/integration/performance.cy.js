@@ -3,14 +3,14 @@
 describe('Performance Page', function () {
 
 	before(() => {
-		cy.visit('/wp-admin/admin.php?page=web#/performance');
+		cy.visit('/wp-admin/admin.php?page=crazydomains#/performance');
 		cy.injectAxe();
 		
 	});
 
 	it('Is Accessible', () => {
 		cy.wait(500);
-		cy.checkA11y('.wppw-app-body');
+		cy.checkA11y('.wppcd-app-body');
 	});
 
 	it('Has Cache Settings', () => {

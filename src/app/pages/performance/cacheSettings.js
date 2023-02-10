@@ -1,7 +1,7 @@
 import AppStore from '../../data/store';
 import { Heading, ErrorCard } from '../../components';
 import {
-	webSettingsApiFetch,
+	crazydomainsSettingsApiFetch,
 	dispatchUpdateSnackbar,
 } from '../../util/helpers';
 import {
@@ -22,14 +22,14 @@ const CacheSettings = () => {
 		{
 			label: (
 				<span>
-					<strong>{ __( 'Disabled', 'wp-plugin-web' ) }</strong>
+					<strong>{ __( 'Disabled', 'wp-plugin-crazy-domains' ) }</strong>
 					<span>
 						{ __(
 							'No cache enabled. Every page load is fresh.',
-							'wp-plugin-web'
+							'wp-plugin-crazy-domains'
 						) }
 					</span>
-					<em>{ __( 'Not recommended.', 'wp-plugin-web' ) }</em>
+					<em>{ __( 'Not recommended.', 'wp-plugin-crazy-domains' ) }</em>
 				</span>
 			),
 			value: 0,
@@ -38,17 +38,17 @@ const CacheSettings = () => {
 		{
 			label: (
 				<span>
-					<strong>{ __( 'Assets Only', 'wp-plugin-web' ) }</strong>
+					<strong>{ __( 'Assets Only', 'wp-plugin-crazy-domains' ) }</strong>
 					<span>
 						{ __(
 							'Cache static assets like images and the appearance of your site for 1 hour.',
-							'wp-plugin-web'
+							'wp-plugin-crazy-domains'
 						) }
 					</span>
 					<em>
 						{ __(
 							'Tuned for online stores and member sites that need to be fresh.',
-							'wp-plugin-web'
+							'wp-plugin-crazy-domains'
 						) }
 					</em>
 				</span>
@@ -60,18 +60,18 @@ const CacheSettings = () => {
 			label: (
 				<span>
 					<strong>
-						{ __( 'Assets & Web Pages', 'wp-plugin-web' ) }
+						{ __( 'Assets & Web Pages', 'wp-plugin-crazy-domains' ) }
 					</strong>
 					<span>
 						{ __(
 							'Cache static assets for 24 hours and web pages for 2 hours.',
-							'wp-plugin-web'
+							'wp-plugin-crazy-domains'
 						) }
 					</span>
 					<em>
 						{ __(
 							'Tuned for sites that change at least weekly.',
-							'wp-plugin-web'
+							'wp-plugin-crazy-domains'
 						) }
 					</em>
 				</span>
@@ -85,19 +85,19 @@ const CacheSettings = () => {
 					<strong>
 						{ __(
 							'Assets & Web Pages - Extended',
-							'wp-plugin-web'
+							'wp-plugin-crazy-domains'
 						) }
 					</strong>
 					<span>
 						{ __(
 							'Cache static assets for 1 week and web pages for 8 hours.',
-							'wp-plugin-web'
+							'wp-plugin-crazy-domains'
 						) }
 					</span>
 					<em>
 						{ __(
 							'Tuned for sites that update a few times a month or less.',
-							'wp-plugin-web'
+							'wp-plugin-crazy-domains'
 						) }
 					</em>
 				</span>
@@ -112,7 +112,7 @@ const CacheSettings = () => {
 	};
 
 	useUpdateEffect( () => {
-		webSettingsApiFetch( { cacheLevel }, setError, ( response ) => {
+		crazydomainsSettingsApiFetch( { cacheLevel }, setError, ( response ) => {
 			setStore( {
 				...store,
 				cacheLevel,
@@ -128,13 +128,13 @@ const CacheSettings = () => {
 		<Card className="card-cache-settings">
 			<CardHeader>
 				<Heading level="3">
-					{ __( 'Cache Level', 'wp-plugin-web' ) }
+					{ __( 'Cache Level', 'wp-plugin-crazy-domains' ) }
 				</Heading>
 			</CardHeader>
 			<CardBody>
 				{ __(
 					'Improve delivery speed for this site by storing a static cached copy that gets regenerated regularly. This can help attract and retain visitors!',
-					'wp-plugin-web'
+					'wp-plugin-crazy-domains'
 				) }
 			</CardBody>
 			<CardBody>

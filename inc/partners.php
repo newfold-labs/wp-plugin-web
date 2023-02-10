@@ -2,10 +2,10 @@
 /**
  * This file adds filters for partler links.
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  */
 
-namespace Web;
+namespace CrazyDomains;
 
 /**
  * WPForms upgrade affiliate link.

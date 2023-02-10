@@ -1,6 +1,6 @@
 <?php
 
-namespace Web\RestApi;
+namespace CrazyDomains\RestApi;
 
 use function NewfoldLabs\WP\ModuleLoader\container;
 
@@ -14,7 +14,7 @@ class CachingController extends \WP_REST_Controller {
 	 *
 	 * @var string
 	 */
-	protected $namespace = 'web/v1';
+	protected $namespace = 'crazydomains/v1';
 
 	/**
 	 * Constructor.
@@ -62,7 +62,7 @@ class CachingController extends \WP_REST_Controller {
 	 */
 	public function check_permission() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			return new \WP_Error( 'rest_forbidden_context', __( 'Sorry, you are not allowed to access this endpoint.', 'wp-plugin-web' ), array( 'status' => rest_authorization_required_code() ) );
+			return new \WP_Error( 'rest_forbidden_context', __( 'Sorry, you are not allowed to access this endpoint.', 'wp-plugin-crazy-domains' ), array( 'status' => rest_authorization_required_code() ) );
 		}
 
 		return true;

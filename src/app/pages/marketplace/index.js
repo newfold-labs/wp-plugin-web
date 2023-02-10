@@ -44,7 +44,7 @@ const MarketplacePage = () => {
     };
     // constants to pass to module
     const moduleConstants = {
-        'resturl': window.WPPW.resturl,
+        'resturl': window.WPPCD.resturl,
         'eventendpoint': '/newfold-data/v1/events/',
         'perPage': 12,
         'supportsCTB': false, // not needed, but explicity setting to false anyway

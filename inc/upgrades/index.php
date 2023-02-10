@@ -2,5 +2,5 @@
 /**
  * Silence is Golden.
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  **/

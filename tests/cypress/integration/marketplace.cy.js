@@ -9,7 +9,7 @@ describe('Marketplace Page', function () {
 		}, {
 			fixture: 'products'
 		}).as('products');
-		cy.visit('/wp-admin/admin.php?page=web#/marketplace');
+		cy.visit('/wp-admin/admin.php?page=crazydomains#/marketplace');
 		cy.wait('@products');
 	});
 
@@ -20,7 +20,7 @@ describe('Marketplace Page', function () {
 	it('Is Accessible', () => {
 		cy.injectAxe();
 		cy.wait(1000);
-		cy.checkA11y('.wppw-app-body');
+		cy.checkA11y('.wppcd-app-body');
 	});
 
 	it('Product grid has 4 items', () => {

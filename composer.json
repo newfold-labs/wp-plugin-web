@@ -1,6 +1,6 @@
 {
-    "name": "newfold-labs/wp-plugin-web",
-    "description": "WordPress plugin that integrates your WordPress site with the Web.com control panel, including performance, security, and update features.",
+    "name": "newfold-labs/wp-plugin-crazy-domains",
+    "description": "WordPress plugin that integrates your WordPress site with the Crazy Domains control panel, including performance, security, and update features.",
     "type": "wordpress-plugin",
     "license": [
         "GPL-2.0-or-later"
@@ -44,8 +44,8 @@
         "fix": "vendor/bin/phpcbf --standard=phpcs.xml .",
         "lint": "vendor/bin/phpcs --standard=phpcs.xml -s .",
         "i18n": [
-            "vendor/bin/wp i18n make-pot . ./languages/wp-plugin-web.pot --headers=Report-Msgid-Bugs-To:https://github.com/newfold-labs/wp-plugin-web/issues --exclude=assets,storybook,tests",
-            "vendor/bin/wp i18n make-pot . ./languages/wp-plugin-web.pot --headers=POT-Creation-Date:null --exclude=assets,storybook,tests"
+            "vendor/bin/wp i18n make-pot . ./languages/wp-plugin-crazy-domains.pot --headers=Report-Msgid-Bugs-To:https://github.com/newfold-labs/wp-plugin-crazy-domains/issues --exclude=assets,storybook,tests",
+            "vendor/bin/wp i18n make-pot . ./languages/wp-plugin-crazy-domains.pot --headers=POT-Creation-Date:null --exclude=assets,storybook,tests"
         ]
     },
     "scripts-descriptions": {

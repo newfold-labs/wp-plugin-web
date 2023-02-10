@@ -23,11 +23,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Validate version number
-        if: ${{ github.repository == 'newfold-labs/wp-plugin-web' }}
+        if: ${{ github.repository == 'newfold-labs/wp-plugin-crazy-domains' }}
         run: |
           taggedVersion=${{ env.VERSION }}
-          pluginHeaderVersion=`grep "Version:" wp-plugin-web.php | grep -Eo "[0-9\.]*"`
-          pluginConstantVersion=`grep "'WEB_PLUGIN_VERSION'," wp-plugin-web.php | grep -Eo "[0-9\.]*"`
+          pluginHeaderVersion=`grep "Version:" wp-plugin-crazy-domains.php | grep -Eo "[0-9\.]*"`
+          pluginConstantVersion=`grep "'CRAZYDOMAINS_PLUGIN_VERSION'," wp-plugin-crazy-domains.php | grep -Eo "[0-9\.]*"`
           pluginPackageVersion=`grep "version" package.json | grep -Eo "[0-9\.]*"`
           echo "Tagged version: $taggedVersion"
           echo "Plugin header version: $pluginHeaderVersion"
@@ -128,4 +128,4 @@ jobs:
           curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
                -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
                -H "Content-Type: application/json" \
-               --data '{"files":["https://hiive.cloud/workers/release-api/plugins/newfold-labs/wp-plugin-web"]}'
+               --data '{"files":["https://hiive.cloud/workers/release-api/plugins/newfold-labs/wp-plugin-crazy-domains"]}'

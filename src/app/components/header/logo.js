@@ -1,6 +1,6 @@
 import { Button } from '@wordpress/components';
 import { Heading } from '../../components';
-import { ReactComponent as Brand } from '../../../../assets/svg/web-logo.svg';
+import { ReactComponent as Brand } from '../../../../assets/svg/crazydomains-logo.svg';
 import { delay } from 'lodash';
 
 const Mark = () => {
@@ -14,7 +14,7 @@ const Mark = () => {
 	};
 	return (
 		<Button
-			icon={ <Brand className="wppw-logo" /> }
+			icon={ <Brand className="wppcd-logo" /> }
 			style={ { height: '39px' } }
 			iconSize={ 39 }
 			onMouseUp={ defocus }
@@ -26,10 +26,10 @@ const Mark = () => {
 
 const Logo = () => {
 	return (
-		<div className="wppw-logo-wrap">
+		<div className="wppcd-logo-wrap">
 			<Mark />
 			<Heading level="2" className="screen-reader-text">
-				{ __( 'Web.com WordPress Plugin', 'wp-plugin-web' ) }
+				{ __( 'Crazy Domains WordPress Plugin', 'wp-plugin-crazy-domains' ) }
 			</Heading>
 		</div>
 	);

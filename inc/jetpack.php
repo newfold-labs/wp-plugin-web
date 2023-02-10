@@ -2,10 +2,10 @@
 /**
  * This file customizes Jetpack modules and blocks.
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  */
 
-namespace Web;
+namespace CrazyDomains;
 
 /**
  * Customize the default Jetpack modules that should be enabled.

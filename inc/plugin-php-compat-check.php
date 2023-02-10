@@ -2,10 +2,10 @@
 /**
  * Class that runs checks before loading possibly incompatible code.
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  */
 
-namespace Web;
+namespace CrazyDomains;
 
 /**
  * Class Plugin_PHP_Compat_Check
@@ -120,8 +120,8 @@ class Plugin_PHP_Compat_Check {
 	public function check_has_min_php_version() {
 		if ( version_compare( PHP_VERSION, $this->min_php_version, '<' ) ) {
 			/* translators: 1: plugin name 2: minimum required PHP version, current PHP version */
-			$error_msg  = sprintf( __( '%1$s requires PHP version %2$s or later. You are currently running version %3$s.', 'wp-plugin-web' ), $this->name, $this->min_php_version, PHP_VERSION );
-			$error_msg .= esc_html__( ' Please contact your web host about upgrading PHP.', 'wp-plugin-web' );
+			$error_msg  = sprintf( __( '%1$s requires PHP version %2$s or later. You are currently running version %3$s.', 'wp-plugin-crazy-domains' ), $this->name, $this->min_php_version, PHP_VERSION );
+			$error_msg .= esc_html__( ' Please contact your web host about upgrading PHP.', 'wp-plugin-crazy-domains' );
 			$this->errors->add( 'php_version', $error_msg );
 		}
 	}
@@ -136,7 +136,7 @@ class Plugin_PHP_Compat_Check {
 				$this->errors->add(
 					'php_extension',
 					/* translators: 1: plugin name 2: required PHP extension */
-					sprintf( __( '%1$s requires the %2$s PHP extension.', 'wp-plugin-web' ), $this->name, $extension )
+					sprintf( __( '%1$s requires the %2$s PHP extension.', 'wp-plugin-crazy-domains' ), $this->name, $extension )
 				);
 			}
 		}
@@ -152,7 +152,7 @@ class Plugin_PHP_Compat_Check {
 				'wp_version',
 				sprintf(
 				/* translators: 1: plugin name 2: minimum required WordPress version 3: current WordPress version */
-					__( '%1$s requires WordPress version %2$s or later. You are currently running version %3$s.', 'wp-plugin-web' ),
+					__( '%1$s requires WordPress version %2$s or later. You are currently running version %3$s.', 'wp-plugin-crazy-domains' ),
 					$this->name,
 					$this->min_wp_version,
 					$wp_version
@@ -190,7 +190,7 @@ class Plugin_PHP_Compat_Check {
 		}
 		echo '<p>';
 		/* translators: plugin name */
-		printf( esc_html__( 'The "%s" plugin has been deactivated.', 'wp-plugin-web' ), esc_html( $this->name ) );
+		printf( esc_html__( 'The "%s" plugin has been deactivated.', 'wp-plugin-crazy-domains' ), esc_html( $this->name ) );
 		echo '</p></div>';
 	}
 

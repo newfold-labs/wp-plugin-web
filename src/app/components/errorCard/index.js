@@ -24,20 +24,20 @@ const ErrorCard = ( { error, className, notice = 'Error!' } ) => {
 							height: '24px',
 						} }
 					/>{ ' ' }
-					{ __( 'Oh No, An Error!', 'wp-plugin-web' ) }
+					{ __( 'Oh No, An Error!', 'wp-plugin-crazy-domains' ) }
 				</Heading>
 			</CardHeader>
 			<CardBody>
 				<p>
 					{ __(
 						'You found an error, please refresh the page and try again!',
-						'wp-plugin-web'
+						'wp-plugin-crazy-domains'
 					) }
 				</p>
 				<p>
 					{ __(
 						'If the error persists, please contact support.',
-						'wp-plugin-web'
+						'wp-plugin-crazy-domains'
 					) }
 				</p>
 			</CardBody>
@@ -45,7 +45,7 @@ const ErrorCard = ( { error, className, notice = 'Error!' } ) => {
 				<p>
 					{ error && error.message ? error.message : '' }
 					{ error && error.data
-						? __( ' Error code: ', 'wp-plugin-web' ) +
+						? __( ' Error code: ', 'wp-plugin-crazy-domains' ) +
 						  error.data.status
 						: '' }
 				</p>

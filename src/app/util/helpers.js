@@ -2,7 +2,7 @@ import { dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 
 let lastNoticeId;
-const W_NAV = document.querySelector( '#toplevel_page_web .wp-submenu' );
+const W_NAV = document.querySelector( '#toplevel_page_crazydomains .wp-submenu' );
 /**
  * Set active nav in wp admin sub pages.
  *
@@ -32,7 +32,7 @@ export const setActiveSubnav = ( path ) => {
 					}
 					// highlight our home nav for root level access
 					const W_HOME_NAV = document.querySelector(
-						'.wppw-nav a[href="#/home"]'
+						'.wppcd-nav a[href="#/home"]'
 					);
 					if ( W_HOME_NAV ) {
 						if ( path === '/' || path === '/home' ) {
@@ -70,17 +70,17 @@ export const dispatchUpdateSnackbar = ( text = 'Settings Saved' ) => {
 };
 
 /**
- * Wrapper method to post setting to web endpoint
+ * Wrapper method to post setting to crazydomains endpoint
  *
  * @param {*} data object of data
  * @param passError setter for the error in component
  * @param thenCallback method to call in promise then
  * @return apiFetch promise
  */
-export const webSettingsApiFetch = ( data, passError, thenCallback ) => {
+export const crazydomainsSettingsApiFetch = ( data, passError, thenCallback ) => {
 	return apiFetch( {
-		// path: 'web/v1/settings', //  can't use path bacause it breaks on temp domains
-		url: window.WPPW.resturl + '/web/v1/settings',
+		// path: 'crazydomains/v1/settings', //  can't use path bacause it breaks on temp domains
+		url: window.WPPCD.resturl + '/crazydomains/v1/settings',
 		method: 'POST',
 		data,
 	} )
@@ -93,16 +93,16 @@ export const webSettingsApiFetch = ( data, passError, thenCallback ) => {
 };
 
 /**
- * Wrapper method to post request to web cache endpoint
+ * Wrapper method to post request to crazydomains cache endpoint
  *
  * @param {*} data object of data
  * @param passError setter for the error in component
  * @param thenCallback method to call in promise then
  * @return apiFetch promise
  */
-export const webPurgeCacheApiFetch = ( data, passError, thenCallback ) => {
+export const crazydomainsPurgeCacheApiFetch = ( data, passError, thenCallback ) => {
 	return apiFetch( {
-		url: window.WPPW.resturl + '/web/v1/caching',
+		url: window.WPPCD.resturl + '/crazydomains/v1/caching',
 		method: 'DELETE',
 		data,
 	} )
@@ -119,7 +119,7 @@ export const webPurgeCacheApiFetch = ( data, passError, thenCallback ) => {
  */
 export const comingSoonAdminbarToggle = ( comingSoon ) => {
 	const comingsoonadminbar = document.getElementById(
-		'wp-admin-bar-web-coming_soon'
+		'wp-admin-bar-crazydomains-coming_soon'
 	);
 	if ( ! comingsoonadminbar ) {
 		return;

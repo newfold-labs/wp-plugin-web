@@ -1,4 +1,4 @@
-.wppw-header {
+.wppcd-header {
     align-content: center;
     background: var(--dc-theme-white);
     display:flex;
@@ -15,7 +15,7 @@
     }
 }
 
-.wppw-logo-wrap {
+.wppcd-logo-wrap {
     margin-left: 12px;
     a.components-button {
         padding: 2rem 12px;
@@ -26,23 +26,23 @@
     }
 }
 
-.wppw-nav-utility {
+.wppcd-nav-utility {
     align-content: center;
     display: flex;
 }
-.wppw-nav-utility-link {
+.wppcd-nav-utility-link {
     display: block;
     margin: 6px 16px 0 0;
 }
 
-.wppw-nav {
+.wppcd-nav {
     padding: 1.33rem;
     will-change: background-color;
     transition: background-color 0.33s ease;
     background-color: var(--mdc-theme-primary--dark1);
 }
 
-.wppw-nav-large {
+.wppcd-nav-large {
     display: flex;
     list-style: none;
     max-width: 1320px;
@@ -57,7 +57,7 @@
             margin-left: 1rem;
         }
     }
-    .wppw-nav-large__link {
+    .wppcd-nav-large__link {
         display: inline;
         color: var(--dc-theme-white) !important;
         cursor: pointer;
@@ -97,33 +97,33 @@
 }
 
 
-.wppw-page {
-    // marketplace and default blue applied in .wppw-nav
+.wppcd-page {
+    // marketplace and default blue applied in .wppcd-nav
     &-home {
-        .wppw-nav {
+        .wppcd-nav {
             background-color: var(--mdc-theme-secondary);
         }
     }
     &-performance {
-        .wppw-nav {
+        .wppcd-nav {
             background-color: var(--dc-theme-qua);
         }
     }
     &-settings {
-        .wppw-nav {
+        .wppcd-nav {
             background-color: #EE4C2D;
         }
     }
     &-help {
-        .wppw-nav {
+        .wppcd-nav {
             background-color: var(--dc-theme-black);
         }
     }
     /* Black Links */
     &-home,
     &-performance {
-        .wppw-nav-large {
-            .wppw-nav-large__link {
+        .wppcd-nav-large {
+            .wppcd-nav-large__link {
                 color: var(--dc-theme-black) !important;
                 &:after {
                     background-color: var(--dc-theme-black) !important;
@@ -133,7 +133,7 @@
     }
 }
 
-.wppw-nav-utility {
+.wppcd-nav-utility {
 
     a {
         text-decoration: none;

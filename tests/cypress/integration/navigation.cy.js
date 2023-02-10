@@ -3,23 +3,23 @@
 describe('Navigation', function () {
 
 	before(() => {
-		cy.visit('/wp-admin/admin.php?page=web');
+		cy.visit('/wp-admin/admin.php?page=crazydomains');
 		cy.injectAxe();
 		
 	});
 
 	it('Logo Links to home', () => {
-		cy.get('.wppw-logo-wrap').click();
+		cy.get('.wppcd-logo-wrap').click();
 		cy.wait(500);
 		cy.hash().should('eq', '#/home');
 	});
 	
 	it('Admin Subnav properly highlights', () => {
 		cy
-			.get('#adminmenu #toplevel_page_web')
+			.get('#adminmenu #toplevel_page_crazydomains')
 			.should('have.class', 'wp-has-current-submenu');
 		cy
-			.get('#adminmenu #toplevel_page_web ul.wp-submenu li.current a')
+			.get('#adminmenu #toplevel_page_crazydomains ul.wp-submenu li.current a')
 			.should('have.attr', 'href')
 			.and('match', /home/);
 	});
@@ -36,7 +36,7 @@ describe('Navigation', function () {
 			.get('.link-Marketplace')
 			.should('have.class', 'active');
 		cy
-			.get('#adminmenu #toplevel_page_web ul.wp-submenu li.current a')
+			.get('#adminmenu #toplevel_page_crazydomains ul.wp-submenu li.current a')
 			.should('have.attr', 'href')
 			.and('match', /marketplace/);
 
@@ -50,7 +50,7 @@ describe('Navigation', function () {
 			.get('.link-Marketplace')
 			.should('not.have.class', 'active');
 		cy
-			.get('#adminmenu #toplevel_page_web ul.wp-submenu li.current a')
+			.get('#adminmenu #toplevel_page_crazydomains ul.wp-submenu li.current a')
 			.should('have.attr', 'href')
 			.and('match', /performance/);
 
@@ -58,7 +58,7 @@ describe('Navigation', function () {
 		cy.wait(500);
 		cy.hash().should('eq', '#/settings');
 		cy
-			.get('#adminmenu #toplevel_page_web ul.wp-submenu li.current a')
+			.get('#adminmenu #toplevel_page_crazydomains ul.wp-submenu li.current a')
 			.should('have.attr', 'href')
 			.and('match', /settings/);
 	});

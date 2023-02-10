@@ -10,7 +10,7 @@ import { useViewportMatch } from '@wordpress/compose';
 const Settings = () => {
 	const isWideViewport = useViewportMatch( 'large' );
 	return (
-		<div className="wppw-Settings grid col2 has-page-graphic">
+		<div className="wppcd-Settings grid col2 has-page-graphic">
 			<AutomaticUpdates />
 			{ isWideViewport && (
 				<div>
@@ -22,7 +22,7 @@ const Settings = () => {
 							height: 'auto',
 							transform: 'rotate3d(0, 0, 1, 90deg)',
 						} }
-						alt={ __( 'Star illustration', 'wp-plugin-web' ) }
+						alt={ __( 'Star illustration', 'wp-plugin-crazy-domains' ) }
 					/>
 				</div>
 			) }

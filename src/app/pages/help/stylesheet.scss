@@ -1,5 +1,6 @@
 .card-help {
     text-align: center;
+    flex-grow: 2;
 
     .components-card-header,
     .components-card-footer {
@@ -13,12 +14,4 @@
         justify-content: center;
     }
 
-    &:last-of-type {
-        @media screen and (min-width: 800px) {
-            grid-column: span 2;
-        }
-        @media screen and (min-width: 1020px) {
-            grid-column: span 3;
-        }
-    }
 }

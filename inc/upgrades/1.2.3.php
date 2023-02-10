@@ -2,7 +2,7 @@
 /**
  * Handle updates for version 1.2.3
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  */
 
 // Clear newfold_marketplace transient with update in wp-module-marketplace@1.4.0

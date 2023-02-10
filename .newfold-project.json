@@ -1,10 +1,10 @@
 {
-    "name": "Web.com WordPress Plugin",
-    "description": "WordPress plugin that integrates your WordPress site with the Web.com control panel, including performance, security, and update features.",
-    "url": "https://web.com",
+    "name": "Crazy Domains WordPress Plugin",
+    "description": "WordPress plugin that integrates your WordPress site with the Crazy Domains control panel, including performance, security, and update features.",
+    "url": "https://crazydomains.com",
     "package": {
         "vendor": "newfold",
-        "name": "wp-plugin-web"
+        "name": "wp-plugin-crazy-domains"
     },
     "license": {
         "slug": "GPL-2.0-or-later",
@@ -16,14 +16,14 @@
         "email": "evanrm@gmail.com",
         "url": "https://evanmullins.com"
     },
-    "text_domain": "wp-plugin-web",
-    "namespace": "Web",
+    "text_domain": "wp-plugin-crazy-domains",
+    "namespace": "CrazyDomains",
     "prefixes": {
-        "long": "WPPluginWeb",
-        "short": "wppw",
-        "function": "wppw_",
-        "constant": "WPPW_",
-        "meta": "wppw_",
-        "slug": "wppw-"
+        "long": "WPPluginCrazyDomains",
+        "short": "wppcd",
+        "function": "wppcd_",
+        "constant": "WPPCD_",
+        "meta": "wppcd_",
+        "slug": "wppcd-"
     }
 }

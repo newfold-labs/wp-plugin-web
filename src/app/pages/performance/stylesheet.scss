@@ -1,4 +1,4 @@
-.wppw {
+.wppcd {
 
     .components-radio-control__option label span {
         
@@ -31,8 +31,8 @@
     }
 
     /* WP 5.5 || WP 5.6 */
-    [class*="wppw-wp-5.5"],
-    [class*="wppw-wp-5.6"] {
+    [class*="wppcd-wp-5.5"],
+    [class*="wppcd-wp-5.6"] {
         .components-radio-control__input[type="radio"]:checked::before {
             margin-top: 5px;
             margin-left: 5px;
@@ -46,7 +46,7 @@
     }
 
     /* WP 5.7 */
-    [class*="wppw-wp-5.7"] {
+    [class*="wppcd-wp-5.7"] {
         .components-radio-control__input[type="radio"]:checked::before {
                 transform: translate(3px, 3px);
 

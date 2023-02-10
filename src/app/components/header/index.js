@@ -10,14 +10,14 @@ const Header = () => {
 	const isLargeViewport = useViewportMatch( 'medium' );
 	return (
 		<Fragment>
-			<header className="wppw-header">
-				<div className="wppw-header-inner">
+			<header className="wppcd-header">
+				<div className="wppcd-header-inner">
 					<Logo />
 					{ ( isLargeViewport && <NavUtility /> ) || <NavMobile /> }
 				</div>
 			</header>
 			{ isLargeViewport && (
-				<nav className="wppw-nav">
+				<nav className="wppcd-nav">
 					<NavLarge />
 				</nav>
 			) }

@@ -16,7 +16,7 @@ cypress.env.json
 # Built-app files
 /.docs
 /build/*
-/wp-plugin-web
+/wp-plugin-crazy-domains
 
 # File Types
 *.log

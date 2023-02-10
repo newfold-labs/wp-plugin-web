@@ -1,8 +1,8 @@
 {
-    "name": "wp-plugin-web",
-    "description": "WordPress plugin that integrates your WordPress site with the Web.com control panel, including performance, security, and update features.",
+    "name": "wp-plugin-crazy-domains",
+    "description": "WordPress plugin that integrates your WordPress site with the Crazy Domains control panel, including performance, security, and update features.",
     "license": "GPL-2.0-or-later",
-    "version": "1.2.4",
+    "version": "1.0.0",
     "private": true,
     "author": {
         "name": "Evan Mullins",
@@ -33,10 +33,10 @@
         "storybook:build": "build-storybook -c ./storybook -o ./.docs",
         "test:e2e": "npx cypress run",
         "test:unit": "wp-scripts test-unit-js",
-        "create:dist": "rsync -r --exclude-from=.distignore . ./wp-plugin-web",
+        "create:dist": "rsync -r --exclude-from=.distignore . ./wp-plugin-crazy-domains",
         "php-deps": "composer install --no-dev --optimize-autoloader",
-        "create:zip": "cd ./wp-plugin-web && zip -r -9 ../wp-plugin-web.zip . && ls -lh ../wp-plugin-web.zip",
-        "prebuild:cleanup": "rm -rf ./build ./wp-plugin-web ./wp-plugin-web.zip ./vendor",
+        "create:zip": "cd ./wp-plugin-crazy-domains && zip -r -9 ../wp-plugin-crazy-domains.zip . && ls -lh ../wp-plugin-crazy-domains.zip",
+        "prebuild:cleanup": "rm -rf ./build ./wp-plugin-crazy-domains ./wp-plugin-crazy-domains.zip ./vendor",
         "simulate-runner-build": "npm run prebuild:cleanup && npm i && npm run php-deps && npm run build && npm run create:dist && npm run create:zip",
         "srb": "npm run simulate-runner-build"
     },

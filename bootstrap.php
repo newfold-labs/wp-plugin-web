@@ -2,10 +2,10 @@
 /**
  * Plugin bootstrap file
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  */
 
-namespace Web;
+namespace CrazyDomains;
 
 use WP_Forge\WPUpdateHandler\PluginUpdater;
 use WP_Forge\UpgradeHandler\UpgradeHandler;
@@ -18,7 +18,7 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 	require __DIR__ . '/vendor/autoload.php';
 } else {
 	if ( 'local' === wp_get_environment_type() ) {
-		wp_die( esc_html( __( 'Please install the Web.com Plugin dependencies.', 'wp-plugin-web' ) ) );
+		wp_die( esc_html( __( 'Please install the Crazy Domains Plugin dependencies.', 'wp-plugin-crazy-domains' ) ) );
 	}
 	return;
 }
@@ -26,21 +26,21 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 /*
  * Initialize coming soon module via container
  */
-$web_module_container = new Container(
+$crazydomains_module_container = new Container(
 	array(
 		'cache_types' => array( 'browser', 'file', 'skip404' ),
 	)
 );
 
 // Set plugin to container
-$web_module_container->set(
+$crazydomains_module_container->set(
 	'plugin',
-	$web_module_container->service(
+	$crazydomains_module_container->service(
 		function() {
 			return new Plugin(
 				array(
-					'id'   => 'web',
-					'file' => WEB_PLUGIN_FILE,
+					'id'   => 'crazydomains',
+					'file' => CRAZYDOMAINS_PLUGIN_FILE,
 				)
 			);
 		}
@@ -48,44 +48,44 @@ $web_module_container->set(
 );
 
 // Set coming soon values
-$web_module_container->set(
+$crazydomains_module_container->set(
 	'comingsoon',
 	array(
-		'admin_app_url'       => admin_url( 'admin.php?page=web#/home' ),
-		'template_h1'         => __( 'Coming Soon!', 'wp-plugin-web' ),
-		'template_h2'         => __( 'A New WordPress Site', 'wp-plugin-web' ),
+		'admin_app_url'       => admin_url( 'admin.php?page=crazydomains#/home' ),
+		'template_h1'         => __( 'Coming Soon!', 'wp-plugin-crazy-domains' ),
+		'template_h2'         => __( 'A New WordPress Site', 'wp-plugin-crazy-domains' ),
 		'template_footer_t'   => sprintf(
-			/* translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag, %3$s is replaced with opening link tag taking you to login page, %4$s is replaced with closing link tag, %5$s is replaced with opening link tag taking you to my.web.com, %6$s is replaced with closing link tag */
-			esc_html__( 'A %1$sWeb.com%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sWeb.com%6$s.', 'wp-plugin-web' ) . '&nbsp;',
-			'<a href="' . esc_url( 'https://www.web.com/websites/wordpress' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
+			/* translators: %1$s is replaced with opening link tag taking you to crazydomains.com/wordpress, %2$s is replaced with closing link tag, %3$s is replaced with opening link tag taking you to login page, %4$s is replaced with closing link tag, %5$s is replaced with opening link tag taking you to my.crazydomains.com, %6$s is replaced with closing link tag */
+			esc_html__( 'A %1$sCrazy Domains%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sCrazy Domains%6$s.', 'wp-plugin-crazy-domains' ) . '&nbsp;',
+			'<a href="' . esc_url( 'https://www.crazydomains.com/websites/wordpress' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
 			'</a>',
 			'<a href="' . esc_url( wp_login_url() ) . '">',
 			'</a>',
-			'<a href="' . esc_url( 'https://www.web.com/my-account/account-center/login' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
+			'<a href="' . esc_url( 'https://www.crazydomains.com/my-account/account-center/login' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
 			'</a>'
 		),
 		'template_page_title' => sprintf(
 			/* translators: %s: Blog name */
-			__( '%s &mdash; Coming Soon', 'wp-plugin-web' ),
+			__( '%s &mdash; Coming Soon', 'wp-plugin-crazy-domains' ),
 			esc_html( get_option( 'blogname' ) )
 		),
-		'admin_bar_text'      => '<div style="background-color: #FEC101; color: #000; padding: 0 1rem;">' . __( 'Coming Soon Active', 'wp-plugin-web' ) . '</div>',
+		'admin_bar_text'      => '<div style="background-color: #FEC101; color: #000; padding: 0 1rem;">' . __( 'Coming Soon Active', 'wp-plugin-crazy-domains' ) . '</div>',
 		'admin_notice_text'   => sprintf(
 			/* translators: %1$s is replaced with the opening link tag to preview the page, and %2$s is replaced with the closing link tag, %3$s is the opening link tag, %4$s is the closing link tag. */
-			__( 'Your site is currently displaying a %1$scoming soon page%2$s. Once you are ready, %3$slaunch your site%4$s.', 'wp-plugin-web' ),
-			'<a href="' . get_home_url() . '?preview=coming_soon" title="' . __( 'Preview the coming soon landing page', 'wp-plugin-web' ) . '">',
+			__( 'Your site is currently displaying a %1$scoming soon page%2$s. Once you are ready, %3$slaunch your site%4$s.', 'wp-plugin-crazy-domains' ),
+			'<a href="' . get_home_url() . '?preview=coming_soon" title="' . __( 'Preview the coming soon landing page', 'wp-plugin-crazy-domains' ) . '">',
 			'</a>',
-			'<a href="' . esc_url( admin_url( 'admin.php?page=web#/home' ) ) . '">',
+			'<a href="' . esc_url( admin_url( 'admin.php?page=crazydomains#/home' ) ) . '">',
 			'</a>'
 		),
-		'template_styles'     => esc_url( WEB_PLUGIN_URL . 'assets/styles/coming-soon.css' ),
+		'template_styles'     => esc_url( CRAZYDOMAINS_PLUGIN_URL . 'assets/styles/coming-soon.css' ),
 	)
 );
-setContainer( $web_module_container );
+setContainer( $crazydomains_module_container );
 
 // Set up the updater endpoint and map values
-$updateurl     = 'https://hiive.cloud/workers/release-api/plugins/newfold-labs/wp-plugin-web'; // Custom API GET endpoint
-$pluginUpdater = new PluginUpdater( WEB_PLUGIN_FILE, $updateurl );
+$updateurl     = 'https://hiive.cloud/workers/release-api/plugins/newfold-labs/wp-plugin-crazy-domains'; // Custom API GET endpoint
+$pluginUpdater = new PluginUpdater( CRAZYDOMAINS_PLUGIN_FILE, $updateurl );
 $pluginUpdater->setDataMap(
 	array(
 		'version'       => 'version.latest',
@@ -102,9 +102,9 @@ if ( is_admin() ) {
 
 	// Handle plugin upgrades
 	$upgrade_handler = new UpgradeHandler(
-		WEB_PLUGIN_DIR . '/inc/upgrades',            // Directory where upgrade routines live
-		get_option( 'web_plugin_version', '0.9.0' ), // Old plugin version (from database)
-		WEB_PLUGIN_VERSION                           // New plugin version (from code)
+		CRAZYDOMAINS_PLUGIN_DIR . '/inc/upgrades',            // Directory where upgrade routines live
+		get_option( 'crazydomains_plugin_version', '1.0.0' ), // Old plugin version (from database)
+		CRAZYDOMAINS_PLUGIN_VERSION                           // New plugin version (from code)
 	);
 
 	// Returns true if the old version doesn't match the new version
@@ -112,22 +112,22 @@ if ( is_admin() ) {
 
 	if ( $did_upgrade ) {
 		// If an upgrade occurred, update the new version in the database to prevent running the routine(s) again.
-		update_option( 'web_plugin_version', WEB_PLUGIN_VERSION, true );
+		update_option( 'crazydomains_plugin_version', CRAZYDOMAINS_PLUGIN_VERSION, true );
 	}
 }
 
 // Required files
-require WEB_PLUGIN_DIR . '/inc/Admin.php';
-require WEB_PLUGIN_DIR . '/inc/AdminBar.php';
-require WEB_PLUGIN_DIR . '/inc/base.php';
-require WEB_PLUGIN_DIR . '/inc/jetpack.php';
-require WEB_PLUGIN_DIR . '/inc/partners.php';
-require WEB_PLUGIN_DIR . '/inc/performance.php';
-require WEB_PLUGIN_DIR . '/inc/RestApi/CachingController.php';
-require WEB_PLUGIN_DIR . '/inc/RestApi/SettingsController.php';
-require WEB_PLUGIN_DIR . '/inc/RestApi/rest-api.php';
-require WEB_PLUGIN_DIR . '/inc/settings.php';
-require WEB_PLUGIN_DIR . '/inc/updates.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/Admin.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/AdminBar.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/base.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/jetpack.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/partners.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/performance.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/RestApi/CachingController.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/RestApi/SettingsController.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/RestApi/rest-api.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/settings.php';
+require CRAZYDOMAINS_PLUGIN_DIR . '/inc/updates.php';
 
 /* WordPress Admin Page & Features */
 if ( is_admin() ) {

@@ -2,19 +2,19 @@
 /**
  * All data retrieval and saving happens from this file.
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  */
 
-namespace Web;
+namespace CrazyDomains;
 
 /**
- * \Web\Data
+ * \CrazyDomains\Data
  * This class does not have a constructor to get instantiated, just static methods.
  */
 final class Data {
 
 	/**
-	 * Data loaded onto window.WPPW
+	 * Data loaded onto window.WPPCD
 	 *
 	 * @return array
 	 */
@@ -22,12 +22,12 @@ final class Data {
 		global $wp_version;
 
 		$runtime = array(
-			'url'       => WEB_BUILD_URL,
-			'version'   => WEB_PLUGIN_VERSION,
+			'url'       => CRAZYDOMAINS_BUILD_URL,
+			'version'   => CRAZYDOMAINS_PLUGIN_VERSION,
 			'resturl'   => \get_home_url() . '/index.php?rest_route=',
 			'wpversion' => $wp_version,
 			'admin'     => \admin_url(),
-			'assets'    => WEB_PLUGIN_URL . 'assets/',
+			'assets'    => CRAZYDOMAINS_PLUGIN_URL . 'assets/',
 		);
 
 		return $runtime;

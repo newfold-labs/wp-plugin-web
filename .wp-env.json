@@ -17,7 +17,7 @@
             "config": {
                 "WP_TESTS_DOMAIN": "localhost:8881",
                 "WP_TESTS_EMAIL": "evanrm@gmail.com",
-                "WP_TESTS_TITLE": "Web WordPress Plugin",
+                "WP_TESTS_TITLE": "Crazy Domains WordPress Plugin",
                 "WP_TESTS_BINARY": "php"
             }
         }

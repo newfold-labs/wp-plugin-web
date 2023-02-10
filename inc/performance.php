@@ -2,10 +2,10 @@
 /**
  * Manage legacy mojo performance settings.
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  */
 
-namespace Web;
+namespace CrazyDomains;
 
 /**
  * Callback to Toggle Mojo Cache level

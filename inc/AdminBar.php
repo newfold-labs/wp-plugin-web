@@ -2,13 +2,13 @@
 /**
  * Register AdminBar help button.
  *
- * @package WPPluginWeb
+ * @package WPPluginCrazyDomains
  */
 
-namespace Web;
+namespace CrazyDomains;
 
 /**
- * \Web\AdminBar
+ * \CrazyDomains\AdminBar
  */
 class AdminBar {
 
@@ -31,11 +31,11 @@ class AdminBar {
 		global $wp_admin_bar;
 		$wp_admin_bar->add_menu(
 			array(
-				'id'    => 'web-support',
-				'title' => __( 'Need help?', 'wp-plugin-web' ),
-				'href'  => admin_url( 'admin.php?page=web#/help' ),
+				'id'    => 'crazydomains-support',
+				'title' => __( 'Need help?', 'wp-plugin-crazy-domains' ),
+				'href'  => admin_url( 'admin.php?page=crazydomains#/help' ),
 				'meta'  => array(
-					'title' => esc_attr__( 'We\'re here for you!', 'wp-plugin-web' ),
+					'title' => esc_attr__( 'We\'re here for you!', 'wp-plugin-crazy-domains' ),
 				),
 			)
 		);
