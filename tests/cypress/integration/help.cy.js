@@ -36,8 +36,14 @@ describe('Help Page', function () {
 			.should('be.visible');
 	});
 
-	it('KB Card Exists', () => {
-		cy.get('.card-help-kb').contains('h3', 'Knowledge Base')
+	it('Online Support Card Exists', () => {
+		cy.get('.card-help-help').contains('h3', 'Online Support')
+			.scrollIntoView()
+			.should('be.visible');
+	});
+
+	it('Online Academy Card Exists', () => {
+		cy.get('.card-help-academy').contains('h3', 'Online Academy')
 			.scrollIntoView()
 			.should('be.visible');
 	});
