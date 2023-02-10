@@ -73,14 +73,18 @@ const AppBody = ( props ) => {
 		>
 			<Header />
 			<NewfoldNotifications
-				apiFetch={apiFetch}
-				classnames={classnames} 
-				context='web-plugin'
-				filter={filter}
-				page={hashedPath}
-				resturl={window.WPPW.resturl}
-				useEffect={useEffect}
-				useState={useState}
+				constants={{
+					context: 'web-plugin',
+					page: hashedPath,
+					resturl: window.WPPW.resturl
+				}}
+				methods={{
+					apiFetch,
+					classnames,
+					filter,
+					useState,
+					useEffect
+				}}
 			/>
 			<div className="wppw-app-body">
 				<div className="wppw-app-body-inner">
