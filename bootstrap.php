@@ -39,8 +39,10 @@ $web_module_container->set(
 		function() {
 			return new Plugin(
 				array(
-					'id'   => 'web',
-					'file' => WEB_PLUGIN_FILE,
+					'id'           => 'web',
+					'file'         => WEB_PLUGIN_FILE,
+					'brand'        => get_option( 'mm_brand', 'web' ),
+					'install_date' => get_option( 'web_plugin_install_date' ),
 				)
 			);
 		}
