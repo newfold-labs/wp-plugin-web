@@ -1,5 +1,5 @@
 .wppw .accordion {
-    border: 1px solid var(--mdc-theme-primary);
+    border: 1px solid var(--color-secondary);
     margin-bottom: .6em;
     margin-top: .6em;
     opacity: .8;
@@ -12,7 +12,7 @@
     }
 
     .accordion-summary {
-        background: var(--dc-theme-grey--light4);
+        background: var(--color-secondary);
         cursor: pointer;
         font-weight: 700;
         padding: 10px 15px;
