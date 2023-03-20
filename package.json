@@ -6,7 +6,7 @@
     "private": true,
     "author": {
         "name": "Evan Mullins",
-        "email": "evanrm@gmail.com"
+        "email": "evan@bluehost.com"
     },
     "devDependencies": {
         "@testing-library/cypress": "^9.0.0",
