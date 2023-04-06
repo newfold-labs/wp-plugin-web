@@ -75,13 +75,13 @@
             &::before {
                 content: '';
                 position: absolute;
-                bottom: -10px;
+                bottom: -12px;
                 left: auto;
                 right: auto;
                 height: 20px;
                 width: 20px;
                 transform: rotate(45deg);
-                background: linear-gradient(133deg, var(--color-primary-lighter) 50%, var(--color-primary-dark) 50%);
+                background: linear-gradient(133deg, transparent 50%, var(--color-primary-dark) 50%);
                 
                 @media screen and (max-width: 600px) {
                     display: none !important;
