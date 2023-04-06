@@ -35,8 +35,8 @@ define( 'WEB_PLUGIN_VERSION', '1.2.5' );
 define( 'WEB_PLUGIN_FILE', __FILE__ );
 define( 'WEB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WEB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-if ( ! defined( 'BH_HUB_URL' ) ) {
-	define( 'BH_HUB_URL', 'https://hiive.cloud/api' );
+if ( ! defined( 'NFD_HIIVE_URL' ) ) {
+	define( 'NFD_HIIVE_URL', 'https://hiive.cloud/api' );
 }
 
 define( 'WEB_BUILD_DIR', WEB_PLUGIN_DIR . 'build/' . WEB_PLUGIN_VERSION );
