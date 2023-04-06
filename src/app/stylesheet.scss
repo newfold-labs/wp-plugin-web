@@ -1,94 +1,60 @@
 :root {
-    --mdc-theme-primary: #0D47FB;
-    --mdc-theme-primary--light1: #4A75FC;
-    --mdc-theme-primary--light2: #6E91FD;
-    --mdc-theme-primary--light3: #CFDAFE;
-    --mdc-theme-primary--light4: #E6ECFF;
-    --mdc-theme-primary--dark1: #0A39C9;
-
-    --mdc-theme-secondary: #0BB073;
-    --mdc-theme-secondary--light1: #48C496;
-    --mdc-theme-secondary--light2: #6DD0AB;
-    --mdc-theme-secondary--light3: #CEEFE3;
-    --mdc-theme-secondary--light4: #E6F7F1;
-    --mdc-theme-secondary--dark1: #098D5C;
-
-    --dc-theme-ter: #14C1B3;
-    --dc-theme-ter--light1: #4FD1C6;
-    --dc-theme-ter--light2: #72DAD1;
-    --dc-theme-ter--light3: #D0F3F0;
-    --dc-theme-ter--light4: #E7F9F7;
-    --dc-theme-ter--dark1: #109A8F;
-
-    --dc-theme-qua: #FEC101;
-    --dc-theme-qua--light1: #FED141;
-    --dc-theme-qua--light2: #FEDA67;
-    --dc-theme-qua--light3: #FFF3CC;
-    --dc-theme-qua--light4: #FCF6E9;
-    --dc-theme-qua--dark1: #CB9A01;
-
-    --dc-theme-qui: #CC482E;
-    --dc-theme-qui--light1: #D97662;
-    --dc-theme-qui--light2: #E09182;
-    --dc-theme-qui--light3: #F5DAD5;
-    --dc-theme-qui--light4: #FFF9E5;
-    --dc-theme-qui--dark1: #A33A25;
-
-    --dc-theme-sen: #DF5361;
-    --dc-theme-sen--light1: #E77E89;
-    --dc-theme-sen--light2: #EC98A0;
-    --dc-theme-sen--light3: #F9DDDF;
-    --dc-theme-sen--light4: #FCEDEF;
-    --dc-theme-sen--dark1: #B2424E;
-
-    --dc-theme-black: #000;
-    --dc-theme-grey: #353738;
-    --dc-theme-grey--light1: #55585A;
-    --dc-theme-grey--light2: #AAAFB3;
-    --dc-theme-grey--light3: #D4DBE0;
-    --dc-theme-grey--light4: #F5F7F8;
-    --dc-theme-white: #fff;
-
-    --mdc-theme-error: #ff182f;
-    --mdc-theme-error--light: #ffebea;
-    --mdc-theme-error--dark: #701116;
-
-    --dc-theme-warning: #f2b61b;
-    --dc-theme-warning--light: #fae2af;
-    --dc-theme-warning--dark: #be5a00;
-
-    --dc-theme-success: #23c161;
-    --dc-theme-success--light: #ebf9ed;
-    --dc-theme-success--dark: #034a1d;
-
+    // Primary
+    --color-primary: #0D47FB;
+    --color-primary-dark: #0A39C9;
+    --color-primary-light: #6E91FD;
+    --color-primary-lighter: #E6ECFF;
+    // Secondary
+    --color-secondary: #0BB073;
+    --color-secondary-dark: #098D5C;
+    --color-secondary-light: #72DAD1;
+    --color-secondary-lighter: #E7F9F7;
+    // UI
+    --color-title: #000000;
+    --color-text: #000000;
+    --color-link: #0D47FB;
+    --color-border: rgba(0, 0, 0, 0.1);
+    --color-success: #388E3C;
+    --color-warning: #F57C00;
+    --color-error: #D32F2F;
+    // Contrast
+    --color-white: #FFFFFF;
+    --color-off-white: #F0F0F5;
+    --color-black: #000000;
+    --color-success-contrast: #DFF2E0;
+    --color-warning-contrast: #FFE3C6;
+    --color-error-contrast: #F6D3D3;
+    --color-canvas: #FDFDFD;
 }
 
 html {
     @media screen and (min-width: 782px) {
-        overflow: -moz-scrollbars-vertical; 
+        overflow: -moz-scrollbars-vertical;
         overflow-y: scroll;
     }
 }
 
 body.toplevel_page_web {
-    --wp-admin-theme-color: var(--mdc-theme-primary);
-    --wp-admin-theme-color-darker-10: var(--mdc-theme-primary--dark1);
-    --wp-admin-theme-color-darker-20: var(--dc-theme-black);
+    --wp-admin-theme-color: var(--color-primary);
+    --wp-admin-theme-color-darker-10: var(--color-primary-dark);
+    --wp-admin-theme-color-darker-20: var(--color-black);
     --wp-admin-border-width-focus: 2px;
-    --webbrand-focus: inset 0 0 0 1px var(--dc-theme-white),0 0 0 var(--wp-admin-border-width-focus) var(--mdc-theme-primary);
-    
+    --webbrand-focus: inset 0 0 0 1px var(--color-white), 0 0 0 var(--wp-admin-border-width-focus) var(--color-primary);
+
     a {
-        color: var(--mdc-theme-primary);
+        color: var(--color-primary);
     }
-    
+
     @media screen and (max-width:782px) {
         .wp-responsive-open #wpbody {
             right: -190px; // only when mobile admin menu open
         }
     }
+
     #wpwrap {
-        background-color: var(--dc-theme-white);
+        background-color: var(--color-canvas);
     }
+
     #wpcontent {
         padding-left: 0 !important;
     }
@@ -97,6 +63,7 @@ body.toplevel_page_web {
         li {
             transition: opacity .33s ease;
         }
+
         .hideme {
             max-height: 32px;
             opacity: 0;
@@ -105,37 +72,48 @@ body.toplevel_page_web {
             width: 0;
         }
     }
-    
+
     #wpbody-content .notice,
     #wpbody-content #dolly,
     #wpbody-content .update-nag {
         display: none;
     }
+
     #wpbody-content .newfold-notifications-wrapper .notice {
         display: block;
     }
 
 }
-.wppw {
-    color: var(--dc-theme-grey);
 
-    h1, h2, h3, h4, h5, h6 {
-        color: var(--dc-theme-black);
+.wppw {
+    color: var(--color-text);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: var(--color-title);
         font-weight: 700;
     }
+
     .wppw-nav a {
-        color: var(--dc-theme-black);
+        color: var(--color-black);
     }
-    p, div {
-        color: var(--dc-theme-grey);
+
+    p,
+    div {
+        color: var(--color-title);
         font-size: 15px;
         font-weight: 500;
     }
+
     .components-card__body .components-toggle-control .components-base-control__field .components-toggle-control__label,
     .components-card__body .components-input-control__label,
     .components-card__body .components-input-control__label *,
     .components-card__body .components-radio-control__option label strong {
-        color: var(--dc-theme-black);
+        color: var(--color-text);
     }
 
     .components-button {
@@ -144,7 +122,8 @@ body.toplevel_page_web {
         transition: all 0.25s ease;
         white-space: nowrap;
 
-        .dashicons, .dashicons-before:before {
+        .dashicons,
+        .dashicons-before:before {
             transition: all .25s ease;
         }
 
@@ -154,61 +133,69 @@ body.toplevel_page_web {
 
         &.is-primary,
         &[variant="primary"] {
-            background-color: var(--mdc-theme-primary);
-            color: var(--dc-theme-white);
+            background-color: var(--color-primary);
+            color: var(--color-white);
         }
 
         &.is-secondary,
         &[variant="secondary"] {
-            border-color: var(--mdc-theme-primary);
-            box-shadow: inset 0 0 0 1px var(--mdc-theme-primary);
-            color: var(--mdc-theme-primary);
+            border-color: var(--color-primary);
+            box-shadow: inset 0 0 0 1px var(--color-primary);
+            color: var(--color-primary);
         }
 
         &:last-child {
-            padding-right: 1rem; /* <= WP 5.8 */
+            padding-right: 1rem;
+            /* <= WP 5.8 */
         }
 
         &.has-icon {
             padding-right: 1rem;
 
             .dashicon {
-                margin-right: 10px; /* <= WP 5.6 */
+                margin-right: 10px;
+                /* <= WP 5.6 */
             }
         }
     }
+
     a:focus {
         box-shadow: var(--webbrand-focus);
         outline: 0;
     }
+
     .components-base-control__help,
     .components-radio-control__option label span span {
-        color: var(--dc-theme-grey);
+        color: var(--color-text);
         margin-top: 0.25rem;
     }
 }
-.wppw, .wppw * {
+
+.wppw,
+.wppw * {
     box-sizing: border-box;
 }
 
 .wppw-app-body {
-    padding: 18px 24px 0;
+    padding: 3.25rem 24px 1rem;
+
     &-inner {
         max-width: 1290px;
         margin-left: auto;
         margin-right: auto;
         width: 100%;
     }
-}
 
-.components-snackbar__content {
-    color: var(--dc-theme-grey--light4) !important;
+    @media screen and (max-width:782px) {
+        padding-top: 2.5rem;
+    }
 }
 
 .grid {
     display: grid;
     gap: clamp(0.5rem, calc(1rem + 1vw), 2rem);
     padding: 0.5rem;
+
     &.col2,
     &.col3,
     &.col4 {
@@ -216,12 +203,14 @@ body.toplevel_page_web {
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
     }
+
     &.col3,
     &.col4 {
         @media screen and (min-width: 800px) {
             grid-template-columns: repeat(3, minmax(0, 1fr));
         }
     }
+
     &.col4 {
         @media screen and (min-width: 1020px) {
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -234,8 +223,17 @@ body.toplevel_page_web {
     position: relative;
 
     .components-snackbar-list {
-        bottom: .5rem;
+        bottom: .95rem;
         position: fixed;
+    }
+
+    .components-snackbar {
+        background-color: var(--color-secondary-lighter);
+        box-shadow: inset -2px -2px 0px 4px var(--color-secondary-dark);
+    }
+
+    .components-snackbar__content {
+        color: var(--color-secondary-dark) !important;
     }
 }
 
@@ -254,7 +252,7 @@ body.toplevel_page_web {
 
 .wppw {
     .components-card {
-        box-shadow: inset -2px -2px 0px 4px var(--dc-theme-black);
+        box-shadow: inset -2px -2px 0px 4px var(--color-black);
 
         &.short {
             margin-bottom: auto;

@@ -24,43 +24,73 @@
             /* <= WP 5.4 */
             flex-direction: row;
             /* <= WP 5.6 */
-            gap: 1.5rem;
+            gap: 0;
             max-width: max-content;
             height: fit-content;
-            margin-bottom: 1.5rem;
-            padding: 0rem .8rem 0 .8rem;
-            background-color: var(--mdc-theme-primary--light4);
-            box-shadow: 2px 2px 0 4px var(--mdc-theme-primary--light3);
+            margin-bottom: 2rem;
+            // padding: 0rem .8rem 0 .8rem;
+            background-color: var(--color-primary-lighter);
+            box-shadow: 2px 2px 0 4px var(--color-primary-dark);
 
             @media screen and (max-width: 600px) {
                 min-width: initial;
-                overflow-y: scroll;
+                overflow-x: scroll;
             }
         }
     }
 
     .components-tab-panel__tabs-item {
         font-size: 14px;
-        color: var(--mdc-theme-primary--dark1);
+        color: var(--color-primary-dark);
+        padding: 16px 1.5rem 16px 1.5rem;
+        min-width: 130px;
+        justify-content: center;
         padding: 16px 3px 16px 3px;
         height: auto;
         transition: all .15s ease-in-out;
+        border-right: 1px solid var(--color-primary-light);
+        position: relative;
+
+        @media screen and (max-width: 600px) {
+            padding-bottom: 11px;
+            border-bottom: 5px solid transparent;
+        }
 
         &:hover {
-            color: var(--mdc-theme-primary--light1);
+            color: var(--color-primary);
         }
 
         &:last-child {
-            padding-right: 3px;
+            border-right: none;
+            padding-right: 0;
         }
 
         &.current-tab {
-            border-bottom: 2.5px solid;
-            border-color: var(--mdc-theme-primary--dark1);
             cursor: default;
 
             &:hover {
-                color: var(--mdc-theme-primary--dark1);
+                color: var(--color-primary-dark);
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: auto;
+                right: auto;
+                height: 20px;
+                width: 20px;
+                top: 42px;
+                transform: rotate(45deg);
+                transition: none;
+                background: linear-gradient(133deg, transparent 50%, var(--color-primary-dark) 50%);
+                
+                @media screen and (max-width: 600px) {
+                    display: none !important;
+                }
+            }
+
+            @media screen and (max-width: 600px) {
+                border-bottom: 5px solid var(--color-primary-light);
             }
         }
 
@@ -76,7 +106,7 @@
     border-bottom: 4px;
     border-right: 4px;
     border-style: solid;
-    border-color: var(--dc-theme-black);
+    border-color: var(--color-black);
     overflow: hidden;
 
     &.components-card {
@@ -133,16 +163,27 @@
             margin: 0;
         }
 
+        .has-full-price {
+            .price {
+                margin-top: 10px;
+            }
+        }
+
         .price {
-            background-color: rgb(9, 141, 92, .15);
-            box-shadow: 1px 1px 0 2.5px rgb(9, 141, 92, .3);
+            background-color: var(--color-secondary-lighter);
+            box-shadow: 1px 1px 0 2px var(--color-secondary);
             border-radius: 0;
-            color: var(--mdc-theme-secondary--dark1);
+            color: var(--color-secondary-dark);
             font-size: .95rem;
             font-weight: 800;
             min-width: max-content;
             margin-left: 0;
             padding: 0.25rem 0.75rem;
+        }
+
+        .full-price {
+            filter: grayscale(.5);
+            font-size: .8rem !important;
         }
     }
 
@@ -150,6 +191,8 @@
         flex-grow: 1;
         padding-top: 4px;
         padding-bottom: 22px;
+        line-height: 1.35;
+        font-weight: 400;
     }
 
     .components-card__footer {
