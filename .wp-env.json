@@ -10,12 +10,13 @@
     "plugins": [
         "."
     ],
-    "port": 8884,
-    "testsPort": 8885,
+    "port": 8886,
+    "testsPort": 8887,
     "env": {
         "tests": {
             "config": {
-                "WP_TESTS_DOMAIN": "localhost:8885",
+                "WP_SITEURL": "localhost:8887",
+                "WP_TESTS_DOMAIN": "localhost:8887",
                 "WP_TESTS_TITLE": "Web WordPress Plugin",
                 "WP_TESTS_BINARY": "php"
             }
