@@ -2,23 +2,26 @@
     "name": "wp-plugin-web",
     "description": "WordPress plugin that integrates your WordPress site with the Web.com control panel, including performance, security, and update features.",
     "license": "GPL-2.0-or-later",
-    "version": "1.2.6",
+    "version": "1.2.7",
     "private": true,
     "author": {
         "name": "Evan Mullins",
         "url": "https://evanmullins.com"
     },
     "devDependencies": {
+        "@replayio/cypress": "^1.0.0",
         "@testing-library/cypress": "^9.0.0",
-        "@wordpress/env": "^5.16.0",
-        "@wordpress/scripts": "^26.4.0",
-        "cypress": "^12.12.0",
+        "@wordpress/env": "^8.1.0",
+        "@wordpress/scripts": "^26.6.0",
+        "cypress": "^12.14.0",
         "cypress-axe": "^1.4.0"
     },
     "scripts": {
         "build": "wp-scripts build",
         "check-engines": "wp-scripts check-engines",
         "check-licenses": "wp-scripts check-licenses --production",
+        "cypress": "npm cypress open",
+        "cypress:record": "RECORD_ALL_CONTENT=1 RECORD_REPLAY_METADATA_FILE=$(mktemp) npx cypress run --browser 'Replay Chromium'",
         "develop": "npm run start",
         "develop:analyzer": "npm run start:analyzer",
         "lint:css": "wp-scripts lint-style '**/*.css'",
@@ -41,17 +44,17 @@
         "srb": "npm run simulate-runner-build"
     },
     "dependencies": {
-        "@wordpress/compose": "^6.10.0",
-        "@wordpress/dom-ready": "^3.33.0",
-        "@wordpress/element": "^5.10.0",
-        "@wordpress/i18n": "^4.29.0",
-        "@wordpress/icons": "^9.24.0",
+        "@wordpress/compose": "^6.12.0",
+        "@wordpress/dom-ready": "^3.35.0",
+        "@wordpress/element": "^5.12.0",
+        "@wordpress/i18n": "^4.35.0",
+        "@wordpress/icons": "^9.26.0",
         "classnames": "^2.3.2",
-        "jquery": "^3.6.4",
+        "jquery": "^3.7.0",
         "lodash": "^4.17.21",
         "react": "^18.2.0",
         "react-error-boundary": "^4.0.3",
-        "react-router-dom": "^6.11.1",
+        "react-router-dom": "^6.12.1",
         "react-use": "^17.4.0"
     }
 }
