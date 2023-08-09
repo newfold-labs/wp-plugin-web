@@ -11,10 +11,10 @@
  * Plugin Name:       The Web.com Plugin
  * Plugin URI:        https://web.com
  * Description:       WordPress plugin that integrates a WordPress site with the Web.com control panel, including performance, security, and update features.
- * Version:           1.2.7
+ * Version:           1.2.8
  * Requires at least: 4.7
  * Requires PHP:      5.6
- * Tested up to:      6.2
+ * Tested up to:      6.3
  * Author:            Web.com
  * Author URI:        https://web.com
  * Text Domain:       wp-plugin-web
@@ -31,7 +31,7 @@ if ( defined( 'WEB_PLUGIN_VERSION' ) ) {
 }
 
 // Define constants
-define( 'WEB_PLUGIN_VERSION', '1.2.7' );
+define( 'WEB_PLUGIN_VERSION', '1.2.8' );
 define( 'WEB_PLUGIN_FILE', __FILE__ );
 define( 'WEB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WEB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
