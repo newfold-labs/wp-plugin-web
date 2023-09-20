@@ -46,4 +46,5 @@ module.exports = defineConfig({
       'vendor/newfold-labs/wp-module-marketplace/tests/cypress/integration/', // until ui is updated use local marketplace tests instead
     ],
   },
+  retries: 1,
 })
