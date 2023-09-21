@@ -28,7 +28,7 @@ jobs:
           taggedVersion=${{ env.VERSION }}
           pluginHeaderVersion=`grep "Version:" wp-plugin-web.php | grep -Eo "[0-9\.]*"`
           pluginConstantVersion=`grep "'WEB_PLUGIN_VERSION'," wp-plugin-web.php | grep -Eo "[0-9\.]*"`
-          pluginPackageVersion=`grep "version" package.json | grep -Eo "[0-9\.]*"`
+          pluginPackageVersion=`grep '"version"' package.json | grep -Eo "[0-9\.]*"`
           echo "Tagged version: $taggedVersion"
           echo "Plugin header version: $pluginHeaderVersion"
           echo "Plugin constant version: $pluginConstantVersion"
