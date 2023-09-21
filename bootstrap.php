@@ -149,3 +149,52 @@ if ( is_admin() ) {
 }
 
 AdminBar::init();
+
+
+/**
+ * Filter to add applicable BN code to paypal requests
+ *
+ * https://github.com/newfold-labs/wp-module-ecommerce/blob/trunk/bootstrap.php#L62-L101
+ */
+if ( function_exists( 'add_filter' ) ) {
+	add_filter(
+		'http_request_args',
+		function ( $parsed_args, $url ) {
+
+			// Bail early if the request is not to PayPal's v2 checkout API
+			if ( false === stripos( wp_parse_url( $url, PHP_URL_HOST ), 'paypal.com' ) ) {
+				return $parsed_args;
+			}
+
+			// Check for an existing bn_code
+			$bn_code = isset( $parsed_args['headers']['PayPal-Partner-Attribution-Id'] ) ? $parsed_args['headers']['PayPal-Partner-Attribution-Id'] : null;
+
+			// Ensure we only set when blank, or when using one of our stale codes
+			if ( is_null( $bn_code ) || false !== stripos( $bn_code, 'yith' ) || false !== stripos( $bn_code, 'newfold' ) ) {
+				// The correct code is case-sensitive. YITH brand is uppercase, but the code is not.
+				$parsed_args['headers']['PayPal-Partner-Attribution-Id'] = 'Yith_PCP';
+			}
+
+			return $parsed_args;
+		},
+		10,
+		2
+	);
+
+	add_filter(
+		'script_loader_tag',
+		function ( $tag, $handle, $source ) {
+			if ( stripos( $source, 'paypal.com/sdk' ) !== false ) {
+				$replacement = ' data-partner-attribution-id="Yith_PCP"';
+				if ( stripos( $tag, 'partner-attribution-id' ) === false ) {
+					$tag = str_replace( ' src=', $replacement . ' src=', $tag );
+				} else if ( stripos( $tag, 'NEWFOLD' ) || stripos( $tag, 'YITH' ) ) {
+					$tag = preg_replace( '/ data-partner-attribution-id="(.*?)"/', $replacement, $tag );
+				}
+			}
+			return $tag;
+		},
+		25,
+		3
+	);
+}
