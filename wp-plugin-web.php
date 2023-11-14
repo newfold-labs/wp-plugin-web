@@ -10,6 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:       The Web.com Plugin
  * Plugin URI:        https://web.com
+ * Update URI:        https://github.com/newfold-labs/wp-plugin-web/
  * Description:       WordPress plugin that integrates a WordPress site with the Web.com control panel, including performance, security, and update features.
  * Version:           1.3.0
  * Requires at least: 4.7
