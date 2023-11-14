@@ -1,4 +1,14 @@
-import { settings, help, grid, store } from '@wordpress/icons';
+import { 
+	HomeIcon,
+	ShoppingBagIcon,
+	WrenchScrewdriverIcon,
+	BoltIcon, 
+	AdjustmentsHorizontalIcon,
+	BuildingStorefrontIcon,
+	QuestionMarkCircleIcon } 
+from '@heroicons/react/24/outline';
+import { NewfoldRuntime } from "@newfold-labs/wp-module-runtime";
+import { getMarketplaceSubnavRoutes } from '../../../vendor/newfold-labs/wp-module-marketplace/components/marketplaceSubnav';
 import { Route, Routes } from 'react-router-dom';
 import { __ } from '@wordpress/i18n';
 import Home from '../pages/home';
@@ -42,40 +52,40 @@ const topRoutePaths = [
 	'/marketplace',
 	'/performance',
 	'/settings',
-	'/help',
 ];
-const utilityRoutePaths = [ '/performance', '/settings', '/help' ];
+const utilityRoutePaths = [ '/help' ];
 
 export const routes = [
 	{
 		name: '/home',
 		title: __( 'Home', 'wp-plugin-web' ),
 		Component: Home,
-		Icon: grid,
+		Icon: HomeIcon,
 	},
 	{
 		name: '/marketplace',
 		title: __( 'Marketplace', 'wp-plugin-web' ),
 		Component: Marketplace,
-		Icon: store,
+		Icon: ShoppingBagIcon,
+		subRoutes: await getMarketplaceSubnavRoutes(),
 	},
 	{
 		name: '/performance',
 		title: __( 'Performance', 'wp-plugin-web' ),
 		Component: Performance,
-		Dashicon: 'performance',
+		Icon: BoltIcon,
 	},
 	{
 		name: '/settings',
 		title: __( 'Settings', 'wp-plugin-web' ),
 		Component: Settings,
-		Icon: settings,
+		Icon: AdjustmentsHorizontalIcon,
 	},
 	{
 		name: '/help',
 		title: __( 'Help', 'wp-plugin-web' ),
 		Component: Help,
-		Icon: help,
+		Icon: QuestionMarkCircleIcon,
 	},
 ];
 

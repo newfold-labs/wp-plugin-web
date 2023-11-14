@@ -1,33 +1,64 @@
-import './stylesheet.scss';
-import graphicUrl from '../../../../assets/svg/large-star.svg';
-import CacheSettings from './cacheSettings';
-import ClearCache from './clearCache';
-import SettingsCallout from './settingsCallout';
-import { useViewportMatch } from '@wordpress/compose';
+import AppStore from '../../data/store';
+import { Page } from '../../components/page';
+import { useState, useEffect, useContext, Fragment } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
+import classnames from 'classnames';
+import { useUpdateEffect } from 'react-use';
+import { NewfoldRuntime } from "@newfold-labs/wp-module-runtime";
+import { SectionContainer, SectionHeader, SectionContent, SectionSettings } from '../../components/section';
+import { useNotification } from '../../components/notifications/feed';
+import { 
+    webSettingsApiFetch as newfoldSettingsApiFetch, 
+    webPurgeCacheApiFetch as newfoldPurgeCacheApiFetch
+} from '../../util/helpers';
 
-const Performance = () => {
-	const isWideViewport = useViewportMatch( 'large' );
+import { default as NewfoldPerformance } from '../../../../vendor/newfold-labs/wp-module-performance/components/performance/';
+
+const PerformancePage = () => {
+
+    // constants to pass to module
+    const moduleConstants = {};
+
+    // methods to pass to module
+    const moduleMethods = {
+        apiFetch,
+        classnames,
+        useState,
+        useEffect,
+        useContext,
+        NewfoldRuntime,
+        useNotification,
+        newfoldSettingsApiFetch,
+        newfoldPurgeCacheApiFetch,
+        useUpdateEffect,
+        AppStore,
+    };
+
+	const moduleComponents = {
+		Page,
+        SectionHeader,
+		SectionContent,
+        SectionSettings,
+        SectionContainer,
+        Fragment,
+	}
 
 	return (
-		<div className="wppw-Performance grid col2 has-page-graphic">
-			<CacheSettings />
-			{ isWideViewport && (
-				<div>
-					<img
-						src={ graphicUrl }
-						style={ {
-							float: 'right',
-							width: '80%',
-							height: 'auto',
-						} }
-						alt={ __( 'Star illustration', 'wp-plugin-web' ) }
-					/>
-				</div>
-			) }
-			<ClearCache />
-			<SettingsCallout />
-		</div>
+		<Page title="Performance" className={"wppw-app-settings-page"}>
+			<SectionContainer className={'wppw-app-settings-container'}>
+                <SectionHeader
+                    title={__('Performance', 'wp-plugin-web')}
+                    subTitle={__('This is where you can manage cache settings for your website.', 'wp-plugin-web')}
+                    className={'wppw-app-settings-header'}
+                />
+                <NewfoldPerformance
+                    constants={moduleConstants}
+                    methods={moduleMethods}
+                    Components={moduleComponents}
+                />
+            </SectionContainer>
+		</Page>
 	);
 };
 
-export default Performance;
+export default PerformancePage;
