@@ -14,20 +14,18 @@ namespace Web;
 final class Data {
 
 	/**
-	 * Data loaded onto window.WPPW
+	 * Data loaded onto window.NewfoldRuntime
 	 *
 	 * @return array
 	 */
 	public static function runtime() {
-		global $wp_version;
+		global $web_module_container;
 
 		$runtime = array(
-			'url'       => WEB_BUILD_URL,
-			'version'   => WEB_PLUGIN_VERSION,
-			'resturl'   => \get_home_url() . '/index.php?rest_route=',
-			'wpversion' => $wp_version,
-			'admin'     => \admin_url(),
-			'assets'    => WEB_PLUGIN_URL . 'assets/',
+			'url'     => WEB_BUILD_URL,
+			'version' => WEB_PLUGIN_VERSION,
+			'assets'  => WEB_PLUGIN_URL . 'assets/',
+			'brand'   => $web_module_container->plugin()->brand,
 		);
 
 		return $runtime;

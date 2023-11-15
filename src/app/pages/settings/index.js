@@ -1,36 +1,38 @@
-import './stylesheet.scss';
-import graphicUrl from '../../../../assets/svg/large-star.svg';
 import AutomaticUpdates from './automaticUpdates';
 import ComingSoon from './comingSoon';
 import CommentSettings from './commentSettings';
 import ContentSettings from './contentSettings';
-import PerformanceCallout from './performanceCallout';
-import { useViewportMatch } from '@wordpress/compose';
+import { Page } from '../../components/page';
+import { SectionContainer, SectionHeader, SectionContent } from '../../components/section';
 
 const Settings = () => {
-	const isWideViewport = useViewportMatch( 'large' );
 	return (
-		<div className="wppw-Settings grid col2 has-page-graphic">
-			<AutomaticUpdates />
-			{ isWideViewport && (
-				<div>
-					<img
-						src={ graphicUrl }
-						style={ {
-							float: 'right',
-							width: '80%',
-							height: 'auto',
-							transform: 'rotate3d(0, 0, 1, 90deg)',
-						} }
-						alt={ __( 'Star illustration', 'wp-plugin-web' ) }
-					/>
-				</div>
-			) }
-			<ComingSoon />
-			<ContentSettings />
-			<CommentSettings />
-			<PerformanceCallout />
-		</div>
+		<Page title="Settings" className={"wppw-app-settings-page"}>
+			<SectionContainer className={'wppw-app-settings-container'}>
+				<SectionHeader
+					title={__('Settings', 'wp-plugin-web')}
+					subTitle={__('This is where you can manage common settings for your website.', 'wp-plugin-web')}
+					className={'wppw-app-settings-header'}
+				/>
+
+				<SectionContent separator={true} className={'wppw-app-settings-coming-soon'}>
+					<ComingSoon />
+				</SectionContent>
+
+				<SectionContent separator={true} className={'wppw-app-settings-update'}>
+					<AutomaticUpdates />
+				</SectionContent>
+
+				<SectionContent separator={true} className={'wppw-app-settings-content'}>
+					<ContentSettings />
+				</SectionContent>
+
+				<SectionContent className={'wppw-app-settings-comments'}>
+					<CommentSettings />
+				</SectionContent>
+
+			</SectionContainer>
+		</Page>
 	);
 };
 

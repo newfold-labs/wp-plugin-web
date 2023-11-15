@@ -236,38 +236,3 @@ body.toplevel_page_web {
         color: var(--color-secondary-dark) !important;
     }
 }
-
-
-.has-page-graphic {
-    padding-bottom: 26rem;
-}
-
-.wppw-page-graphic {
-    bottom: 3.5rem;
-    opacity: .5;
-    position: absolute;
-    right: 1rem;
-    z-index: -1;
-}
-
-.wppw {
-    .components-card {
-        box-shadow: inset -2px -2px 0px 4px var(--color-black);
-
-        &.short {
-            margin-bottom: auto;
-        }
-
-        &.disabled {
-            opacity: .5;
-        }
-    }
-
-    .components-card-body,
-    .components-card__body {
-
-        &.disabled {
-            opacity: .5;
-        }
-    }
-}
