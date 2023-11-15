@@ -55,7 +55,7 @@ jobs:
           echo "PACKAGE=${REPO##*/}" >> $GITHUB_OUTPUT
 
       - name: Set Node.js 16.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 16.x
 
@@ -99,8 +99,17 @@ jobs:
       - name: Setup Registry
         run: printf "\n//npm.pkg.github.com/:_authToken=${{ secrets.NEWFOLD_ACCESS_TOKEN }}" >> .npmrc
 
-      - name: npm install
+      - name: NPM Install
         run: npm install --legacy-peer-deps
+
+      - name: Validate WP Versions
+        if: ${{ (github.repository == 'newfold-labs/wp-plugin-web') && (github.event.release.prerelease == false) }}
+        run: |
+          wpEnvVersion=`grep "WordPress/WordPress#tags/" .wp-env.json | grep -Eo "[0-9\.]*"`
+          pluginHeaderTestedVersion=`grep "Tested up to:" wp-plugin-web.php | grep -Eo "[0-9\.]*"`
+          echo "wp-env version: $wpEnvVersion"
+          echo "Plugin header tested version: $pluginHeaderTestedVersion"
+          [[ "$wpEnvVersion" == "$pluginHeaderTestedVersion" ]] || exit 1
 
       - name: Build JavaScript
         run: npm run build

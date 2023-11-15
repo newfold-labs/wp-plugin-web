@@ -1,5 +1,7 @@
 import { dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@wordpress/url';
+import { NewfoldRuntime } from "@newfold-labs/wp-module-runtime";
 
 let lastNoticeId;
 const W_NAV = document.querySelector( '#toplevel_page_web .wp-submenu' );
@@ -80,7 +82,7 @@ export const dispatchUpdateSnackbar = ( text = 'Settings Saved' ) => {
 export const webSettingsApiFetch = ( data, passError, thenCallback ) => {
 	return apiFetch( {
 		// path: 'web/v1/settings', //  can't use path bacause it breaks on temp domains
-		url: window.WPPW.resturl + '/web/v1/settings',
+		url: NewfoldRuntime.createApiUrl( '/web/v1/settings' ),
 		method: 'POST',
 		data,
 	} )
@@ -102,7 +104,7 @@ export const webSettingsApiFetch = ( data, passError, thenCallback ) => {
  */
 export const webPurgeCacheApiFetch = ( data, passError, thenCallback ) => {
 	return apiFetch( {
-		url: window.WPPW.resturl + '/web/v1/caching',
+		url: NewfoldRuntime.createApiUrl( '/web/v1/caching' ),
 		method: 'DELETE',
 		data,
 	} )
@@ -130,3 +132,21 @@ export const comingSoonAdminbarToggle = ( comingSoon ) => {
 		comingsoonadminbar.classList.remove( 'hideme' );
 	}
 };
+
+/**
+ * Decorates an external link URL with UTM params.
+ *
+ * The utm_term, if passed, should be the link anchor text.
+ * The utm_content should be the unique identifier for the link.
+ * The utm_campaign is optional and reserved for special occasions.
+ *
+ * @param {string} url The original URL.
+ * @param {Object} params The URL parameters to add.
+ *
+ * @return {string} The new URL.
+ */
+export const addUtmParams = (url, params = {}) => {
+	params.utm_source = `wp-admin/admin.php?page=web${window.location.hash}`;
+	params.utm_medium = 'web_plugin';
+	return addQueryArgs(url, params);
+}

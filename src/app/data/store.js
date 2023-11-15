@@ -1,5 +1,5 @@
 import { createContext, useMemo } from '@wordpress/element';
-
+import { NewfoldRuntime } from '@newfold-labs/wp-module-runtime';
 import apiFetch from '@wordpress/api-fetch';
 
 const DEFAULT = {
@@ -11,7 +11,7 @@ const AppStore = createContext( DEFAULT );
 
 export const webApiFetchSettings = async ( options = {} ) => {
 	return await apiFetch( {
-		url: window.WPPW.resturl + '/web/v1/settings',
+		url: NewfoldRuntime.createApiUrl('/web/v1/settings'),
 		...options,
 	} );
 };
@@ -38,7 +38,6 @@ export const AppStoreProvider = ( { children } ) => {
 			webApiFetchSettings()
 				.then( ( settings ) => {
 					setStore( { ...store, ...window.WPPW, ...settings } );
-					window.WPPW.migrated = true;
 					setBooted( true );
 				} )
 				.catch( ( error ) => {
