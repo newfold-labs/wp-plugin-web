@@ -41,7 +41,6 @@
         "react-use": "^17.4.0"
     },
     "devDependencies": {
-        "@replayio/cypress": "^1.7.0",
         "@tailwindcss/forms": "^0.5.7",
         "@testing-library/cypress": "^10.0.1",
         "@wordpress/env": "^8.11.0",
@@ -59,7 +58,6 @@
         "create:dist": "rsync -r --exclude-from=.distignore . ./wp-plugin-web",
         "create:zip": "cd ./wp-plugin-web && zip -r -9 ../wp-plugin-web.zip . && ls -lh ../wp-plugin-web.zip",
         "cypress": "npm cypress open",
-        "cypress:record": "RECORD_ALL_CONTENT=1 RECORD_REPLAY_METADATA_FILE=$(mktemp) npx cypress run --browser 'Replay Chromium'",
         "develop": "npm run start",
         "develop:analyzer": "npm run start:analyzer",
         "i18n": "wpi18n addtextdomain && composer run i18n",
