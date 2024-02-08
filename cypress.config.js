@@ -11,6 +11,7 @@ module.exports = defineConfig({
     phpVersion,
     pluginId: 'web',
     appId: 'wppw',
+    pluginSlug: 'wp-plugin-web',
   },
   fixturesFolder: 'tests/cypress/fixtures',
   screenshotsFolder: 'tests/cypress/screenshots',
