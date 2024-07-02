@@ -11,6 +11,8 @@ use WP_Forge\WPUpdateHandler\PluginUpdater;
 use WP_Forge\UpgradeHandler\UpgradeHandler;
 use NewfoldLabs\WP\ModuleLoader\Container;
 use NewfoldLabs\WP\ModuleLoader\Plugin;
+use NewfoldLabs\WP\Module\Features\Features;
+
 use function NewfoldLabs\WP\ModuleLoader\container as setContainer;
 
 // Composer autoloader
@@ -36,7 +38,7 @@ $web_module_container = new Container(
 $web_module_container->set(
 	'plugin',
 	$web_module_container->service(
-		function() {
+		function () {
 			return new Plugin(
 				array(
 					'id'           => 'web',
@@ -149,6 +151,8 @@ if ( is_admin() ) {
 
 AdminBar::init();
 
+// Instantiate the Features singleton
+Features::getInstance();
 
 /**
  * Filter to add applicable BN code to paypal requests
