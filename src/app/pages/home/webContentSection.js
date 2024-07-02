@@ -11,7 +11,7 @@ const WebContentSection = () => {
 				<ActionField
 					label={__("Blog", "wp-plugin-web")}
 					buttonLabel={__("New Post", "wp-plugin-web")}
-					href={window.NewfoldRuntime.admin_url + 'post-new.php'}
+					href={window.NewfoldRuntime.adminUrl + 'post-new.php'}
 					className={"wppw-app-home-blog-action"}
 				>
 					{__('Write a new blog post.', 'wp-plugin-web')}
@@ -20,7 +20,7 @@ const WebContentSection = () => {
 				<ActionField
 					label={__("Pages", "wp-plugin-web")}
 					buttonLabel={__("New Page", "wp-plugin-web")}
-					href={window.NewfoldRuntime.admin_url + 'post-new.php?post_type=page'}
+					href={window.NewfoldRuntime.adminUrl + 'post-new.php?post_type=page'}
 					className={"wppw-app-home-pages-action"}
 				>
 					{__('Add fresh pages to your website.', 'wp-plugin-web')}
@@ -29,7 +29,7 @@ const WebContentSection = () => {
 				<ActionField
 					label={__("Categories", "wp-plugin-web")}
 					buttonLabel={__("Manage Categories", "wp-plugin-web")}
-					href={window.NewfoldRuntime.admin_url + 'edit-tags.php?taxonomy=category'}
+					href={window.NewfoldRuntime.adminUrl + 'edit-tags.php?taxonomy=category'}
 					className={"wppw-app-home-categories-action"}
 				>
 					{__('Organize existing content into categories.', 'wp-plugin-web')}
