@@ -80,7 +80,7 @@ final class Admin {
 			$marketplace,
 			$performance,
 			$settings,
-			$help,
+			$help
 		);
 	}
 
