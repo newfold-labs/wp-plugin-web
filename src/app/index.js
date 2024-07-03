@@ -71,7 +71,6 @@ const AppBody = ( props ) => {
 				methods={{
 					apiFetch,
 					addQueryArgs,
-					classnames: classNames,
 					filter,
 					useState,
 					useEffect

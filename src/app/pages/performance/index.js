@@ -20,7 +20,6 @@ const PerformancePage = () => {
     // methods to pass to module
     const moduleMethods = {
         apiFetch,
-        classnames: classNames,
         useState,
         useEffect,
         useContext,

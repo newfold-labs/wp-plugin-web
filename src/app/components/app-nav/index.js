@@ -157,7 +157,6 @@ export const SideNav = () => {
 				methods={ {
 					apiFetch,
 					addQueryArgs,
-					classnames: classNames,
 					filter,
 					useState,
 					useEffect,

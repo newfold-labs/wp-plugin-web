@@ -33,7 +33,7 @@ const MarketplacePage = () => {
     // methods to pass to module
     const moduleMethods = {
         apiFetch,
-        classnames: classNames,
+		classNames,
         useState,
         useEffect,
         useLocation,
