@@ -5,21 +5,20 @@ import {
 } from '../../util/helpers';
 import { useState } from '@wordpress/element';
 import { useUpdateEffect } from 'react-use';
-import { Alert, ToggleField } from "@newfold/ui-component-library";
-import { SectionSettings } from "../../components/section";
-import { useNotification } from '../../components/notifications/feed';
+import { Alert, Container, ToggleField } from "@newfold/ui-component-library";
+import { useNotification } from 'App/components/notifications';
 
 const ComingSoon = () => {
-	const { store, setStore } = useContext(AppStore);
-	const [comingSoon, setComingSoon] = useState(store.comingSoon);
-	const [isError, setError] = useState(false);
+	const { store, setStore } = useContext( AppStore );
+	const [ comingSoon, setComingSoon ] = useState( store.comingSoon );
+	const [ isError, setError ] = useState( false );
 
 	let notify = useNotification();
 
 	const getComingSoonNoticeTitle = () => {
 		return comingSoon
-			? __('Coming soon activated', 'wp-plugin-web')
-			: __('Coming soon deactivated', 'wp-plugin-web');
+			? __( 'Coming soon activated', 'wp-plugin-web' )
+			: __( 'Coming soon deactivated', 'wp-plugin-web' );
 	};
 
 	const getComingSoonNoticeText = () => {
@@ -36,26 +35,47 @@ const ComingSoon = () => {
 	
 	const getComingSoonSectionTitle = () => {
 		const getStatus = () => {
-			return (
-				comingSoon 
-				? <span className="nfd-text-[#e10001]">{__('Coming Soon', 'wp-plugin-web')}</span>
-				: <span className="nfd-text-[#008112]">{__('Live', 'wp-plugin-web')}</span>
+			return comingSoon ? (
+				<span className="nfd-text-[#e10001] coming-soon-status">
+					{ __( 'Not Live', 'wp-plugin-web' ) }
+				</span>
+			) : (
+				<span className="nfd-text-[#008112] coming-soon-status">
+					{ __( 'Live', 'wp-plugin-web' ) }
+				</span>
 			);
 		};
 
 		return (
-			<span>{__('Site Status', 'wp-plugin-web')}: {getStatus()}</span>
-		)
+			<span>
+				{ __( 'Site Status', 'wp-plugin-web' ) }: { getStatus() }
+			</span>
+		);
 	};
 
 	const toggleComingSoon = () => {
-		webSettingsApiFetch({ comingSoon: !comingSoon }, setError, (response) => {
-			setComingSoon(!comingSoon);
-		});
+		webSettingsApiFetch(
+			{ comingSoon: !comingSoon }, 
+			setError, (response) => {
+				setComingSoon(!comingSoon);
+			}
+		);
+	};
+
+	const getComingSoonSectionDescription = () => {
+		return comingSoon
+			? __(
+					'Turn off your "Coming Soon" page when you are ready to launch your website.',
+					'wp-plugin-web'
+			  )
+			: __(
+					'Turn on your "Coming Soon" page when you need to make major changes to your website.',
+					'wp-plugin-web'
+			  );
 	};
 
 	const notifySuccess = () => {
-		notify.push("coming-soon-toggle-notice", {
+		notify.push( "coming-soon-toggle-notice", {
 			title: getComingSoonNoticeTitle(),
 			description: (
 				<span>
@@ -64,8 +84,11 @@ const ComingSoon = () => {
 			),
 			variant: "success",
 			autoDismiss: 5000,
-		});
+		} );
 	};
+	useUpdateEffect( () => {
+		setComingSoon( store.comingSoon );
+	}, [ store.comingSoon ] );
 
 	useUpdateEffect(() => {
 		setStore({
@@ -78,19 +101,19 @@ const ComingSoon = () => {
 	}, [comingSoon]);
 
 	return (
-		<SectionSettings
-			title={getComingSoonSectionTitle()}
-			description={__('Still building your site? Need to make a big change?', 'wp-plugin-web')}
+		<Container.SettingsField
+			title={ getComingSoonSectionTitle() }
+			description={ getComingSoonSectionDescription() }
 		>
 			<div className="nfd-flex nfd-flex-col nfd-gap-6">
 				<ToggleField
 					id="coming-soon-toggle"
 					label={__('Coming soon page', 'wp-plugin-web')}
 					description={__(
-						'Your Hostgator Coming Soon page lets you hide your site from visitors while you make the magic happen.',
+						'Your Coming Soon page lets you hide your site from visitors while you make the magic happen.',
 						'wp-plugin-web'
 					)}
-					checked={comingSoon}
+					checked={ comingSoon }
 					onChange={() => {
 						toggleComingSoon();
 					}}
@@ -108,7 +131,7 @@ const ComingSoon = () => {
 					</Alert>
 				}
 			</div>
-		</SectionSettings>
+		</Container.SettingsField>
 	);
 }
 

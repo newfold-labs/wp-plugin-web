@@ -2,9 +2,8 @@ import AppStore from '../../data/store';
 import { webSettingsApiFetch } from '../../util/helpers';
 import { useUpdateEffect } from 'react-use';
 import { useState } from '@wordpress/element';
-import { Alert, ToggleField } from "@newfold/ui-component-library";
-import { SectionSettings } from "../../components/section";
-import { useNotification } from '../../components/notifications/feed';
+import { Alert, Container, ToggleField } from "@newfold/ui-component-library";
+import { useNotification } from 'App/components/notifications';
 
 const AutomaticUpdatesAll = ({ setError, notify }) => {
 	const { store, setStore } = useContext(AppStore);
@@ -262,7 +261,7 @@ const AutomaticUpdates = () => {
 	let notify = useNotification();
 
 	return (
-		<SectionSettings
+		<Container.SettingsField
 			title={__('Automatic Updates', 'wp-plugin-web')}
 			description={__('Keeping automatic updates on ensures timely security fixes and the latest features.', 'wp-plugin-web')}
 		>
@@ -277,7 +276,7 @@ const AutomaticUpdates = () => {
 					</Alert>
 				}
 			</div>
-		</SectionSettings>
+		</Container.SettingsField>
 	);
 }
 

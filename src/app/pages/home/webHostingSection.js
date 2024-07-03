@@ -1,9 +1,9 @@
 import ActionField from "../../components/action-field";
-import { SectionSettings } from "../../components/section";
+import { Container } from "@newfold/ui-component-library";
 
 const WebHostingSection = () => {
 	return (
-		<SectionSettings
+		<Container.SettingsField
 			title={__('Web Hosting', 'wp-plugin-web')}
 			description={__('Access & manage your Web.com account.', 'wp-plugin-web')}
 		>
@@ -25,7 +25,7 @@ const WebHostingSection = () => {
 					{__("Manage Web account products, options and billing.", "wp-plugin-web")}
 				</ActionField>
 			</div>
-		</SectionSettings>
+		</Container.SettingsField>
 	);
 };
 

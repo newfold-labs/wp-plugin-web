@@ -236,3 +236,8 @@ body.toplevel_page_web {
         color: var(--color-secondary-dark) !important;
     }
 }
+
+.nfd-disabled {
+    opacity: .5;
+    pointer-events: disabled;
+}

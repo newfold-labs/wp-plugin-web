@@ -1,9 +1,9 @@
 import ActionField from "../../components/action-field";
-import { SectionSettings } from "../../components/section";
+import { Container } from "@newfold/ui-component-library";
 
 const WebContentSection = () => {
 	return (
-		<SectionSettings
+		<Container.SettingsField
 			title={__('Website Content', 'wp-plugin-web')}
 			description={__('Create, manage & sort your story.', 'wp-plugin-web')}
 		>
@@ -35,7 +35,7 @@ const WebContentSection = () => {
 					{__('Organize existing content into categories.', 'wp-plugin-web')}
 				</ActionField>
 			</div>
-		</SectionSettings >
+		</Container.SettingsField >
 	);
 };
 

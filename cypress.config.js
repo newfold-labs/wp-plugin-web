@@ -41,6 +41,7 @@ module.exports = defineConfig({
 		excludeSpecPattern: [
       'vendor/newfold-labs/wp-module-coming-soon/tests/cypress/integration/', // until ecommerce module is added use the local coming soon test instead
     ],
+    experimentalRunAllSpecs: true,
   },
   retries: 1,
   experimentalMemoryManagement: true,

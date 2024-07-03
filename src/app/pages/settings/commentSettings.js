@@ -2,9 +2,8 @@ import AppStore from '../../data/store';
 import { webSettingsApiFetch } from '../../util/helpers';
 import { useUpdateEffect } from 'react-use';
 import { useState } from '@wordpress/element';
-import { Alert, SelectField, ToggleField } from "@newfold/ui-component-library";
-import { SectionSettings } from "../../components/section";
-import { useNotification } from '../../components/notifications/feed';
+import { Alert, Container, SelectField, ToggleField } from "@newfold/ui-component-library";
+import { useNotification } from 'App/components/notifications';
 
 const OldPostsComments = ({ setError, notify }) => {
 	const { store, setStore } = useContext(AppStore);
@@ -227,7 +226,7 @@ const CommentSettings = () => {
 
 	let notify = useNotification();
 	return (
-		<SectionSettings
+		<Container.SettingsField
 			title={__('Comments', 'wp-plugin-web')}
 			description={__('Comments allow visitors to provide feedback and respond to your posts or pages.', 'wp-plugin-web')}
 		>
@@ -241,7 +240,7 @@ const CommentSettings = () => {
 					</Alert>
 				}
 			</div>
-		</SectionSettings >
+		</Container.SettingsField >
 	);
 };
 
