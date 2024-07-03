@@ -101,7 +101,7 @@ $pluginUpdater->setDataMap(
 	)
 );
 $pluginUpdater->setDataOverrides(
-	[
+	array(
 		'banners' => array(
 			'2x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-banner.svg',
 			'1x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-banner.svg',
@@ -110,7 +110,7 @@ $pluginUpdater->setDataOverrides(
 			'2x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-icon.svg',
 			'1x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-icon.svg',
 		),
-	]
+	)
 );
 
 // Handle any upgrade routines (only in the admin)
