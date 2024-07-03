@@ -65,7 +65,7 @@ final class Admin {
 		// add performance if enabled
 		$performance = isEnabled( 'performance' )
 			? array(
-				'web#/performance' => __( 'Performance', 'wp-plugin-web' )
+				'web#/performance' => __( 'Performance', 'wp-plugin-web' ),
 			)
 			: array();
 		$settings    = array(

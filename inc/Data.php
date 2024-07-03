@@ -20,7 +20,6 @@ final class Data {
 	 */
 	public static function runtime() {
 		global $web_module_container;
-
 		$runtime = array(
 			'plugin' => array(
 				'url'     => WEB_BUILD_URL,
@@ -29,8 +28,6 @@ final class Data {
 				'brand'   => $web_module_container->plugin()->brand,
 			),
 		);
-
 		return $runtime;
 	}
-
 }

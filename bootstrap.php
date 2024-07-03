@@ -102,14 +102,14 @@ $pluginUpdater->setDataMap(
 );
 $pluginUpdater->setDataOverrides(
 	[
-		'banners' => [
+		'banners' => array(
 			'2x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-banner.svg',
 			'1x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-banner.svg',
-		],
-		'icons' => [
+		),
+		'icons'   => array(
 			'2x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-icon.svg',
 			'1x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-icon.svg',
-		],
+		),
 	]
 );
 
@@ -191,7 +191,7 @@ if ( function_exists( 'add_filter' ) ) {
 				$replacement = ' data-partner-attribution-id="Yith_PCP"';
 				if ( stripos( $tag, 'partner-attribution-id' ) === false ) {
 					$tag = str_replace( ' src=', $replacement . ' src=', $tag );
-				} else if ( stripos( $tag, 'NEWFOLD' ) || stripos( $tag, 'YITH' ) ) {
+				} elseif ( stripos( $tag, 'NEWFOLD' ) || stripos( $tag, 'YITH' ) ) {
 					$tag = preg_replace( '/ data-partner-attribution-id="(.*?)"/', $replacement, $tag );
 				}
 			}

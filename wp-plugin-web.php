@@ -50,8 +50,8 @@ if ( 'plugins.php' === $pagenow ) {
 
 	$plugin_check = new Plugin_PHP_Compat_Check( __FILE__ );
 
-	$plugin_check->min_php_version = '5.3';
-	$plugin_check->min_wp_version  = '4.7';
+	$plugin_check->min_php_version = '7.1';
+	$plugin_check->min_wp_version  = '6.0';
 
 	$plugin_check->check_plugin_requirements();
 }
@@ -65,13 +65,14 @@ $nfd_plugins_check->incompatible_plugins = array(
 );
 // Deactivate legacy plugin
 $nfd_plugins_check->legacy_plugins = array(
-	'The MOJO Marketplace' => 'mojo-marketplace-wp-plugin/mojo-marketplace.php',
-	'The MOJO Plugin'      => 'wp-plugin-mojo/wp-plugin-mojo.php',
-	'The HostGator Plugin' => 'wp-plugin-hostgator/wp-plugin-hostgator.php',
+	'The MOJO Marketplace'     => 'mojo-marketplace-wp-plugin/mojo-marketplace.php',
+	'The MOJO Plugin'          => 'wp-plugin-mojo/wp-plugin-mojo.php',
+	'The HostGator Plugin'     => 'wp-plugin-hostgator/wp-plugin-hostgator.php',
+	'The Crazy Domains Plugin' => 'wp-plugin-crazy-domains/wp-plugin-crazy-domains.php',
 );
 $pass_nfd_check = $nfd_plugins_check->check_plugin_requirements();
 
 // Check PHP version before initializing to prevent errors if plugin is incompatible.
 if ( $pass_nfd_check && version_compare( PHP_VERSION, '5.3', '>=' ) ) {
-	require dirname( __FILE__ ) . '/bootstrap.php';
+	require __DIR__ . '/bootstrap.php';
 }
