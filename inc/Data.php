@@ -20,15 +20,14 @@ final class Data {
 	 */
 	public static function runtime() {
 		global $web_module_container;
-
 		$runtime = array(
-			'url'     => WEB_BUILD_URL,
-			'version' => WEB_PLUGIN_VERSION,
-			'assets'  => WEB_PLUGIN_URL . 'assets/',
-			'brand'   => $web_module_container->plugin()->brand,
+			'plugin' => array(
+				'url'     => WEB_BUILD_URL,
+				'version' => WEB_PLUGIN_VERSION,
+				'assets'  => WEB_PLUGIN_URL . 'assets/',
+				'brand'   => $web_module_container->plugin()->brand,
+			),
 		);
-
 		return $runtime;
 	}
-
 }

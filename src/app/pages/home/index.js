@@ -1,38 +1,35 @@
 
-import { Page } from '../../components/page';
-import { SectionContainer, SectionHeader, SectionContent } from '../../components/section';
-import ComingSoon from '../settings/comingSoon';
-import SettingsSection from './settingsSection';
-import WebContentSection from './webContentSection';
-import WebHostingSection from './webHostingSection';
-
-import { useEffect } from 'react';
+import { Page, Container } from "@newfold/ui-component-library";
+import ComingSoon from 'App/pages/settings/comingSoon';
+import SettingsSection from 'App/pages/home/settingsSection';
+import WebContentSection from 'App/pages/home/webContentSection';
+import WebHostingSection from 'App/pages/home/webHostingSection';
 
 const Home = () => {
 	return (
 	<Page title="Settings" className={"wppw-app-home-page wppw-home"}>
-		<SectionContainer className={'wppw-app-home-container'}>
-			<SectionHeader
+		<Container className={'wppw-app-home-container'}>
+			<Container.Header
 				title={__('Home', 'wp-plugin-web')}
 				className={'wppw-app-home-header'}
 				/>
 
-			<SectionContent separator={true} className={'wppw-app-home-coming-soon'}>
+			<Container.Block separator={true} className={'wppw-app-home-coming-soon'}>
 				<ComingSoon />
-			</SectionContent>
+			</Container.Block>
 
-			<SectionContent separator={true} className={'wppw-app-home-content'}>
+			<Container.Block separator={true} className={'wppw-app-home-content'}>
 				<WebContentSection />
-			</SectionContent>
+			</Container.Block>
 
-			<SectionContent separator={true} className={'wppw-app-home-settings'}>
+			<Container.Block separator={true} className={'wppw-app-home-settings'}>
 				<SettingsSection />
-			</SectionContent>
+			</Container.Block>
 
-			<SectionContent separator={false} className={'wppw-app-home-hosting'}>
+			<Container.Block separator={false} className={'wppw-app-home-hosting'}>
 				<WebHostingSection />
-			</SectionContent>
-		</SectionContainer>
+			</Container.Block>
+		</Container>
 	</Page>
 	);
 };

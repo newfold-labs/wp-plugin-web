@@ -12,10 +12,10 @@
  * Plugin URI:        https://web.com
  * Update URI:        https://github.com/newfold-labs/wp-plugin-web/
  * Description:       WordPress plugin that integrates a WordPress site with the Web.com control panel, including performance, security, and update features.
- * Version:           2.0.0
+ * Version:           2.1.0
  * Requires at least: 4.7
  * Requires PHP:      5.6
- * Tested up to:      6.4.1
+ * Tested up to:      6.5.5
  * Author:            Web.com
  * Author URI:        https://web.com
  * Text Domain:       wp-plugin-web
@@ -32,7 +32,7 @@ if ( defined( 'WEB_PLUGIN_VERSION' ) ) {
 }
 
 // Define constants
-define( 'WEB_PLUGIN_VERSION', '2.0.0' );
+define( 'WEB_PLUGIN_VERSION', '2.1.0' );
 define( 'WEB_PLUGIN_FILE', __FILE__ );
 define( 'WEB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WEB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -50,8 +50,8 @@ if ( 'plugins.php' === $pagenow ) {
 
 	$plugin_check = new Plugin_PHP_Compat_Check( __FILE__ );
 
-	$plugin_check->min_php_version = '5.3';
-	$plugin_check->min_wp_version  = '4.7';
+	$plugin_check->min_php_version = '7.1';
+	$plugin_check->min_wp_version  = '6.0';
 
 	$plugin_check->check_plugin_requirements();
 }
@@ -65,13 +65,14 @@ $nfd_plugins_check->incompatible_plugins = array(
 );
 // Deactivate legacy plugin
 $nfd_plugins_check->legacy_plugins = array(
-	'The MOJO Marketplace' => 'mojo-marketplace-wp-plugin/mojo-marketplace.php',
-	'The MOJO Plugin'      => 'wp-plugin-mojo/wp-plugin-mojo.php',
-	'The HostGator Plugin' => 'wp-plugin-hostgator/wp-plugin-hostgator.php',
+	'The MOJO Marketplace'     => 'mojo-marketplace-wp-plugin/mojo-marketplace.php',
+	'The MOJO Plugin'          => 'wp-plugin-mojo/wp-plugin-mojo.php',
+	'The HostGator Plugin'     => 'wp-plugin-hostgator/wp-plugin-hostgator.php',
+	'The Crazy Domains Plugin' => 'wp-plugin-crazy-domains/wp-plugin-crazy-domains.php',
 );
-$pass_nfd_check = $nfd_plugins_check->check_plugin_requirements();
+$pass_nfd_check                    = $nfd_plugins_check->check_plugin_requirements();
 
 // Check PHP version before initializing to prevent errors if plugin is incompatible.
 if ( $pass_nfd_check && version_compare( PHP_VERSION, '5.3', '>=' ) ) {
-	require dirname( __FILE__ ) . '/bootstrap.php';
+	require __DIR__ . '/bootstrap.php';
 }

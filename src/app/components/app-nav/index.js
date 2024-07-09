@@ -1,11 +1,14 @@
-import { useEffect } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
 import { useViewportMatch } from '@wordpress/compose';
+import { addQueryArgs } from '@wordpress/url';
+import { filter } from 'lodash';
 import { Modal, SidebarNavigation } from "@newfold/ui-component-library"
 import { NavLink, useLocation } from 'react-router-dom';
-import Logo from "./logo";
-import { topRoutes, utilityRoutes } from "../../data/routes";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-
+import { topRoutes, utilityRoutes } from "../../data/routes";
+import Logo from "./logo";
+import { default as NewfoldNotifications } from '@modules/wp-module-notifications/assets/js/components/notifications/';
 
 export const SideNavHeader = () => {
 	return (
@@ -16,23 +19,24 @@ export const SideNavHeader = () => {
 }
 
 export const SideNavMenu = () => {
-	let location = useLocation();
+	const location = useLocation();
 
 	const primaryMenu = () => {
 		return (
 			<ul className="nfd-flex nfd-flex-col nfd-gap-1.5">
-				{topRoutes.map((page) => (
-
-					<SideNavMenuItem
-						key={page.name}
-						label={page.title}
-						name={page.name}
-						icon={page.Icon}
-						path={page.name}
-						action={page.action}
-						subItems={page.subRoutes}
-					/>
-
+				{topRoutes.map(
+					(page) => (
+						true === page.condition && (
+							<SideNavMenuItem
+								key={page.name}
+								label={page.title}
+								name={page.name}
+								icon={page.Icon}
+								path={page.name}
+								action={page.action}
+								subItems={page.subRoutes}
+							/>
+						)
 				))}
 			</ul>
 		);
@@ -67,7 +71,11 @@ export const SideNavMenu = () => {
 
 		// open active's submenu if it exists
 		const activeMenu = document.querySelector('.wppw-app-sidenav .active');
-		if (activeMenu && null !== activeMenu.nextSibling && activeMenu.nextSibling.classList.contains('wppw-app-navitem-submenu')) {
+		if (
+			activeMenu && 
+			null !== activeMenu.nextSibling && 
+			activeMenu.nextSibling.classList.contains('wppw-app-navitem-submenu')
+		) {
 			activeMenu.nextSibling.classList.remove('nfd-hidden');
 		}
 	}
@@ -131,6 +139,8 @@ export const SideNavMenuSubItem = ({ label, name, path, action }) => {
 }
 
 export const SideNav = () => {
+	const  location = useLocation();
+	const hashedPath = '#' + location.pathname;
 	return (
 		<aside className="wppw-app-sidenav nfd-shrink-0 nfd-hidden min-[783px]:nfd-block nfd-pb-6 nfd-bottom-0 nfd-w-56">
 			<SidebarNavigation>
@@ -139,9 +149,22 @@ export const SideNav = () => {
 					<SideNavMenu />
 				</SidebarNavigation.Sidebar>
 			</SidebarNavigation>
+			<NewfoldNotifications
+				constants={ {
+					context: 'web-app-nav',
+					page: hashedPath,
+				} }
+				methods={ {
+					apiFetch,
+					addQueryArgs,
+					filter,
+					useState,
+					useEffect,
+				} }
+			/>
 		</aside>
 	);
-}
+};
 
 export const MobileNav = () => {
 	const [isOpen, setIsOpen] = useState(false);

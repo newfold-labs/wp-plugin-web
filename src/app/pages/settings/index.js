@@ -1,37 +1,41 @@
+import { Container, Page } from "@newfold/ui-component-library";
 import AutomaticUpdates from './automaticUpdates';
 import ComingSoon from './comingSoon';
 import CommentSettings from './commentSettings';
 import ContentSettings from './contentSettings';
-import { Page } from '../../components/page';
-import { SectionContainer, SectionHeader, SectionContent } from '../../components/section';
+import useContainerBlockIsTarget from 'App/util/hooks/useContainerBlockTarget';
 
 const Settings = () => {
 	return (
 		<Page title="Settings" className={"wppw-app-settings-page"}>
-			<SectionContainer className={'wppw-app-settings-container'}>
-				<SectionHeader
+			<Container className={'wppw-app-settings-container'}>
+				<Container.Header
 					title={__('Settings', 'wp-plugin-web')}
-					subTitle={__('This is where you can manage common settings for your website.', 'wp-plugin-web')}
+					description={__('This is where you can manage common settings for your website.', 'wp-plugin-web')}
 					className={'wppw-app-settings-header'}
 				/>
 
-				<SectionContent separator={true} className={'wppw-app-settings-coming-soon'}>
+				<Container.Block separator={true} className={
+					classNames(
+						'wppw-app-settings-coming-soon',
+						useContainerBlockIsTarget( 'coming-soon-section' ) && 'wppbh-animation-blink'
+					)}>
 					<ComingSoon />
-				</SectionContent>
+				</Container.Block>
 
-				<SectionContent separator={true} className={'wppw-app-settings-update'}>
+				<Container.Block separator={true} className={'wppw-app-settings-update'}>
 					<AutomaticUpdates />
-				</SectionContent>
+				</Container.Block>
 
-				<SectionContent separator={true} className={'wppw-app-settings-content'}>
+				<Container.Block separator={true} className={'wppw-app-settings-content'}>
 					<ContentSettings />
-				</SectionContent>
+				</Container.Block>
 
-				<SectionContent className={'wppw-app-settings-comments'}>
+				<Container.Block className={'wppw-app-settings-comments'}>
 					<CommentSettings />
-				</SectionContent>
+				</Container.Block>
 
-			</SectionContainer>
+			</Container>
 		</Page>
 	);
 };

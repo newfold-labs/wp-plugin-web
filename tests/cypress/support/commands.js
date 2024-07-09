@@ -42,6 +42,9 @@ Cypress.Commands.add('login', (username, password) => {
 				cy.visit('/wp-login.php').wait(1000);
 				cy.get('#user_login').type(username);
 				cy.get('#user_pass').type(`${ password }{enter}`);
+
+				// Speed up tests by setting permalink structure once
+				cy.setPermalinkStructure();
 			}
 		});
 });
@@ -86,4 +89,30 @@ Cypress.Commands.add(
 	(context) => {
 		cy.checkA11y(context, null, printAccessibilityViolations, false);
 	},
+);
+
+Cypress.Commands.add(
+	'setPermalinkStructure',
+	( structure = '/%postname%/' ) => {
+		cy.request({
+			method: 'GET',
+			url: '/wp-json/',
+			failOnStatusCode: false,
+		}).then(result => {
+			if(result.isOkStatusCode) {
+				return;
+			}
+			const permalinkWpCliCommand = `wp rewrite structure "${structure}" --hard;`;
+			const permalinkWpEnvCommand = `npx wp-env run cli ${permalinkWpCliCommand}`;
+			const permalinkWpEnvTestCommand = `npx wp-env run tests-cli ${permalinkWpCliCommand}`;
+			cy.exec( permalinkWpEnvCommand, {failOnNonZeroExit: true})
+				.then((result) => {
+					cy.request('/wp-json/');
+				});
+			cy.exec( permalinkWpEnvTestCommand, {failOnNonZeroExit: true})
+				.then((result) => {
+					cy.request('/wp-json/');
+				});
+		});
+	}
 );

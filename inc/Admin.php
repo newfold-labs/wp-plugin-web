@@ -7,6 +7,9 @@
 
 namespace Web;
 
+use Web\Data;
+use function NewfoldLabs\WP\Module\Features\isEnabled;
+
 /**
  * \Web\Admin
  */
@@ -25,7 +28,7 @@ final class Admin {
 		/* Add inline style to hide subnav link */
 		\add_action( 'admin_head', array( __CLASS__, 'admin_nav_style' ) );
 		/* Add runtime for data store */
-		\add_filter('newfold_runtime', array( __CLASS__, 'add_to_runtime' ) );
+		\add_filter( 'newfold_runtime', array( __CLASS__, 'add_to_runtime' ) );
 
 		if ( isset( $_GET['page'] ) && strpos( filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ), 'web' ) >= 0 ) { // phpcs:ignore
 			\add_action( 'admin_footer_text', array( __CLASS__, 'add_brand_to_admin_footer' ) );
@@ -34,6 +37,10 @@ final class Admin {
 
 	/**
 	 * Add to runtime
+	 *
+	 * @param array $sdk - runtime properties from module
+	 *
+	 * @return array
 	 */
 	public static function add_to_runtime( $sdk ) {
 		include WEB_PLUGIN_DIR . '/inc/Data.php';
@@ -48,12 +55,32 @@ final class Admin {
 	 * @return array
 	 */
 	public static function subpages() {
-		return array(
-			'web#/home'        => __( 'Home', 'wp-plugin-web' ),
+
+		$home        = array(
+			'web#/home' => __( 'Home', 'wp-plugin-web' ),
+		);
+		$marketplace = array(
 			'web#/marketplace' => __( 'Marketplace', 'wp-plugin-web' ),
-			'web#/performance' => __( 'Performance', 'wp-plugin-web' ),
-			'web#/settings'    => __( 'Settings', 'wp-plugin-web' ),
-			'web#/help'        => __( 'Help', 'wp-plugin-web' ),
+		);
+		// add performance if enabled
+		$performance = isEnabled( 'performance' )
+			? array(
+				'web#/performance' => __( 'Performance', 'wp-plugin-web' ),
+			)
+			: array();
+		$settings    = array(
+			'web#/settings' => __( 'Settings', 'wp-plugin-web' ),
+		);
+		$help        = array(
+			'web#/help' => __( 'Help', 'wp-plugin-web' ),
+		);
+
+		return array_merge(
+			$home,
+			$marketplace,
+			$performance,
+			$settings,
+			$help
 		);
 	}
 
@@ -88,15 +115,18 @@ final class Admin {
 			0
 		);
 
-		foreach ( self::subpages() as $route => $title ) {
-			\add_submenu_page(
-				'web',
-				$title,
-				$title,
-				'manage_options',
-				$route,
-				array( __CLASS__, 'render' )
-			);
+		// If we're outside of App, add subpages to App menu
+		if ( false === ( isset( $_GET['page'] ) && strpos( filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ), 'web' ) >= 0 ) ) { // phpcs:ignore
+			foreach ( self::subpages() as $route => $title ) {
+				\add_submenu_page(
+					'web',
+					$title,
+					$title,
+					'manage_options',
+					$route,
+					array( __CLASS__, 'render' )
+				);
+			}
 		}
 	}
 
@@ -145,7 +175,7 @@ final class Admin {
 		\wp_register_script(
 			'web-script',
 			WEB_BUILD_URL . '/index.js',
-			array_merge( $asset['dependencies'], ['nfd-runtime'] ),
+			array_merge( $asset['dependencies'], array( 'newfold-features', 'nfd-runtime' ) ),
 			$asset['version'],
 			true
 		);

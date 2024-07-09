@@ -1,7 +1,11 @@
-import { Page } from '../../components/page';
-import { SectionContainer, SectionContent, SectionHeader } from '../../components/section';
-import help from '../../data/help';
-import { Button, Card, Title } from "@newfold/ui-component-library";
+import { 
+	Button,
+	Card,
+	Container,
+	Page,
+	Title
+} from "@newfold/ui-component-library";
+import help from 'App/data/help';
 
 const HelpCard = ({ item }) => {
 	return ( 
@@ -45,17 +49,17 @@ const Help = () => {
 
 	return (
 		<Page className={"wppw-app-help-page"}>
-			<SectionContainer className={'wppw-app-help-container'}>
-				<SectionHeader
+			<Container className={'wppw-app-help-container'}>
+				<Container.Header
 					title={__('Help', 'wp-plugin-web')}
 					subTitle={__('We are available 24/7 to help answer questions and solve your problems.',
 					'wp-plugin-web')}
 				/>
 
-				<SectionContent>
+				<Container.Block>
 					{renderHelpCards()}
-				</SectionContent>
-			</SectionContainer>
+				</Container.Block>
+			</Container>
 		</Page>
 	);
 };

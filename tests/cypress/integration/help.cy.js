@@ -1,15 +1,17 @@
 // <reference types="Cypress" />
 
 describe('Help Page', () => {
+	const appId = Cypress.env( 'appId' );
+	const pluginId = Cypress.env( 'pluginId' );
 
 	before(() => {
-		cy.visit(`/wp-admin/admin.php?page=${Cypress.env('pluginId')}#/help`);
+		cy.visit(`/wp-admin/admin.php?page=${pluginId}#/help`);
 	});
 	
 	it('Is Accessible', () => {
 		cy.injectAxe();
 		cy.wait(500);
-		cy.a11y('.wppw-app-body');
+		cy.a11y('.' + appId + '-app-body');
 	});
 
 	it('Phone Card Exists', () => {

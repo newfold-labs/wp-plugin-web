@@ -2,9 +2,8 @@ import AppStore from '../../data/store';
 import { webSettingsApiFetch } from '../../util/helpers';
 import { useUpdateEffect } from 'react-use';
 import { useState } from '@wordpress/element';
-import { Alert, SelectField } from "@newfold/ui-component-library";
-import { SectionSettings } from "../../components/section";
-import { useNotification } from '../../components/notifications/feed';
+import { Alert, Container, SelectField } from "@newfold/ui-component-library";
+import { useNotification } from 'App/components/notifications';
 
 const ContentRevisions = ({ setError, notify }) => {
 	const { store, setStore } = useContext(AppStore);
@@ -160,7 +159,7 @@ const ContentSettings = () => {
 
 	let notify = useNotification();
 	return (
-		<SectionSettings
+		<Container.SettingsField
 			title={__('Content Options', 'wp-plugin-web')}
 			description={__('Controls for content revisions and how often to empty the trash.', 'wp-plugin-web')}
 		>
@@ -174,7 +173,7 @@ const ContentSettings = () => {
 					</Alert>
 				}
 			</div>
-		</SectionSettings >
+		</Container.SettingsField >
 	);
 }
 

@@ -37,7 +37,13 @@ export const AppStoreProvider = ( { children } ) => {
 		if ( false === booted ) {
 			webApiFetchSettings()
 				.then( ( settings ) => {
-					setStore( { ...store, ...window.WPPW, ...settings } );
+					setStore( { 
+						...store,
+						...window.WPPW,
+						...settings,
+						features: window.NewfoldFeatures.features,
+						toggleableFeatures: window.NewfoldFeatures.togglable,
+					} );
 					setBooted( true );
 				} )
 				.catch( ( error ) => {
