@@ -81,6 +81,6 @@
         "newfold-labs/wp-php-standards": "^1.2.3",
         "roave/security-advisories": "dev-latest",
         "wp-cli/i18n-command": "^2.6.1",
-        "wp-phpunit/wp-phpunit": "^6.5.4"
+        "wp-phpunit/wp-phpunit": "^6.6.1"
     }
 }
