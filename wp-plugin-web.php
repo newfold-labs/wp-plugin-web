@@ -12,7 +12,7 @@
  * Plugin URI:        https://web.com
  * Update URI:        https://github.com/newfold-labs/wp-plugin-web/
  * Description:       WordPress plugin that integrates a WordPress site with the Web.com control panel, including performance, security, and update features.
- * Version:           2.1.0
+ * Version:           2.1.1
  * Requires at least: 6.4
  * Requires PHP:      7.1
  * Tested up to:      6.6.1
@@ -32,7 +32,7 @@ if ( defined( 'WEB_PLUGIN_VERSION' ) ) {
 }
 
 // Define constants
-define( 'WEB_PLUGIN_VERSION', '2.1.0' );
+define( 'WEB_PLUGIN_VERSION', '2.1.1' );
 define( 'WEB_PLUGIN_FILE', __FILE__ );
 define( 'WEB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WEB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
