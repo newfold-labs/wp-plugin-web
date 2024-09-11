@@ -15,7 +15,7 @@
  * Version:           2.1.2
  * Requires at least: 6.4
  * Requires PHP:      7.1
- * Tested up to:      6.6.1
+ * Tested up to:      6.6.2
  * Author:            Web.com
  * Author URI:        https://web.com
  * Text Domain:       wp-plugin-web
