@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "052523714fdae798fbf102098dc6a11d",
+    "content-hash": "ff9f78615ed863b864cde6a3d63fcc40",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -705,16 +705,16 @@
         },
         {
             "name": "newfold-labs/wp-module-notifications",
-            "version": "1.6.1",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-notifications.git",
-                "reference": "1cf375e3252b935967da00f516ff64098ebd1850"
+                "reference": "4c9854e5cbc56c42dc02eb49064f1315ccd62067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-notifications/zipball/1cf375e3252b935967da00f516ff64098ebd1850",
-                "reference": "1cf375e3252b935967da00f516ff64098ebd1850",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-notifications/zipball/4c9854e5cbc56c42dc02eb49064f1315ccd62067",
+                "reference": "4c9854e5cbc56c42dc02eb49064f1315ccd62067",
                 "shasum": ""
             },
             "require": {
@@ -743,10 +743,10 @@
             ],
             "description": "A module for managing Newfold in-site notifications.",
             "support": {
-                "source": "https://github.com/newfold-labs/wp-module-notifications/tree/1.6.1",
+                "source": "https://github.com/newfold-labs/wp-module-notifications/tree/1.6.2",
                 "issues": "https://github.com/newfold-labs/wp-module-notifications/issues"
             },
-            "time": "2024-10-09T19:54:08+00:00"
+            "time": "2024-10-31T18:13:03+00:00"
         },
         {
             "name": "newfold-labs/wp-module-performance",
@@ -3398,8 +3398,8 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
+    "platform": [],
+    "platform-dev": [],
     "platform-overrides": {
         "php": "7.0.0"
     },
