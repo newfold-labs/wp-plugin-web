@@ -73,7 +73,7 @@
         "newfold-labs/wp-module-performance": "^2.0.1",
         "newfold-labs/wp-module-runtime": "^1.0.12",
         "newfold-labs/wp-module-secure-passwords": "^1.1.1",
-        "newfold-labs/wp-module-sso": "^1.0.6",
+        "newfold-labs/wp-module-sso": "^1.0.7",
         "wp-cli/wp-cli": "^2.11",
         "wp-forge/wp-update-handler": "^1.0.2",
         "wp-forge/wp-upgrade-handler": "^1.0"
