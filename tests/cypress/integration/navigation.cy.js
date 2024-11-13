@@ -107,4 +107,5 @@ describe('Navigation', { testIsolation: true }, () => {
 		cy.get( 'button.nfd-modal__close-button' ).should( 'be.visible' );
 		cy.get( 'button.nfd-modal__close-button' ).click();
 		cy.get( appClass + '-app-navitem-Home' ).should( 'not.exist' );
+	});
 });
