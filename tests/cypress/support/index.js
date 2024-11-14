@@ -17,5 +17,5 @@ import 'cypress-axe';
 import './commands';
 
 before(() => {
-	cy.login(Cypress.env('wpUsername'), Cypress.env('wpPassword'));
+	cy.wpLogin();
 });
