@@ -49,6 +49,10 @@ Cypress.Commands.add('login', (username, password) => {
 		});
 });
 
+Cypress.Commands.add( 'wpLogin', () => {
+	cy.login( Cypress.env( 'wpUsername' ), Cypress.env( 'wpPassword' ) );
+} );
+
 Cypress.Commands.add('logout', () => {
 	cy
 		.getCookies()
