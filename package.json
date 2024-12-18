@@ -50,7 +50,7 @@
         "cypress": "^13.15.2",
         "cypress-axe": "^1.5.0",
         "node-fetch": "^2.7.0",
-        "tailwindcss": "^3.4.15",
+        "tailwindcss": "^3.4.17",
         "yaml-lint": "^1.7.0"
     },
     "scripts": {
