@@ -110,7 +110,11 @@ jobs:
         run: echo '{"config":{"WP_DEBUG_DISPLAY":false},"plugins":["${{ steps.workflow.outputs.DIST }}/${{ steps.workflow.outputs.PACKAGE }}"]}' > .wp-env.override.json
 
       - name: Install WordPress
-        run: npx @wordpress/env@latest start
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 4
+          max_attempts: 3
+          command: npx wp-env start --debug
 
       - name: Run Cypress Tests
         if: ${{ github.repository != 'newfold-labs/wp-plugin-web' || github.actor == 'dependabot[bot]' }}
