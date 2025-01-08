@@ -35,7 +35,6 @@ class SettingsController extends \WP_REST_Controller {
 				),
 			)
 		);
-
 	}
 
 	/**
@@ -106,6 +105,7 @@ class SettingsController extends \WP_REST_Controller {
 						update_option( 'auto_update_translation', $new_value );
 						break;
 					case 'disableCommentsOldPosts':
+						$new_value = ( $new_value ) ? 'true' : 'false';
 						update_option( 'close_comments_for_old_posts', $new_value );
 						break;
 					case 'closeCommentsDays':
@@ -188,7 +188,6 @@ class SettingsController extends \WP_REST_Controller {
 		);
 
 		return $settings;
-
 	}
 
 	/**
@@ -200,8 +199,6 @@ class SettingsController extends \WP_REST_Controller {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return new \WP_Error( 'rest_forbidden_context', __( 'Sorry, you are not allowed to access this endpoint.', 'wp-plugin-web' ), array( 'status' => rest_authorization_required_code() ) );
 		}
-
 		return true;
 	}
-
 }
