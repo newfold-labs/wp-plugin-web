@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4bcb7d052b3c03728ab1c23360ae7e5",
+    "content-hash": "9bcf7602aabe68571c8fd0183b001a6b",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -623,20 +623,20 @@
         },
         {
             "name": "newfold-labs/wp-module-installer",
-            "version": "1.2.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-installer.git",
-                "reference": "4b994a784f1de5c80dcf274e51ab34f083e4a26d"
+                "reference": "e8dbc7a117c7f9ebeb2c9620ab6689c49ca1d3fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-installer/zipball/4b994a784f1de5c80dcf274e51ab34f083e4a26d",
-                "reference": "4b994a784f1de5c80dcf274e51ab34f083e4a26d",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-installer/zipball/e8dbc7a117c7f9ebeb2c9620ab6689c49ca1d3fe",
+                "reference": "e8dbc7a117c7f9ebeb2c9620ab6689c49ca1d3fe",
                 "shasum": ""
             },
             "require": {
-                "newfold-labs/wp-module-pls": "^1.0.0"
+                "newfold-labs/wp-module-pls": "^1.0.1"
             },
             "require-dev": {
                 "newfold-labs/wp-php-standards": "^1.2",
@@ -662,10 +662,10 @@
             ],
             "description": "An installer for WordPress plugins and themes.",
             "support": {
-                "source": "https://github.com/newfold-labs/wp-module-installer/tree/1.2.2",
+                "source": "https://github.com/newfold-labs/wp-module-installer/tree/1.3.0",
                 "issues": "https://github.com/newfold-labs/wp-module-installer/issues"
             },
-            "time": "2024-10-25T14:26:52+00:00"
+            "time": "2025-01-16T16:51:53+00:00"
         },
         {
             "name": "newfold-labs/wp-module-loader",
@@ -817,28 +817,28 @@
         },
         {
             "name": "newfold-labs/wp-module-performance",
-            "version": "2.3.2",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-performance.git",
-                "reference": "e9a9183dfdc0449b95b73719e0027c4370f07a4f"
+                "reference": "ec56891eaf7131a4e9212a9956f2a19a713c3006"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-performance/zipball/e9a9183dfdc0449b95b73719e0027c4370f07a4f",
-                "reference": "e9a9183dfdc0449b95b73719e0027c4370f07a4f",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-performance/zipball/ec56891eaf7131a4e9212a9956f2a19a713c3006",
+                "reference": "ec56891eaf7131a4e9212a9956f2a19a713c3006",
                 "shasum": ""
             },
             "require": {
                 "newfold-labs/wp-module-context": "^1.0",
-                "newfold-labs/wp-module-features": "^1.3",
+                "newfold-labs/wp-module-features": "^1.4",
                 "newfold-labs/wp-module-installer": "^1.2.2",
                 "wp-forge/collection": "^1.0.2",
                 "wp-forge/wp-htaccess-manager": "^1.0",
-                "wpscholar/url": "^1.2.2"
+                "wpscholar/url": "^1.2.5"
             },
             "require-dev": {
-                "newfold-labs/wp-php-standards": "^1.2.3"
+                "newfold-labs/wp-php-standards": "^1.2.4"
             },
             "type": "library",
             "autoload": {
@@ -862,10 +862,10 @@
             ],
             "description": "A module for managing caching functionality.",
             "support": {
-                "source": "https://github.com/newfold-labs/wp-module-performance/tree/2.3.2",
+                "source": "https://github.com/newfold-labs/wp-module-performance/tree/2.4.0",
                 "issues": "https://github.com/newfold-labs/wp-module-performance/issues"
             },
-            "time": "2025-01-09T12:33:31+00:00"
+            "time": "2025-01-16T15:45:04+00:00"
         },
         {
             "name": "newfold-labs/wp-module-pls",
@@ -1416,16 +1416,16 @@
         },
         {
             "name": "wp-forge/wp-htaccess-manager",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-forge/wp-htaccess-manager.git",
-                "reference": "f1fac7af85c0d75a211a5d0e73cd43a7d62debe8"
+                "reference": "203f0e54378ce2cad9ec8c272851bc7170efcbb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-forge/wp-htaccess-manager/zipball/f1fac7af85c0d75a211a5d0e73cd43a7d62debe8",
-                "reference": "f1fac7af85c0d75a211a5d0e73cd43a7d62debe8",
+                "url": "https://api.github.com/repos/wp-forge/wp-htaccess-manager/zipball/203f0e54378ce2cad9ec8c272851bc7170efcbb1",
+                "reference": "203f0e54378ce2cad9ec8c272851bc7170efcbb1",
                 "shasum": ""
             },
             "type": "library",
@@ -1450,9 +1450,9 @@
             "description": "A helper library for making changes to .htaccess files in WordPress.",
             "support": {
                 "issues": "https://github.com/wp-forge/wp-htaccess-manager/issues",
-                "source": "https://github.com/wp-forge/wp-htaccess-manager/tree/1.0"
+                "source": "https://github.com/wp-forge/wp-htaccess-manager/tree/1.0.1"
             },
-            "time": "2022-04-01T16:21:01+00:00"
+            "time": "2025-01-13T16:12:03+00:00"
         },
         {
             "name": "wp-forge/wp-options",
@@ -1618,17 +1618,23 @@
         },
         {
             "name": "wpscholar/url",
-            "version": "1.2.4",
+            "version": "1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wpscholar/url.git",
-                "reference": "c4bd7e4014acb29ec849631c3ed885c7849c40dd"
+                "reference": "8a8fa6dc257d75353782a7acd9b1194a17d8eadd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wpscholar/url/zipball/c4bd7e4014acb29ec849631c3ed885c7849c40dd",
-                "reference": "c4bd7e4014acb29ec849631c3ed885c7849c40dd",
+                "url": "https://api.github.com/repos/wpscholar/url/zipball/8a8fa6dc257d75353782a7acd9b1194a17d8eadd",
+                "reference": "8a8fa6dc257d75353782a7acd9b1194a17d8eadd",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5.36 || ^9.0"
             },
             "type": "library",
             "autoload": {
@@ -1650,9 +1656,9 @@
             "description": "A PHP class for parsing and manipulating URLs.",
             "support": {
                 "issues": "https://github.com/wpscholar/url/issues",
-                "source": "https://github.com/wpscholar/url/tree/1.2.4"
+                "source": "https://github.com/wpscholar/url/tree/1.2.5"
             },
-            "time": "2024-12-13T16:23:01+00:00"
+            "time": "2024-12-13T17:40:54+00:00"
         }
     ],
     "packages-dev": [
@@ -3516,7 +3522,7 @@
     "platform": {},
     "platform-dev": {},
     "platform-overrides": {
-        "php": "7.0.0"
+        "php": "7.3.0"
     },
     "plugin-api-version": "2.6.0"
 }
