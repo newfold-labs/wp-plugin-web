@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4be099754a590c3b867e58c82a5f073",
+    "content-hash": "ddb3ef778fb07ee70d3119a722245d3c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -715,20 +715,20 @@
         },
         {
             "name": "newfold-labs/wp-module-marketplace",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-marketplace.git",
-                "reference": "71f46b229d1ba96abbd0c673d45b9fa03fdf4145"
+                "reference": "ad3017045901ac63da497072f0fa6c44f96f47f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-marketplace/zipball/71f46b229d1ba96abbd0c673d45b9fa03fdf4145",
-                "reference": "71f46b229d1ba96abbd0c673d45b9fa03fdf4145",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-marketplace/zipball/ad3017045901ac63da497072f0fa6c44f96f47f6",
+                "reference": "ad3017045901ac63da497072f0fa6c44f96f47f6",
                 "shasum": ""
             },
             "require": {
-                "newfold-labs/wp-module-data": "^2.5.2"
+                "newfold-labs/wp-module-data": "^2.6.3"
             },
             "require-dev": {
                 "newfold-labs/wp-php-standards": "^1.2"
@@ -765,10 +765,10 @@
             ],
             "description": "A module for rendering product data and interacting with the Hiive marketplace API.",
             "support": {
-                "source": "https://github.com/newfold-labs/wp-module-marketplace/tree/2.4.0",
+                "source": "https://github.com/newfold-labs/wp-module-marketplace/tree/2.5.0",
                 "issues": "https://github.com/newfold-labs/wp-module-marketplace/issues"
             },
-            "time": "2024-07-03T17:26:23+00:00"
+            "time": "2025-01-16T15:23:16+00:00"
         },
         {
             "name": "newfold-labs/wp-module-notifications",
@@ -3518,5 +3518,5 @@
     "platform-overrides": {
         "php": "7.0.0"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
