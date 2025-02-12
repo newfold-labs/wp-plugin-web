@@ -3,7 +3,7 @@ import { Page, Container } from "@newfold/ui-component-library";
 import { useState, useEffect, useContext, Fragment } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { useUpdateEffect } from 'react-use';
-import { NewfoldRuntime } from "@newfold-labs/wp-module-runtime";
+import { NewfoldRuntime } from "@newfold/wp-module-runtime";
 import { useNotification } from 'App/components/notifications';
 import { 
     webSettingsApiFetch as newfoldSettingsApiFetch, 
