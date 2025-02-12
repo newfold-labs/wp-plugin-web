@@ -1,27 +1,5 @@
 const help = [
 	{
-		name: 'ticket',
-		title: __( 'Email Us', 'wp-plugin-web' ),
-		description: __(
-			"Log in to your Account Manager to submit a support ticket. Once you open a ticket, we'll respond promptly to get it resolved.",
-			'wp-plugin-web'
-		),
-		icon: false,
-		cta: __( 'Email Us', 'wp-plugin-web' ),
-		url: 'https://www.web.com/help/current-support-requests.jsp',
-	},
-	{
-		name: 'phone',
-		title: __( 'Phone', 'wp-plugin-web' ),
-		description: __(
-			'Speak to our award-winning support team over the phone at 866-923-8821. Our customer service hours are 7:00am - 12:00am ET.',
-			'wp-plugin-web'
-		),
-		icon: false,
-		cta: __( 'Call Us', 'wp-plugin-web' ),
-		url: 'tel:8669238821',
-	},
-	{
 		name: 'chat',
 		title: __( 'Chat', 'wp-plugin-web' ),
 		description: __(
@@ -32,6 +10,17 @@ const help = [
 		cta: __( 'Live Chat', 'wp-plugin-web' ),
 		url:
 			'https://www.web.com/chat?utm_campaign=&utm_content=help_chat_link&utm_term=live_chat&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/help',
+	},
+	{
+		name: 'phone',
+		title: __( 'Phone', 'wp-plugin-web' ),
+		description: __(
+			'Speak to our award-winning support team over the phone at 866-227-1474. Our customer service hours are 7:00am - 12:00am ET.',
+			'wp-plugin-web'
+		),
+		icon: false,
+		cta: __( 'Call Us', 'wp-plugin-web' ),
+		url: 'tel:8662271474',
 	},
 	{
 		name: 'twitter',
