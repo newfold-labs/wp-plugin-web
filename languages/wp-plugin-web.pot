@@ -225,26 +225,6 @@ msgid "Oops! Something went wrong. Please try again."
 msgstr ""
 
 #: build/2.1.7/index.js:1
-msgid "Email Us"
-msgstr ""
-
-#: build/2.1.7/index.js:1
-msgid "Log in to your Account Manager to submit a support ticket. Once you open a ticket, we'll respond promptly to get it resolved."
-msgstr ""
-
-#: build/2.1.7/index.js:1
-msgid "Phone"
-msgstr ""
-
-#: build/2.1.7/index.js:1
-msgid "Speak to our award-winning support team over the phone at 866-923-8821. Our customer service hours are 7:00am - 12:00am ET."
-msgstr ""
-
-#: build/2.1.7/index.js:1
-msgid "Call Us"
-msgstr ""
-
-#: build/2.1.7/index.js:1
 msgid "Chat"
 msgstr ""
 
@@ -254,6 +234,18 @@ msgstr ""
 
 #: build/2.1.7/index.js:1
 msgid "Live Chat"
+msgstr ""
+
+#: build/2.1.7/index.js:1
+msgid "Phone"
+msgstr ""
+
+#: build/2.1.7/index.js:1
+msgid "Speak to our award-winning support team over the phone at 866-227-1474. Our customer service hours are 7:00am - 12:00am ET."
+msgstr ""
+
+#: build/2.1.7/index.js:1
+msgid "Call Us"
 msgstr ""
 
 #: build/2.1.7/index.js:1
