@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "035cf9260c76efdf7669ca230c03ad27",
+    "content-hash": "1082162e5a157a39be4a92de75defb64",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -385,16 +385,16 @@
         },
         {
             "name": "newfold-labs/wp-module-data",
-            "version": "2.6.10",
+            "version": "2.6.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-data.git",
-                "reference": "ddafe7e2fe8f9e71ffdd898b00f5c3f6e5d92070"
+                "reference": "058a70c1c957cbe9739c9907f082087cd12a224a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-data/zipball/ddafe7e2fe8f9e71ffdd898b00f5c3f6e5d92070",
-                "reference": "ddafe7e2fe8f9e71ffdd898b00f5c3f6e5d92070",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-data/zipball/058a70c1c957cbe9739c9907f082087cd12a224a",
+                "reference": "058a70c1c957cbe9739c9907f082087cd12a224a",
                 "shasum": ""
             },
             "require": {
@@ -408,12 +408,12 @@
             },
             "require-dev": {
                 "10up/wp_mock": "^0.5.0|^1.0.0",
-                "bluehost/bluehost-wordpress-plugin": ">=3.1",
                 "brianhenryie/composer-phpstorm": ">=0.4",
                 "johnpbloch/wordpress": ">=6.5.3",
                 "kporras07/composer-symlinks": "^1.2",
                 "lucatume/wp-browser": "^3.5.8",
                 "newfold-labs/wp-php-standards": "^1.2.3",
+                "newfold-labs/wp-plugin-bluehost": "^4.0",
                 "phpunit/phpcov": "^8.2.1",
                 "wpackagist-plugin/jetpack": "^14.0",
                 "wpackagist-plugin/woocommerce": ">=9",
@@ -423,7 +423,7 @@
             "type": "library",
             "extra": {
                 "symlinks": {
-                    ".": "wp-content/plugins/bluehost-wordpress-plugin/vendor/newfold-labs/wp-module-data"
+                    ".": "wp-content/plugins/wp-plugin-bluehost/vendor/newfold-labs/wp-module-data"
                 }
             },
             "autoload": {
@@ -481,10 +481,10 @@
             ],
             "description": "Newfold Data Module",
             "support": {
-                "source": "https://github.com/newfold-labs/wp-module-data/tree/2.6.10",
+                "source": "https://github.com/newfold-labs/wp-module-data/tree/2.6.11",
                 "issues": "https://github.com/newfold-labs/wp-module-data/issues"
             },
-            "time": "2025-02-06T18:33:49+00:00"
+            "time": "2025-03-10T22:27:07+00:00"
         },
         {
             "name": "newfold-labs/wp-module-deactivation",
@@ -773,16 +773,16 @@
         },
         {
             "name": "newfold-labs/wp-module-notifications",
-            "version": "1.6.6",
+            "version": "1.6.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-notifications.git",
-                "reference": "14a89f38091a7bf48404740c5f64087a3010ee03"
+                "reference": "3f7253e6215caed62d92423cb702dc2b900cfe8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-notifications/zipball/14a89f38091a7bf48404740c5f64087a3010ee03",
-                "reference": "14a89f38091a7bf48404740c5f64087a3010ee03",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-notifications/zipball/3f7253e6215caed62d92423cb702dc2b900cfe8f",
+                "reference": "3f7253e6215caed62d92423cb702dc2b900cfe8f",
                 "shasum": ""
             },
             "require": {
@@ -791,6 +791,9 @@
                 "wp-forge/helpers": "^2.0",
                 "wpscholar/url": "^1.2"
             },
+            "require-dev": {
+                "newfold-labs/wp-php-standards": "^1.2"
+            },
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -798,6 +801,14 @@
                 },
                 "files": [
                     "bootstrap.php"
+                ]
+            },
+            "scripts": {
+                "fix": [
+                    "vendor/bin/phpcbf --standard=phpcs.xml ."
+                ],
+                "lint": [
+                    "vendor/bin/phpcs --standard=phpcs.xml -s ."
                 ]
             },
             "license": [
@@ -811,10 +822,10 @@
             ],
             "description": "A module for managing Newfold in-site notifications.",
             "support": {
-                "source": "https://github.com/newfold-labs/wp-module-notifications/tree/1.6.6",
+                "source": "https://github.com/newfold-labs/wp-module-notifications/tree/1.6.8",
                 "issues": "https://github.com/newfold-labs/wp-module-notifications/issues"
             },
-            "time": "2024-11-18T20:26:18+00:00"
+            "time": "2025-02-25T21:08:22+00:00"
         },
         {
             "name": "newfold-labs/wp-module-performance",
