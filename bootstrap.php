@@ -138,7 +138,6 @@ require WEB_PLUGIN_DIR . '/inc/AdminBar.php';
 require WEB_PLUGIN_DIR . '/inc/base.php';
 require WEB_PLUGIN_DIR . '/inc/jetpack.php';
 require WEB_PLUGIN_DIR . '/inc/partners.php';
-require WEB_PLUGIN_DIR . '/inc/RestApi/CachingController.php';
 require WEB_PLUGIN_DIR . '/inc/RestApi/SettingsController.php';
 require WEB_PLUGIN_DIR . '/inc/RestApi/rest-api.php';
 require WEB_PLUGIN_DIR . '/inc/settings.php';
