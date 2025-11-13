@@ -91,6 +91,15 @@ final class Admin {
 	public static function admin_nav_style() {
 		echo '<style>';
 		echo 'li#toplevel_page_web a.toplevel_page_web div.wp-menu-image.svg { transition: fill 0.15s; background-size: 24px auto !important; }';
+		echo 'li#toplevel_page_web a.toplevel_page_web div.wp-menu-name {
+		    padding: 8px 2px 8px 29px;
+			font-size: 12px;
+		}';
+		echo 'li#toplevel_page_web a.toplevel_page_web div.wp-menu-image img {
+			padding: 6px 8px 0px;
+			opacity: 1 !important;
+			display: block;
+		}';
 		echo 'ul#adminmenu a.toplevel_page_web.wp-has-current-submenu:after, ul#adminmenu>li#toplevel_page_web.current>a.current:after { border-right-color: #fff !important; }';
 		echo 'li#toplevel_page_web > ul > li.wp-first-item { display: none !important; }';
 		echo '#wp-toolbar #wp-admin-bar-web-coming_soon .ab-item { padding: 0; }';
@@ -103,15 +112,17 @@ final class Admin {
 	 * @return void
 	 */
 	public static function page() {
-		$webcom = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iMzgwLjAwMDAwMHB0IiBoZWlnaHQ9IjM4MC4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDM4MC4wMDAwMDAgMzgwLjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgo8bWV0YWRhdGE+CkNyZWF0ZWQgYnkgcG90cmFjZSAxLjExLCB3cml0dGVuIGJ5IFBldGVyIFNlbGluZ2VyIDIwMDEtMjAxMwo8L21ldGFkYXRhPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwzODAuMDAwMDAwKSBzY2FsZSgwLjEwMDAwMCwtMC4xMDAwMDApIgpmaWxsPSIjMDAwMDAwIiBzdHJva2U9Im5vbmUiPgo8cGF0aCBkPSJNNzA1IDI2ODAgYy00MiAtMTcgLTY4IC01OCAtNjggLTEwMiAxIC0yOSA3NyAtMjUxIDIzNyAtNjk2IDEzMAotMzU5IDI0MiAtNjY1IDI1MSAtNjgxIDI1IC00OSA2MiAtNzEgMTE3IC03MSA5MCAwIDk1IDEwIDI0MyA0NDAgMjc4IDgxMCAyNjIKNzY3IDI3MyA3NDAgNSAtMTQgOTQgLTI3MiAxOTggLTU3NSAyMTAgLTYxMiAyMDYgLTYwNSAyOTAgLTYwNSA1NiAwIDkwIDE2CjExMyA1NCAxMSAxNyA4NyAyMjAgMTcxIDQ1MSA4MyAyMzEgMTkwIDUyNiAyMzcgNjU1IDQ3IDEyOSA4OCAyNTQgOTEgMjc3IDYKNTMgLTE1IDg5IC02NiAxMTAgLTQ1IDE5IC0xMDQgNCAtMTI4IC0zMSAtOCAtMTMgLTc2IC0yMDMgLTE1MCAtNDIyIC03NSAtMjIwCi0xNjQgLTQ4MiAtMTk5IC01ODQgLTM1IC0xMDIgLTY2IC0xNzggLTY5IC0xNzAgLTMgOCAtNjcgMjAyIC0xNDEgNDMwIC03NQoyMjggLTE1OSA0ODQgLTE4NyA1NjggLTI5IDg5IC02MCAxNjUgLTc0IDE4MiAtNDYgNTQgLTE1NiA0OCAtMTkyIC0xMSAtNyAtMTEKLTEwMSAtMjgwIC0yMDggLTU5NyAtMTA3IC0zMTYgLTE5NiAtNTc3IC0xOTggLTU3OSAtMiAtMiAtOTAgMjU0IC0xOTYgNTY5Ci0xMDYgMzE1IC0yMDEgNTg3IC0yMTIgNjA1IC0yNiA0NCAtODUgNjMgLTEzMyA0M3oiLz4KPHBhdGggZD0iTTI5NDUgMTQ0NSBjLTEyMCAtNDMgLTE1MSAtMTgxIC02MSAtMjcxIDQ2IC00NiA5MSAtNjEgMTUzIC00OSA0OSA5CjEwOCA2OCAxMjIgMTIzIDM1IDEyNyAtOTAgMjQyIC0yMTQgMTk3eiIvPgo8L2c+Cjwvc3ZnPgo=';
-
+		// $iconurl = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iMzgwLjAwMDAwMHB0IiBoZWlnaHQ9IjM4MC4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDM4MC4wMDAwMDAgMzgwLjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgo8bWV0YWRhdGE+CkNyZWF0ZWQgYnkgcG90cmFjZSAxLjExLCB3cml0dGVuIGJ5IFBldGVyIFNlbGluZ2VyIDIwMDEtMjAxMwo8L21ldGFkYXRhPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwzODAuMDAwMDAwKSBzY2FsZSgwLjEwMDAwMCwtMC4xMDAwMDApIgpmaWxsPSIjMDAwMDAwIiBzdHJva2U9Im5vbmUiPgo8cGF0aCBkPSJNNzA1IDI2ODAgYy00MiAtMTcgLTY4IC01OCAtNjggLTEwMiAxIC0yOSA3NyAtMjUxIDIzNyAtNjk2IDEzMAotMzU5IDI0MiAtNjY1IDI1MSAtNjgxIDI1IC00OSA2MiAtNzEgMTE3IC03MSA5MCAwIDk1IDEwIDI0MyA0NDAgMjc4IDgxMCAyNjIKNzY3IDI3MyA3NDAgNSAtMTQgOTQgLTI3MiAxOTggLTU3NSAyMTAgLTYxMiAyMDYgLTYwNSAyOTAgLTYwNSA1NiAwIDkwIDE2CjExMyA1NCAxMSAxNyA4NyAyMjAgMTcxIDQ1MSA4MyAyMzEgMTkwIDUyNiAyMzcgNjU1IDQ3IDEyOSA4OCAyNTQgOTEgMjc3IDYKNTMgLTE1IDg5IC02NiAxMTAgLTQ1IDE5IC0xMDQgNCAtMTI4IC0zMSAtOCAtMTMgLTc2IC0yMDMgLTE1MCAtNDIyIC03NSAtMjIwCi0xNjQgLTQ4MiAtMTk5IC01ODQgLTM1IC0xMDIgLTY2IC0xNzggLTY5IC0xNzAgLTMgOCAtNjcgMjAyIC0xNDEgNDMwIC03NQoyMjggLTE1OSA0ODQgLTE4NyA1NjggLTI5IDg5IC02MCAxNjUgLTc0IDE4MiAtNDYgNTQgLTE1NiA0OCAtMTkyIC0xMSAtNyAtMTEKLTEwMSAtMjgwIC0yMDggLTU5NyAtMTA3IC0zMTYgLTE5NiAtNTc3IC0xOTggLTU3OSAtMiAtMiAtOTAgMjU0IC0xOTYgNTY5Ci0xMDYgMzE1IC0yMDEgNTg3IC0yMTIgNjA1IC0yNiA0NCAtODUgNjMgLTEzMyA0M3oiLz4KPHBhdGggZD0iTTI5NDUgMTQ0NSBjLTEyMCAtNDMgLTE1MSAtMTgxIC02MSAtMjcxIDQ2IC00NiA5MSAtNjEgMTUzIC00OSA0OSA5CjEwOCA2OCAxMjIgMTIzIDM1IDEyNyAtOTAgMjQyIC0yMTQgMTk3eiIvPgo8L2c+Cjwvc3ZnPgo=';
+		$iconurl = WEB_PLUGIN_URL . 'assets/svg/ns-icon-image.svg';
+		$iconurl = \add_query_arg( 'ver', WEB_PLUGIN_VERSION, $iconurl );
+		
 		\add_menu_page(
-			__( 'Web.com', 'wp-plugin-web' ),
-			__( 'Web.com', 'wp-plugin-web' ),
+			__( 'Network Solutions', 'wp-plugin-web' ),
+			__( 'Network Solutions', 'wp-plugin-web' ),
 			'manage_options',
 			'web',
 			array( __CLASS__, 'render' ),
-			$webcom,
+			$iconurl,
 			0
 		);
 

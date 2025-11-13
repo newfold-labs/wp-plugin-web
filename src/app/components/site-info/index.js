@@ -2,7 +2,7 @@ import { LockClosedIcon, LockOpenIcon } from "@heroicons/react/24/outline";
 import { NewfoldRuntime } from "@newfold/wp-module-runtime";
 import { Button } from "@newfold/ui-component-library";
 import { WordPressIcon } from "../icons";
-import { ReactComponent as WebIcon } from '../../../../assets/svg/web-icon-white.svg';
+import { ReactComponent as WebIcon } from '../../../../assets/svg/ns-icon-image.svg';
 
 export const SiteInfoBar = () => {
     const { url, title } = NewfoldRuntime.siteDetails;
@@ -43,7 +43,7 @@ export const SiteInfoBar = () => {
                         variant="primary" 
                         className="nfd-bg-primary-400 nfd-text-tiny nfd-w-full min-[400px]:nfd-w-auto">
                         <WebIcon />
-                        { __("Web Account", "wp-plugin-web") }
+                        { __("Network Solutions Account", "wp-plugin-web") }
                     </Button>
                     <Button 
                         as="a" 
