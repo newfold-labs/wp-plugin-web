@@ -38,7 +38,7 @@ final class Admin {
 	/**
 	 * Add to runtime
 	 *
-	 * @param array $sdk - runtime properties from module
+	 * @param array $sdk - runtime properties from module.
 	 *
 	 * @return array
 	 */
@@ -62,7 +62,7 @@ final class Admin {
 		$marketplace = array(
 			'web#/marketplace' => __( 'Marketplace', 'wp-plugin-web' ),
 		);
-		// add performance if enabled
+		// add performance if enabled.
 		$performance = isEnabled( 'performance' )
 			? array(
 				'web#/performance' => __( 'Performance', 'wp-plugin-web' ),
@@ -112,10 +112,9 @@ final class Admin {
 	 * @return void
 	 */
 	public static function page() {
-		// $iconurl = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iMzgwLjAwMDAwMHB0IiBoZWlnaHQ9IjM4MC4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDM4MC4wMDAwMDAgMzgwLjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgo8bWV0YWRhdGE+CkNyZWF0ZWQgYnkgcG90cmFjZSAxLjExLCB3cml0dGVuIGJ5IFBldGVyIFNlbGluZ2VyIDIwMDEtMjAxMwo8L21ldGFkYXRhPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwzODAuMDAwMDAwKSBzY2FsZSgwLjEwMDAwMCwtMC4xMDAwMDApIgpmaWxsPSIjMDAwMDAwIiBzdHJva2U9Im5vbmUiPgo8cGF0aCBkPSJNNzA1IDI2ODAgYy00MiAtMTcgLTY4IC01OCAtNjggLTEwMiAxIC0yOSA3NyAtMjUxIDIzNyAtNjk2IDEzMAotMzU5IDI0MiAtNjY1IDI1MSAtNjgxIDI1IC00OSA2MiAtNzEgMTE3IC03MSA5MCAwIDk1IDEwIDI0MyA0NDAgMjc4IDgxMCAyNjIKNzY3IDI3MyA3NDAgNSAtMTQgOTQgLTI3MiAxOTggLTU3NSAyMTAgLTYxMiAyMDYgLTYwNSAyOTAgLTYwNSA1NiAwIDkwIDE2CjExMyA1NCAxMSAxNyA4NyAyMjAgMTcxIDQ1MSA4MyAyMzEgMTkwIDUyNiAyMzcgNjU1IDQ3IDEyOSA4OCAyNTQgOTEgMjc3IDYKNTMgLTE1IDg5IC02NiAxMTAgLTQ1IDE5IC0xMDQgNCAtMTI4IC0zMSAtOCAtMTMgLTc2IC0yMDMgLTE1MCAtNDIyIC03NSAtMjIwCi0xNjQgLTQ4MiAtMTk5IC01ODQgLTM1IC0xMDIgLTY2IC0xNzggLTY5IC0xNzAgLTMgOCAtNjcgMjAyIC0xNDEgNDMwIC03NQoyMjggLTE1OSA0ODQgLTE4NyA1NjggLTI5IDg5IC02MCAxNjUgLTc0IDE4MiAtNDYgNTQgLTE1NiA0OCAtMTkyIC0xMSAtNyAtMTEKLTEwMSAtMjgwIC0yMDggLTU5NyAtMTA3IC0zMTYgLTE5NiAtNTc3IC0xOTggLTU3OSAtMiAtMiAtOTAgMjU0IC0xOTYgNTY5Ci0xMDYgMzE1IC0yMDEgNTg3IC0yMTIgNjA1IC0yNiA0NCAtODUgNjMgLTEzMyA0M3oiLz4KPHBhdGggZD0iTTI5NDUgMTQ0NSBjLTEyMCAtNDMgLTE1MSAtMTgxIC02MSAtMjcxIDQ2IC00NiA5MSAtNjEgMTUzIC00OSA0OSA5CjEwOCA2OCAxMjIgMTIzIDM1IDEyNyAtOTAgMjQyIC0yMTQgMTk3eiIvPgo8L2c+Cjwvc3ZnPgo=';
 		$iconurl = WEB_PLUGIN_URL . 'assets/svg/ns-icon-image.svg';
 		$iconurl = \add_query_arg( 'ver', WEB_PLUGIN_VERSION, $iconurl );
-		
+
 		\add_menu_page(
 			__( 'Network Solutions', 'wp-plugin-web' ),
 			__( 'Network Solutions', 'wp-plugin-web' ),
@@ -126,7 +125,7 @@ final class Admin {
 			0
 		);
 
-		// If we're outside of App, add subpages to App menu
+		// If we're outside of App, add subpages to App menu.
 		if ( false === ( isset( $_GET['page'] ) && strpos( filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ), 'web' ) >= 0 ) ) { // phpcs:ignore
 			foreach ( self::subpages() as $route => $title ) {
 				\add_submenu_page(
@@ -154,7 +153,7 @@ final class Admin {
 		if ( version_compare( $wp_version, '5.4', '>=' ) ) {
 			echo '<div id="wppw-app" class="wppw wppw_app"></div>' . PHP_EOL;
 		} else {
-			// fallback messaging for WordPress older than 5.4
+			// fallback messaging for WordPress older than 5.4.
 			echo '<div id="wppw-app" class="wppw wppw_app">' . PHP_EOL;
 			echo '<header class="wppw-header" style="min-height: 90px; padding: 1rem; margin-bottom: 1.5rem;"><div class="wppw-header-inner"><div class="wppw-logo-wrap">' . PHP_EOL;
 			echo '<img src="' . esc_url( WEB_PLUGIN_URL . 'assets/svg/web-logo.svg' ) . '" alt="Web.com logo" />' . PHP_EOL;
@@ -224,7 +223,7 @@ final class Admin {
 	/**
 	 * Filter WordPress Admin Footer Text "Thank you for creating with..."
 	 *
-	 * @param string $footer_text footer text
+	 * @param string $footer_text footer text.
 	 * @return string
 	 */
 	public static function add_brand_to_admin_footer( $footer_text ) {

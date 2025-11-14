@@ -15,12 +15,12 @@ const help = [
 		name: 'phone',
 		title: __( 'Phone', 'wp-plugin-web' ),
 		description: __(
-			'Speak to our award-winning support team over the phone at 866-227-1474. Our customer service hours are 7:00am - 12:00am ET.',
+			'Speak to our award-winning support team over the phone at 855-834-8495. Our customer service hours are 8:00am - 11:00pm ET.',
 			'wp-plugin-web'
 		),
 		icon: false,
 		cta: __( 'Call Us', 'wp-plugin-web' ),
-		url: 'tel:8662271474',
+		url: 'tel:855-834-8495',
 	},
 	{
 		name: 'twitter',
