@@ -24,7 +24,7 @@ const HelpCard = ({ item }) => {
 					variant="secondary"
 					as="a"
 					className="nfd-w-full"
-					href={item.url}
+					href={window.NewfoldRuntime.linkTracker.addUtmParams(item.url)}
 					target="_blank"
 				>
 					{item.cta}

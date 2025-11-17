@@ -113,7 +113,7 @@ function plugin_auto_update_setting_html( $html ) {
 		sprintf(
 		/* translators: %s Settings > General page URL. */
 			__( 'Auto-updates enabled on the <a href="%s">Web.com > Settings</a> page.', 'wp-plugin-web' ),
-			admin_url( 'admin.php?page=web#/settings' )
+			apply_filters( 'nfd_build_url', admin_url( 'admin.php?page=web#/settings' ) )
 		),
 		$html
 	);
@@ -141,7 +141,7 @@ function theme_auto_update_setting_html( $html ) {
 	return sprintf(
 	/* translators: %s Settings > General page URL. */
 		__( 'Auto-updates enabled on the <a href="%s">Web.com > Settings</a> page.', 'wp-plugin-web' ),
-		admin_url( 'admin.php?page=web#/settings' )
+		apply_filters( 'nfd_build_url', admin_url( 'admin.php?page=web#/settings' ) )
 	);
 }
 
@@ -168,7 +168,7 @@ function theme_auto_update_setting_template( $template ) {
 	$replacement    .= sprintf(
 	/* translators: %s Settings > General page URL. */
 		__( 'Auto-updates enabled on the <a href="%s">Web.com > Settings</a> page.', 'wp-plugin-web' ),
-		admin_url( 'admin.php?page=web#/settings' )
+		apply_filters( 'nfd_build_url', admin_url( 'admin.php?page=web#/settings' ) )
 	);
 
 	return str_replace( $template_string, $replacement, $template );
