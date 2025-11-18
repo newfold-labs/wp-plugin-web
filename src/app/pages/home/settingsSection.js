@@ -11,7 +11,7 @@ const SettingsSection = () => {
 				<ActionField
 					label={__("Manage Settings", "wp-plugin-web")}
 					buttonLabel={__("Settings", "wp-plugin-web")}
-					href={"#/settings"}
+					href={window.NewfoldRuntime.linkTracker.addUtmParams("admin.php?page=web#/settings")}
 					className={"wppw-app-home-settings-action"}
 				>
 					{__('Manage your site settings. You can ajdust automatic updates, comments, revisions and more.', 'wp-plugin-web')}
@@ -20,7 +20,7 @@ const SettingsSection = () => {
 				<ActionField
 					label={__("Performance", "wp-plugin-web")}
 					buttonLabel={__("Performance", "wp-plugin-web")}
-					href={"#/performance"}
+					href={window.NewfoldRuntime.linkTracker.addUtmParams("admin.php?page=web#/performance")}
 					className={"wppw-app-home-performance-action"}
 				>
 					{__('Manage site performance and caching settings as well as clear the site cache.', 'wp-plugin-web')}
@@ -29,7 +29,7 @@ const SettingsSection = () => {
 				<ActionField
 					label={__("Marketplace", "wp-plugin-web")}
 					buttonLabel={__("Visit Marketplace", "wp-plugin-web")}
-					href={"#/marketplace"}
+					href={window.NewfoldRuntime.linkTracker.addUtmParams("admin.php?page=web#/marketplace")}
 					className={"wppw-app-home-marketplace-action"}
 				>
 					{__('Add site services, themes or plugins from the marketplace.', 'wp-plugin-web')}
