@@ -229,7 +229,7 @@ final class Admin {
 	public static function add_brand_to_admin_footer( $footer_text ) {
 
 		$wordpress_url = '<a href="' . apply_filters( 'nfd_build_url', 'https://wordpress.org/', array( 'source' => 'web_admin_footer' ) ) . '">WordPress</a>';
-		$web_url       = '<a href="' . apply_filters( 'nfd_build_url', 'https://web.com/about-us', array( 'source' => 'web_admin_footer' ) ) . '">Web.com</a>';
+		$web_url       = '<a href="' . apply_filters( 'nfd_build_url', 'https://www.networksolutions.com/', array( 'source' => 'web_admin_footer' ) ) . '">Network Solutions</a>';
 
 		// translators: %1$s is the WordPress URL, %2$s is the Web.com URL.
 		$footer_text = sprintf( \__( 'Thank you for creating with %1$s and %2$s', 'wp-plugin-web' ), $wordpress_url, $web_url );
