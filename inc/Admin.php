@@ -156,7 +156,7 @@ final class Admin {
 			// fallback messaging for WordPress older than 5.4.
 			echo '<div id="wppw-app" class="wppw wppw_app">' . PHP_EOL;
 			echo '<header class="wppw-header" style="min-height: 90px; padding: 1rem; margin-bottom: 1.5rem;"><div class="wppw-header-inner"><div class="wppw-logo-wrap">' . PHP_EOL;
-			echo '<img src="' . esc_url( WEB_PLUGIN_URL . 'assets/svg/web-logo.svg' ) . '" alt="Web.com logo" />' . PHP_EOL;
+			echo '<img src="' . esc_url( WEB_PLUGIN_URL . 'assets/svg/ns-logo.svg' ) . '" alt="Network Solutions logo" />' . PHP_EOL;
 			echo '</div></div></header>' . PHP_EOL;
 			echo '<div class="wrap">' . PHP_EOL;
 			echo '<div class="card" style="margin-left: 20px;"><h2 class="title">' . esc_html__( 'Please update to a newer WordPress version.', 'wp-plugin-web' ) . '</h2>' . PHP_EOL;
