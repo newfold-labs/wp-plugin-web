@@ -112,7 +112,7 @@ function plugin_auto_update_setting_html( $html ) {
 		'<span class="label">Auto-updates enabled</span>',
 		sprintf(
 		/* translators: %s Settings > General page URL. */
-			__( 'Auto-updates enabled on the <a href="%s">Web.com > Settings</a> page.', 'wp-plugin-web' ),
+			__( 'Auto-updates enabled on the <a href="%s">Network Solutions > Settings</a> page.', 'wp-plugin-web' ),
 			apply_filters( 'nfd_build_url', admin_url( 'admin.php?page=web#/settings' ) )
 		),
 		$html
@@ -140,7 +140,7 @@ function theme_auto_update_setting_html( $html ) {
 
 	return sprintf(
 	/* translators: %s Settings > General page URL. */
-		__( 'Auto-updates enabled on the <a href="%s">Web.com > Settings</a> page.', 'wp-plugin-web' ),
+		__( 'Auto-updates enabled on the <a href="%s">Network Solutions > Settings</a> page.', 'wp-plugin-web' ),
 		apply_filters( 'nfd_build_url', admin_url( 'admin.php?page=web#/settings' ) )
 	);
 }
@@ -167,7 +167,7 @@ function theme_auto_update_setting_template( $template ) {
 	$replacement     = '<# } else if ( data.autoupdate.forced ) { #>';
 	$replacement    .= sprintf(
 	/* translators: %s Settings > General page URL. */
-		__( 'Auto-updates enabled on the <a href="%s">Web.com > Settings</a> page.', 'wp-plugin-web' ),
+		__( 'Auto-updates enabled on the <a href="%s">Network Solutions > Settings</a> page.', 'wp-plugin-web' ),
 		apply_filters( 'nfd_build_url', admin_url( 'admin.php?page=web#/settings' ) )
 	);
 
