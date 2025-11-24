@@ -1,6 +1,6 @@
 {
     "name": "newfold-labs/wp-plugin-web",
-    "description": "WordPress plugin that integrates your WordPress site with the Web.com control panel, including performance, security, and update features.",
+    "description": "WordPress plugin that integrates your WordPress site with the Network Solutions control panel, including performance, security, and update features.",
     "type": "wordpress-plugin",
     "license": [
         "GPL-2.0-or-later"
