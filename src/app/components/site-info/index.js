@@ -38,7 +38,7 @@ export const SiteInfoBar = () => {
                     <Button 
                         as="a"
                         id="site_info_portal_button"
-                        href= { window.NewfoldRuntime.linkTracker.addUtmParams( 'https://www.web.com/my-account/home' ) }
+                        href= { window.NewfoldRuntime.linkTracker.addUtmParams( 'https://www.networksolutions.com/my-account/' ) }
                         target="_blank"
                         variant="primary" 
                         className="nfd-bg-primary-400 nfd-text-tiny nfd-w-full min-[400px]:nfd-w-auto">
