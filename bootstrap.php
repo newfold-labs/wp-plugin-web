@@ -20,7 +20,7 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 	require __DIR__ . '/vendor/autoload.php';
 } else {
 	if ( 'local' === wp_get_environment_type() ) {
-		wp_die( esc_html( __( 'Please install the Web.com Plugin dependencies.', 'wp-plugin-web' ) ) );
+		wp_die( esc_html( __( 'Please install the Network Solutions Plugin dependencies.', 'wp-plugin-web' ) ) );
 	}
 	return;
 }
@@ -63,12 +63,12 @@ add_filter(
 				'template_h2'         => __( 'A New WordPress Site', 'wp-plugin-web' ),
 				'template_footer_t'   => sprintf(
 				/* translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag, %3$s is replaced with opening link tag taking you to login page, %4$s is replaced with closing link tag, %5$s is replaced with opening link tag taking you to my.web.com, %6$s is replaced with closing link tag */
-					esc_html__( 'A %1$sWeb.com%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sWeb.com%6$s.', 'wp-plugin-web' ) . '&nbsp;',
-					'<a href="' . esc_url( 'https://www.web.com/websites/wordpress' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
+					esc_html__( 'A %1$sNetwork Solutions%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sNetwork Solutions%6$s.', 'wp-plugin-web' ) . '&nbsp;',
+					'<a href="' . esc_url( 'https://www.networksolutions.com/websites/wordpress' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
 					'</a>',
 					'<a href="' . esc_url( wp_login_url() ) . '">',
 					'</a>',
-					'<a href="' . esc_url( 'https://www.web.com/my-account/account-center/login' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
+					'<a href="' . esc_url( 'https://www.networksolutions.com/my-account/account-center/login' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
 					'</a>'
 				),
 				'template_page_title' => sprintf(
