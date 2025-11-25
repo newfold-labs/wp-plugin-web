@@ -6,7 +6,7 @@ import domReady from '@wordpress/dom-ready';
 import { createRoot, render } from '@wordpress/element';
 
 const WP_ADM_PAGE_ROOT_ELEMENT = 'wppw-app';
-const W_ASCI = `Welcome to Web.com!`;
+const W_ASCI = `Welcome to Network Solutions!`;
 console.log( W_ASCI );
 
 const WPPWRender = () => {
