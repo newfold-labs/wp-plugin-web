@@ -77,7 +77,8 @@
         "newfold-labs/wp-module-sso": "^1.2.0",
         "wp-cli/wp-cli": "^2.11",
         "wp-forge/wp-update-handler": "^1.0.2",
-        "wp-forge/wp-upgrade-handler": "^1.0"
+        "wp-forge/wp-upgrade-handler": "^1.0",
+        "newfold-labs/wp-module-ecommerce": "^1.7.1"
     },
     "require-dev": {
         "newfold-labs/wp-php-standards": "^1.2.5",
