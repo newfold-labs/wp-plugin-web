@@ -165,6 +165,17 @@ AdminBar::init();
 // Instantiate the Features singleton
 Features::getInstance();
 
+// Enable performance feature by default
+add_action(
+	'init',
+	function() {
+		// Enable performance feature if not already set
+		if ( false === get_option( 'nfd_module_performance', false ) ) {
+			update_option( 'nfd_module_performance', true );
+		}
+	}
+);
+
 /**
  * Filter to add applicable BN code to paypal requests
  *

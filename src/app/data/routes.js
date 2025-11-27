@@ -13,7 +13,6 @@ import { Route, Routes } from 'react-router-dom';
 import Home from '../pages/home';
 import Marketplace from '../pages/marketplace';
 import Settings from '../pages/settings';
-import Performance from '../pages/performance';
 import Help from '../pages/help';
 import Admin from '../pages/admin';
 
@@ -23,17 +22,12 @@ const addPartialMatch = ( prefix, path ) =>
 export const AppRoutes = () => {
 	return (
 		<Routes>
-			{ routes.map(
-				( page ) => (
-					true === page.condition && ( 
-						<Route
-							end
-							key={ page.name }
-							path={ addPartialMatch( '/marketplace', page.name ) }
-							element={ <page.Component /> }
-						/>
-					)
-			) ) }
+			<Route path="/home" element={ <Home /> } />
+			<Route path="/marketplace/*" element={ <Marketplace /> } />
+			<Route path="/settings" element={ <Settings /> } />
+			<Route path="/settings/performance" element={ <Settings /> } />
+			<Route path="/help" element={ <Help /> } />
+			<Route path="/admin" element={ <Admin /> } />
 			<Route path="/" element={ <Home /> } />
 			<Route
 				path="*"
@@ -52,7 +46,6 @@ export const AppRoutes = () => {
 const topRoutePaths = [
 	'/home',
 	'/marketplace',
-	'/performance',
 	'/settings',
 ];
 const utilityRoutePaths = [ '/help' ];
@@ -74,9 +67,9 @@ export const routes = [
 		condition: true,
 	},
 	{
-		name: '/performance',
+		name: '/settings/performance',
 		title: __( 'Performance', 'wp-plugin-web' ),
-		Component: Performance,
+		Component: Settings,
 		Icon: BoltIcon,
 		condition: await window.NewfoldFeatures.isEnabled( 'performance' ),
 	},

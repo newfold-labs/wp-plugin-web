@@ -241,3 +241,83 @@ body.toplevel_page_web {
     opacity: .5;
     pointer-events: disabled;
 }
+
+// Accordion styles for settings page
+.nfd-root .nfd-details {
+
+    summary {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        padding: 2rem;
+    }
+    
+    .nfd-details-content {
+        flex-grow: 1;
+        
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        p {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin: 0;
+        }
+    }
+
+    .nfd-details-icon {
+        flex-shrink: 0;
+        font-size: 1.5rem;
+        transform: rotate(180deg);
+        width: 1.5rem;
+        transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    &[open] {
+        .nfd-details-icon {
+            transform: rotate(0deg);
+        }
+    }
+
+    &:hover,
+    &[open] {
+        .nfd-details-icon {
+            color: var(--color-primary);
+        }
+    }
+}
+
+// Settings page layout adjustments
+.wppw-app-settings-page__header {
+    padding: 0 0 1.5rem 0;
+}
+
+.nfd-settings-app-wrapper {
+    margin-bottom: 1rem;
+}
+
+// Performance accordion specific styles
+.performance-details {
+    &[open] {
+        #performance-portal {            
+            // Hide the performance module's built-in header using title attribute
+            .nfd-page[title="Performance"] > div:first-child {
+                display: none !important;
+            }
+            
+            // Also hide any h1 or h2 that says Performance in the portal
+            h1:contains("Performance"),
+            .nfd-page > div > h1,
+            .nfd-page > div > h2 {
+                &:first-child {
+                    display: none !important;
+                }
+            }
+        }
+    }
+}

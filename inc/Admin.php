@@ -56,31 +56,11 @@ final class Admin {
 	 */
 	public static function subpages() {
 
-		$home        = array(
-			'web#/home' => __( 'Home', 'wp-plugin-web' ),
-		);
-		$marketplace = array(
+		return array(
+			'web#/home'        => __( 'Home', 'wp-plugin-web' ),
 			'web#/marketplace' => __( 'Marketplace', 'wp-plugin-web' ),
-		);
-		// add performance if enabled.
-		$performance = isEnabled( 'performance' )
-			? array(
-				'web#/performance' => __( 'Performance', 'wp-plugin-web' ),
-			)
-			: array();
-		$settings    = array(
-			'web#/settings' => __( 'Settings', 'wp-plugin-web' ),
-		);
-		$help        = array(
-			'web#/help' => __( 'Help', 'wp-plugin-web' ),
-		);
-
-		return array_merge(
-			$home,
-			$marketplace,
-			$performance,
-			$settings,
-			$help
+			'web#/settings'    => __( 'Settings', 'wp-plugin-web' ),
+			'web#/help'        => __( 'Help', 'wp-plugin-web' ),
 		);
 	}
 
@@ -103,6 +83,7 @@ final class Admin {
 		echo 'ul#adminmenu a.toplevel_page_web.wp-has-current-submenu:after, ul#adminmenu>li#toplevel_page_web.current>a.current:after { border-right-color: #fff !important; }';
 		echo 'li#toplevel_page_web > ul > li.wp-first-item { display: none !important; }';
 		echo '#wp-toolbar #wp-admin-bar-web-coming_soon .ab-item { padding: 0; }';
+		echo '.nfd-portal-apps { position: fixed; top: -9999px; left: -9999px; }';
 		echo '</style>';
 	}
 
@@ -125,18 +106,16 @@ final class Admin {
 			0
 		);
 
-		// If we're outside of App, add subpages to App menu.
-		if ( false === ( isset( $_GET['page'] ) && strpos( filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ), 'web' ) >= 0 ) ) { // phpcs:ignore
-			foreach ( self::subpages() as $route => $title ) {
-				\add_submenu_page(
-					'web',
-					$title,
-					$title,
-					'manage_options',
-					$route,
-					array( __CLASS__, 'render' )
-				);
-			}
+		// Add subpages to the menu
+		foreach ( self::subpages() as $route => $title ) {
+			\add_submenu_page(
+				'web',
+				$title,
+				$title,
+				'manage_options',
+				$route,
+				array( __CLASS__, 'render' )
+			);
 		}
 	}
 
@@ -152,6 +131,10 @@ final class Admin {
 
 		if ( version_compare( $wp_version, '5.4', '>=' ) ) {
 			echo '<div id="wppw-app" class="wppw wppw_app"></div>' . PHP_EOL;
+			// Add root element for performance portal app
+			echo '<div id="nfd-portal-apps" class="nfd-portal-apps">' . PHP_EOL;
+			echo '<div id="nfd-performance-portal"></div>' . PHP_EOL;
+			echo '</div>' . PHP_EOL;
 		} else {
 			// fallback messaging for WordPress older than 5.4.
 			echo '<div id="wppw-app" class="wppw wppw_app">' . PHP_EOL;
@@ -201,6 +184,12 @@ final class Admin {
 		if ( false !== strpos( $screen->id, 'web' ) ) {
 			\wp_enqueue_script( 'web-script' );
 			\wp_enqueue_style( 'web-style' );
+			
+			// Enqueue performance module assets if they're registered
+			if ( \wp_script_is( 'nfd-performance', 'registered' ) ) {
+				\wp_enqueue_script( 'nfd-performance' );
+				\wp_enqueue_style( 'nfd-performance' );
+			}
 		}
 	}
 
