@@ -63,7 +63,7 @@ final class Admin {
 			'web#/marketplace' => __( 'Marketplace', 'wp-plugin-web' ),
 		);
 		// add performance if enabled.
-		$performance = isEnabled( 'performance' )
+		$performance = true
 			? array(
 				'web#/performance' => __( 'Performance', 'wp-plugin-web' ),
 			)
@@ -147,7 +147,18 @@ final class Admin {
 	 */
 	public static function render() {
 		global $wp_version;
-
+	if ( ! function_exists( 'get_plugin_data' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		$plugin_data = get_plugin_data( WEB_PLUGIN_FILE );
+		$portal_apps = array(
+			// 'nfd-coming-soon-portal',
+			// 'nfd-marketplace-portal',
+			// 'nfd-next-steps-portal',
+			'nfd-performance-portal',
+			// 'nfd-solutions-portal',
+			// 'nfd-staging-portal',
+		);
 		echo '<!-- Web.com -->' . PHP_EOL;
 
 		if ( version_compare( $wp_version, '5.4', '>=' ) ) {

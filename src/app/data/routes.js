@@ -78,7 +78,7 @@ export const routes = [
 		title: __( 'Performance', 'wp-plugin-web' ),
 		Component: Performance,
 		Icon: BoltIcon,
-		condition: await window.NewfoldFeatures.isEnabled( 'performance' ),
+		// condition: await window.NewfoldFeatures.isEnabled( 'performance' ),
 	},
 	{
 		name: '/settings',

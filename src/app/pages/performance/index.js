@@ -10,7 +10,7 @@ import {
     webPurgeCacheApiFetch as newfoldPurgeCacheApiFetch
 } from '../../util/helpers';
 
-import { default as NewfoldPerformance } from '@modules/wp-module-performance/components/performance/';
+// import { default as NewfoldPerformance } from '@modules/wp-module-performance/components/performance/';
 
 const PerformancePage = () => {
 
@@ -37,17 +37,18 @@ const PerformancePage = () => {
 
 	return (
 		<Page title="Performance" className={"wppw-app-settings-page"}>
-			<Container className={'wppw-app-settings-container'}>
+			<Container className={'wppw-app-settings-container'} id="nfd-performance">
                 <Container.Header
                     title={__('Performance', 'wp-plugin-web')}
                     description={__('This is where you can manage cache settings for your website.', 'wp-plugin-web')}
                     className={'wppw-app-settings-header'}
                 />
-                <NewfoldPerformance
+                {/* <div id="nfd-performance"></div> */}
+                {/* <NewfoldPerformance
                     constants={moduleConstants}
                     methods={moduleMethods}
                     Components={moduleComponents}
-                />
+                /> */}
             </Container>
 		</Page>
 	);
