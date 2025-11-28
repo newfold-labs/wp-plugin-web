@@ -184,12 +184,6 @@ final class Admin {
 		if ( false !== strpos( $screen->id, 'web' ) ) {
 			\wp_enqueue_script( 'web-script' );
 			\wp_enqueue_style( 'web-style' );
-			
-			// Enqueue performance module assets if they're registered
-			if ( \wp_script_is( 'nfd-performance', 'registered' ) ) {
-				\wp_enqueue_script( 'nfd-performance' );
-				\wp_enqueue_style( 'nfd-performance' );
-			}
 		}
 	}
 
