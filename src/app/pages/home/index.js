@@ -11,7 +11,7 @@ const Home = () => {
 	<Page title="Home" className={"wppw-app-home-page wppw-home"}>
 		<Container className={'wppw-app-home-container'}>
 			<Container.Header className={'wppw-app-home-header'}>
-				<Title as="h1" className="nfd-flex nfd-items-center nfd-gap-2">
+				<Title as="h2" className="nfd-flex nfd-items-center nfd-gap-2">
 					<HomeIcon className="nfd-w-8 nfd-h-8" />
 					{__('Home', 'wp-plugin-web')}
 				</Title>

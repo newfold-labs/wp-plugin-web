@@ -55,7 +55,7 @@ const Help = () => {
 					subTitle={__('We are available 24/7 to help answer questions and solve your problems.',
 					'wp-plugin-web')}
 				>
-					<Title as="h1" className="nfd-flex nfd-items-center nfd-gap-2">
+					<Title as="h2" className="nfd-flex nfd-items-center nfd-gap-2">
 						<QuestionMarkCircleIcon className="nfd-w-8 nfd-h-8" />
 						{__('Help', 'wp-plugin-web')}
 					</Title>
