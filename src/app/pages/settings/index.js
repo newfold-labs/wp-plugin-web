@@ -1,5 +1,5 @@
 import { Container, Page, Title } from "@newfold/ui-component-library";
-import { ChevronUpIcon } from '@heroicons/react/24/outline';
+import { ChevronUpIcon, Cog6ToothIcon, BoltIcon } from '@heroicons/react/24/outline';
 import { useContext, useEffect } from '@wordpress/element';
 import { useLocation } from 'react-router-dom';
 import AutomaticUpdates from './automaticUpdates';
@@ -57,7 +57,8 @@ const Settings = () => {
 	return (
 		<Page title="Settings" className={"wppw-app-settings-page"}>
 			<div className="wppw-app-settings-page__header nfd-flex nfd-flex-col nfd-gap-y-4">
-				<Title as="h1">
+				<Title as="h1" className="nfd-flex nfd-items-center nfd-gap-2">
+					<Cog6ToothIcon className="nfd-w-8 nfd-h-8" />
 					{__('Settings', 'wp-plugin-web')}
 				</Title>
 				<Title as="h2" className="nfd-font-normal nfd-text-[13px] nfd-color-body">
@@ -65,33 +66,6 @@ const Settings = () => {
 				</Title>
 			</div>
 			
-			{isPerformanceEnabled && (
-				<Container
-					id="nfd-performance"
-					className={'nfd-settings-app-wrapper nfd-performance'}
-				>
-					<details className="nfd-details settings-app-wrapper performance-details" open>
-						<summary>
-							<div className="nfd-details-content">
-								<Title as={'h1'} className={'nfd-mb-2'}>
-									{__('Performance', 'wp-plugin-web')}
-								</Title>
-								<Title 
-									as={'h2'}
-									className="nfd-font-normal nfd-text-[13px]"
-								>
-									{__('Optimize your website by managing cache and performance settings', 'wp-plugin-web')}
-								</Title>
-							</div>
-							<span className="nfd-details-icon">
-								<ChevronUpIcon />
-							</span>
-						</summary>
-						<div id="performance-portal"></div>
-					</details>
-				</Container>
-			)}
-
 			<Container className={'nfd-settings-app-wrapper wppw-app-settings-container'}>
 				<details className="nfd-details settings-app-wrapper settings-details">
 					<summary>
@@ -99,7 +73,8 @@ const Settings = () => {
 							id={'settings-header'}
 							className={'wppw-app-settings-header'}
 						>
-							<Title as={'h1'} className={'nfd-mb-2'}>
+							<Title as={'h1'} className={'nfd-mb-2 nfd-flex nfd-items-center nfd-gap-2'}>
+								<Cog6ToothIcon className="nfd-w-6 nfd-h-6" />
 								{__('General Settings', 'wp-plugin-web')}
 							</Title>
 							<Title
@@ -135,6 +110,34 @@ const Settings = () => {
 					</Container.Block>
 				</details>
 			</Container>
+
+			{isPerformanceEnabled && (
+				<Container
+					id="nfd-performance"
+					className={'nfd-settings-app-wrapper nfd-performance'}
+				>
+					<details className="nfd-details settings-app-wrapper performance-details">
+						<summary>
+							<div className="nfd-details-content">
+								<Title as={'h1'} className={'nfd-mb-2 nfd-flex nfd-items-center nfd-gap-2'}>
+									<BoltIcon className="nfd-w-6 nfd-h-6" />
+									{__('Performance', 'wp-plugin-web')}
+								</Title>
+								<Title 
+									as={'h2'}
+									className="nfd-font-normal nfd-text-[13px]"
+								>
+									{__('Optimize your website by managing cache and performance settings', 'wp-plugin-web')}
+								</Title>
+							</div>
+							<span className="nfd-details-icon">
+								<ChevronUpIcon />
+							</span>
+						</summary>
+						<div id="performance-portal"></div>
+					</details>
+				</Container>
+			)}
 		</Page>
 	);
 };

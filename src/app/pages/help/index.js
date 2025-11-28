@@ -5,6 +5,7 @@ import {
 	Page,
 	Title
 } from "@newfold/ui-component-library";
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import help from 'App/data/help';
 
 const HelpCard = ({ item }) => {
@@ -51,10 +52,14 @@ const Help = () => {
 		<Page className={"wppw-app-help-page"}>
 			<Container className={'wppw-app-help-container'}>
 				<Container.Header
-					title={__('Help', 'wp-plugin-web')}
 					subTitle={__('We are available 24/7 to help answer questions and solve your problems.',
 					'wp-plugin-web')}
-				/>
+				>
+					<Title as="h1" className="nfd-flex nfd-items-center nfd-gap-2">
+						<QuestionMarkCircleIcon className="nfd-w-8 nfd-h-8" />
+						{__('Help', 'wp-plugin-web')}
+					</Title>
+				</Container.Header>
 
 				<Container.Block>
 					{renderHelpCards()}

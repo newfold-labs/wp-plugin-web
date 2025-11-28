@@ -43,7 +43,7 @@ const MarketplacePage = () => {
     };
 
 	return (
-        <Page className={"wppw-app-marketplace-page"}>
+        <Page className={"wppw-app-marketplace-page marketplace-with-icon"}>
 			<Container className={'wppw-app-marketplace-container nfd-overflow-clip'}>
 
 				<NewfoldMarketplace 
