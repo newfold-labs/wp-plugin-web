@@ -1,16 +1,17 @@
 import { Container, Page, Title } from "@newfold/ui-component-library";
 import { ChevronUpIcon } from '@heroicons/react/24/outline';
-import { useEffect } from '@wordpress/element';
+import { useContext, useEffect } from '@wordpress/element';
 import { useLocation } from 'react-router-dom';
 import AutomaticUpdates from './automaticUpdates';
 import ComingSoon from './comingSoon';
 import CommentSettings from './commentSettings';
 import ContentSettings from './contentSettings';
 import useContainerBlockIsTarget from 'App/util/hooks/useContainerBlockTarget';
+import AppStore from 'App/data/store';
 
 const Settings = () => {
-	// Always show performance accordion
-	const isPerformanceEnabled = true;
+	const { store } = useContext( AppStore );
+	const isPerformanceEnabled = store.features?.performance ?? true;
 	const location = useLocation();
 
 	useEffect(() => {
