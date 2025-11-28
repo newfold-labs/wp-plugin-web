@@ -1,5 +1,5 @@
 import { Container, Page, Title } from "@newfold/ui-component-library";
-import { ChevronUpIcon, Cog6ToothIcon, BoltIcon } from '@heroicons/react/24/outline';
+import { ChevronUpIcon, Cog6ToothIcon, BoltIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 import { useContext, useEffect } from '@wordpress/element';
 import { useLocation } from 'react-router-dom';
 import AutomaticUpdates from './automaticUpdates';
@@ -58,7 +58,7 @@ const Settings = () => {
 		<Page title="Settings" className={"wppw-app-settings-page"}>
 			<div className="wppw-app-settings-page__header nfd-flex nfd-flex-col nfd-gap-y-4">
 				<Title as="h1" className="nfd-flex nfd-items-center nfd-gap-2">
-					<Cog6ToothIcon className="nfd-w-8 nfd-h-8" />
+					<AdjustmentsHorizontalIcon className="nfd-w-8 nfd-h-8" />
 					{__('Settings', 'wp-plugin-web')}
 				</Title>
 				<Title as="h2" className="nfd-font-normal nfd-text-[13px] nfd-color-body">
