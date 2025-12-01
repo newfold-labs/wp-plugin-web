@@ -13,8 +13,8 @@
  * Update URI:        https://github.com/newfold-labs/wp-plugin-web/
  * Description:       WordPress plugin that integrates a WordPress site with the Network Solutions control panel, including performance, security, and update features.
  * Version:           2.2.0
- * Requires at least: 7.4
- * Requires PHP:      7.1
+ * Requires at least: 6.6
+ * Requires PHP:      7.4
  * Tested up to:      6.8.1
  * Author:            Network Solutions
  * Author URI:        https://www.networksolutions.com
