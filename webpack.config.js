@@ -41,9 +41,17 @@ const mostCommonImports = {
  */
 const webConfig = {
     mode: 'production',
+    entry: {
+		index: path.resolve( process.cwd(), 'src/index.js' ), // Main plugin app
+		'portal-registry': path.resolve(
+			process.cwd(),
+			'src/portalRegistry/index.js'
+		), // Shared registry
+	},
     output: {
         // versioned output directory i.e. /build/1.0.0, /build/1.1.0, etc.
         path: path.resolve(process.cwd(), 'build/' + version),
+        filename: '[name].js',
     },
     resolve: { alias },
     plugins: [new ProvidePlugin(mostCommonImports)],

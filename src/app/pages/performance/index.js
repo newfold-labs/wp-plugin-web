@@ -31,6 +31,25 @@ const PerformancePage = () => {
         AppStore,
     };
 
+    	useEffect( () => {
+		// run when mounts
+
+		const performancePortal =
+			document.getElementById( 'performance-portal' );
+
+		if ( performancePortal ) {
+			window.NFDPortalRegistry.registerPortal(
+				'performance',
+				performancePortal
+			);
+		}
+
+		// run when unmounts
+		return () => {
+			window.NFDPortalRegistry.unregisterPortal( 'performance' );
+		};
+	}, [] );
+
 	const moduleComponents = {
         Fragment,
 	}
@@ -38,17 +57,10 @@ const PerformancePage = () => {
 	return (
 		<Page title="Performance" className={"wppw-app-settings-page"}>
 			<Container className={'wppw-app-settings-container'} id="nfd-performance">
-                <Container.Header
-                    title={__('Performance', 'wp-plugin-web')}
-                    description={__('This is where you can manage cache settings for your website.', 'wp-plugin-web')}
-                    className={'wppw-app-settings-header'}
-                />
-                {/* <div id="nfd-performance"></div> */}
-                {/* <NewfoldPerformance
-                    constants={moduleConstants}
-                    methods={moduleMethods}
-                    Components={moduleComponents}
-                /> */}
+
+                <div id="nfd-performance-portal-wrapper">
+							<div id="performance-portal"></div>
+						</div>
             </Container>
 		</Page>
 	);

@@ -25,7 +25,7 @@
     },
     "dependencies": {
         "@heroicons/react": "^2.2.0",
-        "@newfold/ui-component-library": "1.3.0",
+        "@newfold/ui-component-library": "^2.1.1",
         "@newfold/wp-module-runtime": "^1.1.3",
         "@wordpress/compose": "^7.20.0",
         "@wordpress/dom-ready": "^4.34.0",
@@ -51,7 +51,8 @@
         "cypress-axe": "^1.6.0",
         "node-fetch": "^2.7.0",
         "tailwindcss": "^3.4.17",
-        "yaml-lint": "^1.7.0"
+        "yaml-lint": "^1.7.0",
+        "ajv": "^8.17.1"
     },
     "scripts": {
         "build": "wp-scripts build",

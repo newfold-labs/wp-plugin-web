@@ -152,17 +152,17 @@ final class Admin {
 		}
 		$plugin_data = get_plugin_data( WEB_PLUGIN_FILE );
 		$portal_apps = array(
-			// 'nfd-coming-soon-portal',
-			// 'nfd-marketplace-portal',
-			// 'nfd-next-steps-portal',
 			'nfd-performance-portal',
-			// 'nfd-solutions-portal',
-			// 'nfd-staging-portal',
 		);
 		echo '<!-- Web.com -->' . PHP_EOL;
 
 		if ( version_compare( $wp_version, '5.4', '>=' ) ) {
-			echo '<div id="wppw-app" class="wppw wppw_app"></div>' . PHP_EOL;
+			echo '<div id="wppw-app" class="wppw wppw_app"></div>';
+			echo '<div id="nfd-portal-apps" class="nfd-portal-apps">'; // each portal app needs a root id added here
+			foreach ( $portal_apps as $portal_app ) {
+				echo '<div id="' . esc_attr( $portal_app ) . '"></div>';
+			}
+			echo '</div>' . PHP_EOL;
 		} else {
 			// fallback messaging for WordPress older than 5.4.
 			echo '<div id="wppw-app" class="wppw wppw_app">' . PHP_EOL;
@@ -196,7 +196,15 @@ final class Admin {
 		\wp_register_script(
 			'web-script',
 			WEB_BUILD_URL . '/index.js',
-			array_merge( $asset['dependencies'], array( 'newfold-features', 'nfd-runtime' ) ),
+			array_merge( $asset['dependencies'], array( 'newfold-features', 'nfd-runtime', 'nfd-portal-registry' ) ),
+			$asset['version'],
+			true
+		);
+
+		\wp_register_script(
+			'nfd-portal-registry',
+			WEB_BUILD_URL . '/portal-registry.js',
+			array( 'wp-components', 'wp-element' ),
 			$asset['version'],
 			true
 		);
