@@ -1,9 +1,9 @@
 import apiFetch from '@wordpress/api-fetch';
 import { useState, useEffect } from '@wordpress/element';
 import { useLocation, useMatch, useNavigate } from 'react-router-dom';
-import { Container, Page } from '@newfold/ui-component-library';
+import { Container, Page, Title } from '@newfold/ui-component-library';
 import { NewfoldRuntime } from "@newfold/wp-module-runtime";
-import { default as MarketplaceHeader } from '@modules/wp-module-marketplace/components/marketplaceHeader';
+import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { default as MarketplaceBody } from '@modules/wp-module-marketplace/components/marketplaceBody';
 
 const MarketplacePage = () => {
@@ -45,18 +45,22 @@ const MarketplacePage = () => {
     };
 
 	return (
-        <Page className={"wppw-app-marketplace-page marketplace-with-icon"}>
-			<Container className={'wppw-app-marketplace-container nfd-overflow-clip'}>
-				
-				<MarketplaceHeader 
-					title={moduleConstants.text.title}
-					description={moduleConstants.text.subTitle}
-				/>
+        <Page className={"wppw-app-marketplace-page"}>
+			<Container className={'wppw-app-marketplace-container'}>
+				<Container.Header className={'wppw-app-marketplace-header'}>
+					<Title as="h2" className="nfd-flex nfd-items-center nfd-gap-2">
+						<ShoppingBagIcon className="nfd-w-8 nfd-h-8" />
+						{moduleConstants.text.title}
+					</Title>
+					<span>{moduleConstants.text.subTitle}</span>
+				</Container.Header>
 
-				<MarketplaceBody 
-					methods={moduleMethods}
-					constants={moduleConstants}
-				/>
+				<Container.Block className={'wppw-app-marketplace-body'}>
+					<MarketplaceBody 
+						methods={moduleMethods}
+						constants={moduleConstants}
+					/>
+				</Container.Block>
 
 			</Container>
 		</Page>

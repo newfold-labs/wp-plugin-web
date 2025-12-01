@@ -15,6 +15,7 @@ const Home = () => {
 					<HomeIcon className="nfd-w-8 nfd-h-8" />
 					{__('Home', 'wp-plugin-web')}
 				</Title>
+				<span>{__('Manage your website settings and content.', 'wp-plugin-web')}</span>
 			</Container.Header>
 
 			<Container.Block separator={true} className={'wppw-app-home-coming-soon'}>

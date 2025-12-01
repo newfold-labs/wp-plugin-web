@@ -2,6 +2,7 @@ import { Container, Page, Title } from "@newfold/ui-component-library";
 import { ChevronUpIcon, Cog6ToothIcon, BoltIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 import { useContext, useEffect } from '@wordpress/element';
 import { useLocation } from 'react-router-dom';
+import classNames from 'classnames';
 import AutomaticUpdates from './automaticUpdates';
 import ComingSoon from './comingSoon';
 import CommentSettings from './commentSettings';
@@ -56,59 +57,57 @@ const Settings = () => {
 
 	return (
 		<Page title="Settings" className={"wppw-app-settings-page"}>
-			<div className="wppw-app-settings-page__header nfd-flex nfd-flex-col nfd-gap-y-4">
-				<Title as="h1" className="nfd-flex nfd-items-center nfd-gap-2">
-					<AdjustmentsHorizontalIcon className="nfd-w-8 nfd-h-8" />
-					{__('Settings', 'wp-plugin-web')}
-				</Title>
-				<Title as="h2" className="nfd-font-normal nfd-text-[13px] nfd-color-body">
-					{__('Manage common settings for your website.', 'wp-plugin-web')}
-				</Title>
-			</div>
-			
 			<Container className={'nfd-settings-app-wrapper wppw-app-settings-container'}>
+				<Container.Header className={'wppw-app-settings-header'}>
+					<Title as="h2" className="nfd-flex nfd-items-center nfd-gap-2">
+						<AdjustmentsHorizontalIcon className="nfd-w-8 nfd-h-8" />
+						{__('Settings', 'wp-plugin-web')}
+					</Title>
+					<span>{__('Manage common settings for your website.', 'wp-plugin-web')}</span>
+				</Container.Header>
+
 				<details className="nfd-details settings-app-wrapper settings-details">
-					<summary>
-						<div
-							id={'settings-header'}
-							className={'wppw-app-settings-header'}
-						>
-							<Title as={'h1'} className={'nfd-mb-2 nfd-flex nfd-items-center nfd-gap-2'}>
-								<Cog6ToothIcon className="nfd-w-6 nfd-h-6" />
-								{__('General Settings', 'wp-plugin-web')}
-							</Title>
-							<Title
-								as={'h2'}
-								className="nfd-font-normal nfd-text-[13px]"
+						<summary>
+							<div
+								id={'settings-header'}
+								className={'wppw-app-settings-header'}
 							>
-								{__('Manage common settings for your website', 'wp-plugin-web')}
-							</Title>
-						</div>
-						<span className="nfd-details-icon">
-							<ChevronUpIcon />
-						</span>
-					</summary>
+								<Title as={'h1'} className={'nfd-mb-2 nfd-flex nfd-items-center nfd-gap-2'}>
+									<Cog6ToothIcon className="nfd-w-6 nfd-h-6" />
+									{__('General Settings', 'wp-plugin-web')}
+								</Title>
+								<Title
+									as={'h2'}
+									className="nfd-font-normal nfd-text-[13px]"
+								>
+									{__('Manage common settings for your website', 'wp-plugin-web')}
+								</Title>
+							</div>
+							<span className="nfd-details-icon">
+								<ChevronUpIcon />
+							</span>
+						</summary>
 
-					<Container.Block separator={true} className={
-						classNames(
-							'wppw-app-settings-coming-soon',
-							useContainerBlockIsTarget('coming-soon-section') && 'wppw-animation-blink'
-						)}>
-						<ComingSoon />
-					</Container.Block>
+						<Container.Block separator={true} className={
+							classNames(
+								'wppw-app-settings-coming-soon',
+								useContainerBlockIsTarget('coming-soon-section') && 'wppw-animation-blink'
+							)}>
+							<ComingSoon />
+						</Container.Block>
 
-					<Container.Block separator={true} className={'wppw-app-settings-update'}>
-						<AutomaticUpdates />
-					</Container.Block>
+						<Container.Block separator={true} className={'wppw-app-settings-update'}>
+							<AutomaticUpdates />
+						</Container.Block>
 
-					<Container.Block separator={true} className={'wppw-app-settings-content'}>
-						<ContentSettings />
-					</Container.Block>
+						<Container.Block separator={true} className={'wppw-app-settings-content'}>
+							<ContentSettings />
+						</Container.Block>
 
-					<Container.Block className={'wppw-app-settings-comments'}>
-						<CommentSettings />
-					</Container.Block>
-				</details>
+						<Container.Block className={'wppw-app-settings-comments'}>
+							<CommentSettings />
+						</Container.Block>
+					</details>
 			</Container>
 
 			{isPerformanceEnabled && (
