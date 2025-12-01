@@ -125,8 +125,7 @@ final class Admin {
 			0
 		);
 
-		// If we're outside of App, add subpages to App menu.
-		if ( false === ( isset( $_GET['page'] ) && strpos( filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ), 'web' ) >= 0 ) ) { // phpcs:ignore
+		// Add subpages to App menu.
 			foreach ( self::subpages() as $route => $title ) {
 				\add_submenu_page(
 					'web',
@@ -137,7 +136,6 @@ final class Admin {
 					array( __CLASS__, 'render' )
 				);
 			}
-		}
 	}
 
 	/**
