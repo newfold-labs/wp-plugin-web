@@ -85,6 +85,26 @@ body.toplevel_page_web {
 
 }
 
+// Top Bar Navigation Styles
+.wppw-app-topbar {
+    backdrop-filter: blur(8px);
+    position: relative;
+    width: 100%;
+    
+    .wppw-app-navitem {
+        white-space: nowrap;
+        
+        svg {
+            flex-shrink: 0;
+        }
+    }
+}
+
+// Ensure app container fills properly
+.wppw-app-container {
+    min-height: 100vh;
+}
+
 .wppw {
     color: var(--color-text);
 
@@ -177,7 +197,7 @@ body.toplevel_page_web {
 }
 
 .wppw-app-body {
-    padding: 3.25rem 24px 1rem;
+    padding: 2rem 24px 1rem;
 
     &-inner {
         max-width: 1290px;
@@ -187,7 +207,7 @@ body.toplevel_page_web {
     }
 
     @media screen and (max-width:782px) {
-        padding-top: 2.5rem;
+        padding-top: 1.5rem;
     }
 }
 
