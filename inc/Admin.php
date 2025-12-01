@@ -126,16 +126,16 @@ final class Admin {
 		);
 
 		// Add subpages to App menu.
-			foreach ( self::subpages() as $route => $title ) {
-				\add_submenu_page(
-					'web',
-					$title,
-					$title,
-					'manage_options',
-					$route,
-					array( __CLASS__, 'render' )
-				);
-			}
+		foreach ( self::subpages() as $route => $title ) {
+			\add_submenu_page(
+				'web',
+				$title,
+				$title,
+				'manage_options',
+				$route,
+				array( __CLASS__, 'render' )
+			);
+		}
 	}
 
 	/**
