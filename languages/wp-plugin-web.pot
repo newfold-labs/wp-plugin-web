@@ -1,8 +1,8 @@
-# Copyright (C) 2025 Web.com
+# Copyright (C) 2025 Network Solutions
 # This file is distributed under the GPL 2.0 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Web.com Plugin 2.1.7\n"
+"Project-Id-Version: Network Solutions Plugin 2.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/newfold-labs/wp-plugin-web/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,110 +11,115 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2023-01-11T20:21:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wp-plugin-web\n"
 
 #. Plugin Name of the plugin
 #: wp-plugin-web.php
-msgid "The Web.com Plugin"
+msgid "Network Solutions Plugin"
 msgstr ""
 
 #. Plugin URI of the plugin
 #. Author URI of the plugin
 #: wp-plugin-web.php
-msgid "https://web.com"
+msgid "https://www.networksolutions.com"
 msgstr ""
 
 #. Description of the plugin
 #: wp-plugin-web.php
-msgid "WordPress plugin that integrates a WordPress site with the Web.com control panel, including performance, security, and update features."
+msgid "WordPress plugin that integrates a WordPress site with the Network Solutions control panel, including performance, security, and update features."
 msgstr ""
 
 #. Author of the plugin
 #: wp-plugin-web.php
-#: inc/Admin.php:109
-#: inc/Admin.php:110
-msgid "Web.com"
+#: inc/Admin.php:119
+#: inc/Admin.php:120
+msgid "Network Solutions"
 msgstr ""
 
 #: bootstrap.php:23
-msgid "Please install the Web.com Plugin dependencies."
+msgid "Please install the Network Solutions Plugin dependencies."
 msgstr ""
 
-#: bootstrap.php:59
+#: bootstrap.php:62
 msgid "Coming Soon!"
 msgstr ""
 
-#: bootstrap.php:60
+#: bootstrap.php:63
 msgid "A New WordPress Site"
 msgstr ""
 
 #. translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag, %3$s is replaced with opening link tag taking you to login page, %4$s is replaced with closing link tag, %5$s is replaced with opening link tag taking you to my.web.com, %6$s is replaced with closing link tag
-#: bootstrap.php:63
-msgid "A %1$sWeb.com%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sWeb.com%6$s."
+#: bootstrap.php:66
+#, php-format
+msgid "A %1$sNetwork Solutions%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sNetwork Solutions%6$s."
 msgstr ""
 
 #. translators: %s: Blog name
-#: bootstrap.php:73
+#: bootstrap.php:76
+#, php-format
 msgid "%s &mdash; Coming Soon"
 msgstr ""
 
-#: bootstrap.php:76
+#: bootstrap.php:79
 msgid "Coming Soon Active"
 msgstr ""
 
 #. translators: %1$s is replaced with the opening link tag to preview the page, and %2$s is replaced with the closing link tag, %3$s is the opening link tag, %4$s is the closing link tag.
-#: bootstrap.php:79
+#: bootstrap.php:82
+#, php-format
 msgid "Your site is currently displaying a %1$scoming soon page%2$s. Once you are ready, %3$slaunch your site%4$s."
 msgstr ""
 
-#: bootstrap.php:80
+#: bootstrap.php:83
 msgid "Preview the coming soon landing page"
 msgstr ""
 
 #: inc/Admin.php:60
-#: inc/Admin.php:206
-#: build/2.1.7/index.js:1
+#: inc/Admin.php:216
+#: build/2.2.1/index.js:1
 msgid "Home"
 msgstr ""
 
 #: inc/Admin.php:63
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Marketplace"
 msgstr ""
 
 #. translators: %1$s is the opening <a> tag, %2$s is the closing </a> tag.
 #: inc/Admin.php:68
-#: build/2.1.7/index.js:1
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:1
+#: build/2.2.1/index.js:12
 msgid "Performance"
 msgstr ""
 
 #: inc/Admin.php:72
-#: inc/Admin.php:207
-#: build/2.1.7/index.js:1
+#: inc/Admin.php:217
+#: build/2.2.1/index.js:1
 msgid "Settings"
 msgstr ""
 
 #: inc/Admin.php:75
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Help"
 msgstr ""
 
-#: inc/Admin.php:152
+#: inc/Admin.php:162
 msgid "Please update to a newer WordPress version."
 msgstr ""
 
-#: inc/Admin.php:153
+#: inc/Admin.php:163
 msgid "There are new WordPress components which this plugin requires in order to render the interface."
 msgstr ""
 
-#: inc/Admin.php:154
+#: inc/Admin.php:164
 msgid "Please update now"
 msgstr ""
 
-#: inc/Admin.php:220
-msgid "Thank you for creating with <a href=\"https://wordpress.org/\">WordPress</a> and <a href=\"https://web.com/about-us\">Web.com</a>."
+#. translators: %1$s is the WordPress URL, %2$s is the Web.com URL.
+#: inc/Admin.php:235
+#, php-format
+msgid "Thank you for creating with %1$s and %2$s"
 msgstr ""
 
 #: inc/AdminBar.php:35
@@ -127,16 +132,19 @@ msgstr ""
 
 #. translators: 1: plugin name 2: incompatible plugin name
 #: inc/plugin-nfd-compat-check.php:161
+#, php-format
 msgid "\"%1$s\" has self-deactivated. It is incompatible with \"%2$s\"."
 msgstr ""
 
 #. translators: 1: legacy plugin name 2: plugin name
 #: inc/plugin-nfd-compat-check.php:188
+#, php-format
 msgid "\"%1$s\" has been deactivated. It is incompatible with \"%2$s\"."
 msgstr ""
 
 #. translators: 1: plugin name 2: minimum required PHP version, current PHP version
 #: inc/plugin-php-compat-check.php:123
+#, php-format
 msgid "%1$s requires PHP version %2$s or later. You are currently running version %3$s."
 msgstr ""
 
@@ -146,16 +154,19 @@ msgstr ""
 
 #. translators: 1: plugin name 2: required PHP extension
 #: inc/plugin-php-compat-check.php:139
+#, php-format
 msgid "%1$s requires the %2$s PHP extension."
 msgstr ""
 
 #. translators: 1: plugin name 2: minimum required WordPress version 3: current WordPress version
 #: inc/plugin-php-compat-check.php:155
+#, php-format
 msgid "%1$s requires WordPress version %2$s or later. You are currently running version %3$s."
 msgstr ""
 
 #. translators: plugin name
 #: inc/plugin-php-compat-check.php:193
+#, php-format
 msgid "The \"%s\" plugin has been deactivated."
 msgstr ""
 
@@ -168,245 +179,222 @@ msgstr ""
 #: inc/updates.php:115
 #: inc/updates.php:143
 #: inc/updates.php:170
-msgid "Auto-updates enabled on the <a href=\"%s\">Web.com > Settings</a> page."
+#, php-format
+msgid "Auto-updates enabled on the <a href=\"%s\">Network Solutions > Settings</a> page."
 msgstr ""
 
 #: inc/updates.php:166
 msgid "Auto-updates enabled"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Web WordPress Plugin"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Oh No, An Error!"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "You found an error, please refresh the page and try again!"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "If the error persists, please contact support."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid " Error code: "
 msgstr ""
 
-#: build/2.1.7/index.js:1
-msgid "Web Account"
+#: build/2.2.1/index.js:1
+msgid "Network Solutions Account"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "There's nothing here!"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Admin"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "The performance feature provides improvements to loads faster for visitors including cache settings."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Sorry, that is not allowed."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "This feature cannot currently be modified."
 msgstr ""
 
-#: build/2.1.7/index.js:1
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:1
+#: build/2.2.1/index.js:12
 msgid "Oops! Something went wrong. Please try again."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Chat"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Chat with our sales and support team for quick, helpful answers to questions about product features, pricing and more. Our chat agents are available 24/7."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Live Chat"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Phone"
 msgstr ""
 
-#: build/2.1.7/index.js:1
-msgid "Speak to our award-winning support team over the phone at 866-227-1474. Our customer service hours are 7:00am - 12:00am ET."
+#: build/2.2.1/index.js:1
+msgid "Speak to our award-winning support team over the phone at 855-834-8495. Our customer service hours are 8:00am - 11:00pm ET."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Call Us"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Tweet"
 msgstr ""
 
-#: build/2.1.7/index.js:1
-msgid "Find our team at @webdotcom for updates on our products and support from our team."
+#: build/2.2.1/index.js:1
+msgid "Find our team at @netsolcares for updates on our products and support from our team."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Tweet Us"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Knowledge Base"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Our experts share their experience and well-organized guides to common questions."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Find Answers"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Blog"
 msgstr ""
 
-#: build/2.1.7/index.js:1
-msgid "Learn best practices, get insider tips and find the latest news about Web.com."
+#: build/2.2.1/index.js:1
+msgid "Learn best practices, get insider tips and find the latest news about Network Solutions."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Learn Stuff"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Video Tutorials"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Check out our video library of step-by-step tutorials."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Watch Now"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Settings and Performance"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Customize & fine-tune your site."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Manage Settings"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Manage your site settings. You can ajdust automatic updates, comments, revisions and more."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Manage site performance and caching settings as well as clear the site cache."
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Visit Marketplace"
 msgstr ""
 
-#: build/2.1.7/index.js:1
+#: build/2.2.1/index.js:1
 msgid "Add site services, themes or plugins from the marketplace."
 msgstr ""
 
-#: build/2.1.7/index.js:1
-msgid "Explore our featured collection of tools and services."
-msgstr ""
-
-#: build/2.1.7/index.js:1
-msgid "Oops, there was an error loading the marketplace, please try again later."
-msgstr ""
-
-#: build/2.1.7/index.js:1
-msgid "Sorry, no marketplace items. Please, try again later."
-msgstr ""
-
-#: build/2.1.7/index.js:1
-msgid "Load More"
-msgstr ""
-
-#: build/2.1.7/index.js:1
-msgid "Oops! Something Went Wrong"
-msgstr ""
-
-#: build/2.1.7/index.js:1
-msgid "An error occurred while loading the content. Please try again later."
-msgstr ""
-
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "This is where you can manage cache settings for your website."
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Site Status"
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Not Live"
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Live"
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Coming soon page"
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Your Coming Soon page lets you hide your site from visitors while you make the magic happen."
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Your website is currently displaying a \"Coming Soon\" page."
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Manage All Updates"
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "WordPress Core"
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Plugins"
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Themes"
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Automatic Updates"
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid "Keeping automatic updates on ensures timely security fixes and the latest features."
 msgstr ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid " day."
 msgid_plural " days."
 msgstr[0] ""
 msgstr[1] ""
 
-#: build/2.1.7/index.js:6
+#: build/2.2.1/index.js:12
 msgid " comment at a time."
 msgid_plural " comments at a time."
 msgstr[0] ""
