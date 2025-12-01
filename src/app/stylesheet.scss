@@ -313,8 +313,14 @@ body.toplevel_page_web {
 }
 
 // Settings page layout adjustments
-.nfd-settings-app-wrapper {
-    margin-bottom: 1rem;
+.wppw-app-settings-container {
+    padding-bottom: 1.5rem;
+    
+    .nfd-details {
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    }
 }
 
 // Performance accordion specific styles
