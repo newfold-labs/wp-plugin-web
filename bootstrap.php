@@ -20,7 +20,7 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 	require __DIR__ . '/vendor/autoload.php';
 } else {
 	if ( 'local' === wp_get_environment_type() ) {
-		wp_die( esc_html( __( 'Please install the Web.com Plugin dependencies.', 'wp-plugin-web' ) ) );
+		wp_die( esc_html( __( 'Please install the Network Solutions Plugin dependencies.', 'wp-plugin-web' ) ) );
 	}
 	return;
 }
@@ -52,39 +52,50 @@ $web_module_container->set(
 );
 
 // Set coming soon values
-$web_module_container->set(
-	'comingsoon',
-	array(
-		'admin_app_url'       => admin_url( 'admin.php?page=web#/home' ),
-		'template_h1'         => __( 'Coming Soon!', 'wp-plugin-web' ),
-		'template_h2'         => __( 'A New WordPress Site', 'wp-plugin-web' ),
-		'template_footer_t'   => sprintf(
-			/* translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag, %3$s is replaced with opening link tag taking you to login page, %4$s is replaced with closing link tag, %5$s is replaced with opening link tag taking you to my.web.com, %6$s is replaced with closing link tag */
-			esc_html__( 'A %1$sWeb.com%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sWeb.com%6$s.', 'wp-plugin-web' ) . '&nbsp;',
-			'<a href="' . esc_url( 'https://www.web.com/websites/wordpress' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
-			'</a>',
-			'<a href="' . esc_url( wp_login_url() ) . '">',
-			'</a>',
-			'<a href="' . esc_url( 'https://www.web.com/my-account/account-center/login' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
-			'</a>'
-		),
-		'template_page_title' => sprintf(
-			/* translators: %s: Blog name */
-			__( '%s &mdash; Coming Soon', 'wp-plugin-web' ),
-			esc_html( get_option( 'blogname' ) )
-		),
-		'admin_bar_text'      => '<div style="background-color: #FEC101; color: #000; padding: 0 1rem;">' . __( 'Coming Soon Active', 'wp-plugin-web' ) . '</div>',
-		'admin_notice_text'   => sprintf(
-			/* translators: %1$s is replaced with the opening link tag to preview the page, and %2$s is replaced with the closing link tag, %3$s is the opening link tag, %4$s is the closing link tag. */
-			__( 'Your site is currently displaying a %1$scoming soon page%2$s. Once you are ready, %3$slaunch your site%4$s.', 'wp-plugin-web' ),
-			'<a href="' . get_home_url() . '?preview=coming_soon" title="' . __( 'Preview the coming soon landing page', 'wp-plugin-web' ) . '">',
-			'</a>',
-			'<a href="' . esc_url( admin_url( 'admin.php?page=web#/home' ) ) . '">',
-			'</a>'
-		),
-		'template_styles'     => esc_url( WEB_PLUGIN_URL . 'assets/styles/coming-soon.css' ),
-	)
+add_filter(
+	'newfold/coming-soon/filter/args',
+	function ( $args, $default_args ) {
+
+		$args = wp_parse_args(
+			array(
+				'admin_app_url'       => admin_url( 'admin.php?page=web#/home' ),
+				'template_h1'         => __( 'Coming Soon!', 'wp-plugin-web' ),
+				'template_h2'         => __( 'A New WordPress Site', 'wp-plugin-web' ),
+				'template_footer_t'   => sprintf(
+				/* translators: %1$s is replaced with opening link tag taking you to web.com/wordpress, %2$s is replaced with closing link tag, %3$s is replaced with opening link tag taking you to login page, %4$s is replaced with closing link tag, %5$s is replaced with opening link tag taking you to my.web.com, %6$s is replaced with closing link tag */
+					esc_html__( 'A %1$sNetwork Solutions%2$s powered website. Is this your website? Log in to %3$sWordPress%4$s or %5$sNetwork Solutions%6$s.', 'wp-plugin-web' ) . '&nbsp;',
+					'<a href="' . esc_url( 'https://www.networksolutions.com/websites/wordpress' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
+					'</a>',
+					'<a href="' . esc_url( wp_login_url() ) . '">',
+					'</a>',
+					'<a href="' . esc_url( 'https://www.networksolutions.com/my-account/account-center/login' ) . '" target="_blank" rel="noopener noreferrer nofollow">',
+					'</a>'
+				),
+				'template_page_title' => sprintf(
+				/* translators: %s: Blog name */
+					__( '%s &mdash; Coming Soon', 'wp-plugin-web' ),
+					esc_html( get_option( 'blogname' ) )
+				),
+				'admin_bar_text'      => '<div style="background-color: #FEC101; color: #000; padding: 0 1rem;">' . __( 'Coming Soon Active', 'wp-plugin-web' ) . '</div>',
+				'admin_notice_text'   => sprintf(
+				/* translators: %1$s is replaced with the opening link tag to preview the page, and %2$s is replaced with the closing link tag, %3$s is the opening link tag, %4$s is the closing link tag. */
+					__( 'Your site is currently displaying a %1$scoming soon page%2$s. Once you are ready, %3$slaunch your site%4$s.', 'wp-plugin-web' ),
+					'<a href="' . get_home_url() . '?preview=coming_soon" title="' . __( 'Preview the coming soon landing page', 'wp-plugin-web' ) . '">',
+					'</a>',
+					'<a href="' . esc_url( admin_url( 'admin.php?page=web#/home' ) ) . '">',
+					'</a>'
+				),
+				'template_styles'     => esc_url( WEB_PLUGIN_URL . 'assets/styles/coming-soon.css' ),
+			),
+			$default_args
+		);
+
+		return $args;
+	},
+	10,
+	2
 );
+
 setContainer( $web_module_container );
 
 // Set up the updater endpoint and map values

@@ -1,6 +1,6 @@
 import { Button } from '@wordpress/components';
 import { Title } from '@newfold/ui-component-library';
-import { ReactComponent as Brand } from '../../../../assets/svg/web-logo.svg';
+import { ReactComponent as Brand } from '../../../../assets/svg/ns-logo.svg';
 import { delay } from 'lodash';
 
 const Mark = () => {

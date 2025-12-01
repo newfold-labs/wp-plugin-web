@@ -1,6 +1,6 @@
 <?php
 /**
- * Web.com WordPress Plugin
+ * Network Solutions WordPress Plugin
  *
  * @package           WPPluginWeb
  * @author            Newfold Digital
@@ -8,16 +8,16 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       The Web.com Plugin
- * Plugin URI:        https://web.com
+ * Plugin Name:       Network Solutions Plugin
+ * Plugin URI:        https://www.networksolutions.com
  * Update URI:        https://github.com/newfold-labs/wp-plugin-web/
- * Description:       WordPress plugin that integrates a WordPress site with the Web.com control panel, including performance, security, and update features.
- * Version:           2.1.7
- * Requires at least: 6.5
- * Requires PHP:      7.1
- * Tested up to:      6.7.2
- * Author:            Web.com
- * Author URI:        https://web.com
+ * Description:       WordPress plugin that integrates a WordPress site with the Network Solutions control panel, including performance, security, and update features.
+ * Version:           2.2.0
+ * Requires at least: 6.6
+ * Requires PHP:      7.4
+ * Tested up to:      6.8.1
+ * Author:            Network Solutions
+ * Author URI:        https://www.networksolutions.com
  * Text Domain:       wp-plugin-web
  * Domain Path:       /languages
  * License:           GPL 2.0 or later
@@ -32,7 +32,7 @@ if ( defined( 'WEB_PLUGIN_VERSION' ) ) {
 }
 
 // Define constants
-define( 'WEB_PLUGIN_VERSION', '2.1.7' );
+define( 'WEB_PLUGIN_VERSION', '2.2.0' );
 define( 'WEB_PLUGIN_FILE', __FILE__ );
 define( 'WEB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WEB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

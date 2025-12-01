@@ -2,7 +2,7 @@ import { LockClosedIcon, LockOpenIcon } from "@heroicons/react/24/outline";
 import { NewfoldRuntime } from "@newfold/wp-module-runtime";
 import { Button } from "@newfold/ui-component-library";
 import { WordPressIcon } from "../icons";
-import { ReactComponent as WebIcon } from '../../../../assets/svg/web-icon-white.svg';
+import { ReactComponent as NSIcon } from '../../../../assets/svg/ns-icon-image.svg';
 
 export const SiteInfoBar = () => {
     const { url, title } = NewfoldRuntime.siteDetails;
@@ -38,17 +38,17 @@ export const SiteInfoBar = () => {
                     <Button 
                         as="a"
                         id="site_info_portal_button"
-                        href='https://www.web.com/my-account/home'
+                        href= { window.NewfoldRuntime.linkTracker.addUtmParams( 'https://www.networksolutions.com/my-account/' ) }
                         target="_blank"
                         variant="primary" 
                         className="nfd-bg-primary-400 nfd-text-tiny nfd-w-full min-[400px]:nfd-w-auto">
-                        <WebIcon />
-                        { __("Web Account", "wp-plugin-web") }
+                        <NSIcon />
+                        { __("Network Solutions Account", "wp-plugin-web") }
                     </Button>
                     <Button 
                         as="a" 
                         id="site_info_site_button"
-                        href={(isEcommerce && isStore) ? `${url}/shop` : url}
+                        href={(isEcommerce && isStore) ? window.NewfoldRuntime.linkTracker.addUtmParams(`${url}/shop`) : window.NewfoldRuntime.linkTracker.addUtmParams( url )}
                         target="_blank" 
                         variant="primary" 
                         className="nfd-bg-white nfd-text-[#212936] nfd-text-tiny nfd-w-full min-[400px]:nfd-w-auto"
