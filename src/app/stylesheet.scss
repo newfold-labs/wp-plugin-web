@@ -313,6 +313,17 @@ body.toplevel_page_web {
 }
 
 // Settings page layout adjustments
+.wppw-app-settings-page {
+    border: 1px solid var(--color-border) !important;
+    border-radius: 4px;
+    background-color: var(--color-white);
+    padding: 1.5rem;
+    
+    @media screen and (max-width: 782px) {
+        padding: 1rem;
+    }
+}
+
 .wppw-app-settings-page__header {
     padding: 0 0 1.5rem 0;
 }
