@@ -1,4 +1,3 @@
-import { Button } from '@wordpress/components';
 import { Title } from '@newfold/ui-component-library';
 import { ReactComponent as Brand } from '../../../../assets/svg/ns-logo.svg';
 import { delay } from 'lodash';
@@ -13,19 +12,20 @@ const Mark = () => {
 		}, 500 );
 	};
 	return (
-		<Button
-			icon={ <Brand className="wppw-logo" /> }
-			style={ { width: '160px', height: 'auto' } }
+		<a
+			className="logo-mark"
+			style={ { display: 'block', width: '160px', height: 'auto' } }
 			onMouseUp={ defocus }
-			className="logo-mark nfd-p-0"
 			href="#/home"
-		/>
+		>
+			<Brand className="wppw-logo" />
+		</a>
 	);
 };
 
 const Logo = () => {
 	return (
-		<div className="wppw-logo-wrap">
+		<div className="wppw-logo-wrap" style={ { paddingTop: '12px', paddingBottom: '12px' } }>
 			<Mark />
 			<Title as="h2" className="screen-reader-text">
 				{ __( 'Web WordPress Plugin', 'wp-plugin-web' ) }

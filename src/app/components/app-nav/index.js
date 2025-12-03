@@ -223,7 +223,7 @@ export const TopBarNav = () => {
 
 	return (
 		<header className="wppw-app-topbar nfd-border-b nfd-border-line nfd-bg-white nfd-shadow-sm">
-			<div className="nfd-flex nfd-justify-between nfd-items-center nfd-px-4 nfd-h-16">
+			<div className="nfd-flex nfd-justify-between nfd-items-center nfd-px-4 nfd-min-h-16">
 				<div className="nfd-flex nfd-items-center nfd-gap-8">
 					<div className="nfd-shrink-0">
 						<Logo />
