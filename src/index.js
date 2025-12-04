@@ -1,6 +1,12 @@
 /* Use PHP-provided URL to current version's build directory instead of root */
 import './webpack-public-path';
 
+// Initialize portal registry before anything else
+import './portalRegistry';
+
+// Initialize menu active state handler
+import './app/util/menuActiveState';
+
 import App from './app';
 import domReady from '@wordpress/dom-ready';
 import { createRoot, render } from '@wordpress/element';

@@ -20,7 +20,7 @@ const SettingsSection = () => {
 				<ActionField
 					label={__("Performance", "wp-plugin-web")}
 					buttonLabel={__("Performance", "wp-plugin-web")}
-					href={window.NewfoldRuntime.linkTracker.addUtmParams("admin.php?page=web#/performance")}
+					href={window.NewfoldRuntime.linkTracker.addUtmParams("admin.php?page=web#/settings/performance")}
 					className={"wppw-app-home-performance-action"}
 				>
 					{__('Manage site performance and caching settings as well as clear the site cache.', 'wp-plugin-web')}

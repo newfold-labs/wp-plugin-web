@@ -1,55 +1,27 @@
-import AppStore from '../../data/store';
-import { Page, Container } from "@newfold/ui-component-library";
-import { useState, useEffect, useContext, Fragment } from '@wordpress/element';
-import apiFetch from '@wordpress/api-fetch';
-import { useUpdateEffect } from 'react-use';
-import { NewfoldRuntime } from "@newfold/wp-module-runtime";
-import { useNotification } from 'App/components/notifications';
-import { 
-    webSettingsApiFetch as newfoldSettingsApiFetch, 
-    webPurgeCacheApiFetch as newfoldPurgeCacheApiFetch
-} from '../../util/helpers';
-
-import { default as NewfoldPerformance } from '@modules/wp-module-performance/components/performance/';
+import { useEffect } from '@wordpress/element';
 
 const PerformancePage = () => {
 
-    // constants to pass to module
-    const moduleConstants = {};
+	useEffect(() => {
+		// Register the performance portal when component mounts
+		const performancePortal = document.getElementById('performance-portal');
+		if (performancePortal && window.NFDPortalRegistry) {
+			window.NFDPortalRegistry.registerPortal('performance', performancePortal);
+		}
 
-    // methods to pass to module
-    const moduleMethods = {
-        apiFetch,
-        useState,
-        useEffect,
-        useContext,
-        NewfoldRuntime,
-        useNotification,
-        newfoldSettingsApiFetch,
-        newfoldPurgeCacheApiFetch,
-        useUpdateEffect,
-        AppStore,
-    };
-
-	const moduleComponents = {
-        Fragment,
-	}
+		// Clean up when component unmounts
+		return () => {
+			if (window.NFDPortalRegistry) {
+				window.NFDPortalRegistry.unregisterPortal('performance');
+			}
+		};
+	}, []);
 
 	return (
-		<Page title="Performance" className={"wppw-app-settings-page"}>
-			<Container className={'wppw-app-settings-container'}>
-                <Container.Header
-                    title={__('Performance', 'wp-plugin-web')}
-                    description={__('This is where you can manage cache settings for your website.', 'wp-plugin-web')}
-                    className={'wppw-app-settings-header'}
-                />
-                <NewfoldPerformance
-                    constants={moduleConstants}
-                    methods={moduleMethods}
-                    Components={moduleComponents}
-                />
-            </Container>
-		</Page>
+		<div className="wppw-app-performance-page">
+			{/* The performance module will render its complete UI into this div via portal */}
+			<div id="performance-portal"></div>
+		</div>
 	);
 };
 

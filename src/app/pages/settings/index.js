@@ -1,40 +1,139 @@
-import { Container, Page } from "@newfold/ui-component-library";
+import { Container, Page, Title } from "@newfold/ui-component-library";
+import { ChevronUpIcon, Cog6ToothIcon, BoltIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
+import { useContext, useEffect } from '@wordpress/element';
+import { useLocation } from 'react-router-dom';
+import classNames from 'classnames';
 import AutomaticUpdates from './automaticUpdates';
 import ComingSoon from './comingSoon';
 import CommentSettings from './commentSettings';
 import ContentSettings from './contentSettings';
 import useContainerBlockIsTarget from 'App/util/hooks/useContainerBlockTarget';
+import AppStore from 'App/data/store';
 
 const Settings = () => {
+	const { store } = useContext( AppStore );
+	const isPerformanceEnabled = store.features?.performance ?? true;
+	const location = useLocation();
+
+	useEffect(() => {
+		// Register the performance portal when component mounts
+		const performancePortal = document.getElementById('performance-portal');
+		if (performancePortal && window.NFDPortalRegistry) {
+			window.NFDPortalRegistry.registerPortal('performance', performancePortal);
+		}
+
+		// Clean up when component unmounts
+		return () => {
+			if (window.NFDPortalRegistry) {
+				window.NFDPortalRegistry.unregisterPortal('performance');
+			}
+		};
+	}, []);
+
+	// Auto-open accordion sections based on URL hash
+	useEffect(() => {
+		const path = location.pathname;
+
+		// Close all accordion sections first
+		const allDetails = document.querySelectorAll('.nfd-details');
+		allDetails.forEach((details) => {
+			details.removeAttribute('open');
+		});
+
+		// Map URL paths to accordion selectors
+		const accordionMap = {
+			'/settings/performance': '.performance-details',
+		};
+
+		// Open the appropriate accordion section
+		const targetSelector = accordionMap[path];
+		if (targetSelector) {
+			const targetDetails = document.querySelector(targetSelector);
+			if (targetDetails) {
+				targetDetails.setAttribute('open', 'true');
+			}
+		}
+	}, [location.pathname]);
+
 	return (
 		<Page title="Settings" className={"wppw-app-settings-page"}>
-			<Container className={'wppw-app-settings-container'}>
-				<Container.Header
-					title={__('Settings', 'wp-plugin-web')}
-					description={__('This is where you can manage common settings for your website.', 'wp-plugin-web')}
-					className={'wppw-app-settings-header'}
-				/>
+			<Container className={'nfd-settings-app-wrapper wppw-app-settings-container'}>
+				<Container.Header className={'wppw-app-settings-header'}>
+					<Title as="h2" className="nfd-flex nfd-items-center nfd-gap-2">
+						<AdjustmentsHorizontalIcon className="nfd-w-8 nfd-h-8" />
+						{__('Settings', 'wp-plugin-web')}
+					</Title>
+					<span>{__('Manage common settings for your website.', 'wp-plugin-web')}</span>
+				</Container.Header>
 
-				<Container.Block separator={true} className={
-					classNames(
-						'wppw-app-settings-coming-soon',
-						useContainerBlockIsTarget( 'coming-soon-section' ) && 'wppbh-animation-blink'
-					)}>
-					<ComingSoon />
-				</Container.Block>
+				<details className="nfd-details settings-details">
+					<summary>
+						<div
+							id={'settings-header'}
+							className={'wppw-app-settings-header'}
+						>
+							<Title as={'h1'} className={'nfd-mb-2 nfd-flex nfd-items-center nfd-gap-2'}>
+								<Cog6ToothIcon className="nfd-w-6 nfd-h-6" />
+								{__('General Settings', 'wp-plugin-web')}
+							</Title>
+							<Title
+								as={'h2'}
+								className="nfd-font-normal nfd-text-[13px]"
+							>
+								{__('Manage common settings for your website', 'wp-plugin-web')}
+							</Title>
+						</div>
+						<span className="nfd-details-icon">
+							<ChevronUpIcon />
+						</span>
+					</summary>
 
-				<Container.Block separator={true} className={'wppw-app-settings-update'}>
-					<AutomaticUpdates />
-				</Container.Block>
+					<Container.Block separator={true} className={
+						classNames(
+							'wppw-app-settings-coming-soon',
+							useContainerBlockIsTarget('coming-soon-section') && 'wppw-animation-blink'
+						)}>
+						<ComingSoon />
+					</Container.Block>
 
-				<Container.Block separator={true} className={'wppw-app-settings-content'}>
-					<ContentSettings />
-				</Container.Block>
+					<Container.Block separator={true} className={'wppw-app-settings-update'}>
+						<AutomaticUpdates />
+					</Container.Block>
 
-				<Container.Block className={'wppw-app-settings-comments'}>
-					<CommentSettings />
-				</Container.Block>
+					<Container.Block separator={true} className={'wppw-app-settings-content'}>
+						<ContentSettings />
+					</Container.Block>
 
+					<Container.Block className={'wppw-app-settings-comments'}>
+						<CommentSettings />
+					</Container.Block>
+				</details>
+
+				{isPerformanceEnabled && (
+					<details 
+						id="nfd-performance"
+						className="nfd-details performance-details"
+					>
+						<summary>
+							<div className="nfd-details-content">
+								<Title as={'h1'} className={'nfd-mb-2 nfd-flex nfd-items-center nfd-gap-2'}>
+									<BoltIcon className="nfd-w-6 nfd-h-6" />
+									{__('Performance', 'wp-plugin-web')}
+								</Title>
+								<Title 
+									as={'h2'}
+									className="nfd-font-normal nfd-text-[13px]"
+								>
+									{__('Optimize your website by managing cache and performance settings', 'wp-plugin-web')}
+								</Title>
+							</div>
+							<span className="nfd-details-icon">
+								<ChevronUpIcon />
+							</span>
+						</summary>
+						<div id="performance-portal"></div>
+					</details>
+				)}
 			</Container>
 		</Page>
 	);
