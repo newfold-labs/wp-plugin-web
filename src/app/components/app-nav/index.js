@@ -210,13 +210,108 @@ export const MobileNav = () => {
 	);
 }
 
-export const AppNav = () => {
+export const TopBarNav = () => {
+	const [isOpen, setIsOpen] = useState(false);
 	const isLargeViewport = useViewportMatch('medium');
+	let location = useLocation();
+	const hashedPath = '#' + location.pathname;
+	
+	// Close mobile nav when location changes
+	useEffect(() => {
+		setIsOpen(false);
+	}, [location]);
 
 	return (
-		<>
-			{(isLargeViewport && <SideNav />) || <MobileNav />}
-		</>
+		<header className="wppw-app-topbar nfd-border-b nfd-border-line nfd-bg-white nfd-shadow-sm">
+			<div className="nfd-flex nfd-justify-between nfd-items-center nfd-px-4 nfd-min-h-16">
+				<div className="nfd-flex nfd-items-center nfd-gap-8">
+					<div className="nfd-shrink-0">
+						<Logo />
+					</div>
+					
+					{/* Desktop Navigation - Horizontal Menu */}
+					{isLargeViewport && (
+						<nav className="nfd-hidden min-[783px]:nfd-flex nfd-items-center nfd-gap-1">
+							{topRoutes.map(
+								(page) => (
+									true === page.condition && (
+										<NavLink
+											key={page.name}
+											onClick={(page.action && page.action instanceof Function) ? page.action : null}
+											to={page.name}
+											className={`wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-[#E2E8F0] nfd-transition-colors`}
+										>
+											{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
+											{page.title}
+										</NavLink>
+									)
+							))}
+							<div className="nfd-h-6 nfd-w-px nfd-bg-[#D8DEE4] nfd-mx-2"></div>
+							{utilityRoutes.map((page) => (
+								<NavLink
+									key={page.name}
+									onClick={(page.action && page.action instanceof Function) ? page.action : null}
+									to={page.name}
+									className={`wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-[#E2E8F0] nfd-transition-colors`}
+								>
+									{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
+									{page.title}
+								</NavLink>
+							))}
+						</nav>
+					)}
+				</div>
 
+				{/* Mobile Menu Button */}
+				{!isLargeViewport && (
+					<button
+						id="nfd-app-mobile-nav"
+						role="button"
+						className="nfd-h-16 nfd-px-4 nfd-text-body nfd-flex nfd-items-center focus:nfd-outline-none focus:nfd-ring-2 focus:nfd-ring-inset focus:nfd-ring-primary min-[783px]:nfd-hidden"
+						onClick={() => { setIsOpen(true) }}
+					>
+						<span className="nfd-sr-only">Open Navigation Menu</span>
+						<Bars3Icon className="nfd-w-6 nfd-h-6" />
+					</button>
+				)}
+
+				{/* Mobile Navigation Modal */}
+				<Modal
+					isOpen={isOpen}
+					onClose={() => setIsOpen(false)}
+					className="wppw-app-sidenav-mobile nfd-z-40"
+					initialFocus
+				>
+					<Modal.Panel className="nfd-p-0 nfd-overflow-visible">
+						<div className="wppw-app-sidenav nfd-p-5 nfd-max-h-[70vh] nfd-overflow-y-auto">
+							<SideNavMenu />
+						</div>
+					</Modal.Panel>
+				</Modal>
+			</div>
+
+			{/* Notifications for desktop */}
+			{isLargeViewport && (
+				<div className="nfd-hidden">
+					<NewfoldNotifications
+						constants={ {
+							context: 'web-app-nav',
+							page: hashedPath,
+						} }
+						methods={ {
+							apiFetch,
+							addQueryArgs,
+							filter,
+							useState,
+							useEffect,
+						} }
+					/>
+				</div>
+			)}
+		</header>
 	);
+}
+
+export const AppNav = () => {
+	return <TopBarNav />;
 }

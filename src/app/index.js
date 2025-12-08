@@ -99,7 +99,7 @@ export const App = () => (
 		<Root context={{ isRtl: false }}>
 			<NotificationFeed>
 				<Router>
-					<div className="wppw-app-container min-[783px]:nfd-p-8 min-[783px]:nfd-flex nfd-gap-6 nfd-max-w-full xl:nfd-max-w-screen-xl 2xl:nfd-max-w-screen-2xl nfd-my-0">
+					<div className="wppw-app-container nfd-flex nfd-flex-col">
 						<AppNav />
 						<AppBody />
 					</div>
