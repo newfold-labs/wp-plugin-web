@@ -265,4 +265,22 @@ describe('Settings Page', { testIsolation: true }, () => {
 
 	});
 
+	it('Wonder Blocks feature enabled', () => {
+		cy
+			.get( appClass + '-app-settings-wonder-blocks')
+			.scrollIntoView()
+			.should('be.visible');
+		// Ensure wonderblocks-toggle is enabled (true) before starting the test
+		cy.get('[data-id="wonderblocks-toggle"]').then(($toggle) => {
+			if ($toggle.attr('aria-checked') === 'false') {
+				cy.wrap($toggle).click();
+				cy.wait(500);
+			}
+		});
+		cy.visit( "wp-admin/edit.php?post_type=page" );
+		cy.wait(500);
+		cy.get( '.nfd-wba-cta-edit-screen' ).should('be.visible');
+
+	});
+
 });

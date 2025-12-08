@@ -9,6 +9,7 @@ import CommentSettings from './commentSettings';
 import ContentSettings from './contentSettings';
 import useContainerBlockIsTarget from 'App/util/hooks/useContainerBlockTarget';
 import AppStore from 'App/data/store';
+import WonderBlockSettings from "./wonderBlockSettings";
 
 const Settings = () => {
 	const { store } = useContext( AppStore );
@@ -98,6 +99,18 @@ const Settings = () => {
 
 					<Container.Block separator={true} className={'wppw-app-settings-update'}>
 						<AutomaticUpdates />
+					</Container.Block>
+
+					<Container.Block separator={true} className={'wppw-app-settings-wonder-blocks'}>
+						<Container.SettingsField
+								title={ __( 'Features', 'wp-plugin-web' ) }
+								description={ __(
+									'Customize the available features as you manage your website.',
+									'wp-plugin-web'
+								) }
+							>
+								<WonderBlockSettings />
+						</Container.SettingsField>
 					</Container.Block>
 
 					<Container.Block separator={true} className={'wppw-app-settings-content'}>
