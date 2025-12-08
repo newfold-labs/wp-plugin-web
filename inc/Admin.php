@@ -83,7 +83,6 @@ final class Admin {
 		echo 'ul#adminmenu a.toplevel_page_web.wp-has-current-submenu:after, ul#adminmenu>li#toplevel_page_web.current>a.current:after { border-right-color: #fff !important; }';
 		echo 'li#toplevel_page_web > ul > li.wp-first-item { display: none !important; }';
 		echo '#wp-toolbar #wp-admin-bar-web-coming_soon .ab-item { padding: 0; }';
-		echo '.nfd-portal-apps { position: fixed; top: -9999px; left: -9999px; }';
 		echo '</style>';
 	}
 
@@ -131,10 +130,16 @@ final class Admin {
 
 		if ( version_compare( $wp_version, '5.4', '>=' ) ) {
 			echo '<div id="wppw-app" class="wppw wppw_app"></div>' . PHP_EOL;
-			// Add root element for performance portal app
-			echo '<div id="nfd-portal-apps" class="nfd-portal-apps">' . PHP_EOL;
-			echo '<div id="nfd-performance-portal"></div>' . PHP_EOL;
-			echo '</div>' . PHP_EOL;
+			// Render bootstrap containers for modules that need portals
+			// Only enabled features get their containers rendered
+			$features_with_portals = array( 'performance' );
+			foreach ( $features_with_portals as $feature ) {
+				if ( function_exists( 'NewfoldLabs\WP\Module\Features\isEnabled' ) &&
+					\NewfoldLabs\WP\Module\Features\isEnabled( $feature ) ) {
+					$portal_id = 'nfd-' . $feature . '-portal';
+					echo '<div id="' . esc_attr( $portal_id ) . '" style="display:none"></div>' . PHP_EOL;
+				}
+			}
 		} else {
 			// fallback messaging for WordPress older than 5.4.
 			echo '<div id="wppw-app" class="wppw wppw_app">' . PHP_EOL;
