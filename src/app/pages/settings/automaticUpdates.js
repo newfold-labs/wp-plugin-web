@@ -5,15 +5,9 @@ import { useState } from '@wordpress/element';
 import { Alert, Container, ToggleField } from "@newfold/ui-component-library";
 import { useNotification } from 'App/components/notifications';
 
-const AutomaticUpdatesAll = ({ setError, notify }) => {
+const AutomaticUpdatesAll = ({ setError, notify, setAutoUpdatesAll, autoUpdatesAll }) => {
 	const { store, setStore } = useContext(AppStore);
-	const [autoUpdatesAll, setAutoUpdatesAll] = useState(
-		store.autoUpdatesMajorCore &&
-		store.autoUpdatesPlugins &&
-		store.autoUpdatesThemes
-		? true
-		: false
-	);
+
 
 	const getAllNoticeTitle = () => {
 		return autoUpdatesAll
@@ -28,8 +22,17 @@ const AutomaticUpdatesAll = ({ setError, notify }) => {
 
 	const toggleAutoUpdatesAll = () => {
 		if ( autoUpdatesAll ) { // is unchecking
-			// just uncheck this one
-			setAutoUpdatesAll(!autoUpdatesAll);
+			webSettingsApiFetch(
+				{ 
+					autoUpdatesMajorCore: false,
+					autoUpdatesPlugins: false,
+					autoUpdatesThemes: false
+				}, 
+				setError, 
+				(response) => {
+					setAutoUpdatesAll(!autoUpdatesAll);
+				}
+			);
 		} else { // is checking
 			webSettingsApiFetch(
 				{ 
@@ -86,7 +89,7 @@ const AutomaticUpdatesAll = ({ setError, notify }) => {
 	);
 }
 
-const AutomaticUpdatesMajorCore = ({ setError, notify }) => {
+const AutomaticUpdatesMajorCore = ({ setError, notify, autoUpdatesAll }) => {
 	const { store, setStore } = useContext(AppStore);
 	const [autoUpdatesMajorCore, setAutoUpdatesCore] = useState(
 		store.autoUpdatesMajorCore
@@ -130,7 +133,12 @@ const AutomaticUpdatesMajorCore = ({ setError, notify }) => {
 
 		notifySuccess();
 	}, [autoUpdatesMajorCore]);
-
+	
+useUpdateEffect(() => {
+		if ( !autoUpdatesAll ){
+			setAutoUpdatesCore(false)
+		}
+	}, [autoUpdatesAll]);
 	return (
 		<ToggleField
 			id="autoupdate-core-toggle"
@@ -142,7 +150,7 @@ const AutomaticUpdatesMajorCore = ({ setError, notify }) => {
 	);
 }
 
-const AutomaticUpdatesPlugins = ({ setError, notify }) => {
+const AutomaticUpdatesPlugins = ({ setError, notify, autoUpdatesAll }) => {
 	const { store, setStore } = useContext(AppStore);
 	const [autoUpdatesPlugins, setAutoUpdatesPlugins] = useState(
 		store.autoUpdatesPlugins
@@ -187,6 +195,11 @@ const AutomaticUpdatesPlugins = ({ setError, notify }) => {
 		notifySuccess();
 	}, [autoUpdatesPlugins]);
 
+	useUpdateEffect(() => {
+		if ( !autoUpdatesAll ){
+			setAutoUpdatesPlugins(false)
+		}
+	}, [autoUpdatesAll]);
 	return (
 		<ToggleField
 			id="autoupdate-plugins-toggle"
@@ -198,7 +211,7 @@ const AutomaticUpdatesPlugins = ({ setError, notify }) => {
 	);
 }
 
-const AutomaticUpdatesThemes = ({ setError, notify }) => {
+const AutomaticUpdatesThemes = ({ setError, notify, autoUpdatesAll }) => {
 	const { store, setStore } = useContext(AppStore);
 	const [autoUpdatesThemes, setAutoUpdatesThemes] = useState(
 		store.autoUpdatesThemes
@@ -244,6 +257,11 @@ const AutomaticUpdatesThemes = ({ setError, notify }) => {
 		notifySuccess();
 	}, [autoUpdatesThemes]);
 
+	useUpdateEffect(() => {
+		if ( !autoUpdatesAll ){
+			setAutoUpdatesThemes(false)
+		}
+	}, [autoUpdatesAll]);
 	return (
 		<ToggleField
 			id="autoupdate-themes-toggle"
@@ -256,7 +274,16 @@ const AutomaticUpdatesThemes = ({ setError, notify }) => {
 }
 
 const AutomaticUpdates = () => {
+		const { store, setStore } = useContext(AppStore);
+
 	const [isError, setError] = useState(false);
+		const [autoUpdatesAll, setAutoUpdatesAll] = useState(
+		store.autoUpdatesMajorCore &&
+		store.autoUpdatesPlugins &&
+		store.autoUpdatesThemes
+		? true
+		: false
+	);
 
 	let notify = useNotification();
 
@@ -266,10 +293,10 @@ const AutomaticUpdates = () => {
 			description={__('Keeping automatic updates on ensures timely security fixes and the latest features.', 'wp-plugin-web')}
 		>
 			<div className="nfd-flex nfd-flex-col nfd-gap-4">
-				<AutomaticUpdatesAll setError={setError} notify={notify} />
-				<AutomaticUpdatesMajorCore setError={setError} notify={notify} />
-				<AutomaticUpdatesPlugins setError={setError} notify={notify} />
-				<AutomaticUpdatesThemes setError={setError} notify={notify} />
+				<AutomaticUpdatesAll setError={setError} notify={notify} autoUpdatesAll={autoUpdatesAll} setAutoUpdatesAll={setAutoUpdatesAll} />
+				<AutomaticUpdatesMajorCore setError={setError} notify={notify} autoUpdatesAll={autoUpdatesAll} />
+				<AutomaticUpdatesPlugins setError={setError} notify={notify} autoUpdatesAll={autoUpdatesAll} />
+				<AutomaticUpdatesThemes setError={setError} notify={notify} autoUpdatesAll={autoUpdatesAll} />
 				{isError &&
 					<Alert variant="error">
 						{__('Oops! Something went wrong. Please try again.', 'wp-plugin-web')}
