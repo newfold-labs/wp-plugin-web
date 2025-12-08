@@ -56,31 +56,11 @@ final class Admin {
 	 */
 	public static function subpages() {
 
-		$home        = array(
-			'web#/home' => __( 'Home', 'wp-plugin-web' ),
-		);
-		$marketplace = array(
+		return array(
+			'web#/home'        => __( 'Home', 'wp-plugin-web' ),
 			'web#/marketplace' => __( 'Marketplace', 'wp-plugin-web' ),
-		);
-		// add performance if enabled.
-		$performance = isEnabled( 'performance' )
-			? array(
-				'web#/performance' => __( 'Performance', 'wp-plugin-web' ),
-			)
-			: array();
-		$settings    = array(
-			'web#/settings' => __( 'Settings', 'wp-plugin-web' ),
-		);
-		$help        = array(
-			'web#/help' => __( 'Help', 'wp-plugin-web' ),
-		);
-
-		return array_merge(
-			$home,
-			$marketplace,
-			$performance,
-			$settings,
-			$help
+			'web#/settings'    => __( 'Settings', 'wp-plugin-web' ),
+			'web#/help'        => __( 'Help', 'wp-plugin-web' ),
 		);
 	}
 
@@ -125,18 +105,16 @@ final class Admin {
 			0
 		);
 
-		// If we're outside of App, add subpages to App menu.
-		if ( false === ( isset( $_GET['page'] ) && strpos( filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ), 'web' ) >= 0 ) ) { // phpcs:ignore
-			foreach ( self::subpages() as $route => $title ) {
-				\add_submenu_page(
-					'web',
-					$title,
-					$title,
-					'manage_options',
-					$route,
-					array( __CLASS__, 'render' )
-				);
-			}
+		// Add subpages to the menu
+		foreach ( self::subpages() as $route => $title ) {
+			\add_submenu_page(
+				'web',
+				$title,
+				$title,
+				'manage_options',
+				$route,
+				array( __CLASS__, 'render' )
+			);
 		}
 	}
 
@@ -152,6 +130,16 @@ final class Admin {
 
 		if ( version_compare( $wp_version, '5.4', '>=' ) ) {
 			echo '<div id="wppw-app" class="wppw wppw_app"></div>' . PHP_EOL;
+			// Render bootstrap containers for modules that need portals
+			// Only enabled features get their containers rendered
+			$features_with_portals = array( 'performance' );
+			foreach ( $features_with_portals as $feature ) {
+				if ( function_exists( 'NewfoldLabs\WP\Module\Features\isEnabled' ) &&
+					\NewfoldLabs\WP\Module\Features\isEnabled( $feature ) ) {
+					$portal_id = 'nfd-' . $feature . '-portal';
+					echo '<div id="' . esc_attr( $portal_id ) . '" style="display:none"></div>' . PHP_EOL;
+				}
+			}
 		} else {
 			// fallback messaging for WordPress older than 5.4.
 			echo '<div id="wppw-app" class="wppw wppw_app">' . PHP_EOL;

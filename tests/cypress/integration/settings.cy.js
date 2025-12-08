@@ -5,7 +5,14 @@ describe('Settings Page', { testIsolation: true }, () => {
 
 	beforeEach(() => {
 		cy.wpLogin();
-		cy.visit(`/wp-admin/admin.php?page=${ Cypress.env( 'pluginId' ) }#/settings`);		
+		cy.visit(`/wp-admin/admin.php?page=${ Cypress.env( 'pluginId' ) }#/settings`);	
+		
+		// Ensure the general settings accordion is open
+		cy.get('.nfd-settings-app-wrapper details.settings-details').then(($details) => {
+			if (!$details.prop('open')) {
+				cy.wrap($details).find('summary').click();
+			}
+		});
 	});
 
 	it('Is Accessible', () => {
@@ -44,6 +51,19 @@ describe('Settings Page', { testIsolation: true }, () => {
 
 
 	it('Autoupdate Toggles function properly', () => {
+		cy
+			.get( appClass + '-app-settings-update')
+			.scrollIntoView()
+			.should('be.visible');
+		
+		// Ensure autoupdate-all-toggle is enabled (true) before starting the test
+		cy.get('[data-id="autoupdate-all-toggle"]').then(($toggle) => {
+			if ($toggle.attr('aria-checked') === 'false') {
+				cy.wrap($toggle).click();
+				cy.wait(500);
+			}
+		});
+		
 		//On load update all is checked, which forces other updates to check and disabled state
 		cy.get('[data-id="autoupdate-all-toggle"]').should('have.attr', 'aria-checked').and('include', 'true');
 		cy.get('[data-id="autoupdate-core-toggle"]').should('be.disabled').should('have.attr', 'aria-checked').and('include', 'true');
@@ -122,7 +142,11 @@ describe('Settings Page', { testIsolation: true }, () => {
 	});
 
 	it('Content Settings Work', () => {
-		cy.get('[data-id="content-revisions-select"]').click();
+		cy
+			.get( appClass + '-app-settings-content')
+			.scrollIntoView()
+			.should('be.visible');
+		cy.get('[data-id="content-revisions-select"]').scrollIntoView().click();
 		cy.wait(100);
 		cy.get('[data-id="content-revisions-select"]')
 			.parent()
@@ -184,7 +208,8 @@ describe('Settings Page', { testIsolation: true }, () => {
 	});
 
 	it('Comment Settings Work', () => {
-		cy.get( appClass + '-app-settings-comments')
+		cy
+			.get( appClass + '-app-settings-comments')
 			.scrollIntoView()
 			.should( 'be.visible' );
 
