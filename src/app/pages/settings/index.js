@@ -58,7 +58,7 @@ const Settings = () => {
 
 	return (
 		<Page title="Settings" className={"wppw-app-settings-page"}>
-			<Container className={'nfd-settings-app-wrapper wppw-app-settings-container'}>
+			<Container className={'nfd-settings-app-wrapper wppw-app-settings-container nfd-p-0'}>
 				<Container.Header className={'wppw-app-settings-header'}>
 					<Title as="h2" className="nfd-flex nfd-items-center nfd-gap-2">
 						<AdjustmentsHorizontalIcon className="nfd-w-8 nfd-h-8" />
@@ -121,7 +121,6 @@ const Settings = () => {
 						<CommentSettings />
 					</Container.Block>
 				</details>
-
 				{isPerformanceEnabled && (
 					<details 
 						id="nfd-performance"
