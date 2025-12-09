@@ -16,6 +16,12 @@ if (typeof window !== 'undefined') {
 			const menuMap = {
 				'/home': 'web#/home',
 				'/marketplace': 'web#/marketplace',
+				'marketplace/services': 'web#/marketplace',
+				'marketplace/featured': 'web#/marketplace',
+				'marketplace/ecommerce': 'web#/marketplace',
+				'marketplace/seo': 'web#/marketplace',
+				'marketplace/themes': 'web#/marketplace',
+				'marketplace/all': 'web#/marketplace',
 				'/settings': 'web#/settings',
 				'/settings/performance': 'web#/settings',
 				'/help': 'web#/help'
