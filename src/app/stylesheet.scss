@@ -340,6 +340,18 @@ body.toplevel_page_web {
                     display: none !important;
                 }
             }
+            
+            // Remove container styling to prevent double border appearance
+            .nfd-container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                background: transparent !important;
+                
+                // Remove bottom border from last block
+                .nfd-container__block:last-child > div {
+                    border-bottom: none !important;
+                }
+            }
         }
     }
 }
