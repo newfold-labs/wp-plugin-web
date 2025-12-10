@@ -85,6 +85,26 @@ body.toplevel_page_web {
 
 }
 
+// Top Bar Navigation Styles
+.wppw-app-topbar {
+    backdrop-filter: blur(8px);
+    position: relative;
+    width: 100%;
+    
+    .wppw-app-navitem {
+        white-space: nowrap;
+        
+        svg {
+            flex-shrink: 0;
+        }
+    }
+}
+
+// Ensure app container fills properly
+.wppw-app-container {
+    min-height: 100vh;
+}
+
 .wppw {
     color: var(--color-text);
 
@@ -177,7 +197,7 @@ body.toplevel_page_web {
 }
 
 .wppw-app-body {
-    padding: 3.25rem 24px 1rem;
+    padding: 2rem 24px 1rem;
 
     &-inner {
         max-width: 1290px;
@@ -187,7 +207,7 @@ body.toplevel_page_web {
     }
 
     @media screen and (max-width:782px) {
-        padding-top: 2.5rem;
+        padding-top: 1.5rem;
     }
 }
 
@@ -240,4 +260,111 @@ body.toplevel_page_web {
 .nfd-disabled {
     opacity: .5;
     pointer-events: disabled;
+}
+
+// Accordion styles for settings page
+.nfd-root .nfd-details {
+
+    summary {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        padding: 2rem;
+    }
+    
+    .nfd-details-content {
+        flex-grow: 1;
+        
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        p {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin: 0;
+        }
+    }
+
+    .nfd-details-icon {
+        flex-shrink: 0;
+        font-size: 1.5rem;
+        transform: rotate(180deg);
+        width: 1.5rem;
+        transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    &[open] {
+        .nfd-details-icon {
+            transform: rotate(0deg);
+        }
+    }
+
+    &:hover,
+    &[open] {
+        .nfd-details-icon {
+            color: var(--color-primary);
+        }
+    }
+}
+
+// Settings page layout adjustments
+.wppw-app-settings-container {
+    padding-bottom: 1.5rem;
+    
+    .nfd-details {
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+// Performance accordion specific styles
+.performance-details {
+    &[open] {
+        #performance-portal {            
+            // Hide the performance module's built-in header using title attribute
+            .nfd-page[title="Performance"] > div:first-child {
+                display: none !important;
+            }
+            
+            // Also hide any h1 or h2 that says Performance in the portal
+            h1:contains("Performance"),
+            .nfd-page > div > h1,
+            .nfd-page > div > h2 {
+                &:first-child {
+                    display: none !important;
+                }
+            }
+            
+            // Remove container styling to prevent double border appearance
+            .nfd-container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                background: transparent !important;
+                
+                // Remove bottom border from last block
+                .nfd-container__block:last-child > div {
+                    border-bottom: none !important;
+                }
+            }
+        }
+    }
+}
+
+
+// Remove separator after header on home, help, settings, and marketplace pages
+.wppw-app-home-container,
+.wppw-app-help-container,
+.wppw-app-settings-container,
+.wppw-app-marketplace-container {
+    .nfd-container__header {
+        border-bottom: none !important;
+        border-bottom-width: 0 !important;
+        margin-bottom: 0;
+    }
 }
