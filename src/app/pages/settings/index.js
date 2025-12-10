@@ -44,6 +44,7 @@ const Settings = () => {
 		// Map URL paths to accordion selectors
 		const accordionMap = {
 			'/settings/performance': '.performance-details',
+			'/settings': '.settings-details'
 		};
 
 		// Open the appropriate accordion section
