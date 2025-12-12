@@ -24,11 +24,10 @@ describe('Home Page', { testIsolation: true }, () => {
 		cy.a11y( appClass + '-app-body');
 	});
 
-	it('Maintenance Mode Section Exists', () => {
-		cy
-			.get( appClass + '-app-home-coming-soon').contains('h3', 'Site Status')
-			.scrollIntoView()
-			.should('be.visible');
+	it('Maintenance Mode/Coming Soon Section Exists', () => {
+		cy.get('[data-cy="nfd-coming-soon-content"]')
+		.scrollIntoView()
+		.should('be.visible');
 	});
 
 	it('Website Content Section Exists', () => {
