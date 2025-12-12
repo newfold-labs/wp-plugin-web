@@ -8,7 +8,7 @@ const ComingSoonSection = () => {
         // run when mounts
         const comingSoonPortal =
             document.getElementById('coming-soon-portal');
-            
+
         if (comingSoonPortal) {
             console.log("Home Page 2");
             window.NFDPortalRegistry.registerPortal(
