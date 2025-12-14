@@ -1,5 +1,6 @@
 import { Page, Container, Title } from "@newfold/ui-component-library";
 import { HomeIcon } from '@heroicons/react/24/outline';
+import ComingSoon from 'App/pages/settings/comingSoon';
 import SettingsSection from 'App/pages/home/settingsSection';
 import WebContentSection from 'App/pages/home/webContentSection';
 import WebHostingSection from 'App/pages/home/webHostingSection';
@@ -17,7 +18,9 @@ const Home = () => {
 				</Title>
 				<span>{__('Manage your website settings and content.', 'wp-plugin-web')}</span>
 			</Container.Header>
-
+			<Container.Block separator={true} className={'wppw-app-home-coming-soon'}>
+				<ComingSoon />
+			</Container.Block>
 			<Container.Block separator={true} className={'wppw-app-home-content'}>
 				<WebContentSection />
 			</Container.Block>
