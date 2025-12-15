@@ -2,7 +2,9 @@ import { useEffect } from '@wordpress/element';
 import { Container } from "@newfold/ui-component-library";
 
 const ComingSoonSection = () => {
-    const siteKind = window.NewfoldRuntime.siteType || 'website';
+    const siteKind = window.NewfoldRuntime?.isWoocommerceActive 
+  ? 'store' 
+  : (window.NewfoldRuntime?.siteType || 'website');
 
     useEffect(() => {
         // run when mounts
