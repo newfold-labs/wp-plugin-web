@@ -132,7 +132,7 @@ final class Admin {
 			echo '<div id="wppw-app" class="wppw wppw_app"></div>' . PHP_EOL;
 			// Render bootstrap containers for modules that need portals
 			// Only enabled features get their containers rendered
-			$features_with_portals = array( 'performance' );
+			$features_with_portals = array( 'performance', 'coming-soon' );
 			foreach ( $features_with_portals as $feature ) {
 				if ( function_exists( 'NewfoldLabs\WP\Module\Features\isEnabled' ) &&
 					\NewfoldLabs\WP\Module\Features\isEnabled( $feature ) ) {
