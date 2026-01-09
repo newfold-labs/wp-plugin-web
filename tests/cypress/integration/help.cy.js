@@ -9,7 +9,7 @@ describe('Help Page', { testIsolation: true }, () => {
 	
 	it('Is Accessible', () => {
 		cy.injectAxe();
-		cy.wait(500);
+		cy.wait(1000); // Wait for React app to fully load
 		cy.a11y('.' + Cypress.env( 'appId' ) + '-app-body');
 	});
 
