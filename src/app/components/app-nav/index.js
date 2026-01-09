@@ -1,13 +1,16 @@
 import { useEffect, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { useViewportMatch } from '@wordpress/compose';
-import { addQueryArgs } from '@wordpress/url';
+import { addQueryArgs, cleanForSlug } from '@wordpress/url';
 import { filter } from 'lodash';
-import { Modal, SidebarNavigation } from "@newfold/ui-component-library"
+import { Modal, SidebarNavigation, Button } from "@newfold/ui-component-library"
 import { NavLink, useLocation } from 'react-router-dom';
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { topRoutes, utilityRoutes } from "../../data/routes";
+import { topRoutes, utilityRoutes } from 'App/data/routes';
 import Logo from "./logo";
+import { NewfoldRuntime } from '@newfold/wp-module-runtime';
+import { WordPressIcon } from "../icons";
+import { ReactComponent as NSIcon } from '../../../../assets/svg/ns-icon-image.svg';
 import { default as NewfoldNotifications } from '@modules/wp-module-notifications/assets/js/components/notifications/';
 
 export const SideNavHeader = () => {
@@ -88,7 +91,7 @@ export const SideNavMenu = () => {
 	return (
 		<div className="nfd-px-0.5 nfd-space-y-6">
 			{primaryMenu()}
-			{secondaryMenu()}
+			{/* {secondaryMenu()} */}
 		</div>
 	);
 }
@@ -99,7 +102,7 @@ export const SideNavMenuItem = ({ label, name, icon: Icon = null, path, action, 
 			<NavLink
 				onClick={(action && action instanceof Function) ? action : null}
 				to={path}
-				className={`wppw-app-navitem wppw-app-navitem-${label} nfd-flex nfd-items-center nfd-gap-3 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-[#E2E8F0]`}
+				className={`wppw-app-navitem wppw-app-navitem-${ cleanForSlug( label ) } nfd-flex nfd-items-center nfd-gap-3 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-blue-100`}
 			>
 				{Icon &&
 					<Icon className="nfd-flex-shrink-0 nfd--ml-1 nfd-h-6 nfd-w-6" />
@@ -130,7 +133,7 @@ export const SideNavMenuSubItem = ({ label, name, path, action }) => {
 			<NavLink
 				onClick={(action && action instanceof Function) ? action : null}
 				to={path} 
-				className={`wppw-app-subnavitem wppw-app-subnavitem-${label} nfd-flex nfd-items-center nfd-gap-3 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-body leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-[#E2E8F0] [&.active]:nfd-text-title`}
+				className={`wppw-app-subnavitem wppw-app-subnavitem-${ cleanForSlug( label ) } nfd-flex nfd-items-center nfd-gap-3 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-body leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-blue-100 [&.active]:nfd-text-title`}
 			>
 				{label}
 			</NavLink>
@@ -215,6 +218,9 @@ export const TopBarNav = () => {
 	const isLargeViewport = useViewportMatch('medium');
 	let location = useLocation();
 	const hashedPath = '#' + location.pathname;
+	const { url } = NewfoldRuntime.siteDetails;
+	const isEcommerce = NewfoldRuntime.hasCapability("isEcommerce");
+	const isStore = window.location.href?.includes("store");
 	
 	// Close mobile nav when location changes
 	useEffect(() => {
@@ -231,7 +237,7 @@ export const TopBarNav = () => {
 					
 					{/* Desktop Navigation - Horizontal Menu */}
 					{isLargeViewport && (
-						<nav className="nfd-hidden min-[783px]:nfd-flex nfd-items-center nfd-gap-1">
+						<nav className="min-[783px]:nfd-flex nfd-items-center nfd-gap-1">
 							{topRoutes.map(
 								(page) => (
 									true === page.condition && (
@@ -239,28 +245,41 @@ export const TopBarNav = () => {
 											key={page.name}
 											onClick={(page.action && page.action instanceof Function) ? page.action : null}
 											to={page.name}
-											className={`wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-[#E2E8F0] nfd-transition-colors`}
+											className={`wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-blue-100 nfd-transition-colors`}
 										>
 											{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
 											{page.title}
 										</NavLink>
 									)
 							))}
-							<div className="nfd-h-6 nfd-w-px nfd-bg-[#D8DEE4] nfd-mx-2"></div>
-							{utilityRoutes.map((page) => (
-								<NavLink
-									key={page.name}
-									onClick={(page.action && page.action instanceof Function) ? page.action : null}
-									to={page.name}
-									className={`wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-[#E2E8F0] nfd-transition-colors`}
-								>
-									{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
-									{page.title}
-								</NavLink>
-							))}
 						</nav>
 					)}
 				</div>
+
+				{/* Action Buttons */}
+				{isLargeViewport && (
+					<div className="nfd-flex nfd-items-center nfd-gap-3">
+						<Button 
+							as="a"
+							href={ window.NewfoldRuntime.linkTracker.addUtmParams( 'https://www.networksolutions.com/my-account/' ) }
+							target="_blank"
+							variant="primary" 
+							className="nfd-bg-primary nfd-text-white nfd-text-sm nfd-px-4 nfd-py-2 hover:nfd-bg-primary-dark">
+							<NSIcon className="nfd-w-4 nfd-h-4" />
+							{ __("NS Account", "wp-plugin-web") }
+						</Button>
+						<Button 
+							as="a" 
+							href={(isEcommerce && isStore) ? window.NewfoldRuntime.linkTracker.addUtmParams(`${url}/shop`) : window.NewfoldRuntime.linkTracker.addUtmParams( url )}
+							target="_blank" 
+							variant="secondary" 
+							className="nfd-bg-white nfd-text-slate-900 nfd-text-sm nfd-px-4 nfd-py-2 nfd-border-slate-300 hover:nfd-bg-slate-50"
+						>
+							<WordPressIcon className="nfd-w-4 nfd-h-4" />
+							{ (isEcommerce && isStore) ? __("View Store", "wp-plugin-web") : __("View Site", "wp-plugin-web") }
+						</Button>
+					</div>
+				)}
 
 				{/* Mobile Menu Button */}
 				{!isLargeViewport && (

@@ -16,7 +16,6 @@ import ErrorCard from 'App/components/errorCard';
 import { setActiveSubnav } from 'App/util/helpers';
 import { useHandlePageLoad } from 'App/util/hooks';
 import { AppNav } from 'App/components/app-nav';
-import { SiteInfoBar } from 'App/components/site-info';
 import { NotificationFeed } from 'App/components/notifications';
 
 // component sourced from module
@@ -80,7 +79,6 @@ const AppBody = ( props ) => {
 				<div className="wppw-app-body-inner">
 					<ErrorBoundary FallbackComponent={ <ErrorCard /> }>
 						{ hasError && <ErrorCard error={ hasError } /> }
-						<SiteInfoBar />
 						{ ( true === booted && <AppRoutes /> ) ||
 							( ! hasError && <Spinner /> ) }
 					</ErrorBoundary>
