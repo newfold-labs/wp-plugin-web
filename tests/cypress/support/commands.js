@@ -43,6 +43,18 @@ Cypress.Commands.add('login', (username, password) => {
 				cy.get('#user_login').type(username);
 				cy.get('#user_pass').type(`${ password }{enter}`);
 
+				// Disable onboarding redirect for tests using REST API
+				// This prevents automatic redirects to the onboarding flow after login
+				// Using cy.request() to avoid triggering the redirect by visiting admin pages
+				cy.request({
+					method: 'POST',
+					url: '/wp-json/wp/v2/settings',
+					body: {
+						nfd_module_onboarding_redirect: '0'
+					},
+					failOnStatusCode: false
+				});
+
 				// Speed up tests by setting permalink structure once
 				cy.setPermalinkStructure();
 			}
