@@ -5,7 +5,11 @@ describe('Help Page', { testIsolation: true }, () => {
 	beforeEach(() => {
 		cy.wpLogin();
 		cy.visit(`/wp-admin/admin.php?page=${ Cypress.env( 'pluginId' ) }#/help`);
-		cy.wait(1000); // Wait for React app to fully load
+		
+		// Wait for NewfoldRuntime to be fully initialized
+		cy.window().should('have.property', 'NewfoldRuntime');
+		cy.wait(1000);
+		
 		// Ensure the help page container is loaded before running tests
 		cy.get('.wppw-app-help-container', { timeout: 5000 }).should('exist');
 	});
