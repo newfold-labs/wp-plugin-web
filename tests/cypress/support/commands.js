@@ -28,6 +28,17 @@
 
 import '@testing-library/cypress/add-commands';
 
+Cypress.Commands.add('disableOnboarding', () => {
+	// Disable onboarding redirect using WP-CLI
+	// This prevents automatic redirects to the onboarding flow after login
+	const disableOnboardingCommand = `wp option update nfd_module_onboarding_should_redirect 0`;
+	const disableOnboardingWpEnvCommand = `npx wp-env run cli ${disableOnboardingCommand}`;
+	const disableOnboardingWpEnvTestCommand = `npx wp-env run tests-cli ${disableOnboardingCommand}`;
+	
+	cy.exec(disableOnboardingWpEnvCommand, {failOnNonZeroExit: false});
+	cy.exec(disableOnboardingWpEnvTestCommand, {failOnNonZeroExit: false});
+});
+
 Cypress.Commands.add('login', (username, password) => {
 	cy
 		.getCookies()
@@ -39,21 +50,10 @@ Cypress.Commands.add('login', (username, password) => {
 				}
 			});
 			if (!hasMatch) {
+				cy.disableOnboarding();
 				cy.visit('/wp-login.php').wait(1000);
 				cy.get('#user_login').type(username);
 				cy.get('#user_pass').type(`${ password }{enter}`);
-
-				// Disable onboarding redirect for tests using REST API
-				// This prevents automatic redirects to the onboarding flow after login
-				// Using cy.request() to avoid triggering the redirect by visiting admin pages
-				cy.request({
-					method: 'POST',
-					url: '/wp-json/wp/v2/settings',
-					body: {
-						nfd_module_onboarding_redirect: '0'
-					},
-					failOnStatusCode: false
-				});
 
 				// Speed up tests by setting permalink structure once
 				cy.setPermalinkStructure();
