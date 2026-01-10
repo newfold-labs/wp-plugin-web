@@ -80,6 +80,11 @@ final class Admin {
 			opacity: 1 !important;
 			display: block;
 		}';
+		echo 'li#toplevel_page_web a.toplevel_page_web:hover div.wp-menu-image img,
+		      li#toplevel_page_web.current a.toplevel_page_web div.wp-menu-image img,
+		      li#toplevel_page_web a.toplevel_page_web.wp-has-current-submenu div.wp-menu-image img {
+			filter: brightness(0) invert(1);
+		}';
 		echo 'ul#adminmenu a.toplevel_page_web.wp-has-current-submenu:after, ul#adminmenu>li#toplevel_page_web.current>a.current:after { border-right-color: #fff !important; }';
 		echo 'li#toplevel_page_web > ul > li.wp-first-item { display: none !important; }';
 		echo '#wp-toolbar #wp-admin-bar-web-coming_soon .ab-item { padding: 0; }';
