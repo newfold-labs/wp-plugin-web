@@ -13,7 +13,6 @@ namespace Web;
 function init_rest_api() {
 
 	$controllers = array(
-		'Web\\RestApi\\CachingController',
 		'Web\\RestApi\\SettingsController',
 	);
 
