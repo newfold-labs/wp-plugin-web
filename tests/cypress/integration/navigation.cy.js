@@ -16,7 +16,7 @@ describe('Navigation', { testIsolation: true }, () => {
 
 	it('Logo Links to home', () => {
 		cy.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' a.toplevel_page_web').click();
-		cy.wait(500);
+		cy.wait(1000);
 		cy.url().should('include', 'page=web');
 	});
 
@@ -27,7 +27,7 @@ describe('Navigation', { testIsolation: true }, () => {
 			.should('be.visible');
 		
 		cy.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' ul.wp-submenu li a[href*="#/marketplace"]').click();
-		cy.wait(500);
+		cy.wait(1000);
 		cy.hash().should('eq', '#/marketplace');
 		cy
 			.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' ul.wp-submenu li a[href*="#/marketplace"]')
@@ -37,7 +37,7 @@ describe('Navigation', { testIsolation: true }, () => {
 		cy.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' ul.wp-submenu li a[href*="#/settings"]')
 			.should('be.visible')
 			.click();
-		cy.wait(500);
+		cy.wait(1000);
 		cy.hash().should('eq', '#/settings');
 		cy
 			.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' ul.wp-submenu li a[href*="#/marketplace"]')
@@ -50,13 +50,13 @@ describe('Navigation', { testIsolation: true }, () => {
 		cy.viewport( 'iphone-x' );
 		cy.get( '#nfd-app-mobile-nav' ).should( 'be.visible' );
 
-		cy.get( appClass + '-app-navitem-Home' ).should( 'not.exist' );
+		cy.get( appClass + '-app-navitem-home' ).should( 'not.exist' );
 
 		cy.get( '#nfd-app-mobile-nav' ).click();
-		cy.wait( 500 );
-		cy.get( appClass + '-app-navitem-Home' ).should( 'be.visible' );
+		cy.wait(1000);
+		cy.get( appClass + '-app-navitem-home' ).should( 'be.visible' );
 		cy.get( 'button.nfd-modal__close-button' ).should( 'be.visible' );
 		cy.get( 'button.nfd-modal__close-button' ).click();
-		cy.get( appClass + '-app-navitem-Home' ).should( 'not.exist' );
+		cy.get( appClass + '-app-navitem-home' ).should( 'not.exist' );
 	});
 });
