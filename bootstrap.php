@@ -154,6 +154,7 @@ require WEB_PLUGIN_DIR . '/inc/RestApi/SettingsController.php';
 require WEB_PLUGIN_DIR . '/inc/RestApi/rest-api.php';
 require WEB_PLUGIN_DIR . '/inc/settings.php';
 require WEB_PLUGIN_DIR . '/inc/updates.php';
+require WEB_PLUGIN_DIR . '/inc/widgets/bootstrap.php';
 
 /* WordPress Admin Page & Features */
 if ( is_admin() ) {
