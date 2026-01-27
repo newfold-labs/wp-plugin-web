@@ -98,6 +98,21 @@ add_filter(
 
 setContainer( $web_module_container );
 
+/**
+ * Sub-brands like 'web', 'vodien', and 'crazy-domains' should use 'networksolutions'
+ * as the brand identifier when making AI SiteGen API calls.
+ */
+add_filter(
+	'newfold_ai_sitegen_brand',
+	function ( $brand ) {
+		// Check if this plugin's Data class has the get_ai_sitegen_brand method
+		if ( method_exists( \Web\Data::class, 'get_ai_sitegen_brand' ) ) {
+			return \Web\Data::get_ai_sitegen_brand();
+		}
+		return $brand;
+	}
+);
+
 // Set up the updater endpoint and map values
 $updateurl     = 'https://hiive.cloud/workers/release-api/plugins/newfold-labs/wp-plugin-web'; // Custom API GET endpoint
 $pluginUpdater = new PluginUpdater( WEB_PLUGIN_FILE, $updateurl );
