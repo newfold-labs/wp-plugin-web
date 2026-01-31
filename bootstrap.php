@@ -98,6 +98,9 @@ add_filter(
 
 setContainer( $web_module_container );
 
+// Load Data class for AI SiteGen brand mapping
+require_once WEB_PLUGIN_DIR . '/inc/Data.php';
+
 /**
  * Sub-brands like 'web', 'vodien', and 'crazy-domains' should use 'networksolutions'
  * as the brand identifier when making AI SiteGen API calls.
