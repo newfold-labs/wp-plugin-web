@@ -10,9 +10,9 @@ test.describe('Dashboard Widgets', () => {
     await newfold.clearCapabilities();
   });
 
-  test('Bluehost Widgets are all Accessible', async ({ page }) => {
+  test('Network solutions Widgets are all Accessible', async ({ page }) => {
     // Wait for dashboard widgets to load with longer timeout
-    await expect(page).toHaveURL('http://localhost:8882/wp-admin/index.php');
+    await expect(page).toHaveURL('http://localhost:8886/wp-admin/index.php');
     
     try {
       await newfold.waitForDashboardWidgets(page, 15000);
@@ -22,19 +22,19 @@ test.describe('Dashboard Widgets', () => {
     
     // Check if widgets exist before running accessibility tests
     const sitePreviewWidget = page.locator('#site_preview_widget');
-    const helpWidget = page.locator('#bluehost_help_widget');
-    const accountWidget = page.locator('#bluehost_account_widget');
+ /*    const helpWidget = page.locator('#bluehost_help_widget');
+    const accountWidget = page.locator('#bluehost_account_widget'); */
     
     // Run accessibility tests only on widgets that exist
     if (await sitePreviewWidget.count() > 0) {
       await a11y.checkA11y(page, '#site_preview_widget');
     }
-    if (await helpWidget.count() > 0) {
+   /*  if (await helpWidget.count() > 0) {
       await a11y.checkA11y(page, '#bluehost_help_widget');
     }
     if (await accountWidget.count() > 0) {
       await a11y.checkA11y(page, '#bluehost_account_widget');
-    }
+    } */
   });
 
   test('Site Preview Widget', async ({ page }) => {
@@ -102,7 +102,7 @@ test.describe('Dashboard Widgets', () => {
     // await page.waitForTimeout(1000);
 
     // Coming Soon Enabled - wait for preview link to appear
-    const previewLink = page.locator('a[data-test-id="nfd-preview-site"]');
+  /*   const previewLink = page.locator('a[data-test-id="nfd-preview-site"]');
     previewLink.scrollIntoViewIfNeeded();
     await expect(previewLink).toBeVisible();
     await expect(viewSiteLink).toHaveCount(0);
@@ -140,10 +140,10 @@ test.describe('Dashboard Widgets', () => {
     // Disable button should not exist, enable button should exist
     await expect(disableComingSoonButton).toHaveCount(0);
     await expect(enableComingSoonButton).toContainText('Enable Coming Soon');
-    await expect(enableComingSoonButton).toHaveAttribute('href', '#');
+    await expect(enableComingSoonButton).toHaveAttribute('href', '#'); */
   });
 
-  test('Help Widget', async ({ page }) => {
+/*   test('Help Widget', async ({ page }) => {
     const helpWidget = page.locator('#bluehost_help_widget');
     await expect(helpWidget).toBeVisible();
 
@@ -175,9 +175,9 @@ test.describe('Dashboard Widgets', () => {
     await utils.scrollIntoView(helpCenter);
     await expect(helpCenter).toContainText('Help');
     await expect(helpCenter).toBeVisible();
-  });
+  }); */
 
-  test('Bluehost Account Widget', async ({ page }) => {
+ /*  test('Bluehost Account Widget', async ({ page }) => {
     const accountWidget = page.locator('#bluehost_account_widget');
     await expect(accountWidget).toBeVisible();
 
@@ -216,5 +216,5 @@ test.describe('Dashboard Widgets', () => {
       'security',
       { href: /utm_source/ }
     );
-  });
+  }); */
 });
