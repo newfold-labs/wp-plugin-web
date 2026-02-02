@@ -42,6 +42,8 @@
         "react-use": "^17.6.0"
     },
     "devDependencies": {
+        "@axe-core/playwright": "^4.11.0",
+        "@playwright/test": "^1.57.0",
         "@tailwindcss/forms": "^0.5.10",
         "@testing-library/cypress": "^10.0.3",
         "@wordpress/env": "^10.20.0",
@@ -81,6 +83,10 @@
         "storybook:dev": "start-storybook -c ./storybook",
         "storybook:build": "build-storybook -c ./storybook -o ./.docs",
         "test:e2e": "npx cypress run",
-        "test:unit": "wp-scripts test-unit-js"
+        "test:unit": "wp-scripts test-unit-js",
+        "test:e2e:all": "npm run test:cypress && npm run test:playwright",
+        "test:playwright": "npx playwright test",
+        "test:playwright:update-projects": "node .github/scripts/generate-playwright-projects.mjs",
+        "test:clean-module": "bash ./.github/scripts/test-clean-module"
     }
 }
