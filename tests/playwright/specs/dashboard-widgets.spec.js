@@ -102,7 +102,7 @@ test.describe('Dashboard Widgets', () => {
     // await page.waitForTimeout(1000);
 
     // Coming Soon Enabled - wait for preview link to appear
-  /*   const previewLink = page.locator('a[data-test-id="nfd-preview-site"]');
+    const previewLink = page.locator('a[data-test-id="nfd-preview-site"]');
     previewLink.scrollIntoViewIfNeeded();
     await expect(previewLink).toBeVisible();
     await expect(viewSiteLink).toHaveCount(0);
@@ -140,7 +140,7 @@ test.describe('Dashboard Widgets', () => {
     // Disable button should not exist, enable button should exist
     await expect(disableComingSoonButton).toHaveCount(0);
     await expect(enableComingSoonButton).toContainText('Enable Coming Soon');
-    await expect(enableComingSoonButton).toHaveAttribute('href', '#'); */
+    await expect(enableComingSoonButton).toHaveAttribute('href', '#');
   });
 
 /*   test('Help Widget', async ({ page }) => {

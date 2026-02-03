@@ -9,14 +9,14 @@ async function globalSetup(config) {
     const permalinkStructure = '/%postname%/';
     utils.fancyLog(`🔗 Setting permalink structure to: ${permalinkStructure}`, 55, 'gray', '');
     
-    execSync(`npx wp-env run cli wp option update permalink_structure '${permalinkStructure}'`, {
+    execSync(`npx wp-env run cli -- wp rewrite structure '${permalinkStructure}'`, {
       stdio: 'inherit',
       encoding: 'utf-8',
     });
     
     // Flush rewrite rules to apply the new permalink structure
     utils.fancyLog('🔄 Flushing rewrite rules...', 55, 'gray', '');
-    execSync('npx wp-env run cli wp rewrite flush', {
+    execSync('npx wp-env run cli -- wp rewrite flush --hard', {
       stdio: 'inherit',
       encoding: 'utf-8',
     });
