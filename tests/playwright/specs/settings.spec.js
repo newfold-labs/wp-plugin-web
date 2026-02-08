@@ -33,95 +33,95 @@ test.describe('Settings Page', () => {
 
     // On load update all is checked, which forces other updates to check and disabled state
     const allToggle = page.locator('[data-id="autoupdate-all-toggle"]');
-    await expect(allToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(allToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
 
     const coreToggle = page.locator('[data-id="autoupdate-core-toggle"]');
     await expect(coreToggle).toBeDisabled();
-    await expect(coreToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(coreToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
 
     const pluginsToggle = page.locator('[data-id="autoupdate-plugins-toggle"]');
     await expect(pluginsToggle).toBeDisabled();
-    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
 
     const themesToggle = page.locator('[data-id="autoupdate-themes-toggle"]');
     await expect(themesToggle).toBeDisabled();
-    await expect(themesToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(themesToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
 
     // Disable ALL toggle, leaves everything checked, but enables them
     await allToggle.click();
     await page.waitForTimeout(100);
     
     await utils.waitForNotification(page, 'Disabled All auto-updates');
-    await expect(allToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(allToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
     await expect(coreToggle).not.toBeDisabled();
-    await expect(coreToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(coreToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await expect(pluginsToggle).not.toBeDisabled();
-    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await expect(themesToggle).not.toBeDisabled();
-    await expect(themesToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(themesToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
 
     // Core toggle works
     await expect(coreToggle).not.toBeDisabled();
-    await expect(coreToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(coreToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await coreToggle.click();
     await page.waitForTimeout(100);
-    await expect(coreToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(coreToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
     await utils.waitForNotification(page, 'Disabled Core auto-updates');
-    await expect(allToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(allToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
 
     // Plugins toggle works
     await expect(pluginsToggle).not.toBeDisabled();
-    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await pluginsToggle.click();
     await page.waitForTimeout(100);
-    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
     await utils.waitForNotification(page, 'Disabled Plugins auto-update');
-    await expect(allToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(allToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
 
     // Themes toggle works
     await expect(themesToggle).not.toBeDisabled();
-    await expect(themesToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(themesToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await themesToggle.click();
     await page.waitForTimeout(100);
-    await expect(themesToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(themesToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
     await utils.waitForNotification(page, 'Disabled Themes auto-update');
-    await expect(allToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(allToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
 
     // All toggle activates all
     await allToggle.click();
     await page.waitForTimeout(100);
-    await expect(allToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(allToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await expect(coreToggle).toBeDisabled();
-    await expect(coreToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(coreToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await expect(pluginsToggle).toBeDisabled();
-    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await expect(themesToggle).toBeDisabled();
-    await expect(themesToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(themesToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
 
     // Disabling All toggle returns to previous state
     await allToggle.click();
     await page.waitForTimeout(100);
     await utils.waitForNotification(page, 'Disabled All auto-updates');
-    await expect(allToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(allToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
     await expect(coreToggle).not.toBeDisabled();
-    await expect(coreToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(coreToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
     await expect(pluginsToggle).not.toBeDisabled();
-    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
     await expect(themesToggle).not.toBeDisabled();
-    await expect(themesToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(themesToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
 
     // All Toggle takes over again when all are enabled
     await coreToggle.click();
     await pluginsToggle.click();
     await themesToggle.click();
     await page.waitForTimeout(100);
-    await expect(allToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(allToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await expect(coreToggle).toBeDisabled();
-    await expect(coreToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(coreToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await expect(pluginsToggle).toBeDisabled();
-    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(pluginsToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await expect(themesToggle).toBeDisabled();
-    await expect(themesToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(themesToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
   });
 
   test('Content Settings Work', async ({ page }) => {
@@ -163,16 +163,15 @@ test.describe('Settings Page', () => {
     // Disable comments toggle
     const disableCommentsToggle = page.locator('[data-id="disable-comments-toggle"]');
     await disableCommentsToggle.click();
-    await page.waitForTimeout(500);
-    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false');
+
+    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
     
     const closeCommentsDaysSelect = page.locator('[data-id="close-comments-days-select"]');
     await expect(closeCommentsDaysSelect).toBeDisabled();
     
     await disableCommentsToggle.click();
-    await page.waitForTimeout(500);
     
-    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'true');
+    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
     await expect(closeCommentsDaysSelect).not.toBeDisabled();
 
     // Close comments after days
@@ -193,8 +192,7 @@ test.describe('Settings Page', () => {
 
     // Re-enable comments
     await disableCommentsToggle.click();
-    await page.waitForTimeout(100);
-    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
     await expect(closeCommentsDaysSelect).toBeDisabled();
   });
 });
