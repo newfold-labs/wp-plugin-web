@@ -28,7 +28,7 @@ async function waitForWordPressAdmin(page) {
  * Navigate to plugin page
  * 
  * @param {import('@playwright/test').Page} page - Playwright page object
- * @param {string} pluginSlug - Plugin slug (e.g., 'bluehost')
+ * @param {string} pluginSlug - Plugin slug (e.g., 'bluehost or web')
  * @param {string} subPage - Sub-page hash (e.g., '#/settings')
  * @returns {void}
  */

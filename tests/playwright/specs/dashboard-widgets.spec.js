@@ -22,19 +22,11 @@ test.describe('Dashboard Widgets', () => {
     
     // Check if widgets exist before running accessibility tests
     const sitePreviewWidget = page.locator('#site_preview_widget');
- /*    const helpWidget = page.locator('#bluehost_help_widget');
-    const accountWidget = page.locator('#bluehost_account_widget'); */
     
     // Run accessibility tests only on widgets that exist
     if (await sitePreviewWidget.count() > 0) {
       await a11y.checkA11y(page, '#site_preview_widget');
     }
-   /*  if (await helpWidget.count() > 0) {
-      await a11y.checkA11y(page, '#bluehost_help_widget');
-    }
-    if (await accountWidget.count() > 0) {
-      await a11y.checkA11y(page, '#bluehost_account_widget');
-    } */
   });
 
   test('Site Preview Widget', async ({ page }) => {
@@ -142,79 +134,4 @@ test.describe('Dashboard Widgets', () => {
     await expect(enableComingSoonButton).toContainText('Enable Coming Soon');
     await expect(enableComingSoonButton).toHaveAttribute('href', '#');
   });
-
-/*   test('Help Widget', async ({ page }) => {
-    const helpWidget = page.locator('#bluehost_help_widget');
-    await expect(helpWidget).toBeVisible();
-
-    // Help center not available by default without capabilities
-    const helpLink = page.locator('[data-test-id="nfd-widget-help-link"]');
-    await utils.scrollIntoView(helpLink);
-    await expect(helpLink).toContainText('Get Help');
-    await expect(helpLink).toHaveAttribute('data-help-center', 'false');
-    
-    const helpHref = await helpLink.getAttribute('href');
-    expect(helpHref).toContain('help');
-
-    // Set capabilities and check help center
-    await newfold.setCapability({
-      canAccessAI: true,
-      canAccessHelpCenter: true,
-    });
-    
-    await page.reload();
-    // Log capabilities to verify they were set
-    await newfold.logCapabilities();
-    
-    await utils.scrollIntoView(helpLink);
-    await expect(helpLink).toContainText('Get Help');
-    await expect(helpLink).toHaveAttribute('data-help-center', 'true');
-    await helpLink.click();
-    
-    const helpCenter = page.locator('#nfd-help-center');
-    await utils.scrollIntoView(helpCenter);
-    await expect(helpCenter).toContainText('Help');
-    await expect(helpCenter).toBeVisible();
-  }); */
-
- /*  test('Bluehost Account Widget', async ({ page }) => {
-    const accountWidget = page.locator('#bluehost_account_widget');
-    await expect(accountWidget).toBeVisible();
-
-    // Profile Link
-    await newfold.verifyWidgetLink(
-      page,
-      '[data-test-id="nfd-widget-account-link-profile"]',
-      'Profile',
-      'bluehost',
-      { href: /utm_source/ }
-    );
-
-    // Mail Link
-    await newfold.verifyWidgetLink(
-      page,
-      '[data-test-id="nfd-widget-account-link-email"]',
-      'Mail',
-      'email-office',
-      { href: /utm_source/ }
-    );
-
-    // Hosting Link
-    await newfold.verifyWidgetLink(
-      page,
-      '[data-test-id="nfd-widget-account-link-hosting"]',
-      'Hosting',
-      'hosting',
-      { href: /utm_source/ }
-    );
-
-    // Security Link
-    await newfold.verifyWidgetLink(
-      page,
-      '[data-test-id="nfd-widget-account-link-security"]',
-      'Security',
-      'security',
-      { href: /utm_source/ }
-    );
-  }); */
 });

@@ -110,7 +110,7 @@ async function createWordPressUtils(page, options = {}) {
  * Navigate to a WordPress admin page with smart authentication
  * 
  * @param {import('@playwright/test').Page} page - Playwright page object
- * @param {string} adminPage - Admin page path (e.g., 'admin.php?page=bluehost')
+ * @param {string} adminPage - Admin page path (e.g., 'admin.php?page=web')
  * @param {Object} options - Navigation options
  * @param {boolean} options.forceLogin - Force login even if already logged in (default: false)
  * @returns {Object} Object containing admin and pageUtils instances

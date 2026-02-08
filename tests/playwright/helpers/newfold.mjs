@@ -340,7 +340,7 @@ async function waitForDashboardWidgets(page, timeout = 10000) {
  * Assumes the plugin ID is known.
  *
  * @param {import('@playwright/test').Page} page - Playwright page object.
- * @param {string} pluginId - The ID of the plugin (e.g., 'bluehost').
+ * @param {string} pluginId - The ID of the plugin (e.g., 'bluehost/web').
  * @param {string} path - The path within the plugin (e.g., '#/home').
  */
 async function navigateToPluginPage(page, pluginId, path = '') {

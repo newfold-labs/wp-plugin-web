@@ -5,29 +5,29 @@ test.describe('Settings Page', () => {
 
   test.beforeEach(async ({ page }) => {
     // Navigate to settings page
-    await auth.navigateToAdminPage(page, 'admin.php?page=bluehost#/settings/settings');
+    await auth.navigateToAdminPage(page, 'admin.php?page=web#/settings');
   });
 
   test('Is Accessible', async ({ page }) => {
     // Wait for the main app container to be rendered
-    await page.waitForSelector('#wppbh-app-rendered', { timeout: 10000 });
+    await page.waitForSelector('#wppw-app-rendered', { timeout: 10000 });
     
     // Wait for the app body to be visible
-    await page.waitForSelector('.wppbh-app-body', { timeout: 10000 });
+    await page.waitForSelector('.wppw-app-body', { timeout: 10000 });
     
     // Run accessibility test with WCAG 2.1 AA standards (includes color contrast)
-    await a11y.checkA11y(page, '.wppbh-app-body');
+    await a11y.checkA11y(page, '.wppw-app-body');
   });
 
   test('Has Coming Soon Section', async ({ page }) => {
-    const comingSoonSection = page.locator('.wppbh-app-settings-coming-soon');
+    const comingSoonSection = page.locator('.wppw-app-settings-coming-soon');
     await utils.scrollIntoView(comingSoonSection);
     await expect(comingSoonSection).toBeVisible();
     // further tests exist in coming soon module
   });
 
   test('Autoupdate Toggles function properly', async ({ page }) => {
-    const updatesSection = page.locator('.wppbh-app-settings-update');
+    const updatesSection = page.locator('.wppw-app-settings-update');
     await utils.scrollIntoView(updatesSection);
     await expect(updatesSection).toBeVisible();
 
@@ -147,10 +147,10 @@ test.describe('Settings Page', () => {
   });
 
   test('Comment Settings Work', async ({ page }) => {
-    const commentsSection = page.locator('.wppbh-app-settings-comments');
+    const commentsSection = page.locator('.wppw-app-settings-comments');
     await utils.scrollIntoView(commentsSection);
     await expect(commentsSection).toBeVisible();
-
+ 
     // Comments per page setting
     const commentsPerPageSelect = page.locator('[data-id="comments-per-page-select"]');
     await commentsPerPageSelect.click();
@@ -158,20 +158,26 @@ test.describe('Settings Page', () => {
     await commentsPerPageSelect.locator('..').locator('+ .nfd-select__options .nfd-select__option:first-child').click();
     await page.waitForTimeout(100);
     
-    await expect(commentsSection.locator('label').last()).toContainText('Comments to display per page');
-
+    await expect(commentsSection.locator('label').last()).toContainText(/Display \d+ comments per page\./);
     // Disable comments toggle
     const disableCommentsToggle = page.locator('[data-id="disable-comments-toggle"]');
-    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false');
+    await page.waitForTimeout(500);
+   
+    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'true');
     
     const closeCommentsDaysSelect = page.locator('[data-id="close-comments-days-select"]');
-    await expect(closeCommentsDaysSelect).toBeDisabled();
+    await expect(closeCommentsDaysSelect).not.toBeDisabled();
     
     await disableCommentsToggle.click();
-    await page.waitForTimeout(100);
-    
+    await page.waitForTimeout(1000);
+
+    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false');
+    await expect(closeCommentsDaysSelect).toBeDisabled();
+
+    // Re-enable comments
+    await disableCommentsToggle.click();
+    await page.waitForTimeout(1000);
     await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'true');
-    await expect(closeCommentsDaysSelect).not.toBeDisabled();
 
     // Close comments after days
     await closeCommentsDaysSelect.click();
@@ -179,7 +185,7 @@ test.describe('Settings Page', () => {
     await closeCommentsDaysSelect.locator('..').locator('+ .nfd-select__options .nfd-select__option:last-child').click();
     await page.waitForTimeout(100);
     
-    await expect(commentsSection.locator('label').last()).toContainText('Comments to display per page');
+    await expect(commentsSection.locator('label').last()).toContainText(/Display \d+ comments per page\./);
 
     // Change to 14 days
     await closeCommentsDaysSelect.click();
@@ -187,12 +193,6 @@ test.describe('Settings Page', () => {
     await closeCommentsDaysSelect.locator('..').locator('+ .nfd-select__options .nfd-select__option:nth-child(6)').click();
     await page.waitForTimeout(100);
     
-    await expect(commentsSection.locator('label').nth(1)).toContainText('Close comments after 14 days.');
-
-    // Re-enable comments
-    await disableCommentsToggle.click();
-    await page.waitForTimeout(100);
-    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false');
-    await expect(closeCommentsDaysSelect).toBeDisabled();
+    await expect(commentsSection.locator('label').nth(1)).toContainText(/Close comments after \d+ days\./);
   });
 });

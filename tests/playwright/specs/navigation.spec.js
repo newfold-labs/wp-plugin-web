@@ -4,11 +4,11 @@ import { auth } from '../helpers';
 test.describe('Navigation', () => {
   test.beforeEach(async ({ page }) => {
     // Use shared authentication helper
-    await auth.navigateToAdminPage(page, 'admin.php?page=bluehost');
+    await auth.navigateToAdminPage(page, 'admin.php?page=web');
   });
 
   test('Logo Links to home', async ({ page }) => {
-    await page.click('.wppbh-logo-wrap a');
+    await page.click('.wppw-logo-wrap a');
     await page.waitForTimeout(500);
     
     // Check if the hash is #/home
@@ -24,24 +24,24 @@ test.describe('Navigation', () => {
     await admin.visitAdminPage('index.php');
     
     // Check if the admin submenu exists
-    await expect(page.locator('#adminmenu #toplevel_page_bluehost ul.wp-submenu')).toBeVisible();
+    await expect(page.locator('#adminmenu #toplevel_page_web ul.wp-submenu')).toBeVisible();
     
     // Check for specific submenu items
-    await expect(page.locator('#adminmenu #toplevel_page_bluehost ul.wp-submenu li a[href="admin.php?page=bluehost#/home"]')).toBeVisible();
-    await expect(page.locator('#adminmenu #toplevel_page_bluehost ul.wp-submenu li a[href="admin.php?page=bluehost#/settings"]')).toBeVisible();
-    await expect(page.locator('#adminmenu #toplevel_page_bluehost ul.wp-submenu li a[href="admin.php?page=bluehost#/help"]')).toBeVisible();
+    await expect(page.locator('#adminmenu #toplevel_page_web ul.wp-submenu li a[href="admin.php?page=web#/home"]')).toBeVisible();
+    await expect(page.locator('#adminmenu #toplevel_page_web ul.wp-submenu li a[href="admin.php?page=web#/settings"]')).toBeVisible();
+    await expect(page.locator('#adminmenu #toplevel_page_web ul.wp-submenu li a[href="admin.php?page=web#/help"]')).toBeVisible();
   });
 
   test('Settings link properly navigates', async ({ page }) => {
-    // Navigate to the Bluehost admin page first
-    await auth.navigateToAdminPage(page, 'admin.php?page=bluehost');
+    // Navigate to the web admin page first
+    await auth.navigateToAdminPage(page, 'admin.php?page=web');
     
-    // First hover over the main Bluehost menu to make submenu visible
-    await page.hover('#adminmenu #toplevel_page_bluehost');
+    // First hover over the main web menu to make submenu visible
+    await page.hover('#adminmenu #toplevel_page_web');
     await page.waitForTimeout(100);
     
     // Click the settings link with force option
-    await page.click('#adminmenu #toplevel_page_bluehost ul.wp-submenu li a[href="admin.php?page=bluehost#/settings"]', { force: true });
+    await page.click('#adminmenu #toplevel_page_web ul.wp-submenu li a[href="admin.php?page=web#/settings"]', { force: true });
     await page.waitForTimeout(500);
     
     // Check if the hash is #/settings
