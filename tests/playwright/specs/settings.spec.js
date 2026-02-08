@@ -171,7 +171,7 @@ test.describe('Settings Page', () => {
     
     await disableCommentsToggle.click();
     
-    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
+    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'true');
     await expect(closeCommentsDaysSelect).not.toBeDisabled();
 
     // Close comments after days
