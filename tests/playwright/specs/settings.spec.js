@@ -147,7 +147,7 @@ test.describe('Settings Page', () => {
   });
 
   test('Comment Settings Work', async ({ page }) => {
-    const commentsSection = page.locator('.wppbh-app-settings-comments');
+    const commentsSection = page.locator('.wppw-app-settings-comments');
     await utils.scrollIntoView(commentsSection);
     await expect(commentsSection).toBeVisible();
 
@@ -162,13 +162,15 @@ test.describe('Settings Page', () => {
 
     // Disable comments toggle
     const disableCommentsToggle = page.locator('[data-id="disable-comments-toggle"]');
+    await disableCommentsToggle.click();
+    await page.waitForTimeout(500);
     await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false');
     
     const closeCommentsDaysSelect = page.locator('[data-id="close-comments-days-select"]');
     await expect(closeCommentsDaysSelect).toBeDisabled();
     
     await disableCommentsToggle.click();
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(500);
     
     await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'true');
     await expect(closeCommentsDaysSelect).not.toBeDisabled();
