@@ -146,7 +146,7 @@ test.describe('Settings Page', () => {
     await expect(description).toContainText('The trash will automatically empty every 4 weeks.');
   });
 
-  test('Comment Settings Work', async ({ page }) => {
+test('Comment Settings Work', async ({ page }) => {
     const commentsSection = page.locator('.wppw-app-settings-comments');
     await utils.scrollIntoView(commentsSection);
     await expect(commentsSection).toBeVisible();
@@ -158,21 +158,19 @@ test.describe('Settings Page', () => {
     await commentsPerPageSelect.locator('..').locator('+ .nfd-select__options .nfd-select__option:first-child').click();
     await page.waitForTimeout(100);
     
+    //await expect(commentsSection.locator('label').last()).toContainText('Comments to display per page');
     await expect(commentsSection.locator('label').last()).toContainText(/Display \d+ comments per page\./);
-
     // Disable comments toggle
     const disableCommentsToggle = page.locator('[data-id="disable-comments-toggle"]');
-    await disableCommentsToggle.click();
-
-    // Wait for the toggle to change state (removes the duplicate and fixes timing)
-    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
+    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false');
     
     const closeCommentsDaysSelect = page.locator('[data-id="close-comments-days-select"]');
     await expect(closeCommentsDaysSelect).toBeDisabled();
     
     await disableCommentsToggle.click();
+    await page.waitForTimeout(100);
     
-    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'true', { timeout: 10000 });
+    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'true');
     await expect(closeCommentsDaysSelect).not.toBeDisabled();
 
     // Close comments after days
@@ -181,19 +179,21 @@ test.describe('Settings Page', () => {
     await closeCommentsDaysSelect.locator('..').locator('+ .nfd-select__options .nfd-select__option:last-child').click();
     await page.waitForTimeout(100);
     
-     await expect(commentsSection.locator('label').last()).toContainText(/Display \d+ comments per page\./);
-
+    // await expect(commentsSection.locator('label').last()).toContainText('Comments to display per page');
+    await expect(commentsSection.locator('label').last()).toContainText(/Display \d+ comments per page\./);
     // Change to 14 days
     await closeCommentsDaysSelect.click();
     await page.waitForTimeout(100);
     await closeCommentsDaysSelect.locator('..').locator('+ .nfd-select__options .nfd-select__option:nth-child(6)').click();
     await page.waitForTimeout(100);
     
+   // await expect(commentsSection.locator('label').nth(1)).toContainText('Close comments after 14 days.');
     await expect(commentsSection.locator('label').nth(1)).toContainText(/Close comments after \d+ days\./);
 
     // Re-enable comments
     await disableCommentsToggle.click();
-    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false', { timeout: 10000 });
+    await page.waitForTimeout(100);
+    await expect(disableCommentsToggle).toHaveAttribute('aria-checked', 'false');
     await expect(closeCommentsDaysSelect).toBeDisabled();
   });
 });
