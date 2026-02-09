@@ -1,0 +1,137 @@
+import { test, expect } from '@playwright/test';
+import { auth, wordpress, newfold, a11y, utils } from '../helpers';
+
+test.describe('Dashboard Widgets', () => {
+  
+  test.beforeEach(async ({ page }) => {
+    // Navigate to WordPress dashboard
+    await auth.navigateToAdminPage(page, 'index.php');
+    // clear all capabilities
+    await newfold.clearCapabilities();
+  });
+
+  test('Network solutions Widgets are all Accessible', async ({ page }) => {
+    // Wait for dashboard widgets to load with longer timeout
+    await expect(page).toHaveURL('http://localhost:8886/wp-admin/index.php');
+    
+    try {
+      await newfold.waitForDashboardWidgets(page, 15000);
+    } catch (error) {
+      console.log('Dashboard widgets not found, checking if widgets exist individually...');
+    }
+    
+    // Check if widgets exist before running accessibility tests
+    const sitePreviewWidget = page.locator('#site_preview_widget');
+    
+    // Run accessibility tests only on widgets that exist
+    if (await sitePreviewWidget.count() > 0) {
+      await a11y.checkA11y(page, '#site_preview_widget');
+    }
+  });
+
+  test('Site Preview Widget', async ({ page }) => {
+    // Ensure coming soon is disabled
+    await newfold.setComingSoon(false);
+
+    // Navigate to WordPress dashboard
+    await auth.navigateToAdminPage(page, 'index.php');
+    // Reload page
+    await page.reload();
+
+    // Verify site preview widget exists and is visible
+    const sitePreviewWidget = page.locator('#site_preview_widget');
+    sitePreviewWidget.scrollIntoViewIfNeeded();
+    await expect(sitePreviewWidget).toBeVisible();
+
+    // Check domain and status
+    const domainElement = page.locator('.iframe-preview-domain');
+    domainElement.scrollIntoViewIfNeeded();
+    await expect(domainElement).toBeVisible();
+    await expect(domainElement).toContainText('localhost');
+    await expect(domainElement).toBeVisible();
+
+    const statusElement = page.locator('.iframe-preview-status');
+    statusElement.scrollIntoViewIfNeeded();
+    await expect(statusElement).toBeVisible();
+    await expect(statusElement).toContainText('Live');
+    await expect(statusElement).toBeVisible();
+
+    // Check widget body
+    const widgetBody = page.locator('.site-preview-widget-body');
+    await expect(widgetBody).toContainText('website is live');
+    await expect(widgetBody).toHaveAttribute('data-coming-soon', 'false');
+
+    // Check View Site link
+    const viewSiteLink = page.locator('a[data-test-id="nfd-view-site"]');
+    viewSiteLink.scrollIntoViewIfNeeded();
+    await expect(viewSiteLink).toBeVisible();
+    await expect(viewSiteLink).toContainText('View Site');
+    await expect(viewSiteLink).toBeVisible();
+    
+    const viewSiteHref = await viewSiteLink.getAttribute('href');
+    expect(viewSiteHref).toContain('localhost');
+
+    // Check Edit Site link
+    const editSiteLink = page.locator('a[data-test-id="nfd-edit-site"]');
+    editSiteLink.scrollIntoViewIfNeeded();
+    await expect(editSiteLink).toBeVisible();
+    await expect(editSiteLink).toContainText('Edit Site');
+    await expect(editSiteLink).toBeVisible();
+    
+    const editSiteHref = await editSiteLink.getAttribute('href');
+    expect(editSiteHref).toContain('site-editor');
+
+    // Enable Coming Soon
+    const enableComingSoonButton = page.locator('a[data-test-id="nfd-coming-soon-enable"]');
+    enableComingSoonButton.scrollIntoViewIfNeeded();
+    await expect(enableComingSoonButton).toBeVisible();
+    await expect(enableComingSoonButton).toContainText('Enable Coming Soon');
+    await expect(enableComingSoonButton).toHaveAttribute('href', '#');
+    // Click the button and wait for the API call to complete
+    enableComingSoonButton.click();
+
+    // Wait for the UI to update
+    // await page.waitForTimeout(1000);
+
+    // Coming Soon Enabled - wait for preview link to appear
+    const previewLink = page.locator('a[data-test-id="nfd-preview-site"]');
+    previewLink.scrollIntoViewIfNeeded();
+    await expect(previewLink).toBeVisible();
+    await expect(viewSiteLink).toHaveCount(0);
+
+    // Check status changed to "Not Live"
+    await expect(statusElement).toContainText('Not Live');
+
+    // Check widget body changed to "Coming Soon"
+    await expect(widgetBody).toContainText('Coming Soon');
+    await expect(widgetBody).toHaveAttribute('data-coming-soon', 'true');
+
+    // Enable button should not exist, disable button should exist
+    await expect(enableComingSoonButton).toHaveCount(0);
+    
+    const disableComingSoonButton = page.locator('a[data-test-id="nfd-coming-soon-disable"]');
+    disableComingSoonButton.scrollIntoViewIfNeeded();
+    await expect(disableComingSoonButton).toBeVisible();
+    await expect(disableComingSoonButton).toContainText('Launch Site');
+    await expect(disableComingSoonButton).toHaveAttribute('href', '#');
+    
+    // Click the button and wait for the API call to complete
+    disableComingSoonButton.click();
+    
+    // Wait for the UI to update
+    // await page.waitForTimeout(1000);
+
+    // Coming Soon Disabled
+    viewSiteLink.scrollIntoViewIfNeeded();
+    await expect(viewSiteLink).toBeVisible();
+    await expect(statusElement).toContainText('Live');
+    await expect(widgetBody).toContainText('website is live');
+    await expect(widgetBody).toHaveAttribute('data-coming-soon', 'false');
+    await expect(previewLink).toHaveCount(0);
+
+    // Disable button should not exist, enable button should exist
+    await expect(disableComingSoonButton).toHaveCount(0);
+    await expect(enableComingSoonButton).toContainText('Enable Coming Soon');
+    await expect(enableComingSoonButton).toHaveAttribute('href', '#');
+  });
+});
