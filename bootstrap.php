@@ -98,6 +98,24 @@ add_filter(
 
 setContainer( $web_module_container );
 
+// Load Data class for AI SiteGen brand mapping
+require_once WEB_PLUGIN_DIR . '/inc/Data.php';
+
+/**
+ * Sub-brands like 'web', 'vodien', and 'crazy-domains' should use 'networksolutions'
+ * as the brand identifier when making AI SiteGen API calls.
+ */
+add_filter(
+	'newfold_ai_sitegen_brand',
+	function ( $brand ) {
+		// Check if this plugin's Data class has the get_ai_sitegen_brand method
+		if ( method_exists( \Web\Data::class, 'get_ai_sitegen_brand' ) ) {
+			return \Web\Data::get_ai_sitegen_brand();
+		}
+		return $brand;
+	}
+);
+
 // Set up the updater endpoint and map values
 $updateurl     = 'https://hiive.cloud/workers/release-api/plugins/newfold-labs/wp-plugin-web'; // Custom API GET endpoint
 $pluginUpdater = new PluginUpdater( WEB_PLUGIN_FILE, $updateurl );
@@ -213,3 +231,48 @@ if ( function_exists( 'add_filter' ) ) {
 		3
 	);
 }
+
+/**
+ * Handle plugin activation tasks.
+ *
+ * Runs on fresh plugin activation to set up the environment properly.
+ * This includes flushing rewrite rules and clearing stale transients.
+ *
+ * @return void
+ */
+function on_activate() {
+	// Clear transients that may contain stale data.
+	delete_transient( 'newfold_marketplace' );
+	delete_transient( 'newfold_notifications' );
+	delete_transient( 'newfold_solutions' );
+	delete_transient( 'nfd_site_capabilities' );
+
+	// Flush rewrite rules to ensure permalinks work correctly.
+	flush_rewrite_rules();
+}
+
+/**
+ * Check if the plugin was freshly activated and run activation tasks.
+ *
+ * This runs on admin_init to ensure WordPress is fully loaded before
+ * executing activation tasks like flushing rewrite rules.
+ *
+ * @return void
+ */
+function load_plugin() {
+	if ( is_admin() && WEB_PLUGIN_FILE === get_option( 'nfd_activated_fresh' ) ) {
+		delete_option( 'nfd_activated_fresh' );
+		on_activate();
+	}
+}
+
+// Check for plugin activation on admin_init.
+add_action( 'admin_init', __NAMESPACE__ . '\\load_plugin' );
+
+// Register activation hook to set the activation flag.
+register_activation_hook(
+	WEB_PLUGIN_FILE,
+	function () {
+		add_option( 'nfd_activated_fresh', WEB_PLUGIN_FILE );
+	}
+);
