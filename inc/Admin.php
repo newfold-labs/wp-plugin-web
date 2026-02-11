@@ -22,7 +22,7 @@ final class Admin {
 		/* Add Page to WordPress Admin Menu. */
 		\add_action( 'admin_menu', array( __CLASS__, 'page' ) );
 		/* Load Page Scripts & Styles. */
-		\add_action( 'load-toplevel_page_web', array( __CLASS__, 'assets' ) );
+		\add_action( 'admin_enqueue_scripts', array( __CLASS__, 'assets' ) );
 		/* Add Links to WordPress Plugins list item. */
 		\add_filter( 'plugin_action_links_wp-plugin-web/wp-plugin-web.php', array( __CLASS__, 'actions' ) );
 		/* Add inline style to hide subnav link */
@@ -43,7 +43,7 @@ final class Admin {
 	 * @return array
 	 */
 	public static function add_to_runtime( $sdk ) {
-		include WEB_PLUGIN_DIR . '/inc/Data.php';
+		include_once WEB_PLUGIN_DIR . '/inc/Data.php';
 		return array_merge( $sdk, Data::runtime() );
 	}
 
@@ -79,6 +79,11 @@ final class Admin {
 			padding: 6px 8px 0px;
 			opacity: 1 !important;
 			display: block;
+		}';
+		echo 'li#toplevel_page_web a.toplevel_page_web:hover div.wp-menu-image img,
+		      li#toplevel_page_web.current a.toplevel_page_web div.wp-menu-image img,
+		      li#toplevel_page_web a.toplevel_page_web.wp-has-current-submenu div.wp-menu-image img {
+			filter: brightness(0) invert(1);
 		}';
 		echo 'ul#adminmenu a.toplevel_page_web.wp-has-current-submenu:after, ul#adminmenu>li#toplevel_page_web.current>a.current:after { border-right-color: #fff !important; }';
 		echo 'li#toplevel_page_web > ul > li.wp-first-item { display: none !important; }';
@@ -132,7 +137,7 @@ final class Admin {
 			echo '<div id="wppw-app" class="wppw wppw_app"></div>' . PHP_EOL;
 			// Render bootstrap containers for modules that need portals
 			// Only enabled features get their containers rendered
-			$features_with_portals = array( 'performance' );
+			$features_with_portals = array( 'performance', 'coming-soon' );
 			foreach ( $features_with_portals as $feature ) {
 				if ( function_exists( 'NewfoldLabs\WP\Module\Features\isEnabled' ) &&
 					\NewfoldLabs\WP\Module\Features\isEnabled( $feature ) ) {
