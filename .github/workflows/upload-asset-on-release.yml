@@ -20,7 +20,7 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Validate version number
         if: ${{ github.repository == 'newfold-labs/wp-plugin-web' }}
@@ -38,7 +38,7 @@ jobs:
           [[ "$taggedVersion" == "$pluginPackageVersion" ]] || exit 1
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401 # v2.32.0
+        uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2.36.0
         with:
           php-version: '8.1'
           coverage: none
@@ -55,7 +55,7 @@ jobs:
           echo "PACKAGE=${REPO##*/}" >> $GITHUB_OUTPUT
 
       - name: Set Node.js 20.x
-        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: 20.x
 
@@ -64,7 +64,7 @@ jobs:
         run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
 
       - name: Cache node modules
-        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: ${{ steps.npm-cache.outputs.dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -76,7 +76,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache Composer vendor directory
-        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -134,6 +134,25 @@ jobs:
           asset_path: ${{ steps.workflow.outputs.DIST }}/${{ steps.workflow.outputs.PACKAGE }}.zip
           asset_name: ${{ steps.workflow.outputs.PACKAGE }}.zip
           asset_content_type: application/zip
+
+      - name: Upload Zip to R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          DIST: ${{ steps.workflow.outputs.DIST }}
+          PACKAGE: ${{ steps.workflow.outputs.PACKAGE }}
+          TAG_NAME: ${{ github.event.release.tag_name }}
+        run: |
+          aws --version
+          ENDPOINT="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
+
+          echo "Uploading $PACKAGE.zip to R2 bucket: $R2_BUCKET_NAME"
+          aws s3 cp "$DIST/$PACKAGE.zip" \
+            "s3://${R2_BUCKET_NAME}/uploads/free/$PACKAGE.zip" \
+            --endpoint-url "$ENDPOINT"
 
       - name: Clear cache for release API
         run: |
