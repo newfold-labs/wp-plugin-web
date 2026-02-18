@@ -33,7 +33,7 @@
         "@wordpress/i18n": "^5.20.0",
         "@wordpress/icons": "^11.1.0",
         "classnames": "^2.5.1",
-        "html-react-parser": "^5.2.2",
+        "html-react-parser": "^5.2.17",
         "jquery": "^3.7.1",
         "lodash": "^4.17.21",
         "react": "^19.2.4",
@@ -48,7 +48,7 @@
         "@wordpress/scripts": "^27",
         "axe-core": "^4.10.2",
         "cypress": "^14.2.0",
-        "cypress-axe": "^1.6.0",
+        "cypress-axe": "^1.7.0",
         "node-fetch": "^2.7.0",
         "tailwindcss": "^3.4.17",
         "yaml-lint": "^1.7.0"
