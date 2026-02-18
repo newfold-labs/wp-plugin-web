@@ -97,12 +97,19 @@ export const SideNavMenu = () => {
 }
 
 export const SideNavMenuItem = ({ label, name, icon: Icon = null, path, action, subItems }) => {
+	const location = useLocation();
+	// Check if this is the home route and we're at the root path
+	const isHomeActive = path === '/home' && location.pathname === '/';
+	
 	return (
 		<li className="nfd-mb-0">
 			<NavLink
 				onClick={(action && action instanceof Function) ? action : null}
 				to={path}
-				className={`wppw-app-navitem wppw-app-navitem-${ cleanForSlug( label ) } nfd-flex nfd-items-center nfd-gap-3 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-blue-100`}
+				className={({ isActive }) => {
+					const active = isActive || isHomeActive;
+					return `wppw-app-navitem wppw-app-navitem-${ cleanForSlug( label ) } nfd-flex nfd-items-center nfd-gap-3 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 ${active ? 'active nfd-bg-blue-100' : ''}`;
+				}}
 			>
 				{Icon &&
 					<Icon className="nfd-flex-shrink-0 nfd--ml-1 nfd-h-6 nfd-w-6" />
@@ -239,19 +246,28 @@ export const TopBarNav = () => {
 					{isLargeViewport && (
 						<nav className="min-[783px]:nfd-flex nfd-items-center nfd-gap-1">
 							{topRoutes.map(
-								(page) => (
-									true === page.condition && (
-										<NavLink
-											key={page.name}
-											onClick={(page.action && page.action instanceof Function) ? page.action : null}
-											to={page.name}
-											className={`wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-blue-100 nfd-transition-colors`}
-										>
-											{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
-											{page.title}
-										</NavLink>
-									)
-							))}
+								(page) => {
+									// Check if this is the home route and we're at the root path
+									const isHomeActive = page.name === '/home' && location.pathname === '/';
+									
+									return (
+										true === page.condition && (
+											<NavLink
+												key={page.name}
+												onClick={(page.action && page.action instanceof Function) ? page.action : null}
+												to={page.name}
+												className={({ isActive }) => {
+													const active = isActive || isHomeActive;
+													return `wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 nfd-transition-colors ${active ? 'active nfd-bg-blue-100' : ''}`;
+												}}
+											>
+												{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
+												{page.title}
+											</NavLink>
+										)
+									);
+								}
+							)}
 						</nav>
 					)}
 				</div>
