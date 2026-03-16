@@ -5,11 +5,15 @@ import SettingsSection from 'App/pages/home/settingsSection';
 import WebContentSection from 'App/pages/home/webContentSection';
 import WebHostingSection from 'App/pages/home/webHostingSection';
 import ComingSoonSection from './comingSoonSection';
+import NextSteps from "./nextSteps";
+import StoreDetails from "./storeDetails";
 
 const Home = () => {	
 	return (
 	<Page title="Home" className={"wppw-app-home-page wppw-home"}>
+		<StoreDetails />
 		<ComingSoonSection />
+		<NextSteps />
 		<Container className={'wppw-app-home-container'}>
 			<Container.Header className={'wppw-app-home-header'}>
 				<Title as="h2" className="nfd-flex nfd-items-center nfd-gap-2">
