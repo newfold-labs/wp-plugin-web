@@ -146,8 +146,6 @@ final class Admin {
 					echo '<div id="' . esc_attr( $portal_id ) . '" style="display:none"></div>' . PHP_EOL;
 				}
 			}
-
-			
 		} else {
 			// fallback messaging for WordPress older than 5.4.
 			echo '<div id="wppw-app" class="wppw wppw_app">' . PHP_EOL;
@@ -189,7 +187,7 @@ final class Admin {
 		\wp_register_script(
 			'web-script',
 			WEB_BUILD_URL . '/index.js',
-			array_merge( $asset['dependencies'], array( 'newfold-features', 'nfd-runtime', 'nfd-portal-registry', ) ),
+			array_merge( $asset['dependencies'], array( 'newfold-features', 'nfd-runtime', 'nfd-portal-registry' ) ),
 			$asset['version'],
 			true
 		);
