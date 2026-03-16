@@ -383,3 +383,7 @@ body.toplevel_page_web {
 header.wppw-app-topbar nav a.wppw-app-navitem {
     text-decoration: none;
 }
+
+.nfd-root .nfd-notifications{
+    z-index: 9991 !important;
+}
