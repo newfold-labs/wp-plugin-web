@@ -2,7 +2,7 @@
     "name": "wp-plugin-web",
     "description": "WordPress plugin that integrates your WordPress site with the Network Solutions control panel, including performance, security, and update features.",
     "license": "GPL-2.0-or-later",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "private": true,
     "repository": {
         "type": "git",
@@ -37,13 +37,16 @@
         "jquery": "^3.7.1",
         "lodash": "^4.17.21",
         "react": "^18.3.1",
-        "react-error-boundary": "^5.0.0",
-        "react-router-dom": "^7.9.5",
+        "react-error-boundary": "^6.1.1",
+        "react-router-dom": "^7.13.1",
         "react-use": "^17.6.0"
     },
     "devDependencies": {
+        "@axe-core/playwright": "^4.11.0",
+        "@playwright/test": "^1.58.1",
         "@tailwindcss/forms": "^0.5.10",
         "@testing-library/cypress": "^10.1.0",
+        "@types/node": "^25.2.0",
         "@wordpress/env": "^10.20.0",
         "@wordpress/scripts": "^27",
         "axe-core": "^4.10.2",
@@ -84,6 +87,10 @@
         "storybook:dev": "start-storybook -c ./storybook",
         "storybook:build": "build-storybook -c ./storybook -o ./.docs",
         "test:e2e": "npx cypress run",
+        "test:e2e:all": "npm run test:cypress && npm run test:playwright",
+        "test:playwright": "npx playwright test",
+        "test:playwright:update-projects": "node .github/scripts/generate-playwright-projects.mjs",
+        "test:clean-module": "bash ./.github/scripts/test-clean-module",
         "test:unit": "wp-scripts test-unit-js"
     }
 }

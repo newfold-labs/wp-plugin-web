@@ -135,6 +135,7 @@ final class Admin {
 
 		if ( version_compare( $wp_version, '5.4', '>=' ) ) {
 			echo '<div id="wppw-app" class="wppw wppw_app"></div>' . PHP_EOL;
+			echo '<div id="nfd-next-steps-portal" style="display:none"></div>' . PHP_EOL;
 			// Render bootstrap containers for modules that need portals
 			// Only enabled features get their containers rendered
 			$features_with_portals = array( 'performance', 'coming-soon' );
@@ -176,9 +177,17 @@ final class Admin {
 		}
 
 		\wp_register_script(
+			'nfd-portal-registry',
+			WEB_BUILD_URL . '/portal-registry.js',
+			array( 'wp-components', 'wp-element' ),
+			$asset['version'],
+			true
+		);
+
+		\wp_register_script(
 			'web-script',
 			WEB_BUILD_URL . '/index.js',
-			array_merge( $asset['dependencies'], array( 'newfold-features', 'nfd-runtime' ) ),
+			array_merge( $asset['dependencies'], array( 'newfold-features', 'nfd-runtime', 'nfd-portal-registry' ) ),
 			$asset['version'],
 			true
 		);
