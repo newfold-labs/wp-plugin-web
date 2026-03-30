@@ -42,8 +42,8 @@
             ]
         },
         "wp-module-ai-page-designer": {
-            "type": "path",
-            "url": "./vendor/newfold-labs/wp-module-ai-page-designer"
+            "type": "vcs",
+            "url": "https://github.com/newfold-labs/wp-module-ai-page-designer"
         }
     },
     "scripts": {
