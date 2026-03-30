@@ -8,6 +8,7 @@
 namespace Web;
 
 use Web\Data;
+use NewfoldLabs\WP\Module\AIPageDesigner\Services\CapabilityGate;
 use function NewfoldLabs\WP\Module\Features\isEnabled;
 
 /**
@@ -56,12 +57,21 @@ final class Admin {
 	 */
 	public static function subpages() {
 
-		return array(
+		$pages = array(
 			'web#/home'        => __( 'Home', 'wp-plugin-web' ),
 			'web#/marketplace' => __( 'Marketplace', 'wp-plugin-web' ),
 			'web#/settings'    => __( 'Settings', 'wp-plugin-web' ),
-			'web#/help'        => __( 'Help', 'wp-plugin-web' ),
 		);
+
+		// Add AI Designer if capability is enabled
+		if ( CapabilityGate::has_ai_site_gen() ) {
+			$pages['web#/ai-designer'] = __( 'AI Designer', 'wp-plugin-web' );
+		}
+
+		// Add Help last
+		$pages['web#/help'] = __( 'Help', 'wp-plugin-web' );
+
+		return $pages;
 	}
 
 	/**

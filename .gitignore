@@ -30,3 +30,9 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+.claude
+.cursor
+.codex
+.github/skills
+tests/playwright/test-results

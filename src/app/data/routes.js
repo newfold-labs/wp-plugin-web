@@ -3,7 +3,8 @@ import {
 	ShoppingBagIcon,
 	BoltIcon, 
 	AdjustmentsHorizontalIcon,
-	QuestionMarkCircleIcon } 
+	QuestionMarkCircleIcon,
+	SparklesIcon } 
 from '@heroicons/react/24/outline';
 import { getMarketplaceSubnavRoutes } from '@modules/wp-module-marketplace/components/marketplaceSubnav';
 import { Route, Routes } from 'react-router-dom';
@@ -12,10 +13,12 @@ import Marketplace from '../pages/marketplace';
 import Settings from '../pages/settings';
 import Help from '../pages/help';
 import Admin from '../pages/admin';
+import AIDesigner from '../pages/ai-designer';
 
 const topRoutePaths = [
 	'/home',
 	'/marketplace',
+	'/ai-designer',
 	'/settings',
 	'/help',
 ];
@@ -50,6 +53,13 @@ export const routes = [
 		Component: Settings,
 		Icon: AdjustmentsHorizontalIcon,
 		condition: true,
+	},
+	{
+		name: '/ai-designer',
+		title: __( 'AI Designer', 'wp-plugin-web' ),
+		Component: AIDesigner,
+		Icon: SparklesIcon,
+		condition: window.NewfoldRuntime?.capabilities?.hasAISiteGen || false,
 	},
 	{
 		name: '/help',
