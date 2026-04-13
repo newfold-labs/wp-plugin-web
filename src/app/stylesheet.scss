@@ -57,6 +57,7 @@ body.toplevel_page_web {
 
     #wpcontent {
         padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
     #wpadminbar .ab-top-menu {
@@ -197,13 +198,13 @@ body.toplevel_page_web {
 }
 
 .wppw-app-body {
-    padding: 2rem 24px 1rem;
+    padding: 2rem 1rem 1rem !important;
 
     &-inner {
-        max-width: 1290px;
+        max-width: min(90vw, 1450px);
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
-        width: 100%;
     }
 
     @media screen and (max-width:782px) {
