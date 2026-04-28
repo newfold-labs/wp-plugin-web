@@ -239,6 +239,27 @@ if ( function_exists( 'add_filter' ) ) {
 }
 
 /**
+ * Workaround for onboarding preview pages returning 404 on production.
+ *
+ * PreviewsService::publish_page() in wp-module-onboarding creates preview pages
+ * via wp_insert_post() but never calls flush_rewrite_rules() afterward. On production
+ * with pretty permalinks, newly created pages are not routable until the rewrite rules
+ * are flushed. We hook on wp_after_insert_post (which fires via direct function call
+ * inside wp_insert_post, so it is NOT removed by PreviewsService's remove_all_actions
+ * call) to flush rewrite rules whenever a new page is published during a REST request.
+ */
+add_action(
+	'wp_after_insert_post',
+	function ( $post_id, $post, $update ) {
+		if ( ! $update && 'page' === $post->post_type && 'publish' === $post->post_status && defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			flush_rewrite_rules();
+		}
+	},
+	10,
+	3
+);
+
+/**
  * Handle plugin activation tasks.
  *
  * Runs on fresh plugin activation to set up the environment properly.
