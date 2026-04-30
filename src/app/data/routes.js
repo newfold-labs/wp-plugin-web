@@ -1,10 +1,10 @@
-import { 
+import {
 	HomeIcon,
 	ShoppingBagIcon,
-	BoltIcon, 
+	BoltIcon,
 	AdjustmentsHorizontalIcon,
 	QuestionMarkCircleIcon,
-	SparklesIcon } 
+	SparklesIcon }
 from '@heroicons/react/24/outline';
 import { getMarketplaceSubnavRoutes } from '@modules/wp-module-marketplace/components/marketplaceSubnav';
 import { Route, Routes } from 'react-router-dom';
@@ -59,7 +59,7 @@ export const routes = [
 		title: __( 'AI Designer', 'wp-plugin-web' ),
 		Component: AIDesigner,
 		Icon: SparklesIcon,
-		condition: window.NewfoldRuntime?.capabilities?.hasAISiteGen || false,
+		condition: ( window.NewfoldRuntime?.capabilities?.canAccessAI && window.NewfoldRuntime?.capabilities?.canAccessAIPageDesigner ) || false,
 	},
 	{
 		name: '/help',
@@ -83,10 +83,10 @@ export const AppRoutes = () => {
 				if ( ! route.condition ) {
 					return null;
 				}
-				
+
 				const { name, Component } = route;
 				const routePath = route.subRoutes ? `${ name }/*` : name;
-				
+
 				return (
 					<Route
 						key={ name }
@@ -95,7 +95,7 @@ export const AppRoutes = () => {
 					/>
 				);
 			} ) }
-			
+
 			<Route path="/" element={ <Home /> } />
 			<Route
 				path="*"

@@ -64,7 +64,7 @@ final class Admin {
 		);
 
 		// Add AI Designer if capability is enabled
-		if ( CapabilityGate::has_ai_site_gen() ) {
+		if ( CapabilityGate::has_ai_site_gen() && CapabilityGate::has_ai_page_designer() ) {
 			$pages['web#/ai-designer'] = __( 'AI Designer', 'wp-plugin-web' );
 		}
 
