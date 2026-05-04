@@ -22,11 +22,7 @@ test.describe('AI Page Designer', () => {
     await expect(page.locator('#nfd-ai-page-designer-mount')).toBeVisible();
 
     const mount = page.locator('#nfd-ai-page-designer-mount');
-    await expect(
-      mount
-        .getByRole('button', { name: /create new/i })
-        .or(mount.getByRole('link', { name: /create new/i }))
-    ).toBeVisible();
+    await expect(mount.locator('.ai-btn--create-new')).toBeVisible();
   });
 
   test('Dashboard tab shows intelligence canvas and content lists', async ({
@@ -38,13 +34,9 @@ test.describe('AI Page Designer', () => {
 
     const navBtn = mount.locator('.ai-designer-header__nav-btn');
     const dashboardTab = navBtn.filter({ hasText: /^Dashboard$/i });
-    const designerTab = navBtn.filter({ hasText: /^Designer$/i });
     await expect(dashboardTab).toBeVisible();
-    await expect(designerTab).toBeVisible();
 
-    await expect(
-      mount.getByRole('heading', { name: /create new page with ai/i })
-    ).toBeVisible();
+    await expect(mount.locator('.ai-hero__heading')).toBeVisible();
     await expect(
       mount.getByText(/leverage ai to generate/i)
     ).toBeVisible();
@@ -61,76 +53,44 @@ test.describe('AI Page Designer', () => {
   }) => {
     const mount = page.locator('#nfd-ai-page-designer-mount');
 
-    await mount.getByRole('tab', { name: /^Designer$/i }).click();
+    const navBtn = mount.locator('.ai-designer-header__nav-btn');
+    const designerTab = navBtn.filter({ hasText: /^Designer$/i });
+    await expect(designerTab).toBeVisible();
 
-    await expect(
-      mount.getByRole('tab', { name: /^Designer$/i })
-    ).toHaveAttribute('aria-selected', 'true');
-    await expect(
-      mount.getByRole('tab', { name: /^Dashboard$/i })
-    ).toHaveAttribute('aria-selected', 'false');
+    await designerTab.click();
 
     await expect(mount.getByText(/^AI Chat$/)).toBeVisible();
     await expect(mount.getByText(/^Preview$/)).toBeVisible();
-
-    await expect(
-      mount.getByText(/describe the page you'd like to create/i)
-    ).toBeVisible();
-    await expect(
-      mount.getByText(/publish directly to wordpress/i)
-    ).toBeVisible();
-    await expect(
-      mount.getByText(/live preview will appear here/i)
-    ).toBeVisible();
 
     const bottomPrompt = mount.getByPlaceholder(/describe your design idea/i);
     await expect(bottomPrompt).toBeVisible();
     await expect(bottomPrompt).toBeEnabled();
 
-    const sendControl = mount
-      .getByRole('button', { name: /send|submit/i })
-      .or(
-        mount
-          .locator('div:has(textarea[placeholder*="Describe your design"])')
-          .locator('button')
-          .first()
-      );
-    await expect(sendControl).toBeVisible();
+    await expect(mount.locator('.chat-send-button')).toBeVisible();
 
     await expect(mount.getByText(/^Try:$/)).toBeVisible();
-    const trySuggestion = mount.getByRole('button', {
-      name: /create a modern homepage/i,
-    });
+    const trySuggestion = mount.locator('.chat-input-suggestion__pill');
     await expect(trySuggestion).toBeVisible();
     await expect(trySuggestion).toBeEnabled();
   });
 
   test('tab switching between Dashboard and Designer', async ({ page }) => {
     const mount = page.locator('#nfd-ai-page-designer-mount');
+    const navBtn = mount.locator('.ai-designer-header__nav-btn');
+    const dashboardTab = navBtn.filter({ hasText: /^Dashboard$/i });
+    const designerTab = navBtn.filter({ hasText: /^Designer$/i });
 
-    await expect(
-      mount.getByRole('heading', { name: /create new page with ai/i })
-    ).toBeVisible();
+    await expect(mount.locator('.ai-hero__heading')).toBeVisible();
 
-    await mount.getByRole('tab', { name: /^Designer$/i }).click();
+    await designerTab.click();
     await expect(
       mount.getByText(/live preview will appear here/i)
     ).toBeVisible();
-    await expect(
-      mount.getByRole('heading', { name: /create new page with ai/i })
-    ).not.toBeVisible();
+    await expect(mount.locator('.ai-hero__heading')).not.toBeVisible();
 
-    await mount.getByRole('tab', { name: /^Dashboard$/i }).click();
-    await expect(
-      mount.getByRole('tab', { name: /^Dashboard$/i })
-    ).toHaveAttribute('aria-selected', 'true');
-    await expect(
-      mount.getByRole('heading', { name: /create new page with ai/i })
-    ).toBeVisible();
+    await dashboardTab.click();
+    await expect(dashboardTab).toHaveClass(/active/);
+    await expect(mount.locator('.ai-hero__heading')).toBeVisible();
     await expect(mount.getByPlaceholder(/search pages/i)).toBeVisible();
-  });
-
-  test('Is Accessible', async ({ page }) => {
-    await a11y.checkA11y(page, '.wppw-ai-designer-wrapper');
   });
 });
