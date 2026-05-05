@@ -1,8 +1,13 @@
 import { test, expect } from '@playwright/test';
-import { auth, a11y } from '../helpers';
+import { auth, a11y, newfold } from '../helpers';
 
 test.describe('AI Page Designer', () => {
   test.beforeEach(async ({ page }) => {
+    await newfold.setCapability({
+      canAccessAI: true,
+      canAccessAIPageDesigner: true,
+      hasAISiteGen: true,
+    });
     await auth.navigateToAdminPage(page, 'admin.php?page=web#/ai-designer');
     await page.waitForSelector('#wppw-app-rendered', { timeout: 15000 });
     await page.waitForSelector('#nfd-ai-page-designer-mount', { timeout: 15000 });
