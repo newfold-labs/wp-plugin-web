@@ -59,7 +59,7 @@ test.describe('AI Page Designer', () => {
 
     await designerTab.click();
 
-    await expect(mount.getByText(/^AI Chat$/)).toBeVisible();
+    await expect(mount.getByText(/^Chat$/)).toBeVisible();
     await expect(mount.getByText(/^Preview$/)).toBeVisible();
 
     const bottomPrompt = mount.getByPlaceholder(/describe your design idea/i);
