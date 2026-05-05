@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5310efb31c941ffb4208a8520626113c",
+    "content-hash": "745f4f4b53dbd8b7b0a6756379078ada",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -376,16 +376,16 @@
         },
         {
             "name": "newfold-labs/wp-module-ai-page-designer",
-            "version": "dev-develop",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-ai-page-designer.git",
-                "reference": "9637a0dde76d3150b16e2b31d7d05046d0efc3ba"
+                "reference": "07a8bf981f9ecedf76ea7a1d39ce8e7041df335f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-ai-page-designer/zipball/9637a0dde76d3150b16e2b31d7d05046d0efc3ba",
-                "reference": "9637a0dde76d3150b16e2b31d7d05046d0efc3ba",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-ai-page-designer/zipball/07a8bf981f9ecedf76ea7a1d39ce8e7041df335f",
+                "reference": "07a8bf981f9ecedf76ea7a1d39ce8e7041df335f",
                 "shasum": ""
             },
             "require": {
@@ -435,10 +435,10 @@
             ],
             "description": "AI-powered page and post designer for WordPress with live preview and publishing capabilities",
             "support": {
-                "source": "https://github.com/newfold-labs/wp-module-ai-page-designer/tree/develop",
+                "source": "https://github.com/newfold-labs/wp-module-ai-page-designer/tree/1.0.0",
                 "issues": "https://github.com/newfold-labs/wp-module-ai-page-designer/issues"
             },
-            "time": "2026-05-04T04:47:45+00:00"
+            "time": "2026-05-05T12:42:45+00:00"
         },
         {
             "name": "newfold-labs/wp-module-atomic",
@@ -5766,7 +5766,6 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "newfold-labs/wp-module-ai-page-designer": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
