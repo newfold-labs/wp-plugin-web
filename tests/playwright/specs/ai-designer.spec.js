@@ -74,7 +74,9 @@ test.describe('AI Page Designer', () => {
     await expect(mount.locator('.chat-send-button')).toBeVisible();
 
     await expect(mount.getByText(/^Try:$/)).toBeVisible();
-    const trySuggestion = mount.locator('.chat-input-suggestion__pill');
+    const trySuggestion = mount
+      .locator('.chat-input-suggestion__pill')
+      .first();
     await expect(trySuggestion).toBeVisible();
     await expect(trySuggestion).toBeEnabled();
   });
