@@ -31,7 +31,7 @@
         "@wordpress/dom-ready": "^4.34.0",
         "@wordpress/element": "^6.18.0",
         "@wordpress/i18n": "^5.20.0",
-        "@wordpress/icons": "^12.1.0",
+        "@wordpress/icons": "^12.2.0",
         "classnames": "^2.5.1",
         "html-react-parser": "^5.2.17",
         "jquery": "^3.7.1",
@@ -48,7 +48,7 @@
         "@types/node": "^25.6.0",
         "@wordpress/env": "^10.20.0",
         "@wordpress/scripts": "^27",
-        "axe-core": "^4.10.2",
+        "axe-core": "^4.11.3",
         "node-fetch": "^2.7.0",
         "tailwindcss": "^3.4.17",
         "yaml-lint": "^1.7.0"
