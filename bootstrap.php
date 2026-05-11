@@ -101,6 +101,9 @@ setContainer( $web_module_container );
 // Load Data class for AI SiteGen brand mapping
 require_once WEB_PLUGIN_DIR . '/inc/Data.php';
 
+// Load AI Page Designer Configuration
+require_once WEB_PLUGIN_DIR . '/inc/ai-page-designer-config.php';
+
 /**
  * Sub-brands like 'web', 'vodien', and 'crazy-domains' should use 'networksolutions'
  * as the brand identifier when making AI SiteGen API calls.
@@ -115,6 +118,12 @@ add_filter(
 		return $brand;
 	}
 );
+
+// Load AI Page Designer module
+$ai_page_designer_bootstrap = WEB_PLUGIN_DIR . '/vendor/newfold-labs/wp-module-ai-page-designer/bootstrap.php';
+if ( file_exists( $ai_page_designer_bootstrap ) ) {
+	require_once $ai_page_designer_bootstrap;
+}
 
 // Set up the updater endpoint and map values
 $updateurl     = 'https://hiive.cloud/workers/release-api/plugins/newfold-labs/wp-plugin-web'; // Custom API GET endpoint
