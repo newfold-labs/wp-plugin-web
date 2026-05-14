@@ -21,6 +21,7 @@ jobs:
   build:
     name: On Release
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     permissions:
       contents: write # Required to check out the repository and upload the release zip with actions/upload-release-asset (GitHub docs: contents write creates/uploads release assets).
     steps:

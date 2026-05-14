@@ -23,6 +23,7 @@ jobs:
   phpcs:
     name: Run PHP Code Sniffer
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: read # Required to clone the repository and compute PHP file diffs.
     steps:

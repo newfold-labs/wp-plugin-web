@@ -14,6 +14,7 @@ jobs:
     name: On Delete Release
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'newfold-labs/wp-plugin-web' }}
+    timeout-minutes: 10
     permissions: {} # Purge step calls Cloudflare only; GITHUB_TOKEN is unused.
     steps:
 
