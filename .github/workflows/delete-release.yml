@@ -5,11 +5,16 @@ on:
     types:
       - deleted
 
+# Disable permissions for all available scopes by default.
+# Any needed permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   delete:
     name: On Delete Release
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'newfold-labs/wp-plugin-web' }}
+    permissions: {} # Purge step calls Cloudflare only; GITHUB_TOKEN is unused.
     steps:
 
       - name: Clear cache for release API
