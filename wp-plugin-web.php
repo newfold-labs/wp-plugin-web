@@ -15,7 +15,7 @@
  * Version:           2.3.3
  * Requires at least: 6.6
  * Requires PHP:      7.4
- * Tested up to:      6.9.4
+ * Tested up to:      7.0
  * Author:            Network Solutions
  * Author URI:        https://www.networksolutions.com
  * Text Domain:       wp-plugin-web
