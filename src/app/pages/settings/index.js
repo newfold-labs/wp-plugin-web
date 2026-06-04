@@ -10,6 +10,7 @@ import ContentSettings from './contentSettings';
 import useContainerBlockIsTarget from 'App/util/hooks/useContainerBlockTarget';
 import AppStore from 'App/data/store';
 import WonderBlockSettings from "./wonderBlockSettings";
+import AISiteAssistantSettings from './aiSiteAssistantSettings';
 
 const Settings = () => {
 	const { store } = useContext( AppStore );
@@ -111,6 +112,7 @@ const Settings = () => {
 								) }
 							>
 								<WonderBlockSettings />
+								<AISiteAssistantSettings />
 						</Container.SettingsField>
 					</Container.Block>
 

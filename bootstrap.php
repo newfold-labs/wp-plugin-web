@@ -125,6 +125,12 @@ if ( file_exists( $ai_page_designer_bootstrap ) ) {
 	require_once $ai_page_designer_bootstrap;
 }
 
+// Load AI Site Assistant module
+$ai_assistant_bootstrap = WEB_PLUGIN_DIR . '/vendor/newfold-labs/wp-module-ai-assistant/bootstrap.php';
+if ( file_exists( $ai_assistant_bootstrap ) ) {
+	require_once $ai_assistant_bootstrap;
+}
+
 // Set up the updater endpoint and map values
 $updateurl     = 'https://hiive.cloud/workers/release-api/plugins/newfold-labs/wp-plugin-web'; // Custom API GET endpoint
 $pluginUpdater = new PluginUpdater( WEB_PLUGIN_FILE, $updateurl );

@@ -14,11 +14,13 @@ import Settings from '../pages/settings';
 import Help from '../pages/help';
 import Admin from '../pages/admin';
 import AIDesigner from '../pages/ai-designer';
+import AssistantKnowledge from '../pages/assistant';
 
 const topRoutePaths = [
 	'/home',
 	'/marketplace',
 	'/ai-designer',
+	'/assistant',
 	'/settings',
 	'/help',
 ];
@@ -60,6 +62,16 @@ export const routes = [
 		Component: AIDesigner,
 		Icon: SparklesIcon,
 		condition: ( window.NewfoldRuntime?.capabilities?.canAccessAI && window.NewfoldRuntime?.capabilities?.canAccessAIPageDesigner ) || false,
+	},
+	{
+		name: '/assistant',
+		title: __( 'AI Assistant', 'wp-plugin-web' ),
+		Component: AssistantKnowledge,
+		Icon: SparklesIcon,
+		condition:
+			( window.NewfoldRuntime?.capabilities?.canAccessAI &&
+				window.NewfoldRuntime?.capabilities?.hasAIAssistant ) ||
+			false,
 	},
 	{
 		name: '/help',
