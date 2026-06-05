@@ -79,7 +79,8 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Install Playwright system dependencies
-        run: npx playwright install-deps chromium
+        timeout-minutes: 5
+        run: ./node_modules/.bin/playwright install-deps chromium
 
       - name: Build JavaScript
         run: npm run build
@@ -115,7 +116,8 @@ jobs:
         run: npx wp-env start --debug
 
       - name: Install Playwright Browsers
-        run: npx playwright install chromium
+        timeout-minutes: 5
+        run: ./node_modules/.bin/playwright install chromium
 
       - name: Run Playwright Tests
         run: npx playwright test --reporter=line

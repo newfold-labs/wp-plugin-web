@@ -150,7 +150,8 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Install Playwright system dependencies
-        run: npx playwright install-deps chromium
+        timeout-minutes: 5
+        run: ./node_modules/.bin/playwright install-deps chromium
 
       - name: Setup workflow context
         id: workflow
