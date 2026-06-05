@@ -92,6 +92,9 @@ jobs:
       - name: NPM Install
         run: npm install --legacy-peer-deps
 
+      - name: Install Playwright system dependencies
+        run: npx playwright install-deps chromium
+
       - name: Build JavaScript
         run: npm run build
 
@@ -131,7 +134,7 @@ jobs:
           echo "WordPress is ready!"
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install chromium
 
       - name: Run Playwright Tests
         run: npx playwright test --reporter=line
