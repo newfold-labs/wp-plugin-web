@@ -190,7 +190,8 @@ jobs:
           echo "WordPress is ready!"
 
       - name: Install Playwright Browsers
-        run: npx playwright install chromium
+        run: npx playwright install chromium --with-deps
+        timeout-minutes: 10
 
       - name: Run Playwright Tests
         run: npx playwright test --reporter=line
