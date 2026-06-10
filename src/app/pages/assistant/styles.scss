@@ -6,6 +6,61 @@
 		}
 	}
 
+	// ── Page header ───────────────────────────────────────────────────
+	.wppw-assistant-page-header {
+		align-items: flex-start;
+		display: flex;
+		gap: 1.25rem;
+
+		&__icon-wrap {
+			align-items: center;
+			background: var(--color-primary);
+			border-radius: 14px;
+			display: flex;
+			flex-shrink: 0;
+			height: 3rem;
+			justify-content: center;
+			width: 3rem;
+		}
+
+		&__icon {
+			color: #fff;
+			height: 1.5rem;
+			stroke-width: 1.5;
+			width: 1.5rem;
+		}
+
+		&__text {
+			min-width: 0;
+		}
+
+		&__title-row {
+			align-items: center;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.75rem;
+			margin-bottom: 0.375rem;
+		}
+
+		&__badge {
+			background: rgba(0, 0, 0, 0.06);
+			border-radius: 999px;
+			color: #6b7280;
+			font-size: 0.6875rem;
+			font-weight: 700;
+			letter-spacing: 0.06em;
+			padding: 0.25rem 0.75rem;
+			text-transform: uppercase;
+		}
+
+		&__description {
+			color: #6b7280;
+			font-size: 0.9375rem;
+			line-height: 1.5;
+			margin: 0;
+		}
+	}
+
 	.wppw-assistant-status-banner {
 		align-items: flex-start;
 		border-radius: 12px;
@@ -253,7 +308,32 @@
 		justify-content: flex-end;
 	}
 
+	.wppw-assistant-loading {
+		color: #6b7280;
+		font-size: 0.9375rem;
+		padding: 2rem 0;
+		text-align: center;
+	}
+
+	// ── Preview card (pinned above tabs) ─────────────────────────────
 	.wppw-assistant-preview {
+		border-top: 3px solid var(--color-primary) !important;
+
+		&__title {
+			align-items: center;
+			display: flex;
+			font-size: 1rem !important;
+			gap: 0.5rem;
+			margin-bottom: 0.5rem !important;
+		}
+
+		&__title-icon {
+			color: var(--color-primary);
+			flex-shrink: 0;
+			height: 1.125rem;
+			width: 1.125rem;
+		}
+
 		&__input-row {
 			display: flex;
 			flex-wrap: wrap;
@@ -266,6 +346,12 @@
 			flex: 1 1 240px;
 			font-size: 0.9375rem;
 			padding: 0.625rem 0.875rem;
+
+			&:focus {
+				border-color: var(--color-primary);
+				box-shadow: var(--webbrand-focus);
+				outline: none;
+			}
 		}
 
 		&__response {
@@ -289,10 +375,55 @@
 		}
 	}
 
-	.wppw-assistant-loading {
+	// ── Tab navigation ────────────────────────────────────────────────
+	.wppw-assistant-tabs-nav {
+		align-items: stretch;
+		background: var(--color-white);
+		border-bottom: 2px solid var(--color-border);
+		display: flex;
+		padding: 0 1.5rem;
+	}
+
+	.wppw-assistant-tab-btn {
+		align-items: center;
+		background: none;
+		border: none;
+		border-bottom: 2px solid transparent;
 		color: #6b7280;
-		font-size: 0.9375rem;
-		padding: 2rem 0;
-		text-align: center;
+		cursor: pointer;
+		display: inline-flex;
+		font-size: 0.75rem;
+		font-weight: 700;
+		gap: 0.4375rem;
+		letter-spacing: 0.06em;
+		margin-bottom: -2px;
+		padding: 1rem 1.25rem;
+		text-transform: uppercase;
+		transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+
+		svg {
+			flex-shrink: 0;
+			height: 1rem;
+			width: 1rem;
+		}
+
+		&:hover {
+			background: var(--color-off-white);
+			color: var(--color-primary);
+		}
+
+		&.is-active {
+			border-bottom-color: var(--color-primary);
+			color: var(--color-primary);
+		}
+	}
+
+	// ── Tab panels ────────────────────────────────────────────────────
+	.wppw-assistant-tab-panel {
+		display: none;
+
+		&.is-active {
+			display: block;
+		}
 	}
 }

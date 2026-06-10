@@ -18,10 +18,12 @@ import {
 	ToggleField,
 } from '@newfold/ui-component-library';
 import {
+	BookOpenIcon,
 	CheckCircleIcon,
 	ExclamationTriangleIcon,
 	InformationCircleIcon,
 	ListBulletIcon,
+	MagnifyingGlassIcon,
 	SparklesIcon,
 	XCircleIcon,
 } from '@heroicons/react/24/outline';
@@ -432,6 +434,7 @@ const AssistantKnowledge = () => {
 	const [ previewResponse, setPreviewResponse ] = useState( null );
 	const [ previewLoading, setPreviewLoading ] = useState( false );
 	const [ unavailable, setUnavailable ] = useState( false );
+	const [ activeTab, setActiveTab ] = useState( 0 );
 
 	const isBlogMode = status?.site_mode === 'personal_blog';
 	const showDisabledState = ! isFeatureEnabled || unavailable;
@@ -766,19 +769,30 @@ const AssistantKnowledge = () => {
 		>
 			<Container className="wppw-assistant-knowledge nfd-p-0">
 				<Container.Header>
-					<Title
-						as="h2"
-						className="nfd-flex nfd-items-center nfd-gap-2"
-					>
-						<SparklesIcon className="nfd-w-8 nfd-h-8" />
-						{ __( 'Knowledge', 'wp-plugin-web' ) }
-					</Title>
-					<span>
-						{ __(
-							'Manage the site description, curated facts, and CTAs used by the public assistant.',
-							'wp-plugin-web'
-						) }
-					</span>
+					<div className="wppw-assistant-page-header">
+						<div className="wppw-assistant-page-header__icon-wrap">
+							<SparklesIcon
+								className="wppw-assistant-page-header__icon"
+								aria-hidden="true"
+							/>
+						</div>
+						<div className="wppw-assistant-page-header__text">
+							<div className="wppw-assistant-page-header__title-row">
+								<Title as="h2" className="nfd-m-0">
+									{ __( 'AI Site Assistant', 'wp-plugin-web' ) }
+								</Title>
+								<span className="wppw-assistant-page-header__badge">
+									{ __( 'AI-Powered', 'wp-plugin-web' ) }
+								</span>
+							</div>
+							<p className="wppw-assistant-page-header__description">
+								{ __(
+									'Customize what your assistant knows, how it searches, and preview responses live.',
+									'wp-plugin-web'
+								) }
+							</p>
+						</div>
+					</div>
 				</Container.Header>
 
 				{ error && ! showDisabledState && (
@@ -817,315 +831,18 @@ const AssistantKnowledge = () => {
 						</Container.Block>
 
 						<Container.Block>
-							<SearchIndexCard
-								status={ searchIndexStatus }
-								loading={ searchIndexLoading }
-								rebuilding={ searchIndexRebuilding }
-								onRefresh={ loadSearchIndexStatus }
-								onRebuild={ rebuildSearchIndex }
-							/>
-						</Container.Block>
-
-						<Container.Block>
-							<SynonymsCard
-								value={ synonymText }
-								defaults={ synonymDefaults }
-								loading={ synonymsLoading }
-								saving={ synonymsSaving }
-								onChange={ setSynonymText }
-								onRefresh={ loadSynonyms }
-								onSave={ saveSynonyms }
-							/>
-						</Container.Block>
-
-						<Container.Block>
-							<div className="wppw-assistant-card">
-								<div className="wppw-assistant-card__body">
-									<p className="wppw-assistant-card__eyebrow">
-										{ __(
-											'Site mode override',
-											'wp-plugin-web'
-										) }
-									</p>
-									<SelectField
-										id="assistant-site-mode"
-										label={ __(
-											'Detection mode',
-											'wp-plugin-web'
-										) }
-										value={ siteModeOverride }
-										selectedLabel={
-											siteModeOptions.find(
-												( option ) =>
-													option.value ===
-													siteModeOverride
-											)?.label
-										}
-										options={ siteModeOptions }
-										onChange={ setSiteModeOverride }
-									/>
-								</div>
-							</div>
-						</Container.Block>
-
-						<Container.Block>
-							<div className="wppw-assistant-grid">
-								<div className="wppw-assistant-card">
-									<div className="wppw-assistant-card__body">
-										<h3 className="wppw-assistant-card__title">
-											<InformationCircleIcon
-												className="wppw-assistant-card__title-icon"
-												aria-hidden="true"
-											/>
-											{ isBlogMode
-												? __(
-														'Site description',
-														'wp-plugin-web'
-												  )
-												: __(
-														'Business description',
-														'wp-plugin-web'
-												  ) }
-										</h3>
-										<textarea
-											id="assistant-description"
-											className="wppw-assistant-card__textarea"
-											value={ businessDescription }
-											onChange={ ( e ) =>
-												setBusinessDescription(
-													e.target.value
-												)
-											}
-											placeholder={
-												isBlogMode
-													? __(
-															'Describe your blog and what you write about…',
-															'wp-plugin-web'
-													  )
-													: __(
-															'Describe your business in 1–2 sentences…',
-															'wp-plugin-web'
-													  )
-											}
-										/>
-									</div>
-									<div className="wppw-assistant-card__footer">
-										<Button
-											variant="secondary"
-											className="nfd-w-full"
-											onClick={ improveDescription }
-											disabled={ improving }
-										>
-											<SparklesIcon
-												className="nfd-w-4 nfd-h-4 nfd-mr-2"
-												aria-hidden="true"
-											/>
-											{ improving
-												? __(
-														'Improving…',
-														'wp-plugin-web'
-												  )
-												: __(
-														'Improve with AI',
-														'wp-plugin-web'
-												  ) }
-										</Button>
-									</div>
-								</div>
-
-								<div className="wppw-assistant-card">
-									<div className="wppw-assistant-card__body">
-										<h3 className="wppw-assistant-card__title">
-											<ListBulletIcon
-												className="wppw-assistant-card__title-icon"
-												aria-hidden="true"
-											/>
-											{ __(
-												'Curated facts',
-												'wp-plugin-web'
-											) }
-										</h3>
-										<textarea
-											id="assistant-curated"
-											className="wppw-assistant-card__textarea"
-											value={ curatedFacts }
-											onChange={ ( e ) =>
-												setCuratedFacts(
-													e.target.value
-												)
-											}
-											placeholder={ __(
-												'Hours, contact info, policies, pricing notes…',
-												'wp-plugin-web'
-											) }
-										/>
-									</div>
-								</div>
-							</div>
-						</Container.Block>
-
-						<Container.Block>
-							<div className="wppw-assistant-card">
-								<div className="wppw-assistant-card__body">
-									<div className="wppw-assistant-card__header">
-										<Title
-											as="h3"
-											size="4"
-											className="nfd-m-0"
-										>
-											{ __(
-												'CTAs catalog',
-												'wp-plugin-web'
-											) }
-										</Title>
-										{ totalCtaCount > 0 && (
-											<span className="wppw-assistant-card__link">
-												{ __(
-													'Manage all',
-													'wp-plugin-web'
-												) }{ ' ' }
-												({ totalCtaCount })
-											</span>
-										) }
-									</div>
-
-									{ autoDetectedCtas.map( ( cta ) => (
-										<div
-											key={ cta.url }
-											className="wppw-assistant-cta-row"
-										>
-											<div className="wppw-assistant-cta-row__content">
-												<span className="wppw-assistant-cta-row__label">
-													{ cta.label }
-												</span>
-												<span className="wppw-assistant-cta-row__url">
-													{ cta.url }
-												</span>
-											</div>
-											<div className="wppw-assistant-cta-row__toggle">
-												<ToggleField
-													id={ `cta-hide-${ cta.url }` }
-													label={ __(
-														'Visible',
-														'wp-plugin-web'
-													) }
-													checked={
-														! hiddenCtaUrls.includes(
-															cta.url
-														)
-													}
-													onChange={ ( checked ) =>
-														toggleHiddenCta(
-															cta.url,
-															! checked
-														)
-													}
-												/>
-											</div>
-										</div>
-									) ) }
-
-									{ customCtas.length > 0 && (
-										<div className="nfd-mt-4 nfd-pt-4 nfd-border-t nfd-border-neutral-200">
-											<p className="wppw-assistant-card__eyebrow nfd-mb-3">
-												{ __(
-													'Custom CTAs',
-													'wp-plugin-web'
-												) }
-											</p>
-											{ customCtas.map(
-												( cta, index ) => (
-													<div
-														key={ `custom-cta-${ index }` }
-														className="wppw-assistant-custom-cta nfd-mb-3"
-													>
-														<input
-															type="text"
-															placeholder={ __(
-																'Label',
-																'wp-plugin-web'
-															) }
-															value={ cta.label }
-															onChange={ ( e ) =>
-																updateCustomCta(
-																	index,
-																	'label',
-																	e.target
-																		.value
-																)
-															}
-														/>
-														<input
-															type="url"
-															placeholder={ __(
-																'URL',
-																'wp-plugin-web'
-															) }
-															value={ cta.url }
-															onChange={ ( e ) =>
-																updateCustomCta(
-																	index,
-																	'url',
-																	e.target
-																		.value
-																)
-															}
-														/>
-													</div>
-												)
-											) }
-										</div>
-									) }
-
-									<Button
-										variant="secondary"
-										onClick={ addCustomCta }
-										disabled={ customCtas.length >= 6 }
-									>
-										{ __(
-											'Add custom CTA',
-											'wp-plugin-web'
-										) }
-									</Button>
-								</div>
-							</div>
-						</Container.Block>
-
-						<Container.Block>
-							<div className="wppw-assistant-actions">
-								<Button
-									variant="secondary"
-									onClick={ rebuildKnowledge }
-									disabled={ rebuilding }
-								>
-									{ rebuilding
-										? __( 'Rebuilding…', 'wp-plugin-web' )
-										: __( 'Rebuild now', 'wp-plugin-web' ) }
-								</Button>
-								<Button
-									variant="primary"
-									onClick={ saveKnowledge }
-									disabled={ saving }
-								>
-									{ saving
-										? __( 'Saving…', 'wp-plugin-web' )
-										: __(
-												'Save knowledge',
-												'wp-plugin-web'
-										  ) }
-								</Button>
-							</div>
-						</Container.Block>
-
-						<Container.Block>
 							<div className="wppw-assistant-card wppw-assistant-preview">
 								<div className="wppw-assistant-card__body">
 									<Title
 										as="h3"
 										size="4"
-										className="nfd-mb-2"
+										className="wppw-assistant-preview__title"
 									>
-										{ __( 'Preview', 'wp-plugin-web' ) }
+										<SparklesIcon
+											className="wppw-assistant-preview__title-icon"
+											aria-hidden="true"
+										/>
+										{ __( 'Preview assistant', 'wp-plugin-web' ) }
 									</Title>
 									<p className="nfd-text-sm nfd-text-neutral-600 nfd-mb-4">
 										{ __(
@@ -1202,6 +919,335 @@ const AssistantKnowledge = () => {
 								</div>
 							</div>
 						</Container.Block>
+
+						<div className="wppw-assistant-tabs-nav">
+							<button
+								type="button"
+								className={ `wppw-assistant-tab-btn ${ activeTab === 0 ? 'is-active' : '' }` }
+								onClick={ () => setActiveTab( 0 ) }
+							>
+								<MagnifyingGlassIcon aria-hidden="true" />
+								{ __( 'Search', 'wp-plugin-web' ) }
+							</button>
+							<button
+								type="button"
+								className={ `wppw-assistant-tab-btn ${ activeTab === 1 ? 'is-active' : '' }` }
+								onClick={ () => setActiveTab( 1 ) }
+							>
+								<BookOpenIcon aria-hidden="true" />
+								{ __( 'Knowledge', 'wp-plugin-web' ) }
+							</button>
+						</div>
+
+						<div
+							className={ `wppw-assistant-tab-panel ${ activeTab === 0 ? 'is-active' : '' }` }
+						>
+							<Container.Block>
+								<SearchIndexCard
+									status={ searchIndexStatus }
+									loading={ searchIndexLoading }
+									rebuilding={ searchIndexRebuilding }
+									onRefresh={ loadSearchIndexStatus }
+									onRebuild={ rebuildSearchIndex }
+								/>
+							</Container.Block>
+
+							<Container.Block>
+								<SynonymsCard
+									value={ synonymText }
+									defaults={ synonymDefaults }
+									loading={ synonymsLoading }
+									saving={ synonymsSaving }
+									onChange={ setSynonymText }
+									onRefresh={ loadSynonyms }
+									onSave={ saveSynonyms }
+								/>
+							</Container.Block>
+						</div>
+
+						<div
+							className={ `wppw-assistant-tab-panel ${ activeTab === 1 ? 'is-active' : '' }` }
+						>
+							<Container.Block>
+								<div className="wppw-assistant-grid">
+									<div className="wppw-assistant-card">
+										<div className="wppw-assistant-card__body">
+											<h3 className="wppw-assistant-card__title">
+												<InformationCircleIcon
+													className="wppw-assistant-card__title-icon"
+													aria-hidden="true"
+												/>
+												{ isBlogMode
+													? __(
+															'Site description',
+															'wp-plugin-web'
+													  )
+													: __(
+															'Business description',
+															'wp-plugin-web'
+													  ) }
+											</h3>
+											<textarea
+												id="assistant-description"
+												className="wppw-assistant-card__textarea"
+												value={ businessDescription }
+												onChange={ ( e ) =>
+													setBusinessDescription(
+														e.target.value
+													)
+												}
+												placeholder={
+													isBlogMode
+														? __(
+																'Describe your blog and what you write about…',
+																'wp-plugin-web'
+														  )
+														: __(
+																'Describe your business in 1–2 sentences…',
+																'wp-plugin-web'
+														  )
+												}
+											/>
+										</div>
+										<div className="wppw-assistant-card__footer">
+											<Button
+												variant="secondary"
+												className="nfd-w-full"
+												onClick={ improveDescription }
+												disabled={ improving }
+											>
+												<SparklesIcon
+													className="nfd-w-4 nfd-h-4 nfd-mr-2"
+													aria-hidden="true"
+												/>
+												{ improving
+													? __(
+															'Improving…',
+															'wp-plugin-web'
+													  )
+													: __(
+															'Improve with AI',
+															'wp-plugin-web'
+													  ) }
+											</Button>
+										</div>
+									</div>
+
+									<div className="wppw-assistant-card">
+										<div className="wppw-assistant-card__body">
+											<h3 className="wppw-assistant-card__title">
+												<ListBulletIcon
+													className="wppw-assistant-card__title-icon"
+													aria-hidden="true"
+												/>
+												{ __(
+													'Curated facts',
+													'wp-plugin-web'
+												) }
+											</h3>
+											<textarea
+												id="assistant-curated"
+												className="wppw-assistant-card__textarea"
+												value={ curatedFacts }
+												onChange={ ( e ) =>
+													setCuratedFacts(
+														e.target.value
+													)
+												}
+												placeholder={ __(
+													'Hours, contact info, policies, pricing notes…',
+													'wp-plugin-web'
+												) }
+											/>
+										</div>
+									</div>
+								</div>
+							</Container.Block>
+
+							<Container.Block>
+								<div className="wppw-assistant-card">
+									<div className="wppw-assistant-card__body">
+										<p className="wppw-assistant-card__eyebrow">
+											{ __(
+												'Site mode override',
+												'wp-plugin-web'
+											) }
+										</p>
+										<SelectField
+											id="assistant-site-mode"
+											label={ __(
+												'Detection mode',
+												'wp-plugin-web'
+											) }
+											value={ siteModeOverride }
+											selectedLabel={
+												siteModeOptions.find(
+													( option ) =>
+														option.value ===
+														siteModeOverride
+												)?.label
+											}
+											options={ siteModeOptions }
+											onChange={ setSiteModeOverride }
+										/>
+									</div>
+								</div>
+							</Container.Block>
+
+							<Container.Block>
+								<div className="wppw-assistant-card">
+									<div className="wppw-assistant-card__body">
+										<div className="wppw-assistant-card__header">
+											<Title
+												as="h3"
+												size="4"
+												className="nfd-m-0"
+											>
+												{ __(
+													'CTAs catalog',
+													'wp-plugin-web'
+												) }
+											</Title>
+											{ totalCtaCount > 0 && (
+												<span className="wppw-assistant-card__link">
+													{ __(
+														'Manage all',
+														'wp-plugin-web'
+													) }{ ' ' }
+													({ totalCtaCount })
+												</span>
+											) }
+										</div>
+
+										{ autoDetectedCtas.map( ( cta ) => (
+											<div
+												key={ cta.url }
+												className="wppw-assistant-cta-row"
+											>
+												<div className="wppw-assistant-cta-row__content">
+													<span className="wppw-assistant-cta-row__label">
+														{ cta.label }
+													</span>
+													<span className="wppw-assistant-cta-row__url">
+														{ cta.url }
+													</span>
+												</div>
+												<div className="wppw-assistant-cta-row__toggle">
+													<ToggleField
+														id={ `cta-hide-${ cta.url }` }
+														label={ __(
+															'Visible',
+															'wp-plugin-web'
+														) }
+														checked={
+															! hiddenCtaUrls.includes(
+																cta.url
+															)
+														}
+														onChange={ ( checked ) =>
+															toggleHiddenCta(
+																cta.url,
+																! checked
+															)
+														}
+													/>
+												</div>
+											</div>
+										) ) }
+
+										{ customCtas.length > 0 && (
+											<div className="nfd-mt-4 nfd-pt-4 nfd-border-t nfd-border-neutral-200">
+												<p className="wppw-assistant-card__eyebrow nfd-mb-3">
+													{ __(
+														'Custom CTAs',
+														'wp-plugin-web'
+													) }
+												</p>
+												{ customCtas.map(
+													( cta, index ) => (
+														<div
+															key={ `custom-cta-${ index }` }
+															className="wppw-assistant-custom-cta nfd-mb-3"
+														>
+															<input
+																type="text"
+																placeholder={ __(
+																	'Label',
+																	'wp-plugin-web'
+																) }
+																value={ cta.label }
+																onChange={ ( e ) =>
+																	updateCustomCta(
+																		index,
+																		'label',
+																		e.target
+																			.value
+																	)
+																}
+															/>
+															<input
+																type="url"
+																placeholder={ __(
+																	'URL',
+																	'wp-plugin-web'
+																) }
+																value={ cta.url }
+																onChange={ ( e ) =>
+																	updateCustomCta(
+																		index,
+																		'url',
+																		e.target
+																			.value
+																	)
+																}
+															/>
+														</div>
+													)
+												) }
+											</div>
+										) }
+
+										<Button
+											variant="secondary"
+											onClick={ addCustomCta }
+											disabled={ customCtas.length >= 6 }
+										>
+											{ __(
+												'Add custom CTA',
+												'wp-plugin-web'
+											) }
+										</Button>
+									</div>
+								</div>
+							</Container.Block>
+
+							<Container.Block>
+								<div className="wppw-assistant-actions">
+									<Button
+										variant="secondary"
+										onClick={ rebuildKnowledge }
+										disabled={ rebuilding }
+									>
+										{ rebuilding
+											? __( 'Rebuilding…', 'wp-plugin-web' )
+											: __( 'Rebuild now', 'wp-plugin-web' ) }
+									</Button>
+									<Button
+										variant="primary"
+										onClick={ saveKnowledge }
+										disabled={ saving }
+									>
+										{ saving
+											? __( 'Saving…', 'wp-plugin-web' )
+											: __(
+													'Save knowledge',
+													'wp-plugin-web'
+											  ) }
+									</Button>
+								</div>
+							</Container.Block>
+						</div>
+
 					</>
 				) }
 			</Container>
