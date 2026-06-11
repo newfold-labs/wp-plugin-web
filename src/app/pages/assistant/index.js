@@ -3,6 +3,7 @@ import {
 	useContext,
 	useEffect,
 	useMemo,
+	useRef,
 	useState,
 } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
@@ -151,11 +152,15 @@ const synonymTextToMap = ( text ) =>
 
 const StatusBanner = ( { status } ) => {
 	const tier = status.quality_tier || 'minimal';
+	// Downgrade the banner colour when the search index is empty — the
+	// knowledge profile may be rich but the assistant can't search without it.
+	const effectiveTier =
+		tier === 'rich' && status.search_index_docs === 0 ? 'minimal' : tier;
 	const TierIcon = tierIcons[ tier ] || ExclamationTriangleIcon;
 
 	return (
 		<div
-			className={ `wppw-assistant-status-banner wppw-assistant-status-banner--${ tier }` }
+			className={ `wppw-assistant-status-banner wppw-assistant-status-banner--${ effectiveTier }` }
 		>
 			<div className="wppw-assistant-status-banner__main">
 				<TierIcon
@@ -185,7 +190,7 @@ const StatusBanner = ( { status } ) => {
 						{ status.site_mode }
 						{ ' · ' }
 						{ __( 'Indexed:', 'wp-plugin-web' ) }{ ' ' }
-						{ status.corpus_count }
+						{ status.search_index_docs ?? status.corpus_count }
 						{ ' · ' }
 						{ __( 'Built:', 'wp-plugin-web' ) }{ ' ' }
 						{ formatBuiltAt( status.built_at ) }
@@ -436,6 +441,10 @@ const AssistantKnowledge = () => {
 	const [ unavailable, setUnavailable ] = useState( false );
 	const [ activeTab, setActiveTab ] = useState( 0 );
 
+	// Tracks whether the initial knowledge load has completed so the tab-switch
+	// status refresh doesn't fire before the first fetch returns.
+	const initialLoadDone = useRef( false );
+
 	const isBlogMode = status?.site_mode === 'personal_blog';
 	const showDisabledState = ! isFeatureEnabled || unavailable;
 
@@ -496,6 +505,7 @@ const AssistantKnowledge = () => {
 		try {
 			const data = await apiFetch( { url: knowledgeUrl() } );
 			setStatus( data );
+			initialLoadDone.current = true;
 			setBusinessDescription( data.business_description || '' );
 			setCuratedFacts( data.curated_facts || '' );
 			setSiteModeOverride( data.site_mode_override || '' );
@@ -525,6 +535,20 @@ const AssistantKnowledge = () => {
 		}
 	}, [ store ] );
 
+	// Status-only refresh — updates the banner without touching form fields.
+	const loadKnowledgeStatus = useCallback( async () => {
+		if ( ! isAssistantFeatureEnabled( store ) ) {
+			return;
+		}
+		try {
+			const data = await apiFetch( { url: knowledgeUrl() } );
+			setStatus( data );
+		} catch {
+			// Best-effort; ignore errors so silent tab-switch refreshes don't
+			// surface noise when the user is actively editing.
+		}
+	}, [ store ] );
+
 	useEffect( () => {
 		if ( ! isFeatureEnabled ) {
 			setLoading( false );
@@ -538,14 +562,26 @@ const AssistantKnowledge = () => {
 		}
 
 		loadKnowledge();
-		loadSearchIndexStatus();
 		loadSynonyms();
-	}, [
-		isFeatureEnabled,
-		loadKnowledge,
-		loadSearchIndexStatus,
-		loadSynonyms,
-	] );
+	}, [ isFeatureEnabled, loadKnowledge, loadSynonyms ] );
+
+	// Refetch index stats whenever the Search tab is shown so the dashboard
+	// reflects backend changes made while the page was open.
+	useEffect( () => {
+		if ( isFeatureEnabled && 0 === activeTab ) {
+			loadSearchIndexStatus();
+		}
+	}, [ isFeatureEnabled, activeTab, loadSearchIndexStatus ] );
+
+	// Refresh the status banner on every tab switch (after initial load) so
+	// backend changes — scheduled rebuilds, post saves, etc. — are visible
+	// without requiring a full page reload.
+	useEffect( () => {
+		if ( ! initialLoadDone.current || ! isFeatureEnabled ) {
+			return;
+		}
+		loadKnowledgeStatus();
+	}, [ activeTab, isFeatureEnabled, loadKnowledgeStatus ] );
 
 	useEffect( () => {
 		if ( searchIndexStatus?.rebuild?.status !== 'running' ) {
@@ -553,8 +589,13 @@ const AssistantKnowledge = () => {
 		}
 
 		const interval = setInterval( loadSearchIndexStatus, 5000 );
-		return () => clearInterval( interval );
-	}, [ searchIndexStatus?.rebuild?.status, loadSearchIndexStatus ] );
+		return () => {
+			clearInterval( interval );
+			// Rebuild just finished — refresh the status banner without
+			// resetting any unsaved form edits the user may have open.
+			loadKnowledgeStatus();
+		};
+	}, [ searchIndexStatus?.rebuild?.status, loadSearchIndexStatus, loadKnowledgeStatus ] );
 
 	const autoDetectedCtas = useMemo( () => {
 		if ( ! status?.ctas_catalog ) {
