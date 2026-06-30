@@ -63,8 +63,10 @@ final class Admin {
 			'web#/settings'    => __( 'Settings', 'wp-plugin-web' ),
 		);
 
-		// Add AI Designer if capability is enabled
-		if ( CapabilityGate::has_ai_site_gen() && CapabilityGate::has_ai_page_designer() ) {
+		// Add AI Designer if capability is enabled and the module is available.
+		if ( class_exists( 'NewfoldLabs\WP\Module\AIPageDesigner\Services\CapabilityGate' )
+			&& CapabilityGate::has_ai_site_gen()
+			&& CapabilityGate::has_ai_page_designer() ) {
 			$pages['web#/ai-designer'] = __( 'AI Designer', 'wp-plugin-web' );
 		}
 
