@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "531cf1af781f8f10d7084a2dbe7b6d34",
+    "content-hash": "838660035ea30881846862f9cde0ab8b",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -376,16 +376,16 @@
         },
         {
             "name": "newfold-labs/wp-module-ai-page-designer",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-ai-page-designer.git",
-                "reference": "d36a8110c5305757383f843c78e01c1389414a6a"
+                "reference": "7d0acd3315522fd18b9de9a9a0da6581af85a08e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-ai-page-designer/zipball/d36a8110c5305757383f843c78e01c1389414a6a",
-                "reference": "d36a8110c5305757383f843c78e01c1389414a6a",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-ai-page-designer/zipball/7d0acd3315522fd18b9de9a9a0da6581af85a08e",
+                "reference": "7d0acd3315522fd18b9de9a9a0da6581af85a08e",
                 "shasum": ""
             },
             "require": {
@@ -435,10 +435,10 @@
             ],
             "description": "AI-powered page and post designer for WordPress with live preview and publishing capabilities",
             "support": {
-                "source": "https://github.com/newfold-labs/wp-module-ai-page-designer/tree/1.0.5",
+                "source": "https://github.com/newfold-labs/wp-module-ai-page-designer/tree/1.0.6",
                 "issues": "https://github.com/newfold-labs/wp-module-ai-page-designer/issues"
             },
-            "time": "2026-06-23T08:49:25+00:00"
+            "time": "2026-06-30T08:57:47+00:00"
         },
         {
             "name": "newfold-labs/wp-module-atomic",
