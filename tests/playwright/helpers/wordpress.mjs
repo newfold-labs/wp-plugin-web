@@ -70,6 +70,7 @@ async function wpCli(command) {
     const output = execSync(`npx wp-env run cli wp ${command}`, {
       encoding: 'utf-8', // auto convert Buffer to string
       stdio: ['pipe', 'pipe', 'pipe'], // capture stdout/stderr
+      timeout: 60000,
     });
 
     // If output is empty, just return 0 for success

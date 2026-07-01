@@ -12,6 +12,7 @@ async function globalSetup(config) {
     execSync(`npx wp-env run cli -- wp rewrite structure '${permalinkStructure}'`, {
       stdio: 'inherit',
       encoding: 'utf-8',
+      timeout: 60000,
     });
     
     // Flush rewrite rules to apply the new permalink structure
@@ -19,6 +20,7 @@ async function globalSetup(config) {
     execSync('npx wp-env run cli -- wp rewrite flush --hard', {
       stdio: 'inherit',
       encoding: 'utf-8',
+      timeout: 60000,
     });
     
     utils.fancyLog('✔ Global setup completed successfully', 55, 'green', '');
