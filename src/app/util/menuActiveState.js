@@ -27,6 +27,7 @@ if (typeof window !== 'undefined') {
 			'marketplace/seo': 'web#/marketplace',
 			'marketplace/themes': 'web#/marketplace',
 			'marketplace/all': 'web#/marketplace',
+			'/ai-designer': 'web#/ai-designer',
 			'/settings': 'web#/settings',
 			'/settings/performance': 'web#/settings',
 			'/help': 'web#/help'
