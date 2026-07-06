@@ -84,17 +84,15 @@ export default defineConfig({
   timeout: 30 * 1000, // 30 seconds
   expect: {
     timeout: 10 * 1000, // 10 seconds
-  },
-  retries: process.env.CI ? 1 : 1,
-  workers: process.env.CI ? 1 : 1, // Use default (number of CPU cores) for local, 1 for CI
-  outputDir: 'tests/playwright/test-results',
-  expect: {
     toHaveScreenshot: {
       maxDiffPixels: 100,
       pathTemplate: '{testDir}/screenshots{/projectName}/{testFilePath}/{arg}{ext}',
       fullPage: true,
     },
   },
+  retries: process.env.CI ? 1 : 1,
+  workers: process.env.CI ? 1 : 1, // Use default (number of CPU cores) for local, 1 for CI
+  outputDir: 'tests/playwright/test-results',
   reporter: [
     ['list', { printSteps: true }],
     // ['json', {  outputFile: 'tests/playwright/reports/test-results.json' }],
