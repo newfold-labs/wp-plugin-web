@@ -9,6 +9,16 @@ const DEFAULT = {
 
 const AppStore = createContext( DEFAULT );
 
+/**
+ * Boot/error status lives in its own context so components that only care
+ * about app readiness (e.g. AppBody) don't re-render every time a settings
+ * component writes to the store.
+ */
+export const AppBootContext = createContext( {
+	booted: false,
+	hasError: false,
+} );
+
 export const webApiFetchSettings = async ( options = {} ) => {
 	return await apiFetch( {
 		url: NewfoldRuntime.createApiUrl('/web/v1/settings'),
@@ -33,17 +43,22 @@ export const AppStoreProvider = ( { children } ) => {
 		[ store, booted, hasError ]
 	);
 
+	const bootStatus = useMemo(
+		() => ( { booted, hasError } ),
+		[ booted, hasError ]
+	);
+
 	useEffect( () => {
 		if ( false === booted ) {
 			webApiFetchSettings()
 				.then( ( settings ) => {
-					setStore( { 
-						...store,
+					setStore( ( previousStore ) => ( {
+						...previousStore,
 						...window.WPPW,
 						...settings,
 						features: window.NewfoldFeatures.features,
 						toggleableFeatures: window.NewfoldFeatures.togglable,
-					} );
+					} ) );
 					setBooted( true );
 				} )
 				.catch( ( error ) => {
@@ -54,8 +69,9 @@ export const AppStoreProvider = ( { children } ) => {
 
 	return (
 		<AppStore.Provider value={ contextStore }>
-			{ ' ' }
-			{ children }{ ' ' }
+			<AppBootContext.Provider value={ bootStatus }>
+				{ children }
+			</AppBootContext.Provider>
 		</AppStore.Provider>
 	);
 };

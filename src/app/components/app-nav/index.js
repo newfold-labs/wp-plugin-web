@@ -234,7 +234,6 @@ export const TopBarNav = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const isLargeViewport = useViewportMatch('medium');
 	let location = useLocation();
-	const hashedPath = '#' + location.pathname;
 	const { url } = NewfoldRuntime.siteDetails;
 	const isEcommerce = NewfoldRuntime.hasCapability("isEcommerce");
 	const isStore = window.location.href?.includes("store");
@@ -335,26 +334,6 @@ export const TopBarNav = () => {
 				</Modal>
 			</div>
 
-			{/* Notifications for desktop */}
-			{isLargeViewport && (
-				<div className="nfd-hidden">
-					<Suspense fallback={ null }>
-						<NewfoldNotifications
-							constants={ {
-								context: 'web-app-nav',
-								page: hashedPath,
-							} }
-							methods={ {
-								apiFetch,
-								addQueryArgs,
-								filter,
-								useState,
-								useEffect,
-							} }
-						/>
-					</Suspense>
-				</div>
-			)}
 		</header>
 	);
 }

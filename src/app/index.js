@@ -11,7 +11,7 @@ import { SnackbarList, Spinner } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { store as noticesStore } from '@wordpress/notices';
 import AppRoutes from 'App/data/routes';
-import AppStore, { AppStoreProvider } from 'App/data/store';
+import { AppStoreProvider, AppBootContext } from 'App/data/store';
 import ErrorCard from 'App/components/errorCard';
 import { setActiveSubnav } from 'App/util/helpers';
 import { useHandlePageLoad } from 'App/util/hooks';
@@ -50,7 +50,7 @@ const Notices = () => {
 const AppBody = ( props ) => {
 	const location = useLocation();
 	const hashedPath = '#' + location.pathname;
-	const { booted, hasError } = useContext( AppStore );
+	const { booted, hasError } = useContext( AppBootContext );
 
 	useHandlePageLoad();
 
