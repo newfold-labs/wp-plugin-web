@@ -55,6 +55,7 @@
     },
     "scripts": {
         "build": "NODE_ENV=production wp-scripts build",
+        "build:analyzer": "NODE_ENV=production wp-scripts build --webpack-bundle-analyzer",
         "check-engines": "wp-scripts check-engines",
         "check-licenses": "wp-scripts check-licenses --production",
         "create:dist": "rsync -r --exclude-from=.distignore . ./wp-plugin-web",
@@ -79,7 +80,7 @@
         "simulate-runner-build": "npm run prebuild:cleanup && npm i && npm run php-deps && npm run build && npm run create:dist && npm run create:zip",
         "srb": "npm run simulate-runner-build",
         "start": "NODE_ENV=develop wp-scripts start",
-        "start:analyzer": "npm run start --webpack-bundle-analyzer",
+        "start:analyzer": "npm run start -- --webpack-bundle-analyzer",
         "storybook:dev": "start-storybook -c ./storybook",
         "storybook:build": "build-storybook -c ./storybook -o ./.docs",
         "test:e2e": "npm run test:playwright",

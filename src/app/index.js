@@ -18,11 +18,15 @@ import { useHandlePageLoad } from 'App/util/hooks';
 import { AppNav } from 'App/components/app-nav';
 import { NotificationFeed } from 'App/components/notifications';
 
-// component sourced from module
-import { default as NewfoldNotifications } from '../../vendor/newfold-labs/wp-module-notifications/assets/js/components/notifications/';
+// component sourced from module, loaded on demand to keep it out of the main bundle
+const NewfoldNotifications = lazy( () =>
+	import(
+		'../../vendor/newfold-labs/wp-module-notifications/assets/js/components/notifications/'
+	)
+);
 // to pass to notifications module
 import apiFetch from '@wordpress/api-fetch';
-import { useState } from '@wordpress/element';
+import { lazy, Suspense, useState } from '@wordpress/element';
 import { addQueryArgs } from '@wordpress/url';
 
 const Notices = () => {
@@ -62,22 +66,24 @@ const AppBody = ( props ) => {
 			) }
 		>
 
-			<NewfoldNotifications
-				constants={{
-					context: 'web-plugin',
-					page: hashedPath,
-				}}
-				methods={{
-					apiFetch,
-					addQueryArgs,
-					filter,
-					useState,
-					useEffect
-				}}
-			/>
+			<Suspense fallback={ null }>
+				<NewfoldNotifications
+					constants={{
+						context: 'web-plugin',
+						page: hashedPath,
+					}}
+					methods={{
+						apiFetch,
+						addQueryArgs,
+						filter,
+						useState,
+						useEffect
+					}}
+				/>
+			</Suspense>
 			<div className="wppw-app-body">
 				<div className="wppw-app-body-inner">
-					<ErrorBoundary FallbackComponent={ <ErrorCard /> }>
+					<ErrorBoundary FallbackComponent={ ErrorCard }>
 						{ hasError && <ErrorCard error={ hasError } /> }
 						{ ( true === booted && <AppRoutes /> ) ||
 							( ! hasError && <Spinner /> ) }

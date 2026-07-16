@@ -1,9 +1,14 @@
 /**
- * Set webpack's public path that defaults to the root directory to be the plugin's build directory
- * so that lazy-loading works correctly. This value is set in /includes/Data.php in runtime().
+ * Set webpack's public path (which defaults to the root directory) to the plugin's
+ * versioned build directory so that lazy-loaded chunks resolve correctly.
+ * The build URL is set in /inc/Data.php in runtime() and loaded on
+ * window.NewfoldRuntime by the nfd-runtime script, which is a dependency
+ * of this bundle and therefore always loads first.
  */
-export default () => {
-	if ( 'undefined' !== typeof window.NewfoldRuntime && 'url' in window.NewfoldRuntime ) {
-		__webpack_public_path__ = window.NewfoldRuntime.url;
-	}
-};
+if ( 'undefined' !== typeof window && window.NewfoldRuntime?.plugin?.url ) {
+	// eslint-disable-next-line no-undef, camelcase
+	__webpack_public_path__ = window.NewfoldRuntime.plugin.url.replace(
+		/\/?$/,
+		'/'
+	);
+}

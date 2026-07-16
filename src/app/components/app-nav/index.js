@@ -6,12 +6,19 @@ import { filter } from 'lodash';
 import { Modal, SidebarNavigation, Button } from "@newfold/ui-component-library"
 import { NavLink, useLocation } from 'react-router-dom';
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { topRoutes, utilityRoutes } from 'App/data/routes';
+import { topRoutes, utilityRoutes, useMarketplaceSubnavRoutes } from 'App/data/routes';
 import Logo from "./logo";
 import { NewfoldRuntime } from '@newfold/wp-module-runtime';
 import { WordPressIcon } from "../icons";
 import { ReactComponent as NSIcon } from '../../../../assets/svg/ns-icon-image.svg';
-import { default as NewfoldNotifications } from '@modules/wp-module-notifications/assets/js/components/notifications/';
+import { lazy, Suspense } from '@wordpress/element';
+
+// Loaded on demand so the notifications module isn't part of the main bundle.
+const NewfoldNotifications = lazy( () =>
+	import(
+		'@modules/wp-module-notifications/assets/js/components/notifications/'
+	)
+);
 
 export const SideNavHeader = () => {
 	return (
@@ -23,6 +30,7 @@ export const SideNavHeader = () => {
 
 export const SideNavMenu = () => {
 	const location = useLocation();
+	const marketplaceSubnavRoutes = useMarketplaceSubnavRoutes();
 
 	const primaryMenu = () => {
 		return (
@@ -37,7 +45,7 @@ export const SideNavMenu = () => {
 								icon={page.Icon}
 								path={page.name}
 								action={page.action}
-								subItems={page.subRoutes}
+								subItems={page.hasSubRoutes ? marketplaceSubnavRoutes : page.subRoutes}
 							/>
 						)
 				))}
@@ -159,19 +167,21 @@ export const SideNav = () => {
 					<SideNavMenu />
 				</SidebarNavigation.Sidebar>
 			</SidebarNavigation>
-			<NewfoldNotifications
-				constants={ {
-					context: 'web-app-nav',
-					page: hashedPath,
-				} }
-				methods={ {
-					apiFetch,
-					addQueryArgs,
-					filter,
-					useState,
-					useEffect,
-				} }
-			/>
+			<Suspense fallback={ null }>
+				<NewfoldNotifications
+					constants={ {
+						context: 'web-app-nav',
+						page: hashedPath,
+					} }
+					methods={ {
+						apiFetch,
+						addQueryArgs,
+						filter,
+						useState,
+						useEffect,
+					} }
+				/>
+			</Suspense>
 		</aside>
 	);
 };
@@ -328,19 +338,21 @@ export const TopBarNav = () => {
 			{/* Notifications for desktop */}
 			{isLargeViewport && (
 				<div className="nfd-hidden">
-					<NewfoldNotifications
-						constants={ {
-							context: 'web-app-nav',
-							page: hashedPath,
-						} }
-						methods={ {
-							apiFetch,
-							addQueryArgs,
-							filter,
-							useState,
-							useEffect,
-						} }
-					/>
+					<Suspense fallback={ null }>
+						<NewfoldNotifications
+							constants={ {
+								context: 'web-app-nav',
+								page: hashedPath,
+							} }
+							methods={ {
+								apiFetch,
+								addQueryArgs,
+								filter,
+								useState,
+								useEffect,
+							} }
+						/>
+					</Suspense>
 				</div>
 			)}
 		</header>
