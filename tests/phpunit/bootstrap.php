@@ -1,4 +1,9 @@
 <?php
+/**
+ * PHPUnit bootstrap for the Network Solutions plugin.
+ *
+ * @package WPPluginWeb
+ */
 
 // Load up Composer dependencies
 require dirname( dirname( __DIR__ ) ) . '/vendor/autoload.php';

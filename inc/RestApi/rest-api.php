@@ -12,10 +12,10 @@ namespace Web;
  */
 function init_rest_api() {
 
-	$controllers = array(
+	$controllers = [
 		'Web\\RestApi\\CachingController',
 		'Web\\RestApi\\SettingsController',
-	);
+	];
 
 	foreach ( $controllers as $controller ) {
 		/**

@@ -20,7 +20,7 @@ class SitePreview {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'wp_dashboard_setup', array( __CLASS__, 'init' ), 1 );
+		add_action( 'wp_dashboard_setup', [ __CLASS__, 'init' ], 1 );
 	}
 
 	/**
@@ -32,13 +32,13 @@ class SitePreview {
 		wp_add_dashboard_widget(
 			self::ID,                          // Widget slug.
 			__( 'Site Preview', 'wp-plugin-web' ),
-			array( __CLASS__, 'widget_render' ),
+			[ __CLASS__, 'widget_render' ],
 			null,
 			null,
 			'normal',
 			'high'
 		);
-		\add_action( 'admin_enqueue_scripts', array( __CLASS__, 'assets' ) );
+		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'assets' ] );
 	}
 
 	/**

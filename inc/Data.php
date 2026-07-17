@@ -18,24 +18,24 @@ final class Data {
 	 *
 	 * @var string
 	 */
-	private static $ai_sitegen_brand = 'networksolutions';
+	private static string $ai_sitegen_brand = 'networksolutions';
 
 	/**
 	 * Data loaded onto window.NewfoldRuntime
 	 *
 	 * @return array
 	 */
-	public static function runtime() {
+	public static function runtime(): array {
 		global $web_module_container;
-		$runtime = array(
-			'plugin' => array(
+		$runtime = [
+			'plugin'   => [
 				'url'     => WEB_BUILD_URL,
 				'version' => WEB_PLUGIN_VERSION,
 				'assets'  => WEB_PLUGIN_URL . 'assets/',
 				'brand'   => $web_module_container->plugin()->brand,
-			),
-			'siteType'           => self::get_site_type(),
-		);
+			],
+			'siteType' => self::get_site_type(),
+		];
 		return $runtime;
 	}
 
@@ -47,7 +47,7 @@ final class Data {
 	 *
 	 * @return string The parent brand identifier to use for AI SiteGen API requests.
 	 */
-	public static function get_ai_sitegen_brand() {
+	public static function get_ai_sitegen_brand(): string {
 		return self::$ai_sitegen_brand;
 	}
 
@@ -56,7 +56,7 @@ final class Data {
 	 *
 	 * @return string The site type
 	 */
-	public static function get_site_type() {
+	public static function get_site_type(): string {
 		// Option name for onboarding site info
 		$ONBOARDING_SITE_INFO_OPTION = 'nfd_module_onboarding_site_info';
 
@@ -64,17 +64,17 @@ final class Data {
 		 * Available plan types, this maps the site_type from onboarding module to internal plan types
 		 * Maps the site_type to the site type for the runtime data
 		 */
-		$SITE_TYPES = array(
+		$SITE_TYPES = [
 			'personal'  => 'blog',
 			'business'  => 'website',
 			'ecommerce' => 'store',
-		);
+		];
 
 		if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 			return 'store';
 		}
 
-		$onboarding_data = \get_option( $ONBOARDING_SITE_INFO_OPTION, array() );
+		$onboarding_data = \get_option( $ONBOARDING_SITE_INFO_OPTION, [] );
 		$site_type       = $onboarding_data['site_type'] ?? '';
 		if ( ! empty( $site_type ) && \array_key_exists( $site_type, $SITE_TYPES ) ) {
 			return $SITE_TYPES[ $site_type ];

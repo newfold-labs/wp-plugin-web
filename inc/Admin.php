@@ -21,18 +21,18 @@ final class Admin {
 	 */
 	public function __construct() {
 		/* Add Page to WordPress Admin Menu. */
-		\add_action( 'admin_menu', array( __CLASS__, 'page' ) );
+		\add_action( 'admin_menu', [ __CLASS__, 'page' ] );
 		/* Load Page Scripts & Styles. */
-		\add_action( 'admin_enqueue_scripts', array( __CLASS__, 'assets' ) );
+		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'assets' ] );
 		/* Add Links to WordPress Plugins list item. */
-		\add_filter( 'plugin_action_links_wp-plugin-web/wp-plugin-web.php', array( __CLASS__, 'actions' ) );
+		\add_filter( 'plugin_action_links_wp-plugin-web/wp-plugin-web.php', [ __CLASS__, 'actions' ] );
 		/* Add inline style to hide subnav link */
-		\add_action( 'admin_head', array( __CLASS__, 'admin_nav_style' ) );
+		\add_action( 'admin_head', [ __CLASS__, 'admin_nav_style' ] );
 		/* Add runtime for data store */
-		\add_filter( 'newfold_runtime', array( __CLASS__, 'add_to_runtime' ) );
+		\add_filter( 'newfold_runtime', [ __CLASS__, 'add_to_runtime' ] );
 
 		if ( isset( $_GET['page'] ) && strpos( filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ), 'web' ) >= 0 ) { // phpcs:ignore
-			\add_action( 'admin_footer_text', array( __CLASS__, 'add_brand_to_admin_footer' ) );
+			\add_action( 'admin_footer_text', [ __CLASS__, 'add_brand_to_admin_footer' ] );
 		}
 	}
 
@@ -57,11 +57,11 @@ final class Admin {
 	 */
 	public static function subpages() {
 
-		$pages = array(
+		$pages = [
 			'web#/home'        => __( 'Home', 'wp-plugin-web' ),
 			'web#/marketplace' => __( 'Marketplace', 'wp-plugin-web' ),
 			'web#/settings'    => __( 'Settings', 'wp-plugin-web' ),
-		);
+		];
 
 		// Add AI Designer if capability is enabled and the module is available.
 		if ( class_exists( 'NewfoldLabs\WP\Module\AIPageDesigner\Services\CapabilityGate' )
@@ -117,7 +117,7 @@ final class Admin {
 			__( 'Network Solutions', 'wp-plugin-web' ),
 			'manage_options',
 			'web',
-			array( __CLASS__, 'render' ),
+			[ __CLASS__, 'render' ],
 			$iconurl,
 			0
 		);
@@ -130,7 +130,7 @@ final class Admin {
 				$title,
 				'manage_options',
 				$route,
-				array( __CLASS__, 'render' )
+				[ __CLASS__, 'render' ]
 			);
 		}
 	}
@@ -150,7 +150,7 @@ final class Admin {
 			echo '<div id="nfd-next-steps-portal" style="display:none"></div>' . PHP_EOL;
 			// Render bootstrap containers for modules that need portals
 			// Only enabled features get their containers rendered
-			$features_with_portals = array( 'performance', 'coming-soon' );
+			$features_with_portals = [ 'performance', 'coming-soon' ];
 			foreach ( $features_with_portals as $feature ) {
 				if ( function_exists( 'NewfoldLabs\WP\Module\Features\isEnabled' ) &&
 					\NewfoldLabs\WP\Module\Features\isEnabled( $feature ) ) {
@@ -191,7 +191,7 @@ final class Admin {
 		\wp_register_script(
 			'nfd-portal-registry',
 			WEB_BUILD_URL . '/portal-registry.js',
-			array( 'wp-components', 'wp-element' ),
+			[ 'wp-components', 'wp-element' ],
 			$asset['version'],
 			true
 		);
@@ -199,7 +199,7 @@ final class Admin {
 		\wp_register_script(
 			'web-script',
 			WEB_BUILD_URL . '/index.js',
-			array_merge( $asset['dependencies'], array( 'newfold-features', 'nfd-runtime', 'nfd-portal-registry' ) ),
+			array_merge( $asset['dependencies'], [ 'newfold-features', 'nfd-runtime', 'nfd-portal-registry' ] ),
 			$asset['version'],
 			true
 		);
@@ -207,7 +207,7 @@ final class Admin {
 		\wp_register_style(
 			'web-style',
 			WEB_BUILD_URL . '/index.css',
-			array( 'wp-components' ),
+			[ 'wp-components' ],
 			$asset['version']
 		);
 
@@ -226,10 +226,10 @@ final class Admin {
 	 */
 	public static function actions( $actions ) {
 		return array_merge(
-			array(
+			[
 				'overview' => '<a href="' . \apply_filters( 'nfd_build_url', admin_url( 'admin.php?page=web#/home' ) ) . '">' . __( 'Home', 'wp-plugin-web' ) . '</a>',
 				'settings' => '<a href="' . \apply_filters( 'nfd_build_url', admin_url( 'admin.php?page=web#/settings' ) ) . '">' . __( 'Settings', 'wp-plugin-web' ) . '</a>',
-			),
+			],
 			$actions
 		);
 	}
@@ -242,8 +242,8 @@ final class Admin {
 	 */
 	public static function add_brand_to_admin_footer( $footer_text ) {
 
-		$wordpress_url = '<a href="' . apply_filters( 'nfd_build_url', 'https://wordpress.org/', array( 'source' => 'web_admin_footer' ) ) . '">WordPress</a>';
-		$web_url       = '<a href="' . apply_filters( 'nfd_build_url', 'https://www.networksolutions.com/', array( 'source' => 'web_admin_footer' ) ) . '">Network Solutions</a>';
+		$wordpress_url = '<a href="' . apply_filters( 'nfd_build_url', 'https://wordpress.org/', [ 'source' => 'web_admin_footer' ] ) . '">WordPress</a>';
+		$web_url       = '<a href="' . apply_filters( 'nfd_build_url', 'https://www.networksolutions.com/', [ 'source' => 'web_admin_footer' ] ) . '">Network Solutions</a>';
 
 		// translators: %1$s is the WordPress URL, %2$s is the Web.com URL.
 		$footer_text = sprintf( \__( 'Thank you for creating with %1$s and %2$s', 'wp-plugin-web' ), $wordpress_url, $web_url );

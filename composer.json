@@ -15,7 +15,7 @@
         "optimize-autoloader": true,
         "sort-packages": true,
         "platform": {
-            "php": "7.3.0"
+            "php": "7.4.0"
         },
         "platform-check": false,
         "allow-plugins": {
@@ -51,8 +51,8 @@
         }
     },
     "scripts": {
-        "fix": "vendor/bin/phpcbf --standard=phpcs.xml .",
-        "lint": "vendor/bin/phpcs --standard=phpcs.xml -s .",
+        "fix": "vendor/bin/phpcbf --standard=phpcs.xml --runtime-set testVersion 7.4- .",
+        "lint": "vendor/bin/phpcs --standard=phpcs.xml --runtime-set testVersion 7.4- -s .",
         "i18n-pot": "vendor/bin/wp i18n make-pot . ./languages/wp-plugin-web.pot --headers='{\"Report-Msgid-Bugs-To\":\"https://github.com/newfold-labs/wp-plugin-web/issues\",\"POT-Creation-Date\":\"2023-01-11T20:21:44+00:00\"}' --exclude=assets,tests,src",
         "i18n-po": "vendor/bin/wp i18n update-po ./languages/wp-plugin-web.pot ./languages",
         "i18n-mo": "vendor/bin/wp i18n make-mo ./languages",

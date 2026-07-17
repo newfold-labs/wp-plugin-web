@@ -12,12 +12,12 @@ namespace Web;
 /**
  * Convert string boolean values to actual booleans.
  *
- * @param string $value   The value to convert.
- * @param bool   $default Default value to use if $value is neither 'true' or 'false'.
+ * @param string $value         The value to convert.
+ * @param bool   $default_value Default value to use if $value is neither 'true' or 'false'.
  *
  * @return bool The conversion result.
  */
-function auto_update_make_bool( $value, $default = true ) {
+function auto_update_make_bool( $value, $default_value = true ) {
 	if ( 'false' === $value ) {
 		$value = false;
 	}
@@ -25,7 +25,7 @@ function auto_update_make_bool( $value, $default = true ) {
 		$value = true;
 	}
 	if ( true !== $value && false !== $value ) {
-		$value = $default;
+		$value = $default_value;
 	}
 
 	return $value;
@@ -43,12 +43,12 @@ function auto_update_make_bool( $value, $default = true ) {
 function auto_update_configure() {
 	global $wp_version;
 
-	$settings = array(
+	$settings = [
 		'allow_major_auto_core_updates' => get_option( 'allow_major_auto_core_updates', true ),
 		'allow_minor_auto_core_updates' => get_option( 'allow_minor_auto_core_updates', true ),
 		'auto_update_plugin'            => get_option( 'auto_update_plugin', true ),
 		'auto_update_theme'             => get_option( 'auto_update_theme', true ),
-	);
+	];
 
 	// only change setting if the updater is not disabled
 	if ( ! defined( 'AUTOMATIC_UPDATER_DISABLED' ) || AUTOMATIC_UPDATER_DISABLED === false ) {
@@ -326,7 +326,7 @@ add_action( 'delete_site_transient_update_themes', __NAMESPACE__ . '\\delete_sit
  * }
  */
 function upgrader_process_complete( $upgrader, $hook_extra ) {
-	if ( ! in_array( $hook_extra['type'], array( 'plugin', 'theme' ), true ) ) {
+	if ( ! in_array( $hook_extra['type'], [ 'plugin', 'theme' ], true ) ) {
 		return;
 	}
 
