@@ -207,7 +207,8 @@ if ( function_exists( 'add_filter' ) ) {
 			}
 
 			// Check for an existing bn_code
-			$bn_code = $parsed_args['headers']['PayPal-Partner-Attribution-Id'] ?? null;
+			$headers = $parsed_args['headers'] ?? [];
+			$bn_code = is_array( $headers ) ? ( $headers['PayPal-Partner-Attribution-Id'] ?? null ) : null;
 
 			// Ensure we only set when blank, or when using one of our stale codes
 			if ( is_null( $bn_code ) || false !== stripos( $bn_code, 'yith' ) || false !== stripos( $bn_code, 'newfold' ) ) {

@@ -1,16 +1,13 @@
 <?xml version="1.0"?>
 <ruleset name="Web-Plugin">
-    <rule ref="Newfold"/>
+    <rule ref="Newfold">
+        <!-- Prefer short array syntax []; Newfold forbids it by default. -->
+        <exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+    </rule>
     <config name="minimum_supported_wp_version" value="6.3"/>
     <exclude-pattern>/assets</exclude-pattern>
     <exclude-pattern>/build</exclude-pattern>
     <exclude-pattern>/wp-plugin-web/</exclude-pattern>
-    <!-- Out of scope for PHP 7.x modernization -->
-    <exclude-pattern>/inc/onboarding-access-control\.php</exclude-pattern>
-    <!-- Prefer short array syntax [] as part of PHP modernization -->
-    <rule ref="Universal.Arrays.DisallowShortArraySyntax">
-        <severity name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
-    </rule>
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
     <rule ref="WordPress-Core">
         <exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid"/>
