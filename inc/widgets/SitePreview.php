@@ -28,7 +28,7 @@ class SitePreview {
 	 *
 	 * @return void
 	 */
-	public static function init() {
+	public static function init(): void {
 		wp_add_dashboard_widget(
 			self::ID,                          // Widget slug.
 			__( 'Site Preview', 'wp-plugin-web' ),
@@ -44,7 +44,7 @@ class SitePreview {
 	/**
 	 * Render the widget
 	 */
-	public static function widget_render() {
+	public static function widget_render(): void {
 		$view_file = WEB_PLUGIN_DIR . '/inc/widgets/views/site-preview.php';
 
 		if ( file_exists( $view_file ) ) {
@@ -57,7 +57,7 @@ class SitePreview {
 	 *
 	 * @return void
 	 */
-	public static function assets() {
+	public static function assets(): void {
 		// enqueue the web-style stylesheet
 		// this is registered in Admin.php > assets()
 		\wp_enqueue_style( 'web-style' );

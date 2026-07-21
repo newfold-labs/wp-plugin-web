@@ -146,6 +146,8 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 
 ## Phase 4 — Types: Admin and widgets
 
+**Status:** Done
+
 **Goal:** Type the admin UI and widget layer.
 
 **Target files**
@@ -160,6 +162,12 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 1. Add return/param types to public/static methods.
 2. Type hook callbacks carefully (WP often passes mixed/`null`; prefer accurate nullable types over overly strict ones).
 3. Avoid changing method names or hook registration signatures.
+
+**Completed**
+
+- Typed all static methods on `Admin` (`array`/`string`/`void`)
+- Typed `SitePreview` methods (`void`)
+- `widgets/bootstrap.php` has no functions to type; view file left as mixed template/JS
 
 **Success criteria**
 

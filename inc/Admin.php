@@ -43,7 +43,7 @@ final class Admin {
 	 *
 	 * @return array
 	 */
-	public static function add_to_runtime( $sdk ) {
+	public static function add_to_runtime( array $sdk ): array {
 		include_once WEB_PLUGIN_DIR . '/inc/Data.php';
 		return array_merge( $sdk, Data::runtime() );
 	}
@@ -55,7 +55,7 @@ final class Admin {
 	 *
 	 * @return array
 	 */
-	public static function subpages() {
+	public static function subpages(): array {
 
 		$pages = [
 			'web#/home'        => __( 'Home', 'wp-plugin-web' ),
@@ -80,7 +80,7 @@ final class Admin {
 	 * Add inline script to admin screens
 	 *  - hide extra link in subnav
 	 */
-	public static function admin_nav_style() {
+	public static function admin_nav_style(): void {
 		echo '<style>';
 		echo 'li#toplevel_page_web a.toplevel_page_web div.wp-menu-image.svg { transition: fill 0.15s; background-size: 24px auto !important; }';
 		echo 'li#toplevel_page_web a.toplevel_page_web div.wp-menu-name {
@@ -108,7 +108,7 @@ final class Admin {
 	 *
 	 * @return void
 	 */
-	public static function page() {
+	public static function page(): void {
 		$iconurl = WEB_PLUGIN_URL . 'assets/svg/ns-icon-image.svg';
 		$iconurl = \add_query_arg( 'ver', WEB_PLUGIN_VERSION, $iconurl );
 
@@ -140,7 +140,7 @@ final class Admin {
 	 *
 	 * @return void
 	 */
-	public static function render() {
+	public static function render(): void {
 		global $wp_version;
 
 		echo '<!-- Web.com -->' . PHP_EOL;
@@ -179,7 +179,7 @@ final class Admin {
 	 *
 	 * @return void
 	 */
-	public static function assets() {
+	public static function assets(): void {
 		$asset_file = WEB_BUILD_DIR . '/index.asset.php';
 
 		if ( is_readable( $asset_file ) ) {
@@ -224,7 +224,7 @@ final class Admin {
 	 * @param  array $actions - array of action links for Plugin row item.
 	 * @return array
 	 */
-	public static function actions( $actions ) {
+	public static function actions( array $actions ): array {
 		return array_merge(
 			[
 				'overview' => '<a href="' . \apply_filters( 'nfd_build_url', admin_url( 'admin.php?page=web#/home' ) ) . '">' . __( 'Home', 'wp-plugin-web' ) . '</a>',
@@ -240,7 +240,7 @@ final class Admin {
 	 * @param string $footer_text footer text.
 	 * @return string
 	 */
-	public static function add_brand_to_admin_footer( $footer_text ) {
+	public static function add_brand_to_admin_footer( string $footer_text ): string {
 
 		$wordpress_url = '<a href="' . apply_filters( 'nfd_build_url', 'https://wordpress.org/', [ 'source' => 'web_admin_footer' ] ) . '">WordPress</a>';
 		$web_url       = '<a href="' . apply_filters( 'nfd_build_url', 'https://www.networksolutions.com/', [ 'source' => 'web_admin_footer' ] ) . '">Network Solutions</a>';
