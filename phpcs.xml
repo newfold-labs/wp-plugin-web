@@ -8,6 +8,8 @@
     <exclude-pattern>/assets</exclude-pattern>
     <exclude-pattern>/build</exclude-pattern>
     <exclude-pattern>/wp-plugin-web/</exclude-pattern>
+    <!-- Out of scope for PHP 7.4 modernization; keep excluded if present. -->
+    <exclude-pattern>/inc/onboarding-access-control\.php</exclude-pattern>
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
     <rule ref="WordPress-Core">
         <exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid"/>

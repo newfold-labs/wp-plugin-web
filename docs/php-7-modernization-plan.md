@@ -255,6 +255,8 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 
 ## Phase 7 — Guardrails and ongoing standards
 
+**Status:** Done
+
 **Goal:** Prevent regressions and make modern PHP the default for new code.
 
 **Tasks**
@@ -264,6 +266,23 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 3. Document contributor rule: new first-party PHP follows AutoIncrement-level typing; no new `array()` in in-scope code.
 4. Optionally ratchet PHPCS/Newfold rules that encourage short arrays and types.
 5. Keep vendor modules and `onboarding-access-control.php` explicitly excluded from this initiative’s CI path if needed.
+
+**Completed**
+
+- **PHPStan deferred:** PHPCS + PHPCompatibility (`testVersion 7.4-`) already gate the floor. Adding PHPStan needs WordPress stubs, a baseline, and CI wiring; defer until a follow-up that can own that tooling cost.
+- **Contributor standards** documented below (this file is the source of truth for first-party PHP style).
+- **PHPCS ratchets already in place:** short arrays enforced (`Generic.Arrays.DisallowLongArraySyntax`), Newfold short-array ban excluded, `testVersion 7.4-` (+ Composer/CI `--runtime-set`).
+- **Exclusions:** `vendor/` / packaged `/wp-plugin-web/` already excluded; added explicit PHPCS exclude for `inc/onboarding-access-control.php`.
+
+### Contributor standards (first-party PHP)
+
+For in-scope code (`wp-plugin-web.php`, `bootstrap.php`, `inc/` except exclusions, `tests/phpunit/`):
+
+1. Target **PHP 7.4+** only — no PHP 8-only syntax.
+2. Prefer **`[]`**, **`??` / `??=`**, and **`fn()`** where they improve clarity.
+3. Add **native param/return types** (and typed properties where safe), matching `inc/AutoIncrement.php`.
+4. Do **not** add native types on methods/properties that override untyped WordPress core parents (fatals).
+5. Do **not** modernize `vendor/` or out-of-scope files.
 
 **Success criteria**
 
@@ -276,17 +295,15 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 
 ## Delivery checklist (phase-wise)
 
-| Phase | Focus | Suggested PR |
-|-------|--------|----------------|
-| 1 | Align PHP 7.4 floor (composer + phpcs) | Config-only |
-| 2 | Short arrays + `??` / `??=` (+ light `fn()`) | Mechanical syntax |
-| 3 | Types: helpers + Data / AdminBar / config | Types batch A |
-| 4 | Types: Admin + widgets | Types batch B |
-| 5 | Types: REST controllers | Types batch C |
-| 6 | Types: compat-check + remaining | Types batch D |
-| 7 | PHPStan / CI / contributor standards | Guardrails |
-
-Execute **one phase at a time**. After each phase: lint, smoke-test relevant flows, then proceed.
+| Phase | Focus | Status |
+|-------|--------|--------|
+| 1 | Align PHP 7.4 floor (composer + phpcs) | Done |
+| 2 | Short arrays + `??` / `??=` (+ light `fn()`) | Done |
+| 3 | Types: helpers + Data / AdminBar / config | Done |
+| 4 | Types: Admin + widgets | Done |
+| 5 | Types: REST controllers | Done |
+| 6 | Types: compat-check + remaining | Done |
+| 7 | PHPStan / CI / contributor standards | Done (PHPStan deferred) |
 
 ## Success criteria (overall)
 
