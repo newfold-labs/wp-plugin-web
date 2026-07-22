@@ -52,8 +52,7 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 3. Confirm plugin header remains `Requires PHP: 7.4`.
 4. Confirm CI stays on PHP 7.4 (no change required unless matrix work is added later).
 5. Run `composer lint` / PHPCS and record baseline.
-6. Exclude `inc/onboarding-access-control.php` from PHPCS (out of scope).
-7. Refresh `composer.lock` content-hash after platform change.
+6. Refresh `composer.lock` content-hash after platform change.
 
 **Success criteria**
 
@@ -87,7 +86,6 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 - 4 `isset() ? :` → `??` replacements (`AutoIncrement`, both compat-check helpers, `bootstrap.php` PayPal BN code)
 - One `fn()` arrow function for the plugin container factory in `bootstrap.php`
 - No clean `??=` candidates found (left as-is)
-- `inc/onboarding-access-control.php` untouched and excluded from PHPCS
 
 **Do not**
 
@@ -265,14 +263,14 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 2. Wire analysis into Composer scripts (e.g. `composer analyse`) and CI if adopted.
 3. Document contributor rule: new first-party PHP follows AutoIncrement-level typing; no new `array()` in in-scope code.
 4. Optionally ratchet PHPCS/Newfold rules that encourage short arrays and types.
-5. Keep vendor modules and `onboarding-access-control.php` explicitly excluded from this initiative’s CI path if needed.
+5. Keep vendor modules excluded from this initiative’s CI path if needed.
 
 **Completed**
 
 - **PHPStan deferred:** PHPCS + PHPCompatibility (`testVersion 7.4-`) already gate the floor. Adding PHPStan needs WordPress stubs, a baseline, and CI wiring; defer until a follow-up that can own that tooling cost.
 - **Contributor standards** documented below (this file is the source of truth for first-party PHP style).
 - **PHPCS ratchets already in place:** short arrays enforced (`Generic.Arrays.DisallowLongArraySyntax`), Newfold short-array ban excluded, `testVersion 7.4-` (+ Composer/CI `--runtime-set`).
-- **Exclusions:** `vendor/` / packaged `/wp-plugin-web/` already excluded; added explicit PHPCS exclude for `inc/onboarding-access-control.php`.
+- **Exclusions:** `vendor/` / packaged `/wp-plugin-web/` already excluded.
 
 ### Contributor standards (first-party PHP)
 
@@ -310,5 +308,5 @@ For in-scope code (`wp-plugin-web.php`, `bootstrap.php`, `inc/` except exclusion
 - Platform / PHPCS / header all say PHP **7.4+**
 - In-scope first-party code consistently uses `[]`, `??`/`??=`, and native types
 - `composer lint` clean; PHPUnit green
-- Vendor and `inc/onboarding-access-control.php` untouched by this initiative
+- Vendor untouched by this initiative
 - New in-scope code matches `AutoIncrement.php` typing expectations
