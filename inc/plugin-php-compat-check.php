@@ -19,56 +19,56 @@ class Plugin_PHP_Compat_Check {
 	 *
 	 * @var array
 	 */
-	public $callbacks = [];
+	public array $callbacks = [];
 
 	/**
 	 * Collection of errors
 	 *
 	 * @var \WP_Error
 	 */
-	public $errors;
+	public \WP_Error $errors;
 
 	/**
 	 * A reference to the main plugin file
 	 *
 	 * @var string
 	 */
-	public $file;
+	public string $file;
 
 	/**
 	 * Minimum PHP version required for this plugin
 	 *
 	 * @var string
 	 */
-	public $min_php_version;
+	public string $min_php_version;
 
 	/**
 	 * Minimum WordPress version required for this plugin
 	 *
 	 * @var string
 	 */
-	public $min_wp_version;
+	public string $min_wp_version;
 
 	/**
 	 * Plugin name
 	 *
 	 * @var string
 	 */
-	public $name = '';
+	public string $name = '';
 
 	/**
 	 * Required PHP extensions
 	 *
 	 * @var array
 	 */
-	public $req_php_extensions = [];
+	public array $req_php_extensions = [];
 
 	/**
 	 * Setup our class properties
 	 *
 	 * @param string $file Plugin file
 	 */
-	public function __construct( $file ) {
+	public function __construct( string $file ) {
 		$this->errors = new \WP_Error();
 		$this->file   = $file;
 		$this->name   = $this->get_plugin_name();
@@ -79,7 +79,7 @@ class Plugin_PHP_Compat_Check {
 	 *
 	 * @return string
 	 */
-	public function get_plugin_name() {
+	public function get_plugin_name(): string {
 		$plugin = get_file_data( $this->file, [ 'name' => 'Plugin Name' ] );
 
 		return $plugin['name'] ?? '';
@@ -89,7 +89,7 @@ class Plugin_PHP_Compat_Check {
 	 * Check all our plugin requirements.
 	 * Displays an admin notice and deactivates the plugin if all requirements are not met.
 	 */
-	public function check_plugin_requirements() {
+	public function check_plugin_requirements(): void {
 		if ( isset( $this->min_php_version ) ) {
 			$this->check_has_min_php_version();
 		}
@@ -117,7 +117,7 @@ class Plugin_PHP_Compat_Check {
 	/**
 	 * Check if the minimum required PHP version is available
 	 */
-	public function check_has_min_php_version() {
+	public function check_has_min_php_version(): void {
 		if ( version_compare( PHP_VERSION, $this->min_php_version, '<' ) ) {
 			/* translators: 1: plugin name 2: minimum required PHP version, current PHP version */
 			$error_msg  = sprintf( __( '%1$s requires PHP version %2$s or later. You are currently running version %3$s.', 'wp-plugin-web' ), $this->name, $this->min_php_version, PHP_VERSION );
@@ -130,7 +130,7 @@ class Plugin_PHP_Compat_Check {
 	 * Check if a required PHP extension is available.
 	 * See http://www.php.net/manual/en/extensions.alphabetical.php for a full list.
 	 */
-	public function check_has_required_php_extensions() {
+	public function check_has_required_php_extensions(): void {
 		foreach ( $this->req_php_extensions as $extension ) {
 			if ( ! extension_loaded( $extension ) ) {
 				$this->errors->add(
@@ -145,7 +145,7 @@ class Plugin_PHP_Compat_Check {
 	/**
 	 * Check if the minimum required WordPress version is available
 	 */
-	public function check_has_min_wp_version() {
+	public function check_has_min_wp_version(): void {
 		global $wp_version;
 		if ( version_compare( $wp_version, $this->min_wp_version, '<' ) ) {
 			$this->errors->add(
@@ -166,14 +166,14 @@ class Plugin_PHP_Compat_Check {
 	 *
 	 * @return bool
 	 */
-	public function has_errors() {
+	public function has_errors(): bool {
 		return (bool) count( $this->errors->errors );
 	}
 
 	/**
 	 * Deactivate the plugin
 	 */
-	public function deactivate() {
+	public function deactivate(): void {
 		require_once ABSPATH . '/wp-admin/includes/plugin.php';
 		if ( function_exists( 'deactivate_plugins' ) ) {
 			deactivate_plugins( $this->file );
@@ -183,7 +183,7 @@ class Plugin_PHP_Compat_Check {
 	/**
 	 * Display error messages in the admin
 	 */
-	public function admin_notices() {
+	public function admin_notices(): void {
 		echo '<div class="error">';
 		foreach ( $this->errors->get_error_messages() as $msg ) {
 			echo '<p>' . esc_html( $msg ) . '</p>';

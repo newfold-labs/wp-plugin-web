@@ -17,7 +17,7 @@ namespace Web;
  *
  * @return bool The conversion result.
  */
-function auto_update_make_bool( $value, $default_value = true ) {
+function auto_update_make_bool( $value, bool $default_value = true ): bool {
 	if ( 'false' === $value ) {
 		$value = false;
 	}
@@ -40,7 +40,7 @@ function auto_update_make_bool( $value, $default_value = true ) {
  *              Core's default behavior.
  * @since 5.5.0 When plugin and theme auto-updates are set to "off", WordPress core will manage
  */
-function auto_update_configure() {
+function auto_update_configure(): void {
 	global $wp_version;
 
 	$settings = [
@@ -101,7 +101,7 @@ add_action( 'plugins_loaded', __NAMESPACE__ . '\\auto_update_configure', 5 );
  *
  * @return string The adjusted HTML for the automatic updates column.
  */
-function plugin_auto_update_setting_html( $html ) {
+function plugin_auto_update_setting_html( string $html ): string {
 	$bulk_auto_update_enabled = auto_update_make_bool( get_option( 'auto_update_plugin', true ) );
 
 	if ( ! $bulk_auto_update_enabled ) {
@@ -131,7 +131,7 @@ add_filter( 'plugin_auto_update_setting_html', __NAMESPACE__ . '\\plugin_auto_up
  *
  * @return string The adjusted HTML for the automatic updates column.
  */
-function theme_auto_update_setting_html( $html ) {
+function theme_auto_update_setting_html( string $html ): string {
 	$bulk_auto_update_enabled = auto_update_make_bool( get_option( 'auto_update_theme', true ) );
 
 	if ( ! $bulk_auto_update_enabled ) {
@@ -155,7 +155,7 @@ add_filter( 'theme_auto_update_setting_html', __NAMESPACE__ . '\\theme_auto_upda
  *
  * @return string The modified JavaScript template for displaying the auto-update setting link.
  */
-function theme_auto_update_setting_template( $template ) {
+function theme_auto_update_setting_template( string $template ): string {
 	$bulk_auto_update_enabled = auto_update_make_bool( get_option( 'auto_update_theme', true ) );
 
 	if ( ! $bulk_auto_update_enabled ) {
@@ -182,7 +182,7 @@ add_filter( 'theme_auto_update_setting_template', __NAMESPACE__ . '\\theme_auto_
  * @param mixed $old_value The old option value.
  * @param mixed $value     The new option value.
  */
-function sync_plugin_major_auto_core_update_option( $old_value, $value ) {
+function sync_plugin_major_auto_core_update_option( $old_value, $value ): void { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- Callback arity for update_option_*.
 	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 		return;
 	}
@@ -208,7 +208,7 @@ add_action( 'update_option_auto_update_core_major', __NAMESPACE__ . '\\sync_plug
  *
  * @return bool True if the value was updated, false otherwise.
  */
-function sync_plugin_update_settings() {
+function sync_plugin_update_settings(): bool {
 	if ( ! function_exists( 'get_plugins' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 	}
@@ -227,7 +227,7 @@ function sync_plugin_update_settings() {
  *
  * @return bool True if the value was updated, false otherwise.
  */
-function sync_theme_update_settings() {
+function sync_theme_update_settings(): bool {
 	if ( ! function_exists( 'wp_get_themes' ) ) {
 		require_once ABSPATH . WPINC . '/theme.php';
 	}
@@ -241,7 +241,7 @@ function sync_theme_update_settings() {
  * @param string $plugin_file Path to the plugin file relative to the plugins directory.
  * @param bool   $deleted     Whether the plugin deletion was successful.
  */
-function deleted_plugin( $plugin_file, $deleted ) {
+function deleted_plugin( string $plugin_file, bool $deleted ): void { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- Callback arity for deleted_plugin.
 	if ( ! $deleted ) {
 		return;
 	}
@@ -262,7 +262,7 @@ add_action( 'deleted_plugin', __NAMESPACE__ . '\\deleted_plugin', 10, 2 );
  * @param string $stylesheet Stylesheet of the theme to delete.
  * @param bool   $deleted    Whether the theme deletion was successful.
  */
-function deleted_theme( $stylesheet, $deleted ) {
+function deleted_theme( string $stylesheet, bool $deleted ): void { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- Callback arity for deleted_theme.
 	if ( ! $deleted ) {
 		return;
 	}
@@ -283,7 +283,7 @@ add_action( 'deleted_theme', __NAMESPACE__ . '\\deleted_plugin', 10, 2 );
  * This is a backwards compatibility version of `deleted_theme`, which uses the `deleted_theme` action hook that was
  * added in WordPress 5.8.0.
  */
-function delete_site_transient_update_themes() {
+function delete_site_transient_update_themes(): void {
 	global $wp_version;
 
 	// The `deleted_theme` hook was introduced in WordPress 5.8.
@@ -325,7 +325,7 @@ add_action( 'delete_site_transient_update_themes', __NAMESPACE__ . '\\delete_sit
  *     }
  * }
  */
-function upgrader_process_complete( $upgrader, $hook_extra ) {
+function upgrader_process_complete( $upgrader, array $hook_extra ): void { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed -- Callback arity for upgrader_process_complete.
 	if ( ! in_array( $hook_extra['type'], [ 'plugin', 'theme' ], true ) ) {
 		return;
 	}
@@ -350,7 +350,7 @@ add_action( 'upgrader_process_complete', __NAMESPACE__ . '\\upgrader_process_com
  * @param int $wp_db_version         The new $wp_db_version.
  * @param int $wp_current_db_version The old (current) $wp_db_version.
  */
-function core_update_560( $wp_db_version, $wp_current_db_version ) {
+function core_update_560( int $wp_db_version, int $wp_current_db_version ): void {
 	if ( 49572 > $wp_current_db_version && 49572 < $wp_db_version ) {
 		$update_option = get_option( 'allow_major_auto_core_updates', 'true' );
 

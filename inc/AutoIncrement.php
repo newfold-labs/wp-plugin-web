@@ -22,7 +22,7 @@ class AutoIncrement {
 	 *
 	 * @var wpdb
 	 */
-	private $wpdb;
+	private wpdb $wpdb;
 
 	/**
 	 * Constructor.

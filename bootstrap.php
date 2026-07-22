@@ -269,7 +269,7 @@ add_action(
  *
  * @return void
  */
-function on_activate() {
+function on_activate(): void {
 	// Clear transients that may contain stale data.
 	delete_transient( 'newfold_marketplace' );
 	delete_transient( 'newfold_notifications' );
@@ -288,7 +288,7 @@ function on_activate() {
  *
  * @return void
  */
-function load_plugin() {
+function load_plugin(): void {
 	if ( is_admin() && WEB_PLUGIN_FILE === get_option( 'nfd_activated_fresh' ) ) {
 		delete_option( 'nfd_activated_fresh' );
 		on_activate();

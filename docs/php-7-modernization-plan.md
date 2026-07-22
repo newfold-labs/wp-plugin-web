@@ -213,6 +213,8 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 
 ## Phase 6 — Types: compat-check classes and remaining first-party
 
+**Status:** Done
+
 **Goal:** Finish typing remaining in-scope first-party code, including early-bootstrap compat classes.
 
 **Target files**
@@ -230,6 +232,16 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 2. Add param/return types to methods.
 3. Convert remaining `isset() ? :` → `??` if any left.
 4. Be conservative: these classes run before full plugin load; prefer correct nullable types and avoid fatal type errors on edge inputs.
+
+**Completed**
+
+- Typed properties + methods on `Plugin_PHP_Compat_Check` and `NFD_Plugin_Compat_Check`
+- Guarded `conflicts` option load with `is_array()` before assigning to typed `array` property
+- Typed all functions in `updates.php` (mixed option values left untyped where appropriate)
+- Typed `on_activate(): void` / `load_plugin(): void` in `bootstrap.php`
+- Typed `AutoIncrement::$wpdb` as `private wpdb $wpdb`
+- Upgrade scripts under `inc/upgrades/` are procedural (no functions/classes to type); left as-is
+- `wp-plugin-web.php` has no functions to type
 
 **Success criteria**
 
