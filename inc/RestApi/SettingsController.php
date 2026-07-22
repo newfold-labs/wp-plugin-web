@@ -149,7 +149,7 @@ class SettingsController extends \WP_REST_Controller {
 	 *
 	 * @return array $settings List of the settings and their values
 	 */
-	public function get_current_settings() {
+	public function get_current_settings(): array {
 
 		// By default, we treat all auto updates as on
 		$major        = ( 'true' === get_option( 'allow_major_auto_core_updates', 'true' ) );

@@ -180,6 +180,8 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 
 ## Phase 5 — Types: REST controllers
 
+**Status:** Done
+
 **Goal:** Add types to REST API controllers without breaking WP REST contracts.
 
 **Target files**
@@ -193,6 +195,12 @@ Modernize first-party PHP to consistently use PHP 7.x features (through 7.4), al
 1. Type methods with `\WP_REST_Request`, `\WP_REST_Response`, `bool`, etc., aligning with parent `WP_REST_Controller` where overridden.
 2. Prefer typed `$namespace` property (`string`) if compatible with parent.
 3. Smoke-test settings and caching routes (permission checks, GET/POST).
+
+**Completed**
+
+- Left parent overrides untyped (`register_routes`, `get_item`, `update_item`, `$namespace`) — WP parent signatures are untyped and incompatible with child native types
+- Typed non-override methods: `get_current_settings(): array`, `purge_all(): array`, `init_rest_api(): void`
+- Left `check_permission()` return untyped (returns `bool|\WP_Error`; no PHP 7.4 union types)
 
 **Success criteria**
 
