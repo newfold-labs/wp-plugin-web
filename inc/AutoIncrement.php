@@ -8,7 +8,6 @@
 namespace Web;
 
 use Exception;
-use wpdb;
 
 /**
  * Functions for fixing missing AUTO_INCREMENT on WordPress tables.
@@ -20,17 +19,17 @@ class AutoIncrement {
 	/**
 	 * The WordPress database instance.
 	 *
-	 * @var wpdb
+	 * @var \wpdb
 	 */
-	private wpdb $wpdb;
+	private \wpdb $wpdb;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param wpdb $wpdb WordPress DB ORM.
+	 * @param \wpdb $wpdb WordPress DB ORM.
 	 */
 	public function __construct(
-		wpdb $wpdb
+		\wpdb $wpdb
 	) {
 		$this->wpdb = $wpdb;
 	}

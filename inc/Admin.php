@@ -31,7 +31,7 @@ final class Admin {
 		/* Add runtime for data store */
 		\add_filter( 'newfold_runtime', [ __CLASS__, 'add_to_runtime' ] );
 
-		if ( isset( $_GET['page'] ) && strpos( filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ), 'web' ) >= 0 ) { // phpcs:ignore
+		if ( isset( $_GET['page'] ) && false !== strpos( (string) filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ), 'web' ) ) { // phpcs:ignore
 			\add_action( 'admin_footer_text', [ __CLASS__, 'add_brand_to_admin_footer' ] );
 		}
 	}
