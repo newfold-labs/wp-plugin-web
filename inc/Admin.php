@@ -31,7 +31,8 @@ final class Admin {
 		/* Add runtime for data store */
 		\add_filter( 'newfold_runtime', [ __CLASS__, 'add_to_runtime' ] );
 
-		if ( isset( $_GET['page'] ) && false !== strpos( (string) filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ), 'web' ) ) { // phpcs:ignore
+		$page = filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW );
+		if ( $page && false !== strpos( $page, 'web' ) ) {
 			\add_action( 'admin_footer_text', [ __CLASS__, 'add_brand_to_admin_footer' ] );
 		}
 	}
@@ -39,12 +40,13 @@ final class Admin {
 	/**
 	 * Add to runtime
 	 *
-	 * @param array $sdk - runtime properties from module.
+	 * @param mixed $sdk - runtime properties from module.
 	 *
 	 * @return array
 	 */
-	public static function add_to_runtime( array $sdk ): array {
+	public static function add_to_runtime( $sdk ): array {
 		include_once WEB_PLUGIN_DIR . '/inc/Data.php';
+		$sdk = is_array( $sdk ) ? $sdk : [];
 		return array_merge( $sdk, Data::runtime() );
 	}
 
@@ -185,7 +187,10 @@ final class Admin {
 		if ( is_readable( $asset_file ) ) {
 			$asset = include_once $asset_file;
 		} else {
-			return;
+			$asset = [
+				'dependencies' => [],
+				'version'      => WEB_PLUGIN_VERSION,
+			];
 		}
 
 		\wp_register_script(

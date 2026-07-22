@@ -41,7 +41,7 @@ function web_set_plugin_install_date( string $value ): void {
  * @return int
  */
 function web_get_days_since_plugin_install_date(): int {
-	return absint( ( gmdate( 'U' ) - web_get_plugin_install_date() ) / DAY_IN_SECONDS );
+	return absint( ( (int) gmdate( 'U' ) - (int) web_get_plugin_install_date() ) / DAY_IN_SECONDS );
 }
 
 /**
