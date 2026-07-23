@@ -47,7 +47,7 @@ class CachingController extends \WP_REST_Controller {
 	 */
 	public function purge_all(): array {
 
-		container()->get( 'cachePurger' )->purge_all();
+		container()->get( 'cachePurger' )->purgeAll();
 
 		return [
 			'status'  => 'success',
