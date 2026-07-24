@@ -1,7 +1,7 @@
 import AppStore from '../../data/store';
 import { webSettingsApiFetch } from '../../util/helpers';
 import { useUpdateEffect } from 'App/util/hooks';
-import { useState, useCallback } from '@wordpress/element';
+import { memo, useState, useCallback } from '@wordpress/element';
 import { Alert, Container, ToggleField } from "@newfold/ui-component-library";
 import { useNotification } from 'App/components/notifications';
 
@@ -255,7 +255,7 @@ const AutomaticUpdatesThemes = ({ setError, notify }) => {
 	);
 }
 
-const AutomaticUpdates = () => {
+const AutomaticUpdates = memo( () => {
 	const [isError, setError] = useState(false);
 
 	let notify = useNotification();
@@ -278,6 +278,6 @@ const AutomaticUpdates = () => {
 			</div>
 		</Container.SettingsField>
 	);
-}
+} );
 
 export default AutomaticUpdates;

@@ -12,7 +12,7 @@ Audit and optimise React components in `wp-plugin-web` for performance issues (u
 |-------|--------|
 | Phase 1: Profiling & Baseline Capture | ✅ Bundle sizes measured; re-render counts measured via A/B console instrumentation (see 1.2) — Lighthouse still needs a manual run |
 | Phase 2: Route-Level Code Splitting | ✅ Done |
-| Phase 3: Component Memoization | ✅ Done (React.memo, useMemo, useCallback applied — all components) |
+| Phase 3: Component Memoization | ✅ Done (React.memo, useMemo, useCallback applied — all components incl. six settings-section components; measured impact in Phase 1.2) |
 | Phase 4: Bundle Size Reduction | 🔶 Partial (lodash per-function — kept as explicit dep, PR #588 UI-library bump tested and found to *increase* size, react-use confirmed unneeded and removed, notifications lazy; heroicons/html-react-parser audited — see findings) |
 | Phase 5: Additional Performance Fixes | 🔶 Partial (duplicate notifications removed; debounce/throttle verified as unnecessary; SubMenusManager refactor deliberately deferred) |
 | Phase 6: After Measurement & Documentation | ✅ Measured (see below) |
@@ -103,22 +103,23 @@ npm run build:analyzer   # production build + analyser report
 
 React DevTools Profiler's panel isn't scriptable from the browser-automation tooling available in this session, so instead of a treemap/flamegraph export, re-render counts were measured directly and more precisely: a temporary `console.log` was added to the top of each component's function body (a render only logs if React actually calls the function — `React.memo`/context bail-outs mean no log), the app was built twice — once from this branch's base commit (`1597b85`, via a throwaway `git worktree`) and once from the current branch — and the exact same interaction was performed against both builds in the browser: on the Settings page, toggle "Coming soon page" on, and count renders of components that have **nothing to do with Coming Soon** (they only share the app's notification/store context).
 
-**Result — one Coming Soon toggle:**
+**Result — one Coming Soon toggle, three states:**
 
-| Component | Before (base commit) | After (this branch) |
-|-----------|----------------------|----------------------|
-| `AppBody` | 1 | **0** |
-| `AutomaticUpdates` | 2 | 1 |
-| `WonderBlockSettings` | 2 | 1 |
-| `ContentSettings` | 2 | 1 |
-| `CommentSettings` | 2 | 1 |
-| **Total unrelated re-renders** | **9** | **4** (−56%) |
+| Component | Before (base commit) | After context fixes | After `React.memo` (final) |
+|-----------|----------------------|----------------------|------------------------------|
+| `AppBody` | 1 | **0** | 0 |
+| `AutomaticUpdates` | 2 | 1 | **0** |
+| `ContentSettings` | 2 | 1 | **0** |
+| `CommentSettings` | 2 | 1 | **0** |
+| `WonderBlockSettings` | 2 | 1 | 1 |
+| **Total unrelated re-renders** | **9** | **4** (−56%) | **1** (−89%) |
 
 - **`AppBody`: 1 → 0.** Confirms the `AppBootContext` split (Phase 3.4) works exactly as designed — before, `AppBody` read `booted`/`hasError` off the same `AppStore` context that settings writes update, so every toggle re-rendered the whole app shell; after, it reads a separate context that only changes on boot/error, so a settings write no longer touches it at all.
-- **The 4 unrelated settings sections: 2 → 1 each.** Before, each of these components (they all call `useNotification()` directly) re-rendered *twice* per toggle — once from the toggle's own optimistic state push, once again ~5 seconds later when the save API resolved and pushed a second notification — because the old `FeedContext` Provider recreated its value object on every `NotificationFeed` render, forcing every consumer to re-render regardless of relevance. After the `useCallback`/`useMemo` stabilization (Phase 3.4), the context value stays referentially stable, so the *context-driven* extra render is gone — both pushes now collapse into the render that was already happening.
-- **The remaining 1 re-render each is a real, separate, still-open opportunity**, not something this branch fixed: `AutomaticUpdates`, `ComingSoon`, `CommentSettings`, `ContentSettings`, `PerformanceFeatureSettings`, and `WonderBlockSettings` are plain function components with no `React.memo`, so when their shared parent (the Settings page) re-renders in response to the store write, they still re-render along with it — memoization only stops a component from re-rendering due to *unstable props/context*, not due to an unmemoized parent re-rendering it directly. Wrapping these six components in `React.memo` would very likely take this to 0 as well; flagged as a follow-up rather than done here since it's outside this session's scope.
+- **The four settings sections: 2 → 1 each (context fix).** Before, each of these components (they all call `useNotification()` directly) re-rendered *twice* per toggle — once from the toggle's own optimistic state push, once again ~5 seconds later when the save API resolved and pushed a second notification — because the old `FeedContext` Provider recreated its value object on every `NotificationFeed` render, forcing every consumer to re-render regardless of relevance. After the `useCallback`/`useMemo` stabilization (Phase 3.4), the context value stays referentially stable, so the *context-driven* extra render is gone.
+- **`AutomaticUpdates`, `ContentSettings`, `CommentSettings`: 1 → 0 (`React.memo`, this fix).** These three take zero props and only consume `useNotification()` — not `AppStore` — at their own top level, so their remaining render was purely inherited from their unmemoized parent (the Settings page, which re-renders on every store write). Wrapping them in `React.memo` (Phase 3.1 follow-up, applied to all six settings-section components for consistency) eliminates that inherited render entirely, confirmed by re-running this exact same measurement after the change.
+- **`WonderBlockSettings` stays at 1 — `React.memo` genuinely cannot fix this one.** Unlike the three above, `WonderBlockSettings` calls `useContext(AppStore)` directly at its own top level (so does `ComingSoon` and `PerformanceFeatureSettings`, though they aren't siblings re-rendered by this specific toggle). `React.memo` only bails out a re-render caused by an unmemoized *parent* re-rendering with unchanged props — it has no effect on a component's own direct context subscription, and React always re-renders a context consumer when the provider's value changes, regardless of memoization anywhere in the tree. Eliminating this one would require splitting `AppStore` into narrower, per-domain contexts (similar in spirit to the `AppBootContext` split, but touching every settings field and the `webApiFetchSettings`/`reformStore` pipeline) — a materially bigger, riskier change than this session's scope, so it's left as a named follow-up rather than attempted here.
 
-Methodology note: a second, unfiltered console read during the same test showed 21 messages instead of 7, all sharing one identical whole-second timestamp — a read-buffering artifact of the console-tracking tool re-reporting the same entries, not real extra renders (the genuine two-batch pattern in the "before" build had distinctly different timestamps 5 seconds apart). The numbers above are from the first clean read taken immediately after each toggle, before that duplication occurred.
+Methodology note: a second, unfiltered console read during the same test showed extra duplicate entries all sharing one identical whole-second timestamp — a read-buffering artifact of the console-tracking tool re-reporting the same entries, not real extra renders (genuinely distinct render batches had different timestamps seconds apart). The numbers above are from the first clean read taken immediately after each toggle, before that duplication occurred.
 
 ### 1.3 Lighthouse Performance Baseline
 
@@ -157,8 +158,14 @@ All components wrapped in `React.memo`:
 | `NextSteps` | `app/pages/home/nextSteps.js` | Static section |
 | `Logo` | `app/components/app-nav/logo.js` | Pure presentational |
 | `WordPressIcon` | `app/components/icons/WordPressIcon.js` | Pure SVG |
+| `ComingSoon` | `app/pages/settings/comingSoon.js` | Prop-less; see 1.2 for measured impact |
+| `AutomaticUpdates` | `app/pages/settings/automaticUpdates.js` | Prop-less; measured 1 → 0 re-renders per unrelated settings write |
+| `WonderBlockSettings` | `app/pages/settings/wonderBlockSettings.js` | Prop-less; consumes `AppStore` directly, so `memo` alone doesn't fully eliminate its re-render (see 1.2) |
+| `ContentSettings` | `app/pages/settings/contentSettings.js` | Prop-less; measured 1 → 0 re-renders per unrelated settings write |
+| `CommentSettings` | `app/pages/settings/commentSettings.js` | Prop-less; measured 1 → 0 re-renders per unrelated settings write |
+| `PerformanceFeatureSettings` | `app/pages/settings/performanceFeatureSettings.js` | Prop-less; added for consistency (not exercised by the Settings-page measurement, renders on the Admin page) |
 
-> Note: `StoreDetails`, `ComingSoonSection`, `NextSteps`, `WordPressIcon` are prop-less components — `React.memo` prevents them re-rendering whenever their parent re-renders (empty props are always shallow-equal).
+> Note: `StoreDetails`, `ComingSoonSection`, `NextSteps`, `WordPressIcon`, and the six settings-section components above are prop-less — `React.memo` prevents them re-rendering whenever their parent re-renders (empty props are always shallow-equal). It does **not** stop a re-render caused by the component's own direct context subscription (`ComingSoon`, `WonderBlockSettings`, `PerformanceFeatureSettings` all still read `AppStore` directly) — see the Phase 1.2 measurement for which of these six actually dropped to zero re-renders and why three didn't.
 
 ### 3.2 Add `useMemo` for Derived Objects — ✅ DONE
 
@@ -286,7 +293,7 @@ npm run build:analyzer
 
 ### 6.2 Re-render Comparison (After Report) — ✅ DONE
 
-Done as a single A/B measurement rather than separate before/after passes — see the comparison table and analysis in Phase 1.2 above. Summary: one Coming Soon toggle went from 9 unrelated re-renders (before) to 4 (after), a 56% reduction, with `AppBody`'s unrelated re-render eliminated entirely (1 → 0). The remaining 4 are attributed to the six settings-section components not being wrapped in `React.memo` — a separate, still-open opportunity, not something this branch claims to have fixed.
+Done as a three-state A/B/C measurement rather than separate before/after passes — see the comparison table and analysis in Phase 1.2 above. Summary: one Coming Soon toggle went from 9 unrelated re-renders (base commit) to 4 after the context-churn fixes (−56%) to 1 after also wrapping the six settings-section components in `React.memo` (−89% overall). The one remaining re-render (`WonderBlockSettings`) is a direct `AppStore` context subscription that `React.memo` cannot address — would need a context-splitting refactor, flagged as a follow-up, not attempted here.
 
 ### 6.3 Lighthouse After
 
@@ -326,6 +333,7 @@ All actionable implementation steps are complete. Remaining items are deferred (
 | 12 | Evaluate merging PR #588 (`@newfold/ui-component-library` 1.3.0 → 2.1.1) for bundle size | Low | Low | ✅ Tested — regresses size (+25 KB `index.js`, +71 KB total from `@headlessui/react` v2 bump); do not merge for this reason |
 | 13 | Evaluate dropping our explicit `lodash` dependency in favor of the UI library's transitive one | Low | Low | ✅ Tested — 0 KB saving (already deduped to one copy); kept explicit to avoid phantom-dependency risk |
 | 11 | Phase 5.3: Debounce/throttle location effects | Low | Low | ✅ Verified unnecessary (see 5.3) |
+| 14 | Phase 3.1: `React.memo` on the six settings-section components (the re-render evidence follow-up) | Low | Low | ✅ Measured 9 → 4 → 1 unrelated re-renders; `WonderBlockSettings`/`ComingSoon`/`PerformanceFeatureSettings` still directly consume `AppStore` — full elimination needs a context-splitting refactor, flagged as a further follow-up |
 
 ### Completed Steps
 
@@ -349,6 +357,7 @@ All actionable implementation steps are complete. Remaining items are deferred (
 | — | Phase 4.3: heroicons audit (confirmed tree-shaken) | ✅ |
 | — | Phase 4.5: html-react-parser audit (dead dependency — removed) | ✅ |
 | — | Phase 5.3: Debounce/throttle location effects — verified `setIsOpen(false)` is a React state-update no-op, no change needed | ✅ |
+| — | Phase 3.1: `React.memo` added to `ComingSoon`, `AutomaticUpdates`, `WonderBlockSettings`, `ContentSettings`, `CommentSettings`, `PerformanceFeatureSettings` — measured (before/after re-instrumentation) `AutomaticUpdates`/`ContentSettings`/`CommentSettings` drop to 0 re-renders per unrelated settings write; `WonderBlockSettings` stays at 1 due to its own direct `AppStore` subscription, which `memo` cannot address | ✅ |
 
 ---
 

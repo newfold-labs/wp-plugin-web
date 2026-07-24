@@ -1,11 +1,11 @@
-import { useState } from '@wordpress/element';
+import { memo, useState } from '@wordpress/element';
 import { useUpdateEffect } from 'App/util/hooks';
 import { Alert, ToggleField } from '@newfold/ui-component-library';
 import AppStore from '../../data/store';
 import { featureToggle } from '../../util/helpers';
 import { useNotification } from 'App/components/notifications';
 
-const WonderBlockSettings = () => {
+const WonderBlockSettings = memo( () => {
     const { store, setStore } = useContext( AppStore );
 	const [ wonderBlocks, setWonderBlocks ] = useState(
 		store.features.patterns
@@ -104,6 +104,6 @@ const WonderBlockSettings = () => {
 			) }
 		</div>
 	);
-}
+} );
 
 export default WonderBlockSettings;
