@@ -278,13 +278,15 @@ npm run build:analyzer
 
 ### 6.4 Bundle Size Comparison Table
 
-Document final results:
+| Asset | Before (original, Jul 16) | After Splitting (rebuild) | Final (all phases, Jul 24) | Reduction |
+|-------|----------------------------|----------------------------|------------------------------|-----------|
+| `index.js` | 150 KB | 150 KB¹ | 174 KB | **+24 KB (+16%)** |
+| Total JS | ~209 KB | ~209 KB¹ | ~233 KB | **+24 KB (+11%)** |
+| `index.css` | 169 KB | 169 KB¹ | 169 KB | 0 KB (no change) |
 
-| Asset | Before (original) | After Splitting (rebuild) | Final (all phases) | Reduction |
-|-------|-------------------|---------------------------|--------------------|-----------|
-| `index.js` | 150 KB | TBD | TBD | TBD |
-| Total JS | ~209 KB | TBD | TBD | TBD |
-| `index.css` | 169 KB | TBD | TBD | TBD |
+¹ "After Splitting" duplicates "Before" because, per the Key Finding above, route-level code splitting was already present in the Jul 16 build — this session's work added memoization/context/lodash changes on top of splitting that already existed, it didn't introduce splitting itself.
+
+Net result: **no bundle-size reduction was achieved** — `index.js` grew 24 KB (+16%) and total JS grew 24 KB (+11%), both attributable to `@newfold/ui-component-library`'s bundled lodash forcing the full package in regardless of our per-function imports, plus the new memoization/context runtime code (see "Key Finding" and "Remaining Bundle Size Opportunity" above). `index.css` is unchanged since the Tailwind purge-glob fix only dropped 10 already-redundant utility classes. The measurable wins from this work are runtime (fewer re-renders, no blocking marketplace fetch, one notifications request instead of two), not download size.
 
 ---
 
