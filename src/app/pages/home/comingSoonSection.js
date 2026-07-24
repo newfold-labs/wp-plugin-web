@@ -1,7 +1,7 @@
-import { useEffect } from '@wordpress/element';
+import { useEffect, memo } from '@wordpress/element';
 import { Container } from "@newfold/ui-component-library";
 
-const ComingSoonSection = () => {
+const ComingSoonSection = memo( () => {
     const siteKind = window.NewfoldRuntime?.isWoocommerceActive 
   ? 'store' 
   : (window.NewfoldRuntime?.siteType || 'website');
@@ -30,6 +30,6 @@ const ComingSoonSection = () => {
                 <div id="coming-soon-portal" />
             </Container>
     );
-};
+} );
 
 export default ComingSoonSection;

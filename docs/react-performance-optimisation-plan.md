@@ -12,8 +12,8 @@ Audit and optimise React components in `wp-plugin-web` for performance issues (u
 |-------|--------|
 | Phase 1: Profiling & Baseline Capture | ✅ Build regenerated (Jul 24) |
 | Phase 2: Route-Level Code Splitting | ✅ Done |
-| Phase 3: Component Memoization | ✅ Done (React.memo, useMemo, useCallback applied) |
-| Phase 4: Bundle Size Reduction | 🔶 Partial (react-use removed, notifications lazy-loaded, lodash per-function; see findings) |
+| Phase 3: Component Memoization | ✅ Done (React.memo, useMemo, useCallback applied — all components) |
+| Phase 4: Bundle Size Reduction | 🔶 Partial (lodash per-function, react-use removed, notifications lazy; heroicons/html-react-parser audited — see findings) |
 | Phase 5: Additional Performance Fixes | 🔶 Partial (duplicate notifications removed; SubMenusManager refactor pending) |
 | Phase 6: After Measurement & Documentation | ✅ Measured (see below) |
 
@@ -128,11 +128,11 @@ All items implemented in `src/app/data/routes.js`:
 
 ---
 
-## Phase 3: Component Memoization 🔶 PARTIAL
+## Phase 3: Component Memoization ✅ DONE
 
-### 3.1 Memoize Presentational Components — ⏳ PENDING
+### 3.1 Memoize Presentational Components — ✅ DONE
 
-Apply `React.memo` to components that receive stable props and re-render due to parent changes:
+All components wrapped in `React.memo`:
 
 | Component | File | Rationale |
 |-----------|------|-----------|
@@ -145,7 +145,9 @@ Apply `React.memo` to components that receive stable props and re-render due to 
 | `Logo` | `app/components/app-nav/logo.js` | Pure presentational |
 | `WordPressIcon` | `app/components/icons/WordPressIcon.js` | Pure SVG |
 
-### 3.2 Add `useMemo` for Derived Objects — ⏳ PENDING
+> Note: `StoreDetails`, `ComingSoonSection`, `NextSteps`, `WordPressIcon` are prop-less components — `React.memo` prevents them re-rendering whenever their parent re-renders (empty props are always shallow-equal).
+
+### 3.2 Add `useMemo` for Derived Objects — ✅ DONE
 
 | Location | Fix |
 |----------|-----|
@@ -154,7 +156,7 @@ Apply `React.memo` to components that receive stable props and re-render due to 
 | `AppBody` — `classNames(...)` call | Wrap in `useMemo` keyed on `location.pathname` |
 | `TopBarNav` — route link rendering | Memoize the nav links array |
 
-### 3.3 Add `useCallback` for Event Handlers — ⏳ PENDING
+### 3.3 Add `useCallback` for Event Handlers — ✅ DONE
 
 | Location | Fix |
 |----------|-----|
@@ -177,75 +179,52 @@ Apply `React.memo` to components that receive stable props and re-render due to 
 
 ## Phase 4: Bundle Size Reduction 🔶 PARTIAL
 
-### 4.1 Replace Full Lodash with Per-Function Imports — ⏳ PENDING
+### 4.1 Replace Full Lodash with Per-Function Imports — ✅ DONE
 
 **File:** `webpack.config.js` — `ProvidePlugin` mappings
 
-Replace:
-```js
-_filter: ['lodash', 'filter'],
-_map: ['lodash', 'map'],
-_isEmpty: ['lodash', 'isEmpty'],
-_camelCase: ['lodash', 'camelCase'],
-```
+Removed the lodash globals (`_filter`, `_map`, `_isEmpty`, `_camelCase`) from `ProvidePlugin` and replaced all source usages with per-function imports or native JS:
 
-With:
-```js
-_filter: ['lodash/filter', 'default'],
-_map: ['lodash/map', 'default'],
-_isEmpty: ['lodash/isEmpty', 'default'],
-_camelCase: ['lodash/camelCase', 'default'],
-```
+- `app/data/routes.js`: `_filter` → native `Array.filter`
+- `app/data/store.js`: `_camelCase` → `import camelCase from 'lodash/camelCase'`
+- `app/index.js`: `import kebabCase from 'lodash/kebabCase'`, `import filter from 'lodash/filter'`
+- `app/components/app-nav/index.js`: `import filter from 'lodash/filter'`
+- `app/components/app-nav/logo.js`: `delay` → native `setTimeout`
 
-Or preferably, replace usages with native JS (`Array.filter`, `Array.map`, etc.) and remove lodash entirely.
-
-Additional lodash imports found in source:
-- `app/index.js`: `import { kebabCase, filter } from 'lodash'`
-- `app/components/app-nav/index.js`: `import { filter } from 'lodash'`
-- `app/components/app-nav/logo.js`: `import { delay } from 'lodash'`
-
-**Estimated saving: ~20–50 KB** (depending on tree-shaking effectiveness)
+**Outcome:** No bundle-size reduction (see Key Finding below) — `@newfold/ui-component-library` imports full CommonJS `lodash` internally (`import { noop } from "lodash"` etc., ~104 KB / 141 modules), and the `lodash-es → lodash` alias in `@wordpress/scripts` prevents tree-shaking. Verified identical behaviour in both v1.3.0 and latest v2.1.1 of the UI library, so upgrading does not resolve this.
 
 ### 4.2 Lazy-Load Vendor Modules — ✅ DONE
 
 - ✅ `NewfoldNotifications` converted to `lazy(() => import(...))` in both `src/app/index.js` and `src/app/components/app-nav/index.js`, wrapped in `<Suspense fallback={null}>`
 - ✅ Marketplace module automatically benefits from Phase 2 route-level splitting (Marketplace page is lazy-loaded)
 
-### 4.3 Audit `@heroicons/react` Usage — ⏳ PENDING
+### 4.3 Audit `@heroicons/react` Usage — ✅ DONE (no action needed)
 
-Currently importing from `@heroicons/react/24/outline` — verify webpack tree-shakes unused icons. If not, switch to direct path imports:
-```js
-import HomeIcon from '@heroicons/react/24/outline/HomeIcon';
-```
+Audited `@heroicons/react@2.2.0`. It ships proper ESM `exports` (with an `import` condition pointing to `esm/` files) and declares `sideEffects: false`, so webpack tree-shakes it correctly.
+
+**Verified empirically** against the production bundle:
+- Unused icon (`AcademicCapIcon`) SVG path data is **absent** from the bundle ✓
+- Used icon (`HomeIcon`) SVG path data is **present** in `index.js` ✓
+- Build stats show only ~4 heroicons modules (3.6 KB) in the main bundle, not the full icon set
+
+Conclusion: named imports from `@heroicons/react/24/outline` are already tree-shaken. No switch to direct path imports required.
 
 ### 4.4 Remove `react-use` Dependency — ✅ DONE
 
 - ✅ `react-use` removed from `package.json` dependencies
 - ✅ `useUpdateEffect` usage replaced (verify no remaining imports at build time)
 
-### 4.5 Evaluate `html-react-parser` Usage — ⏳ PENDING
+### 4.5 Evaluate `html-react-parser` Usage — ✅ DONE (dead dependency)
 
-Check if `html-react-parser` (~12KB) is actually used in the plugin source. If only used in vendor modules, ensure it's not duplicated in the main bundle.
+Audited `html-react-parser@^5.2.17`:
+- **Not imported** anywhere in `src/` or in any bundled `vendor/newfold-labs/*` module source
+- **Not present** in the production bundle (checked for `html-react-parser` / `htmlparser2` / `domhandler` signatures)
 
-### 4.6 Webpack `splitChunks` Optimisation — ⏳ PENDING
+Conclusion: it was a dead `package.json` dependency. The anticipated ~12 KB saving does **not** exist because it was never bundled in the first place. **Removed** via `npm uninstall html-react-parser` (dependency hygiene; zero bundle impact). Build re-verified clean after removal.
 
-Add explicit `splitChunks` config to separate vendor libraries:
+### 4.6 Webpack `splitChunks` Optimisation — ⏸️ DEFERRED
 
-```js
-optimization: {
-    splitChunks: {
-        cacheGroups: {
-            vendor: {
-                test: /[\\/]node_modules[\\/]/,
-                name: 'vendors',
-                chunks: 'all',
-            },
-        },
-    },
-},
-```
-
-This enables browser caching of vendor code separately from app code.
+Deferred: the versioned build folder (`build/2.3.4/`) already provides release-level cache-busting, and a separate vendor chunk adds `index.asset.php` dependency-management risk under `@wordpress/scripts` for no size reduction (caching benefit only). Revisit only if vendor churn between releases becomes a measured cache-invalidation problem.
 
 ---
 
@@ -256,9 +235,9 @@ This enables browser caching of vendor code separately from app code.
 - ✅ Removed hidden duplicate instance from `TopBarNav`
 - ✅ Remaining instances: `AppBody` (context: 'web-plugin') + `SideNav` (context: 'web-app-nav'), both lazy-loaded
 
-### 5.2 Fix `SubMenusManager` DOM Manipulation — ⏳ PENDING
+### 5.2 Fix `SubMenusManager` DOM Manipulation — ⏸️ DEFERRED
 
-`SideNavMenu` uses direct DOM manipulation (`document.querySelectorAll`, `classList`) in a `useEffect` that fires on every location change. Refactor to React state-driven approach or memoize to reduce unnecessary DOM reads.
+`SideNavMenu` uses direct DOM manipulation (`document.querySelectorAll`, `classList`) in a `useEffect` that fires on every location change. Deferred as low-priority: it only touches a handful of nav nodes and does not trigger React re-renders. Revisit if profiling shows it as a hotspot.
 
 ### 5.3 Debounce/Throttle Location-Based Effects — ⏳ PENDING (verify)
 
@@ -312,15 +291,17 @@ Document final results:
 
 ## Remaining Implementation Order
 
+All actionable implementation steps are complete. Remaining items are deferred (optional) or require manual browser-based capture.
+
 | Step | Task | Risk | Effort | Status |
 |------|------|------|--------|--------|
-| 1 | Rebuild + capture analyser/profiler baseline | None | Low | ⏳ |
-| 2 | Phase 4.1: Lodash per-function imports | Low | Low | ⏳ |
-| 3 | Phase 3.1–3.3: React.memo, useMemo, useCallback | Low | Medium | ⏳ |
-| 4 | Phase 4.6: splitChunks config | Low | Low | ⏳ |
-| 5 | Phase 4.3/4.5: heroicons + html-react-parser audit | Low | Low | ⏳ |
-| 6 | Phase 5.2: SubMenusManager refactor | Low | Low | ⏳ |
-| 7 | Phase 6: After measurement & documentation | None | Low | ⏳ |
+| 1 | Rebuild + capture analyser/profiler baseline | None | Low | 🔶 Build regenerated; analyser/profiler capture needs browser |
+| 2 | Phase 4.1: Lodash per-function imports | Low | Low | ✅ |
+| 3 | Phase 3.1–3.3: React.memo, useMemo, useCallback | Low | Medium | ✅ |
+| 4 | Phase 4.6: splitChunks config | Low | Low | ⏸️ Deferred |
+| 5 | Phase 4.3/4.5: heroicons + html-react-parser audit | Low | Low | ✅ |
+| 6 | Phase 5.2: SubMenusManager refactor | Low | Low | ⏸️ Deferred |
+| 7 | Phase 6: After measurement & documentation | None | Low | 🔶 Bundle sizes measured & documented; profiler/lighthouse need browser |
 
 ### Completed Steps
 
@@ -335,6 +316,10 @@ Document final results:
 | — | Phase 5.1: Duplicate notifications removal | ✅ |
 | — | Phase 5.4: ErrorBoundary FallbackComponent fix | ✅ |
 | — | Build tooling: analyzer scripts, sass warning suppression | ✅ |
+| — | Phase 3.1–3.3: React.memo / useMemo / useCallback (all components incl. StoreDetails, ComingSoonSection, NextSteps, WordPressIcon) | ✅ |
+| — | Phase 4.1: Lodash per-function imports / native JS | ✅ |
+| — | Phase 4.3: heroicons audit (confirmed tree-shaken) | ✅ |
+| — | Phase 4.5: html-react-parser audit (dead dependency — removed) | ✅ |
 
 ---
 
@@ -342,9 +327,9 @@ Document final results:
 
 | Risk | Mitigation |
 |------|-----------|
-| `ProvidePlugin` lodash path change breaks implicit imports | Run full lint + build + e2e test suite after change |
-| `React.memo` on `SideNavMenuItem` may not help since it uses `useLocation()` internally | Consider lifting location out and passing `isActive` as prop instead |
-| `splitChunks` vendor chunk may conflict with wp-scripts asset loading | Test that `index.asset.php` dependencies still resolve correctly |
+| `ProvidePlugin` lodash globals removed — any lingering implicit `_filter`/`_map` usage would break at build time | Resolved: full production build compiles clean; all usages replaced explicitly |
+| `React.memo` on `SideNavMenuItem` may not help since it used `useLocation()` internally | Resolved: location lifted out; `isHomeActive` now passed as a prop so memo can short-circuit |
+| `splitChunks` vendor chunk may conflict with wp-scripts asset loading | Deferred (not implemented), so no risk introduced |
 | Lazy chunks fail to load on cached pages with stale chunk hashes | Versioned build folder (`build/2.3.4/`) already mitigates this |
 
 ---
@@ -357,8 +342,10 @@ Document final results:
 - [x] Vendor notification module lazy-loaded
 - [x] Notification context stabilised (`useCallback` + `useMemo`)
 - [x] Boot status context split to reduce app-wide re-renders
-- [ ] Unnecessary re-renders reduced via `React.memo`, `useMemo`, `useCallback` (remaining components)
-- [ ] Lodash per-function imports or native JS replacements
-- [ ] Bundle size reduction measured and documented (before vs after)
+- [x] Unnecessary re-renders reduced via `React.memo`, `useMemo`, `useCallback` (all components)
+- [x] Lodash per-function imports or native JS replacements
+- [x] Bundle size measured and documented (before vs after — see Key Finding: net +24 KB due to UI-library lodash; wins are runtime)
+- [x] `@heroicons/react` audited — confirmed tree-shaken
+- [x] `html-react-parser` audited — confirmed dead dependency, removed from `package.json`
 - [ ] All existing e2e tests pass (`npm run test:e2e`)
 - [ ] No visual regressions in plugin admin UI
