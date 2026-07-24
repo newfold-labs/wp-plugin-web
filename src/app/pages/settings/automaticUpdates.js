@@ -1,6 +1,6 @@
 import AppStore from '../../data/store';
 import { webSettingsApiFetch } from '../../util/helpers';
-import { useUpdateEffect } from 'react-use';
+import { useUpdateEffect } from 'App/util/hooks';
 import { useState, useCallback } from '@wordpress/element';
 import { Alert, Container, ToggleField } from "@newfold/ui-component-library";
 import { useNotification } from 'App/components/notifications';

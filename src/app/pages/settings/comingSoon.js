@@ -4,7 +4,7 @@ import {
 	comingSoonAdminbarToggle,
 } from '../../util/helpers';
 import { useState } from '@wordpress/element';
-import { useUpdateEffect } from 'react-use';
+import { useUpdateEffect } from 'App/util/hooks';
 import { Alert, Container, ToggleField } from "@newfold/ui-component-library";
 import { useNotification } from 'App/components/notifications';
 

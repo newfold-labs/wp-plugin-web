@@ -13,7 +13,7 @@ Audit and optimise React components in `wp-plugin-web` for performance issues (u
 | Phase 1: Profiling & Baseline Capture | ✅ Build regenerated (Jul 24) |
 | Phase 2: Route-Level Code Splitting | ✅ Done |
 | Phase 3: Component Memoization | ✅ Done (React.memo, useMemo, useCallback applied — all components) |
-| Phase 4: Bundle Size Reduction | 🔶 Partial (lodash per-function, react-use reinstated for upcoming UI-library upgrade, notifications lazy; heroicons/html-react-parser audited — see findings) |
+| Phase 4: Bundle Size Reduction | 🔶 Partial (lodash per-function — kept as explicit dep, PR #588 UI-library bump tested and found to *increase* size, react-use confirmed unneeded and removed, notifications lazy; heroicons/html-react-parser audited — see findings) |
 | Phase 5: Additional Performance Fixes | 🔶 Partial (duplicate notifications removed; debounce/throttle verified as unnecessary; SubMenusManager refactor deliberately deferred) |
 | Phase 6: After Measurement & Documentation | ✅ Measured (see below) |
 
@@ -193,6 +193,8 @@ Removed the lodash globals (`_filter`, `_map`, `_isEmpty`, `_camelCase`) from `P
 
 **Outcome:** No bundle-size reduction (see Key Finding below) — `@newfold/ui-component-library` imports full CommonJS `lodash` internally (`import { noop } from "lodash"` etc., ~104 KB / 141 modules), and the `lodash-es → lodash` alias in `@wordpress/scripts` prevents tree-shaking. Verified identical behaviour in both v1.3.0 and latest v2.1.1 of the UI library, so upgrading does not resolve this.
 
+**Considered removing our own `lodash` entry from `package.json`** (since the UI library already forces the same package into the tree) and relying on it transitively. Checked with `npm ls lodash`: there's already only one physical copy installed (`lodash@4.18.1`, deduped across our own dependency, the UI library, and even `@wordpress/scripts`'s own tooling deps) — dropping our declaration would free **0 bytes**, since it's the same file either way. Kept the explicit dependency: relying on a transitive package we don't declare ourselves is a phantom-dependency risk (a future UI-library upgrade that drops or changes its lodash usage would silently break our `lodash/filter` imports with no signal from `npm install`), and there's no size upside to accepting that risk.
+
 ### 4.2 Lazy-Load Vendor Modules — ✅ DONE
 
 - ✅ `NewfoldNotifications` converted to `lazy(() => import(...))` in both `src/app/index.js` and `src/app/components/app-nav/index.js`, wrapped in `<Suspense fallback={null}>`
@@ -209,9 +211,13 @@ Audited `@heroicons/react@2.2.0`. It ships proper ESM `exports` (with an `import
 
 Conclusion: named imports from `@heroicons/react/24/outline` are already tree-shaken. No switch to direct path imports required.
 
-### 4.4 `react-use` Dependency — ⏪ REINSTATED
+### 4.4 `react-use` Dependency — ✅ REMOVED (again)
 
-Originally removed and replaced with a local `useUpdateEffect` hook (`src/app/util/hooks/useUpdateEffect.js`) for dependency hygiene. **Reinstated** at `^17.6.1` because `@newfold/ui-component-library`'s latest release requires `react-use` as a dependency — it will be pulled into the tree regardless once that library is upgraded, so maintaining a duplicate local hook implementation no longer saves anything. The local `useUpdateEffect` hook was deleted and all six settings files (`automaticUpdates.js`, `comingSoon.js`, `commentSettings.js`, `contentSettings.js`, `performanceFeatureSettings.js`, `wonderBlockSettings.js`) now import `useUpdateEffect` from `react-use` again. Build re-verified clean; `index.js` size unchanged (174 KB) since `react-use`'s `useUpdateEffect` was already the only thing pulled from that package.
+Originally removed and replaced with a local `useUpdateEffect` hook (`src/app/util/hooks/useUpdateEffect.js`) for dependency hygiene. Briefly reinstated mid-session on the assumption that `@newfold/ui-component-library`'s latest release requires `react-use` as a dependency.
+
+**That assumption didn't hold up.** Checked the actual published package on the npm registry (`npm view @newfold/ui-component-library@2.1.1 dependencies`, plus `npm pack` + file listing) — neither the currently-installed `1.3.0` nor the latest `2.1.1` (the version bumped to in [PR #588](https://github.com/newfold-labs/wp-plugin-web/pull/588)) declares `react-use` as a dependency, peer dependency, or uses it internally. With no forcing dependency behind it, `react-use` was removed again: the local `useUpdateEffect` hook was restored and all six settings files (`automaticUpdates.js`, `comingSoon.js`, `commentSettings.js`, `contentSettings.js`, `performanceFeatureSettings.js`, `wonderBlockSettings.js`) import it from `App/util/hooks` again.
+
+**Bundle-size impact either way: ~0 KB.** Measured before/after with `react-use` installed — `150.js` (the Settings chunk where `useUpdateEffect` is used) was byte-for-byte identical (17,984 bytes) with and without the package; `index.js` differed by 25 bytes (build-artifact noise). `react-use`'s `useUpdateEffect` was already lazy-chunked and tree-shaken down to nothing, so this change is dependency hygiene, not a size win. If a future `@newfold/ui-component-library` upgrade genuinely adds a `react-use` dependency, re-add it then.
 
 ### 4.5 Evaluate `html-react-parser` Usage — ✅ DONE (dead dependency)
 
@@ -305,7 +311,9 @@ All actionable implementation steps are complete. Remaining items are deferred (
 | 7 | Phase 6: After measurement & documentation | None | Low | 🔶 Bundle sizes measured & documented; profiler/lighthouse need browser |
 | 8 | Phase 3.2: `TopBarNav` nav-links `useMemo` | Low | Low | ✅ |
 | 9 | Phase 3.3: `AutomaticUpdates.toggleAutoUpdatesAll` `useCallback` | Low | Low | ✅ |
-| 10 | Phase 4.4: Reinstate `react-use` for upcoming UI-library upgrade | Low | Low | ✅ |
+| 10 | Phase 4.4: `react-use` — reinstated, then confirmed unneeded via registry check and removed again | Low | Low | ✅ |
+| 12 | Evaluate merging PR #588 (`@newfold/ui-component-library` 1.3.0 → 2.1.1) for bundle size | Low | Low | ✅ Tested — regresses size (+25 KB `index.js`, +71 KB total from `@headlessui/react` v2 bump); do not merge for this reason |
+| 13 | Evaluate dropping our explicit `lodash` dependency in favor of the UI library's transitive one | Low | Low | ✅ Tested — 0 KB saving (already deduped to one copy); kept explicit to avoid phantom-dependency risk |
 | 11 | Phase 5.3: Debounce/throttle location effects | Low | Low | ✅ Verified unnecessary (see 5.3) |
 
 ### Completed Steps
@@ -317,7 +325,9 @@ All actionable implementation steps are complete. Remaining items are deferred (
 | — | Phase 3.4: NotificationFeed context stabilisation | ✅ |
 | — | Phase 3.4+: AppBootContext split from AppStore | ✅ |
 | — | Phase 4.2: Notifications module lazy-loading | ✅ |
-| — | Phase 4.4: `react-use` reinstated (`^17.6.1`) — required by upcoming `@newfold/ui-component-library` upgrade; local `useUpdateEffect` hook removed in favor of it | ✅ |
+| — | Phase 4.4: `react-use` removed — registry check showed no published version of `@newfold/ui-component-library` (1.3.0 or 2.1.1) actually depends on it; local `useUpdateEffect` hook restored | ✅ |
+| — | PR #588 (UI-library 1.3.0 → 2.1.1) bundle-size tested: regresses `index.js` by +25 KB and total JS by +71 KB (new `@headlessui/react` v2 chunk); lodash dependency unchanged between versions — recommend not merging for size reasons | ✅ |
+| — | Explicit `lodash` dependency evaluated for removal in favor of the UI library's transitive copy — 0 byte saving confirmed (already a single deduped copy), kept explicit to avoid phantom-dependency risk | ✅ |
 | — | Phase 5.1: Duplicate notifications removal | ✅ |
 | — | Phase 5.4: ErrorBoundary FallbackComponent fix | ✅ |
 | — | Build tooling: analyzer scripts, sass warning suppression | ✅ |
