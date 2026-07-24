@@ -13,8 +13,8 @@ Audit and optimise React components in `wp-plugin-web` for performance issues (u
 | Phase 1: Profiling & Baseline Capture | ✅ Build regenerated (Jul 24) |
 | Phase 2: Route-Level Code Splitting | ✅ Done |
 | Phase 3: Component Memoization | ✅ Done (React.memo, useMemo, useCallback applied — all components) |
-| Phase 4: Bundle Size Reduction | 🔶 Partial (lodash per-function, react-use removed, notifications lazy; heroicons/html-react-parser audited — see findings) |
-| Phase 5: Additional Performance Fixes | 🔶 Partial (duplicate notifications removed; SubMenusManager refactor pending) |
+| Phase 4: Bundle Size Reduction | 🔶 Partial (lodash per-function, react-use reinstated for upcoming UI-library upgrade, notifications lazy; heroicons/html-react-parser audited — see findings) |
+| Phase 5: Additional Performance Fixes | 🔶 Partial (duplicate notifications removed; debounce/throttle verified as unnecessary; SubMenusManager refactor deliberately deferred) |
 | Phase 6: After Measurement & Documentation | ✅ Measured (see below) |
 
 ---
@@ -154,7 +154,7 @@ All components wrapped in `React.memo`:
 | `MarketplacePage` — `moduleConstants` | Wrap in `useMemo(() => {...}, [])` |
 | `MarketplacePage` — `moduleMethods` | Wrap in `useMemo(() => {...}, [])` |
 | `AppBody` — `classNames(...)` call | Wrap in `useMemo` keyed on `location.pathname` |
-| `TopBarNav` — route link rendering | Memoize the nav links array |
+| `TopBarNav` — route link rendering | ✅ `navLinks` extracted into `useMemo(() => topRoutes.map(...), [location.pathname])`, verified in browser (nav still highlights active route, no console errors) |
 
 ### 3.3 Add `useCallback` for Event Handlers — ✅ DONE
 
@@ -162,7 +162,7 @@ All components wrapped in `React.memo`:
 |----------|-----|
 | `MobileNav` / `TopBarNav` — `setIsOpen(true/false)` | Wrap in `useCallback` |
 | `SideNavMenu` — `SubMenusManager` | Move outside component or wrap in `useCallback` |
-| `AutomaticUpdates` — `toggleAutoUpdatesAll` | Wrap in `useCallback` |
+| `AutomaticUpdates` — `toggleAutoUpdatesAll` | ✅ Wrapped in `useCallback([autoUpdatesAll, setError])`, verified in browser (toggle on/off round-trips state correctly, no console errors) |
 
 ### 3.4 Stabilize Context Values — ✅ DONE
 
@@ -209,10 +209,9 @@ Audited `@heroicons/react@2.2.0`. It ships proper ESM `exports` (with an `import
 
 Conclusion: named imports from `@heroicons/react/24/outline` are already tree-shaken. No switch to direct path imports required.
 
-### 4.4 Remove `react-use` Dependency — ✅ DONE
+### 4.4 `react-use` Dependency — ⏪ REINSTATED
 
-- ✅ `react-use` removed from `package.json` dependencies
-- ✅ `useUpdateEffect` usage replaced (verify no remaining imports at build time)
+Originally removed and replaced with a local `useUpdateEffect` hook (`src/app/util/hooks/useUpdateEffect.js`) for dependency hygiene. **Reinstated** at `^17.6.1` because `@newfold/ui-component-library`'s latest release requires `react-use` as a dependency — it will be pulled into the tree regardless once that library is upgraded, so maintaining a duplicate local hook implementation no longer saves anything. The local `useUpdateEffect` hook was deleted and all six settings files (`automaticUpdates.js`, `comingSoon.js`, `commentSettings.js`, `contentSettings.js`, `performanceFeatureSettings.js`, `wonderBlockSettings.js`) now import `useUpdateEffect` from `react-use` again. Build re-verified clean; `index.js` size unchanged (174 KB) since `react-use`'s `useUpdateEffect` was already the only thing pulled from that package.
 
 ### 4.5 Evaluate `html-react-parser` Usage — ✅ DONE (dead dependency)
 
@@ -239,9 +238,9 @@ Deferred: the versioned build folder (`build/2.3.4/`) already provides release-l
 
 `SideNavMenu` uses direct DOM manipulation (`document.querySelectorAll`, `classList`) in a `useEffect` that fires on every location change. Deferred as low-priority: it only touches a handful of nav nodes and does not trigger React re-renders. Revisit if profiling shows it as a hotspot.
 
-### 5.3 Debounce/Throttle Location-Based Effects — ⏳ PENDING (verify)
+### 5.3 Debounce/Throttle Location-Based Effects — ✅ VERIFIED (no change needed)
 
-`TopBarNav` and `MobileNav` both have `useEffect` that calls `setIsOpen(false)` on every location change. Since location changes are discrete navigation events, this is acceptable but should be verified not to trigger cascading re-renders.
+`TopBarNav` and `MobileNav` both have `useEffect` that calls `setIsOpen(false)` on every location change. Verified this is a no-op in the common case: React bails out of re-rendering when a state setter is called with a value that's `Object.is`-equal to the current state, so `setIsOpen(false)` while already `false` (i.e. every navigation that didn't originate from opening the mobile nav) doesn't trigger a re-render. No debounce/throttle needed — adding one would be unnecessary complexity for a handler that's already cheap.
 
 ### 5.4 ErrorBoundary Fix — ✅ DONE (bonus)
 
@@ -302,6 +301,10 @@ All actionable implementation steps are complete. Remaining items are deferred (
 | 5 | Phase 4.3/4.5: heroicons + html-react-parser audit | Low | Low | ✅ |
 | 6 | Phase 5.2: SubMenusManager refactor | Low | Low | ⏸️ Deferred |
 | 7 | Phase 6: After measurement & documentation | None | Low | 🔶 Bundle sizes measured & documented; profiler/lighthouse need browser |
+| 8 | Phase 3.2: `TopBarNav` nav-links `useMemo` | Low | Low | ✅ |
+| 9 | Phase 3.3: `AutomaticUpdates.toggleAutoUpdatesAll` `useCallback` | Low | Low | ✅ |
+| 10 | Phase 4.4: Reinstate `react-use` for upcoming UI-library upgrade | Low | Low | ✅ |
+| 11 | Phase 5.3: Debounce/throttle location effects | Low | Low | ✅ Verified unnecessary (see 5.3) |
 
 ### Completed Steps
 
@@ -312,14 +315,17 @@ All actionable implementation steps are complete. Remaining items are deferred (
 | — | Phase 3.4: NotificationFeed context stabilisation | ✅ |
 | — | Phase 3.4+: AppBootContext split from AppStore | ✅ |
 | — | Phase 4.2: Notifications module lazy-loading | ✅ |
-| — | Phase 4.4: `react-use` removal | ✅ |
+| — | Phase 4.4: `react-use` reinstated (`^17.6.1`) — required by upcoming `@newfold/ui-component-library` upgrade; local `useUpdateEffect` hook removed in favor of it | ✅ |
 | — | Phase 5.1: Duplicate notifications removal | ✅ |
 | — | Phase 5.4: ErrorBoundary FallbackComponent fix | ✅ |
 | — | Build tooling: analyzer scripts, sass warning suppression | ✅ |
 | — | Phase 3.1–3.3: React.memo / useMemo / useCallback (all components incl. StoreDetails, ComingSoonSection, NextSteps, WordPressIcon) | ✅ |
+| — | Phase 3.2: `TopBarNav` nav-links `useMemo` (previously documented but not implemented — fixed and verified in browser) | ✅ |
+| — | Phase 3.3: `AutomaticUpdates.toggleAutoUpdatesAll` `useCallback` (previously documented but not implemented — fixed and verified in browser) | ✅ |
 | — | Phase 4.1: Lodash per-function imports / native JS | ✅ |
 | — | Phase 4.3: heroicons audit (confirmed tree-shaken) | ✅ |
 | — | Phase 4.5: html-react-parser audit (dead dependency — removed) | ✅ |
+| — | Phase 5.3: Debounce/throttle location effects — verified `setIsOpen(false)` is a React state-update no-op, no change needed | ✅ |
 
 ---
 
@@ -347,5 +353,5 @@ All actionable implementation steps are complete. Remaining items are deferred (
 - [x] Bundle size measured and documented (before vs after — see Key Finding: net +24 KB due to UI-library lodash; wins are runtime)
 - [x] `@heroicons/react` audited — confirmed tree-shaken
 - [x] `html-react-parser` audited — confirmed dead dependency, removed from `package.json`
-- [ ] All existing e2e tests pass (`npm run test:e2e`)
-- [ ] No visual regressions in plugin admin UI
+- [ ] All existing e2e tests pass (`npm run test:e2e`) — not yet run against this branch
+- [x] No visual regressions in plugin admin UI — spot-checked in browser (Home, Settings incl. Automatic Updates toggle, Marketplace); full admin UI walkthrough / Lighthouse/profiler capture still pending (see Phase 1/6)

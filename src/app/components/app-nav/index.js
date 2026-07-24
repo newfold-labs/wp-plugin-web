@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from '@wordpress/element';
+import { memo, useCallback, useEffect, useMemo, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { useViewportMatch } from '@wordpress/compose';
 import { addQueryArgs, cleanForSlug } from '@wordpress/url';
@@ -247,6 +247,28 @@ export const TopBarNav = () => {
 	const openNav = useCallback( () => setIsOpen( true ), [] );
 	const closeNav = useCallback( () => setIsOpen( false ), [] );
 
+	const navLinks = useMemo( () => topRoutes.map( ( page ) => {
+		// Check if this is the home route and we're at the root path
+		const isHomeActive = page.name === '/home' && location.pathname === '/';
+
+		return (
+			true === page.condition && (
+				<NavLink
+					key={page.name}
+					onClick={(page.action && page.action instanceof Function) ? page.action : null}
+					to={page.name}
+					className={({ isActive }) => {
+						const active = isActive || isHomeActive;
+						return `wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 nfd-transition-colors ${active ? 'active nfd-bg-blue-100' : ''}`;
+					}}
+				>
+					{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
+					{page.title}
+				</NavLink>
+			)
+		);
+	} ), [ location.pathname ] );
+
 	return (
 		<header className="wppw-app-topbar nfd-border-b nfd-border-line nfd-bg-white nfd-shadow-sm">
 			<div className="nfd-flex nfd-justify-between nfd-items-center nfd-px-4 nfd-min-h-16">
@@ -254,33 +276,11 @@ export const TopBarNav = () => {
 					<div className="nfd-shrink-0">
 						<Logo />
 					</div>
-					
+
 					{/* Desktop Navigation - Horizontal Menu */}
 					{isLargeViewport && (
 						<nav className="min-[783px]:nfd-flex nfd-items-center nfd-gap-1">
-							{topRoutes.map(
-								(page) => {
-									// Check if this is the home route and we're at the root path
-									const isHomeActive = page.name === '/home' && location.pathname === '/';
-									
-									return (
-										true === page.condition && (
-											<NavLink
-												key={page.name}
-												onClick={(page.action && page.action instanceof Function) ? page.action : null}
-												to={page.name}
-												className={({ isActive }) => {
-													const active = isActive || isHomeActive;
-													return `wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 nfd-transition-colors ${active ? 'active nfd-bg-blue-100' : ''}`;
-												}}
-											>
-												{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
-												{page.title}
-											</NavLink>
-										)
-									);
-								}
-							)}
+							{navLinks}
 						</nav>
 					)}
 				</div>

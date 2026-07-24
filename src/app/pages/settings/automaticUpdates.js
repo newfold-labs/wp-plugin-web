@@ -1,7 +1,7 @@
 import AppStore from '../../data/store';
 import { webSettingsApiFetch } from '../../util/helpers';
-import { useUpdateEffect } from 'App/util/hooks';
-import { useState } from '@wordpress/element';
+import { useUpdateEffect } from 'react-use';
+import { useState, useCallback } from '@wordpress/element';
 import { Alert, Container, ToggleField } from "@newfold/ui-component-library";
 import { useNotification } from 'App/components/notifications';
 
@@ -26,24 +26,24 @@ const AutomaticUpdatesAll = ({ setError, notify }) => {
 			: __('Custom auto-update settings.', 'wp-plugin-web');
 	};
 
-	const toggleAutoUpdatesAll = () => {
+	const toggleAutoUpdatesAll = useCallback( () => {
 		if ( autoUpdatesAll ) { // is unchecking
 			// just uncheck this one
 			setAutoUpdatesAll(!autoUpdatesAll);
 		} else { // is checking
 			webSettingsApiFetch(
-				{ 
+				{
 					autoUpdatesMajorCore: true,
 					autoUpdatesPlugins: true,
 					autoUpdatesThemes: true
-				}, 
-				setError, 
+				},
+				setError,
 				(response) => {
 					setAutoUpdatesAll(!autoUpdatesAll);
 				}
 			);
 		}
-	};
+	}, [ autoUpdatesAll, setError ] );
 
 	const notifySuccess = () => {
 		notify.push("everything-autoupdate-notice", {
