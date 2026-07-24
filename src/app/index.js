@@ -4,7 +4,8 @@ import 'App/tailwind.pcss';
 import { useEffect } from 'react';
 import { useLocation, HashRouter as Router } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
-import { kebabCase, filter } from 'lodash';
+import kebabCase from 'lodash/kebabCase';
+import filter from 'lodash/filter';
 import { Root } from "@newfold/ui-component-library";
 import { NewfoldRuntime } from '@newfold/wp-module-runtime';
 import { SnackbarList, Spinner } from '@wordpress/components';
@@ -26,7 +27,7 @@ const NewfoldNotifications = lazy( () =>
 );
 // to pass to notifications module
 import apiFetch from '@wordpress/api-fetch';
-import { lazy, Suspense, useState } from '@wordpress/element';
+import { lazy, Suspense, useMemo, useState } from '@wordpress/element';
 import { addQueryArgs } from '@wordpress/url';
 
 const Notices = () => {
@@ -54,31 +55,37 @@ const AppBody = ( props ) => {
 
 	useHandlePageLoad();
 
+	const mainClassName = useMemo( () => classNames(
+		'wpadmin-brand-web',
+		`wppw-wp-${ NewfoldRuntime.wpVersion }`,
+		`wppw-page-${ kebabCase( location.pathname ) }`,
+		props.className,
+		'nfd-w-full'
+	), [ location.pathname, props.className ] );
+
+	const notificationConstants = useMemo( () => ( {
+		context: 'web-plugin',
+		page: hashedPath,
+	} ), [ hashedPath ] );
+
+	const notificationMethods = useMemo( () => ( {
+		apiFetch,
+		addQueryArgs,
+		filter,
+		useState,
+		useEffect,
+	} ), [] );
+
 	return (
 		<main
 			id="wppw-app-rendered"
-			className={ classNames(
-				'wpadmin-brand-web',
-				`wppw-wp-${ NewfoldRuntime.wpVersion }`,
-				`wppw-page-${ kebabCase( location.pathname ) }`,
-				props.className,
-				'nfd-w-full'
-			) }
+			className={ mainClassName }
 		>
 
 			<Suspense fallback={ null }>
 				<NewfoldNotifications
-					constants={{
-						context: 'web-plugin',
-						page: hashedPath,
-					}}
-					methods={{
-						apiFetch,
-						addQueryArgs,
-						filter,
-						useState,
-						useEffect
-					}}
+					constants={ notificationConstants }
+					methods={ notificationMethods }
 				/>
 			</Suspense>
 			<div className="wppw-app-body">

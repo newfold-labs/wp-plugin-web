@@ -1,11 +1,11 @@
+import { memo } from '@wordpress/element';
 import { Title } from '@newfold/ui-component-library';
 import { ReactComponent as Brand } from '../../../../assets/svg/ns-logo.svg';
-import { delay } from 'lodash';
 
 const Mark = () => {
 	const defocus = () => {
 		const button = document.querySelector( '.logo-mark' );
-		delay( () => {
+		setTimeout( () => {
 			if ( null !== button ) {
 				button.blur();
 			}
@@ -23,7 +23,7 @@ const Mark = () => {
 	);
 };
 
-const Logo = () => {
+const Logo = memo( () => {
 	return (
 		<div className="wppw-logo-wrap" style={ { paddingTop: '12px', paddingBottom: '12px' } }>
 			<Mark />
@@ -32,6 +32,6 @@ const Logo = () => {
 			</Title>
 		</div>
 	);
-};
+} );
 
 export default Logo;

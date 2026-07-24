@@ -1,8 +1,8 @@
-import { useEffect, useState } from '@wordpress/element';
+import { memo, useCallback, useEffect, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { useViewportMatch } from '@wordpress/compose';
 import { addQueryArgs, cleanForSlug } from '@wordpress/url';
-import { filter } from 'lodash';
+import filter from 'lodash/filter';
 import { Modal, SidebarNavigation, Button } from "@newfold/ui-component-library"
 import { NavLink, useLocation } from 'react-router-dom';
 import { Bars3Icon } from "@heroicons/react/24/outline";
@@ -31,6 +31,7 @@ export const SideNavHeader = () => {
 export const SideNavMenu = () => {
 	const location = useLocation();
 	const marketplaceSubnavRoutes = useMarketplaceSubnavRoutes();
+	const isRootPath = location.pathname === '/';
 
 	const primaryMenu = () => {
 		return (
@@ -46,6 +47,7 @@ export const SideNavMenu = () => {
 								path={page.name}
 								action={page.action}
 								subItems={page.hasSubRoutes ? marketplaceSubnavRoutes : page.subRoutes}
+								isHomeActive={page.name === '/home' && isRootPath}
 							/>
 						)
 				))}
@@ -104,11 +106,7 @@ export const SideNavMenu = () => {
 	);
 }
 
-export const SideNavMenuItem = ({ label, name, icon: Icon = null, path, action, subItems }) => {
-	const location = useLocation();
-	// Check if this is the home route and we're at the root path
-	const isHomeActive = path === '/home' && location.pathname === '/';
-	
+export const SideNavMenuItem = memo( ({ label, name, icon: Icon = null, path, action, subItems, isHomeActive = false }) => {
 	return (
 		<li className="nfd-mb-0">
 			<NavLink
@@ -140,9 +138,9 @@ export const SideNavMenuItem = ({ label, name, icon: Icon = null, path, action, 
 			}
 		</li>
 	);
-}
+} );
 
-export const SideNavMenuSubItem = ({ label, name, path, action }) => {
+export const SideNavMenuSubItem = memo( ({ label, name, path, action }) => {
 	return (
 		<li className="nfd-m-0 nfd-pb-1">
 			<NavLink
@@ -154,7 +152,7 @@ export const SideNavMenuSubItem = ({ label, name, path, action }) => {
 			</NavLink>
 		</li>
 	);
-}
+} );
 
 export const SideNav = () => {
 	const  location = useLocation();
@@ -195,6 +193,9 @@ export const MobileNav = () => {
 		setIsOpen(false);
 	}, [location]);
 
+	const openNav = useCallback( () => setIsOpen( true ), [] );
+	const closeNav = useCallback( () => setIsOpen( false ), [] );
+
 	return (
 		<header className="nfd-sticky nfd-z-30 nfd-top-0 min-[600px]:nfd-top-[46px] nfd-border-b nfd-border-line">
 			<div className="nfd-flex nfd-justify-between nfd-items-center nfd-bg-white">
@@ -206,7 +207,7 @@ export const MobileNav = () => {
 					id="nfd-app-mobile-nav"
 					role="button"
 					className="nfd-h-16 nfd-px-4 nfd-text-body nfd-flex nfd-items-center focus:nfd-outline-none focus:nfd-ring-2 focus:nfd-ring-inset focus:nfd-ring-primary"
-					onClick={() => { setIsOpen(true) }}
+					onClick={ openNav }
 				>
 					<span className="nfd-sr-only">Open Navingation Menu</span>
 					<Bars3Icon className="nfd-w-6 nfd-h-6" />
@@ -214,7 +215,7 @@ export const MobileNav = () => {
 
 				<Modal
 					isOpen={isOpen}
-					onClose={() => setIsOpen(false)}
+					onClose={ closeNav }
 					className="wppw-app-sidenav-mobile nfd-z-40"
 					initialFocus
 				>
@@ -242,6 +243,9 @@ export const TopBarNav = () => {
 	useEffect(() => {
 		setIsOpen(false);
 	}, [location]);
+
+	const openNav = useCallback( () => setIsOpen( true ), [] );
+	const closeNav = useCallback( () => setIsOpen( false ), [] );
 
 	return (
 		<header className="wppw-app-topbar nfd-border-b nfd-border-line nfd-bg-white nfd-shadow-sm">
@@ -312,7 +316,7 @@ export const TopBarNav = () => {
 						id="nfd-app-mobile-nav"
 						role="button"
 						className="nfd-h-16 nfd-px-4 nfd-text-body nfd-flex nfd-items-center focus:nfd-outline-none focus:nfd-ring-2 focus:nfd-ring-inset focus:nfd-ring-primary min-[783px]:nfd-hidden"
-						onClick={() => { setIsOpen(true) }}
+						onClick={ openNav }
 					>
 						<span className="nfd-sr-only">Open Navigation Menu</span>
 						<Bars3Icon className="nfd-w-6 nfd-h-6" />
@@ -322,7 +326,7 @@ export const TopBarNav = () => {
 				{/* Mobile Navigation Modal */}
 				<Modal
 					isOpen={isOpen}
-					onClose={() => setIsOpen(false)}
+					onClose={ closeNav }
 					className="wppw-app-sidenav-mobile nfd-z-40"
 					initialFocus
 				>

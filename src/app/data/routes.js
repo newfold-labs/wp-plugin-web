@@ -150,11 +150,11 @@ export const AppRoutes = () => {
 	);
 };
 
-export const topRoutes = _filter( routes, ( route ) =>
+export const topRoutes = routes.filter( ( route ) =>
 	topRoutePaths.includes( route.name )
 );
 
-export const utilityRoutes = _filter( routes, ( route ) =>
+export const utilityRoutes = routes.filter( ( route ) =>
 	utilityRoutePaths.includes( route.name )
 );
 

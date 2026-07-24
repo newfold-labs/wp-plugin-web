@@ -1,6 +1,7 @@
 import { createContext, useMemo } from '@wordpress/element';
 import { NewfoldRuntime } from '@newfold/wp-module-runtime';
 import apiFetch from '@wordpress/api-fetch';
+import camelCase from 'lodash/camelCase';
 
 const DEFAULT = {
 	store: {},
@@ -29,7 +30,7 @@ export const webApiFetchSettings = async ( options = {} ) => {
 export const reformStore = ( store, endpoint, response ) => {
 	return {
 		...store,
-		[ _camelCase( endpoint ) ]: response,
+		[ camelCase( endpoint ) ]: response,
 	};
 };
 
