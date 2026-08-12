@@ -3,12 +3,12 @@ import {
 	webSettingsApiFetch,
 	comingSoonAdminbarToggle,
 } from '../../util/helpers';
-import { useState } from '@wordpress/element';
-import { useUpdateEffect } from 'react-use';
+import { memo, useState } from '@wordpress/element';
+import { useUpdateEffect } from 'App/util/hooks';
 import { Alert, Container, ToggleField } from "@newfold/ui-component-library";
 import { useNotification } from 'App/components/notifications';
 
-const ComingSoon = () => {
+const ComingSoon = memo( () => {
 	const { store, setStore } = useContext( AppStore );
 	const [ comingSoon, setComingSoon ] = useState( store.comingSoon );
 	const [ isError, setError ] = useState( false );
@@ -133,6 +133,6 @@ const ComingSoon = () => {
 			</div>
 		</Container.SettingsField>
 	);
-}
+} );
 
 export default ComingSoon;

@@ -1,7 +1,7 @@
 import AppStore from '../../data/store';
 import { webSettingsApiFetch } from '../../util/helpers';
-import { useUpdateEffect } from 'react-use';
-import { useState } from '@wordpress/element';
+import { useUpdateEffect } from 'App/util/hooks';
+import { memo, useState } from '@wordpress/element';
 import { Alert, Container, SelectField, ToggleField } from "@newfold/ui-component-library";
 import { useNotification } from 'App/components/notifications';
 
@@ -221,7 +221,7 @@ const CommentsPerPage = ({ setError, notify }) => {
 	);
 }
 
-const CommentSettings = () => {
+const CommentSettings = memo( () => {
 	const [isError, setError] = useState(false);
 
 	let notify = useNotification();
@@ -242,6 +242,6 @@ const CommentSettings = () => {
 			</div>
 		</Container.SettingsField >
 	);
-};
+} );
 
 export default CommentSettings;

@@ -1,17 +1,24 @@
-import { useEffect, useState } from '@wordpress/element';
+import { memo, useCallback, useEffect, useMemo, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { useViewportMatch } from '@wordpress/compose';
 import { addQueryArgs, cleanForSlug } from '@wordpress/url';
-import { filter } from 'lodash';
+import filter from 'lodash/filter';
 import { Modal, SidebarNavigation, Button } from "@newfold/ui-component-library"
 import { NavLink, useLocation } from 'react-router-dom';
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { topRoutes, utilityRoutes } from 'App/data/routes';
+import { topRoutes, utilityRoutes, useMarketplaceSubnavRoutes } from 'App/data/routes';
 import Logo from "./logo";
 import { NewfoldRuntime } from '@newfold/wp-module-runtime';
 import { WordPressIcon } from "../icons";
 import { ReactComponent as NSIcon } from '../../../../assets/svg/ns-icon-image.svg';
-import { default as NewfoldNotifications } from '@modules/wp-module-notifications/assets/js/components/notifications/';
+import { lazy, Suspense } from '@wordpress/element';
+
+// Loaded on demand so the notifications module isn't part of the main bundle.
+const NewfoldNotifications = lazy( () =>
+	import(
+		'@modules/wp-module-notifications/assets/js/components/notifications/'
+	)
+);
 
 export const SideNavHeader = () => {
 	return (
@@ -23,6 +30,8 @@ export const SideNavHeader = () => {
 
 export const SideNavMenu = () => {
 	const location = useLocation();
+	const marketplaceSubnavRoutes = useMarketplaceSubnavRoutes();
+	const isRootPath = location.pathname === '/';
 
 	const primaryMenu = () => {
 		return (
@@ -37,7 +46,8 @@ export const SideNavMenu = () => {
 								icon={page.Icon}
 								path={page.name}
 								action={page.action}
-								subItems={page.subRoutes}
+								subItems={page.hasSubRoutes ? marketplaceSubnavRoutes : page.subRoutes}
+								isHomeActive={page.name === '/home' && isRootPath}
 							/>
 						)
 				))}
@@ -96,11 +106,7 @@ export const SideNavMenu = () => {
 	);
 }
 
-export const SideNavMenuItem = ({ label, name, icon: Icon = null, path, action, subItems }) => {
-	const location = useLocation();
-	// Check if this is the home route and we're at the root path
-	const isHomeActive = path === '/home' && location.pathname === '/';
-	
+export const SideNavMenuItem = memo( ({ label, name, icon: Icon = null, path, action, subItems, isHomeActive = false }) => {
 	return (
 		<li className="nfd-mb-0">
 			<NavLink
@@ -132,9 +138,9 @@ export const SideNavMenuItem = ({ label, name, icon: Icon = null, path, action, 
 			}
 		</li>
 	);
-}
+} );
 
-export const SideNavMenuSubItem = ({ label, name, path, action }) => {
+export const SideNavMenuSubItem = memo( ({ label, name, path, action }) => {
 	return (
 		<li className="nfd-m-0 nfd-pb-1">
 			<NavLink
@@ -146,7 +152,7 @@ export const SideNavMenuSubItem = ({ label, name, path, action }) => {
 			</NavLink>
 		</li>
 	);
-}
+} );
 
 export const SideNav = () => {
 	const  location = useLocation();
@@ -159,19 +165,21 @@ export const SideNav = () => {
 					<SideNavMenu />
 				</SidebarNavigation.Sidebar>
 			</SidebarNavigation>
-			<NewfoldNotifications
-				constants={ {
-					context: 'web-app-nav',
-					page: hashedPath,
-				} }
-				methods={ {
-					apiFetch,
-					addQueryArgs,
-					filter,
-					useState,
-					useEffect,
-				} }
-			/>
+			<Suspense fallback={ null }>
+				<NewfoldNotifications
+					constants={ {
+						context: 'web-app-nav',
+						page: hashedPath,
+					} }
+					methods={ {
+						apiFetch,
+						addQueryArgs,
+						filter,
+						useState,
+						useEffect,
+					} }
+				/>
+			</Suspense>
 		</aside>
 	);
 };
@@ -185,6 +193,9 @@ export const MobileNav = () => {
 		setIsOpen(false);
 	}, [location]);
 
+	const openNav = useCallback( () => setIsOpen( true ), [] );
+	const closeNav = useCallback( () => setIsOpen( false ), [] );
+
 	return (
 		<header className="nfd-sticky nfd-z-30 nfd-top-0 min-[600px]:nfd-top-[46px] nfd-border-b nfd-border-line">
 			<div className="nfd-flex nfd-justify-between nfd-items-center nfd-bg-white">
@@ -196,7 +207,7 @@ export const MobileNav = () => {
 					id="nfd-app-mobile-nav"
 					role="button"
 					className="nfd-h-16 nfd-px-4 nfd-text-body nfd-flex nfd-items-center focus:nfd-outline-none focus:nfd-ring-2 focus:nfd-ring-inset focus:nfd-ring-primary"
-					onClick={() => { setIsOpen(true) }}
+					onClick={ openNav }
 				>
 					<span className="nfd-sr-only">Open Navingation Menu</span>
 					<Bars3Icon className="nfd-w-6 nfd-h-6" />
@@ -204,7 +215,7 @@ export const MobileNav = () => {
 
 				<Modal
 					isOpen={isOpen}
-					onClose={() => setIsOpen(false)}
+					onClose={ closeNav }
 					className="wppw-app-sidenav-mobile nfd-z-40"
 					initialFocus
 				>
@@ -224,7 +235,6 @@ export const TopBarNav = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const isLargeViewport = useViewportMatch('medium');
 	let location = useLocation();
-	const hashedPath = '#' + location.pathname;
 	const { url } = NewfoldRuntime.siteDetails;
 	const isEcommerce = NewfoldRuntime.hasCapability("isEcommerce");
 	const isStore = window.location.href?.includes("store");
@@ -234,6 +244,31 @@ export const TopBarNav = () => {
 		setIsOpen(false);
 	}, [location]);
 
+	const openNav = useCallback( () => setIsOpen( true ), [] );
+	const closeNav = useCallback( () => setIsOpen( false ), [] );
+
+	const navLinks = useMemo( () => topRoutes.map( ( page ) => {
+		// Check if this is the home route and we're at the root path
+		const isHomeActive = page.name === '/home' && location.pathname === '/';
+
+		return (
+			true === page.condition && (
+				<NavLink
+					key={page.name}
+					onClick={(page.action && page.action instanceof Function) ? page.action : null}
+					to={page.name}
+					className={({ isActive }) => {
+						const active = isActive || isHomeActive;
+						return `wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 nfd-transition-colors ${active ? 'active nfd-bg-blue-100' : ''}`;
+					}}
+				>
+					{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
+					{page.title}
+				</NavLink>
+			)
+		);
+	} ), [ location.pathname ] );
+
 	return (
 		<header className="wppw-app-topbar nfd-border-b nfd-border-line nfd-bg-white nfd-shadow-sm">
 			<div className="nfd-flex nfd-justify-between nfd-items-center nfd-px-4 nfd-min-h-16">
@@ -241,33 +276,11 @@ export const TopBarNav = () => {
 					<div className="nfd-shrink-0">
 						<Logo />
 					</div>
-					
+
 					{/* Desktop Navigation - Horizontal Menu */}
 					{isLargeViewport && (
 						<nav className="min-[783px]:nfd-flex nfd-items-center nfd-gap-1">
-							{topRoutes.map(
-								(page) => {
-									// Check if this is the home route and we're at the root path
-									const isHomeActive = page.name === '/home' && location.pathname === '/';
-									
-									return (
-										true === page.condition && (
-											<NavLink
-												key={page.name}
-												onClick={(page.action && page.action instanceof Function) ? page.action : null}
-												to={page.name}
-												className={({ isActive }) => {
-													const active = isActive || isHomeActive;
-													return `wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 nfd-transition-colors ${active ? 'active nfd-bg-blue-100' : ''}`;
-												}}
-											>
-												{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
-												{page.title}
-											</NavLink>
-										)
-									);
-								}
-							)}
+							{navLinks}
 						</nav>
 					)}
 				</div>
@@ -303,7 +316,7 @@ export const TopBarNav = () => {
 						id="nfd-app-mobile-nav"
 						role="button"
 						className="nfd-h-16 nfd-px-4 nfd-text-body nfd-flex nfd-items-center focus:nfd-outline-none focus:nfd-ring-2 focus:nfd-ring-inset focus:nfd-ring-primary min-[783px]:nfd-hidden"
-						onClick={() => { setIsOpen(true) }}
+						onClick={ openNav }
 					>
 						<span className="nfd-sr-only">Open Navigation Menu</span>
 						<Bars3Icon className="nfd-w-6 nfd-h-6" />
@@ -313,7 +326,7 @@ export const TopBarNav = () => {
 				{/* Mobile Navigation Modal */}
 				<Modal
 					isOpen={isOpen}
-					onClose={() => setIsOpen(false)}
+					onClose={ closeNav }
 					className="wppw-app-sidenav-mobile nfd-z-40"
 					initialFocus
 				>
@@ -325,24 +338,6 @@ export const TopBarNav = () => {
 				</Modal>
 			</div>
 
-			{/* Notifications for desktop */}
-			{isLargeViewport && (
-				<div className="nfd-hidden">
-					<NewfoldNotifications
-						constants={ {
-							context: 'web-app-nav',
-							page: hashedPath,
-						} }
-						methods={ {
-							apiFetch,
-							addQueryArgs,
-							filter,
-							useState,
-							useEffect,
-						} }
-					/>
-				</div>
-			)}
 		</header>
 	);
 }

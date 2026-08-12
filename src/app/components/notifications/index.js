@@ -1,4 +1,10 @@
-import { createContext, useContext, useReducer } from "@wordpress/element";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useReducer,
+} from "@wordpress/element";
 import { Notifications } from "@newfold/ui-component-library";
 
 const actions = { PUSH: "push", DISMISS: "dismiss" };
@@ -44,13 +50,16 @@ export const useNotification = () => useContext(FeedContext);
 
 export function NotificationFeed({ children }) {
   let [feed, dispatch] = useReducer(feedReducer, {});
+  // Stable context value so pushing/dismissing a notification doesn't
+  // re-render every useNotification() consumer.
+  const push = useCallback(
+    (id, message) => dispatch({ type: actions.PUSH, id, message }),
+    []
+  );
+  const feedContext = useMemo(() => ({ push }), [push]);
   return (
     <>
-      <FeedContext.Provider
-        value={{
-          push: (id, message) => dispatch({ type: actions.PUSH, id, message }),
-        }}
-      >
+      <FeedContext.Provider value={feedContext}>
         {children}
       </FeedContext.Provider>
       <Notifications>

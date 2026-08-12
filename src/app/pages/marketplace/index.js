@@ -1,5 +1,5 @@
 import apiFetch from '@wordpress/api-fetch';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useMemo } from '@wordpress/element';
 import { useLocation, useMatch, useNavigate } from 'react-router-dom';
 import { Container, Page, Title } from '@newfold/ui-component-library';
 import { NewfoldRuntime } from "@newfold/wp-module-runtime";
@@ -8,8 +8,8 @@ import { default as MarketplaceBody } from '@modules/wp-module-marketplace/compo
 
 const MarketplacePage = () => {
 	
-    // constants to pass to module
-	const moduleConstants = {
+    // constants to pass to module (stable reference across re-renders)
+	const moduleConstants = useMemo( () => ( {
 		'supportsCTB': false,
 		'perPage': 12,
 		'text': {
@@ -31,9 +31,10 @@ const MarketplacePage = () => {
 				},
 			},
 		}
-	};
-    // methods to pass to module
-    const moduleMethods = {
+	} ), [] );
+
+    // methods to pass to module (stable reference across re-renders)
+    const moduleMethods = useMemo( () => ( {
         apiFetch,
 		classNames,
         useState,
@@ -42,7 +43,7 @@ const MarketplacePage = () => {
 		useMatch,
 		useNavigate,
         NewfoldRuntime,
-    };
+    } ), [] );
 
 	return (
         <Page className={"wppw-app-marketplace-page"}>

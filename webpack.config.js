@@ -24,10 +24,6 @@ const mostCommonImports = {
     useContext: ['@wordpress/element', 'useContext'],
     useLocation: ['react-router-dom', 'useLocation'],
     useNavigate: ['react-router-dom', 'useNavigate'],
-    _filter: ['lodash', 'filter'],
-    _map: ['lodash', 'map'],
-    _isEmpty: ['lodash', 'isEmpty'],
-    _camelCase: ['lodash', 'camelCase'],
     __: ['@wordpress/i18n', '__'],
     _n: ['@wordpress/i18n', '_n'],
     sprintf: ['@wordpress/i18n', 'sprintf'],
@@ -55,4 +51,29 @@ const webConfig = {
     resolve: { alias },
     plugins: [new ProvidePlugin(mostCommonImports)],
 };
-module.exports = merge(wpScriptsConfig, webConfig);
+const mergedConfig = merge(wpScriptsConfig, webConfig);
+
+/**
+ * Silence Dart Sass's "legacy JS API" deprecation warning.
+ * The sass-loader version shipped with @wordpress/scripts still uses the
+ * legacy API, so the warning fires on every .scss file and cannot be fixed
+ * here until wp-scripts upgrades sass-loader to v14+ (modern API).
+ */
+for (const rule of mergedConfig.module.rules) {
+    if (!rule || !Array.isArray(rule.use)) {
+        continue;
+    }
+    for (const use of rule.use) {
+        if ('string' === typeof use?.loader && use.loader.includes('sass-loader')) {
+            use.options = {
+                ...use.options,
+                sassOptions: {
+                    ...use.options?.sassOptions,
+                    silenceDeprecations: ['legacy-js-api'],
+                },
+            };
+        }
+    }
+}
+
+module.exports = mergedConfig;

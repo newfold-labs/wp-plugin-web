@@ -1,4 +1,6 @@
-const WordPressIcon = () => {
+import { memo } from '@wordpress/element';
+
+const WordPressIcon = memo( () => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -14,6 +16,6 @@ const WordPressIcon = () => {
 			</g>
 		</svg>
 	);
-}
+} );
 
 export default WordPressIcon;
