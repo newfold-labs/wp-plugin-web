@@ -164,14 +164,35 @@ jobs:
           path: ${{ steps.workflow.outputs.DIST }}
           name: ${{ needs.build.outputs.package }}
 
+      # Fetch latest stable from wordpress.org (zip), not GitHub tags — the mirror
+      # can lag behind wordpress.org releases and break `wp-env start`.
+      - name: Fetch latest WordPress release
+        id: fetch_wp
+        run: |
+          set -euo pipefail
+          OFFER=$(curl -fsS --retry 3 --retry-delay 2 --retry-all-errors --max-time 30 \
+            'https://api.wordpress.org/core/version-check/1.7/')
+          WP_DOWNLOAD_URL=$(echo "$OFFER" | jq -r '.offers[0].download // empty')
+          WP_VERSION=$(echo "$OFFER" | jq -r '.offers[0].version // empty')
+          if [ -z "$WP_DOWNLOAD_URL" ]; then
+            echo "::error::Could not resolve a WordPress download URL from the version-check API."
+            echo "$OFFER" | head -c 500
+            exit 1
+          fi
+          echo "download_url=$WP_DOWNLOAD_URL" >> "$GITHUB_OUTPUT"
+          echo "version=$WP_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Using WordPress $WP_VERSION from $WP_DOWNLOAD_URL"
+
       - name: Configure WordPress
         env:
           DIST: ${{ steps.workflow.outputs.DIST }}
           PACKAGE: ${{ needs.build.outputs.package }}
+          WP_ZIP: ${{ steps.fetch_wp.outputs.download_url }}
         run: |
           jq -n \
+            --arg core "$WP_ZIP" \
             --arg plugin "$DIST/$PACKAGE" \
-            '{plugins: [$plugin]}' > .wp-env.override.json
+            '{core: $core, plugins: [$plugin]}' > .wp-env.override.json
 
       - name: Install WordPress
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60  # v4.0.0
@@ -181,6 +202,7 @@ jobs:
           command: |
             pwd
             ls -la .wp-env*
+            cat .wp-env.override.json
             npx wp-env start --debug
             npx wp-env run cli wp core version
 
