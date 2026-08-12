@@ -8,7 +8,6 @@
 namespace Web;
 
 use Exception;
-use wpdb;
 
 /**
  * Functions for fixing missing AUTO_INCREMENT on WordPress tables.
@@ -20,17 +19,17 @@ class AutoIncrement {
 	/**
 	 * The WordPress database instance.
 	 *
-	 * @var wpdb
+	 * @var \wpdb
 	 */
-	private $wpdb;
+	private \wpdb $wpdb;
 
 	/**
 	 * Constructor.
 	 *
-	 * @param wpdb $wpdb WordPress DB ORM.
+	 * @param \wpdb $wpdb WordPress DB ORM.
 	 */
 	public function __construct(
-		wpdb $wpdb
+		\wpdb $wpdb
 	) {
 		$this->wpdb = $wpdb;
 	}
@@ -84,9 +83,9 @@ class AutoIncrement {
 			$wpdb->query(
 				$wpdb->prepare(
 					'LOCK TABLES %i WRITE;',
-					array(
+					[
 						$prefixed_table_name,
-					)
+					]
 				)
 			);
 
@@ -94,11 +93,11 @@ class AutoIncrement {
 			$zero_id_rows = $wpdb->get_results(
 				$wpdb->prepare(
 					'SELECT %i FROM %i WHERE %i = 0',
-					array(
+					[
 						$column_name,
 						$prefixed_table_name,
 						$column_name,
-					)
+					]
 				),
 			);
 
@@ -107,10 +106,10 @@ class AutoIncrement {
 				$max_id = (int) $this->wpdb->get_var(
 					$wpdb->prepare(
 						'SELECT MAX(%i) FROM %i',
-						array(
+						[
 							$column_name,
 							$prefixed_table_name,
-						)
+						]
 					)
 				);
 
@@ -120,12 +119,12 @@ class AutoIncrement {
 					$this->wpdb->query(
 						$wpdb->prepare(
 							'UPDATE %i SET %i = %d WHERE %i = 0 LIMIT 1',
-							array(
+							[
 								$prefixed_table_name,
 								$column_name,
 								$max_id,
 								$column_name,
-							)
+							]
 						)
 					);
 				}
@@ -139,10 +138,10 @@ class AutoIncrement {
 				$wpdb->prepare(
 					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 					"ALTER TABLE %i MODIFY COLUMN %i {$column_info['Type']} NOT NULL auto_increment;",
-					array(
+					[
 						$prefixed_table_name,
 						$column_name,
-					)
+					]
 				)
 			);
 		} finally {
@@ -165,10 +164,10 @@ class AutoIncrement {
 		return $wpdb->get_row(
 			$wpdb->prepare(
 				'SHOW COLUMNS FROM %i LIKE %s',
-				array(
+				[
 					$prefixed_table_name,
 					$column_name,
-				)
+				]
 			),
 			ARRAY_A
 		);
@@ -210,7 +209,7 @@ class AutoIncrement {
 		$wpdb->query(
 			$wpdb->prepare(
 				'ALTER TABLE %i ADD PRIMARY KEY (%i)',
-				array( $prefixed_table_name, $column_name )
+				[ $prefixed_table_name, $column_name ]
 			)
 		);
 
@@ -232,7 +231,7 @@ class AutoIncrement {
 		$wpdb->query(
 			$wpdb->prepare(
 				'ALTER TABLE %i DROP PRIMARY KEY;',
-				array( $prefixed_table_name )
+				[ $prefixed_table_name ]
 			)
 		);
 	}
@@ -259,7 +258,7 @@ class AutoIncrement {
 		$existing_primary_key = $wpdb->get_results(
 			$wpdb->prepare(
 				"SHOW KEYS FROM %i WHERE Key_name = 'PRIMARY'",
-				array( $prefixed_table_name )
+				[ $prefixed_table_name ]
 			),
 			ARRAY_A
 		);
@@ -276,6 +275,6 @@ class AutoIncrement {
 		 */
 		$primary_key_columns = wp_list_pluck( $existing_primary_key, 'Column_name' );
 
-		return isset( $primary_key_columns[0] ) ? $primary_key_columns[0] : null;
+		return $primary_key_columns[0] ?? null;
 	}
 }

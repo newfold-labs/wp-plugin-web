@@ -99,28 +99,6 @@ export const webSettingsApiFetch = ( data, passError, thenCallback ) => {
 };
 
 /**
- * Wrapper method to post request to web cache endpoint
- *
- * @param {*} data object of data
- * @param passError setter for the error in component
- * @param thenCallback method to call in promise then
- * @return apiFetch promise
- */
-export const webPurgeCacheApiFetch = ( data, passError, thenCallback ) => {
-	return apiFetch( {
-		url: NewfoldRuntime.createApiUrl( '/web/v1/caching' ),
-		method: 'DELETE',
-		data,
-	} )
-		.then( ( response ) => {
-			thenCallback( response );
-		} )
-		.catch( ( error ) => {
-			passError( error );
-		} );
-};
-
-/**
  * Coming soon admin bar
  */
 export const comingSoonAdminbarToggle = ( comingSoon ) => {

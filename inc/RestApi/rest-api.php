@@ -10,12 +10,11 @@ namespace Web;
 /**
  * Instantiate controllers and register routes.
  */
-function init_rest_api() {
+function init_rest_api(): void {
 
-	$controllers = array(
-		'Web\\RestApi\\CachingController',
+	$controllers = [
 		'Web\\RestApi\\SettingsController',
-	);
+	];
 
 	foreach ( $controllers as $controller ) {
 		/**

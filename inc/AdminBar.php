@@ -15,14 +15,14 @@ class AdminBar {
 	/**
 	 * Initialize WP admin bar customizations.
 	 */
-	public static function init() {
-		add_action( 'wp_before_admin_bar_render', array( __CLASS__, 'on_before_admin_bar_render' ) );
+	public static function init(): void {
+		add_action( 'wp_before_admin_bar_render', [ __CLASS__, 'on_before_admin_bar_render' ] );
 	}
 
 	/**
 	 * Customize the WP admin bar.
 	 */
-	public static function on_before_admin_bar_render() {
+	public static function on_before_admin_bar_render(): void {
 		/**
 		 * Reference to the global WordPress admin bar instance.
 		 *
@@ -30,14 +30,14 @@ class AdminBar {
 		 */
 		global $wp_admin_bar;
 		$wp_admin_bar->add_menu(
-			array(
+			[
 				'id'    => 'web-support',
 				'title' => __( 'Need help?', 'wp-plugin-web' ),
 				'href'  => apply_filters( 'nfd_build_url', admin_url( 'admin.php?page=web#/help' ) ),
-				'meta'  => array(
+				'meta'  => [
 					'title' => esc_attr__( 'We\'re here for you!', 'wp-plugin-web' ),
-				),
-			)
+				],
+			]
 		);
 	}
 }
