@@ -1,59 +1,26 @@
-import { 
+import {
 	HomeIcon,
 	ShoppingBagIcon,
-	WrenchScrewdriverIcon,
-	BoltIcon, 
+	BoltIcon,
 	AdjustmentsHorizontalIcon,
-	BuildingStorefrontIcon,
-	QuestionMarkCircleIcon } 
+	QuestionMarkCircleIcon,
+	SparklesIcon }
 from '@heroicons/react/24/outline';
-import { NewfoldRuntime } from "@newfold/wp-module-runtime";
 import { getMarketplaceSubnavRoutes } from '@modules/wp-module-marketplace/components/marketplaceSubnav';
 import { Route, Routes } from 'react-router-dom';
 import Home from '../pages/home';
 import Marketplace from '../pages/marketplace';
 import Settings from '../pages/settings';
-import Performance from '../pages/performance';
 import Help from '../pages/help';
 import Admin from '../pages/admin';
-
-const addPartialMatch = ( prefix, path ) =>
-	prefix === path ? `${ prefix }/*` : path;
-
-export const AppRoutes = () => {
-	return (
-		<Routes>
-			{ routes.map(
-				( page ) => (
-					true === page.condition && ( 
-						<Route
-							end
-							key={ page.name }
-							path={ addPartialMatch( '/marketplace', page.name ) }
-							element={ <page.Component /> }
-						/>
-					)
-			) ) }
-			<Route path="/" element={ <Home /> } />
-			<Route
-				path="*"
-				element={
-					<main style={ { padding: '1rem' } }>
-						<p>
-							{ __( "There's nothing here!", 'wp-plugin-web' ) }
-						</p>
-					</main>
-				}
-			/>
-		</Routes>
-	);
-};
+import AIDesigner from '../pages/ai-designer';
 
 const topRoutePaths = [
 	'/home',
 	'/marketplace',
-	'/performance',
+	'/ai-designer',
 	'/settings',
+	'/help',
 ];
 const utilityRoutePaths = [ '/help' ];
 
@@ -74,9 +41,9 @@ export const routes = [
 		condition: true,
 	},
 	{
-		name: '/performance',
+		name: '/settings/performance',
 		title: __( 'Performance', 'wp-plugin-web' ),
-		Component: Performance,
+		Component: Settings,
 		Icon: BoltIcon,
 		condition: await window.NewfoldFeatures.isEnabled( 'performance' ),
 	},
@@ -86,6 +53,13 @@ export const routes = [
 		Component: Settings,
 		Icon: AdjustmentsHorizontalIcon,
 		condition: true,
+	},
+	{
+		name: '/ai-designer',
+		title: __( 'AI Designer', 'wp-plugin-web' ),
+		Component: AIDesigner,
+		Icon: SparklesIcon,
+		condition: ( window.NewfoldRuntime?.capabilities?.canAccessAI && window.NewfoldRuntime?.capabilities?.canAccessAIPageDesigner ) || false,
 	},
 	{
 		name: '/help',
@@ -101,6 +75,41 @@ export const routes = [
 		condition: true,
 	},
 ];
+
+export const AppRoutes = () => {
+	return (
+		<Routes>
+			{ routes.map( ( route ) => {
+				if ( ! route.condition ) {
+					return null;
+				}
+
+				const { name, Component } = route;
+				const routePath = route.subRoutes ? `${ name }/*` : name;
+
+				return (
+					<Route
+						key={ name }
+						path={ routePath }
+						element={ <Component /> }
+					/>
+				);
+			} ) }
+
+			<Route path="/" element={ <Home /> } />
+			<Route
+				path="*"
+				element={
+					<main style={ { padding: '1rem' } }>
+						<p>
+							{ __( "There's nothing here!", 'wp-plugin-web' ) }
+						</p>
+					</main>
+				}
+			/>
+		</Routes>
+	);
+};
 
 export const topRoutes = _filter( routes, ( route ) =>
 	topRoutePaths.includes( route.name )

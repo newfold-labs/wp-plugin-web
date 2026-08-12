@@ -1,7 +1,7 @@
 {
-    "name": "Web.com WordPress Plugin",
-    "description": "WordPress plugin that integrates your WordPress site with the Web.com control panel, including performance, security, and update features.",
-    "url": "https://web.com",
+    "name": "Network Solutions WordPress Plugin",
+    "description": "WordPress plugin that integrates your WordPress site with the Network Solutions control panel, including performance, security, and update features.",
+    "url": "https://www.networksolutions.com",
     "package": {
         "vendor": "newfold",
         "name": "wp-plugin-web"

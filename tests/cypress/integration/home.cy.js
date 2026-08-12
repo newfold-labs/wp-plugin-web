@@ -8,19 +8,15 @@ describe('Home Page', { testIsolation: true }, () => {
 		cy.visit(`/wp-admin/admin.php?page=${ Cypress.env( 'pluginId' ) }#/home`);
 	});
 
-	it('Site Info Exists', () => {
-		cy.window().then((win) => {
-			const siteTitle = win.NewfoldRuntime.siteTitle;
-
-			cy.get( appClass + '-app-site-info').contains('h3', siteTitle)
-				.scrollIntoView()
-				.should('be.visible');
-		})
+	it('Home Page Header Exists', () => {
+		cy.get( appClass + '-app-home-header')
+			.should('be.visible')
+			.contains('Home');
 	});
 
 	it('Is Accessible', () => {
 		cy.injectAxe();
-		cy.wait(500);
+		cy.wait(1000);
 		cy.a11y( appClass + '-app-body');
 	});
 

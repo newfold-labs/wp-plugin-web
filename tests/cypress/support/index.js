@@ -16,6 +16,4 @@
 import 'cypress-axe';
 import './commands';
 
-before(() => {
-	cy.wpLogin();
-});
+// Note: Global before() hook removed as each test handles login in beforeEach()

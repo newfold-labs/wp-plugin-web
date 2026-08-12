@@ -9,29 +9,29 @@ const help = [
 		icon: false,
 		cta: __( 'Live Chat', 'wp-plugin-web' ),
 		url:
-			'https://www.web.com/chat?utm_campaign=&utm_content=help_chat_link&utm_term=live_chat&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/help',
+			'https://www.networksolutions.com/chat#/help?utm_campaign=&utm_content=help_chat_link&utm_term=live_chat&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/help',
 	},
 	{
 		name: 'phone',
 		title: __( 'Phone', 'wp-plugin-web' ),
 		description: __(
-			'Speak to our award-winning support team over the phone at 866-227-1474. Our customer service hours are 7:00am - 12:00am ET.',
+			'Speak to our award-winning support team over the phone at 855-834-8495. Our customer service hours are 8:00am - 11:00pm ET.',
 			'wp-plugin-web'
 		),
 		icon: false,
 		cta: __( 'Call Us', 'wp-plugin-web' ),
-		url: 'tel:8662271474',
+		url: 'tel:855-834-8495',
 	},
 	{
 		name: 'twitter',
 		title: __( 'Tweet', 'wp-plugin-web' ),
 		description: __(
-			'Find our team at @webdotcom for updates on our products and support from our team.',
+			'Find our team at @netsolcares for updates on our products and support from our team.',
 			'wp-plugin-web'
 		),
 		icon: false,
 		cta: __( 'Tweet Us', 'wp-plugin-web' ),
-		url: 'https://twitter.com/webdotcom',
+		url: 'https://x.com/netsolcares',
 	},
 	{
 		name: 'kb',
@@ -43,19 +43,19 @@ const help = [
 		icon: false,
 		cta: __( 'Find Answers', 'wp-plugin-web' ),
 		url:
-			'https://www.web.com/knowledge?utm_campaign=&utm_content=help_kb_link&utm_term=find_answers&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/help',
+			'https://www.networksolutions.com/help#/help?utm_campaign=&utm_content=help_kb_link&utm_term=find_answers&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/help',
 	},
 	{
 		name: 'blog',
 		title: __( 'Blog', 'wp-plugin-web' ),
 		description: __(
-			'Learn best practices, get insider tips and find the latest news about Web.com.',
+			'Learn best practices, get insider tips and find the latest news about Network Solutions.',
 			'wp-plugin-web'
 		),
 		icon: false,
 		cta: __( 'Learn Stuff', 'wp-plugin-web' ),
 		url:
-			'https://www.web.com/blog/?utm_campaign=&utm_content=help_blog_link&utm_term=learn_stuff&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/help',
+			'https://www.networksolutions.com/blog/#/help?utm_campaign=&utm_content=help_blog_link&utm_term=learn_stuff&utm_medium=brand_plugin&utm_source=wp-admin/admin.php?page=web#/help',
 	},
 	{
 		name: 'video',
@@ -66,7 +66,7 @@ const help = [
 		),
 		icon: false,
 		cta: __( 'Watch Now', 'wp-plugin-web' ),
-		url: 'https://www.youtube.com/c/webdotcom',
+		url: 'https://www.youtube.com/@networksolutions',
 	},
 ];
 

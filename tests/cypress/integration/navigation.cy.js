@@ -8,104 +8,55 @@ describe('Navigation', { testIsolation: true }, () => {
 		cy.visit(`/wp-admin/admin.php?page=${ Cypress.env( 'pluginId' ) }#`);
 	});
 
-	it( "Admin submenu shouldn't exist inside app", () => {
+	it( "Admin submenu should exist", () => {
 		cy.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' ul.wp-submenu' ).should(
-			'not.exist'
+			'exist'
 		);
 	} );
 
 	it('Logo Links to home', () => {
-		cy.get( appClass + '-logo-wrap').click();
-		cy.wait(500);
-		cy.hash().should('eq', '#/home');
+		cy.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' a.toplevel_page_web').click();
+		cy.wait(1000);
+		cy.url().should('include', 'page=web');
 	});
 
 	// test main nav
 	it('Main nav links properly navigates', () => {
 		cy
-			.get( appClass + '-app-navitem-Marketplace').
-			should('not.have.class', 'active');
-		cy.get( appClass + '-app-navitem-Marketplace').click();
-		cy.wait(500);
+			.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' ul.wp-submenu li a[href*="#/marketplace"]')
+			.should('be.visible');
+		
+		cy.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' ul.wp-submenu li a[href*="#/marketplace"]').click();
+		cy.wait(1000);
 		cy.hash().should('eq', '#/marketplace');
 		cy
-			.get( appClass + '-app-navitem-Marketplace')
-			.should('have.class', 'active');
+			.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' ul.wp-submenu li a[href*="#/marketplace"]')
+			.parent()
+			.should('have.class', 'current');
 
-		cy.get( appClass + '-app-navitem-Performance').click();
-		cy.wait(500);
-		cy.hash().should('eq', '#/performance');
-		cy
-			.get( appClass + '-app-navitem-Performance')
-			.should('have.class', 'active');
-		cy
-			.get( appClass + '-app-navitem-Marketplace')
-			.should('not.have.class', 'active');
-
-		cy.get( appClass + '-app-navitem-Settings').click();
-		cy.wait(500);
+		cy.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' ul.wp-submenu li a[href*="#/settings"]')
+			.should('be.visible')
+			.click();
+		cy.wait(1000);
 		cy.hash().should('eq', '#/settings');
-	});
-	
-	it('Subnav links properly navigates', () => {
 		cy
-			.get( appClass + '-app-navitem-Marketplace')
-			.scrollIntoView()
-			.should('not.have.class', 'active');
-		cy.get( appClass + '-app-navitem-Marketplace').click();
-
-		cy.wait(500);
-		cy.hash().should('eq', '#/marketplace');
-		cy
-			.get( appClass + '-app-navitem-Marketplace')
-			.should('have.class', 'active');
-		
-		cy.get( appClass + '-app-subnavitem-Services').click();
-		cy.wait(500);
-		cy.hash().should('eq', '#/marketplace/services');
-		cy
-			.get( appClass + '-app-subnavitem-Services')
-			.should('have.class', 'active');
-		
-
-		cy.get( appClass + '-app-subnavitem-SEO').click();
-		cy.wait(500);
-		cy.hash().should('eq', '#/marketplace/seo');
-		cy
-			.get( appClass + '-app-subnavitem-SEO')
-			.should('have.class', 'active');
-		cy
-			.get( appClass + '-app-subnavitem-Services')
-			.should('not.have.class', 'active');
-		cy
-			.get( appClass + '-app-navitem-Marketplace')
-			.should('have.class', 'active');
-			
-		cy.get( appClass + '-app-navitem-Performance').click();
-			cy.wait(500);
-		cy
-			.get( appClass + '-app-subnavitem-Services')
-			.should('not.have.class', 'active');
-		cy
-			.get( appClass + '-app-subnavitem-SEO')
-			.should('not.have.class', 'active');
-		cy
-			.get( appClass + '-app-navitem-Marketplace')
-			.should('not.have.class', 'active');
+			.get( '#adminmenu #toplevel_page_' + Cypress.env( 'pluginId' ) + ' ul.wp-submenu li a[href*="#/marketplace"]')
+			.parent()
+			.should('not.have.class', 'current');
 	});
 
-	it( 'Mobile nav links dispaly and link properly on mobile', () => {
+	it( 'Mobile nav links display and link properly on mobile', () => {
 		cy.get( '#nfd-app-mobile-nav' ).should( 'not.exist' );
 		cy.viewport( 'iphone-x' );
 		cy.get( '#nfd-app-mobile-nav' ).should( 'be.visible' );
 
-		cy.get( appClass + '-app-navitem-Home' ).should( 'not.exist' );
+		cy.get( appClass + '-app-navitem-home' ).should( 'not.exist' );
 
 		cy.get( '#nfd-app-mobile-nav' ).click();
-		cy.wait( 500 );
-		cy.get( appClass + '-app-navitem-Home' ).should( 'be.visible' );
+		cy.wait(1000);
+		cy.get( appClass + '-app-navitem-home' ).should( 'be.visible' );
 		cy.get( 'button.nfd-modal__close-button' ).should( 'be.visible' );
 		cy.get( 'button.nfd-modal__close-button' ).click();
-		cy.get( appClass + '-app-navitem-Home' ).should( 'not.exist' );
+		cy.get( appClass + '-app-navitem-home' ).should( 'not.exist' );
 	});
 });

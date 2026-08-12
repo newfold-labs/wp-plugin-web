@@ -11,7 +11,7 @@
 [![Cypress](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/cypress.yml/badge.svg?branch=main)](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/cypress.yml)
 [![Build Plugin](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/upload-artifact-on-push.yml/badge.svg)](https://github.com/newfold-labs/wp-plugin-web/actions/workflows/upload-artifact-on-push.yml)
 
-WordPress plugin that integrates a WordPress site with the Web.com control panel, including performance, security, and
+WordPress plugin that integrates a WordPress site with the Network Solutions control panel, including performance, security, and
 update features.
 
 # Installation
