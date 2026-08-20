@@ -33,7 +33,7 @@ PHP floor is **7.4** (see `Requires PHP` header in `wp-plugin-web.php`, `compose
 - `npm run test:playwright` (alias `npm run test:e2e`) — Playwright suite (`tests/playwright/specs`); config in `playwright.config.mjs`. `npm run test:playwright:update-projects` regenerates `tests/playwright/playwright-projects.json`.
 - Cypress specs also exist under `tests/cypress/integration` (config `cypress.config.js`), run via the Cypress CLI/GUI directly.
 - `npm run log:watch` — tails the `wp-env` WordPress debug log (`wp-env run wordpress 'tail -f ...debug.log'`), useful while driving Playwright/Cypress locally.
-- Local WP environment is `@wordpress/env`, configured in `.wp-env.json` (core `7.0` tag, PHP 8.1, ports 8886/8887).
+- Local WP environment is `@wordpress/env`, configured in `.wp-env.json` (core `7.1` tag, PHP 8.1, ports 8886/8887).
 
 ### Version bumps / releases
 
