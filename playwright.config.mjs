@@ -21,7 +21,7 @@ const { phpVersion: _phpVersion, core: _core, port: _port } = wpEnvConfig;
  *
  * Handles both source forms we use:
  * - GitHub tag: "WordPress/WordPress#tags/6.8" -> "6.8"
- * - wordpress.org zip: ".../wordpress-7.0.4.zip" -> "7.0.4"
+ * - wordpress.org zip: ".../wordpress-7.1.zip" -> "7.1"
  *
  * The zip form is what CI falls back to when the GitHub mirror lags behind a
  * wordpress.org release, and is also how the beta workflow pins its core.
