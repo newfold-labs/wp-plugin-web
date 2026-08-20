@@ -23,6 +23,11 @@ cypress.env.json
 *.sql
 *.zip
 
+# PHPUnit (machine-local DB credentials/paths, downloaded phar, result cache)
+/tests/phpunit/wp-tests-config.php
+/tools/phpunit.phar
+/.phpunit.result.cache
+
 # Playwright
 node_modules/
 /test-results/

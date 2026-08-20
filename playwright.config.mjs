@@ -16,6 +16,27 @@ const __dirname = dirname(__filename);
 const wpEnvConfig = JSON.parse(readFileSync('./.wp-env.json', 'utf8'));
 const { phpVersion: _phpVersion, core: _core, port: _port } = wpEnvConfig;
 
+/**
+ * Extract the WordPress version from a wp-env `core` source.
+ *
+ * Handles both source forms we use:
+ * - GitHub tag: "WordPress/WordPress#tags/6.8" -> "6.8"
+ * - wordpress.org zip: ".../wordpress-7.0.4.zip" -> "7.0.4"
+ *
+ * The zip form is what CI falls back to when the GitHub mirror lags behind a
+ * wordpress.org release, and is also how the beta workflow pins its core.
+ * Beta/RC zips ("wordpress-7.1-beta1.zip") yield the numeric prefix "7.1",
+ * which still prefix-matches the "7.1-beta1" that Site Health reports.
+ */
+function parseWpVersion(coreSource) {
+  if (!coreSource) {
+    return coreSource;
+  }
+  const lastSegment = /[^/]*$/.exec(coreSource)[0];
+  const zipMatch = /^wordpress-(\d+(?:\.\d+)*)(?:-[\w.-]+)?\.zip$/i.exec(lastSegment);
+  return zipMatch ? zipMatch[1] : lastSegment;
+}
+
 // Check if .wp-env.override.json exists (created by CI workflows with matrix values)
 const overrideFile = './.wp-env.override.json';
 let phpVersion, core, wpVersion;
@@ -25,14 +46,13 @@ if (existsSync(overrideFile)) {
   const overrideConfig = JSON.parse(readFileSync(overrideFile, 'utf8'));
   phpVersion = overrideConfig.phpVersion || _phpVersion;
   core = overrideConfig.core || _core;
-  // Extract version from core string (e.g., "WordPress/WordPress#tags/6.8" -> "6.8")
-  wpVersion = /[^/]*$/.exec(core)[0];
 } else {
   // Use default values from .wp-env.json
   phpVersion = _phpVersion;
   core = _core;
-  wpVersion = /[^/]*$/.exec(core)[0];
 }
+
+wpVersion = parseWpVersion(core);
 
 // Generate projects file if it doesn't exist or is stale
 const projectsFile = './tests/playwright/playwright-projects.json';

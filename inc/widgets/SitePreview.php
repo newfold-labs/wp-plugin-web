@@ -20,7 +20,7 @@ class SitePreview {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'wp_dashboard_setup', array( __CLASS__, 'init' ), 1 );
+		add_action( 'wp_dashboard_setup', [ __CLASS__, 'init' ], 1 );
 	}
 
 	/**
@@ -28,23 +28,23 @@ class SitePreview {
 	 *
 	 * @return void
 	 */
-	public static function init() {
+	public static function init(): void {
 		wp_add_dashboard_widget(
 			self::ID,                          // Widget slug.
 			__( 'Site Preview', 'wp-plugin-web' ),
-			array( __CLASS__, 'widget_render' ),
+			[ __CLASS__, 'widget_render' ],
 			null,
 			null,
 			'normal',
 			'high'
 		);
-		\add_action( 'admin_enqueue_scripts', array( __CLASS__, 'assets' ) );
+		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'assets' ] );
 	}
 
 	/**
 	 * Render the widget
 	 */
-	public static function widget_render() {
+	public static function widget_render(): void {
 		$view_file = WEB_PLUGIN_DIR . '/inc/widgets/views/site-preview.php';
 
 		if ( file_exists( $view_file ) ) {
@@ -57,7 +57,7 @@ class SitePreview {
 	 *
 	 * @return void
 	 */
-	public static function assets() {
+	public static function assets(): void {
 		// enqueue the web-style stylesheet
 		// this is registered in Admin.php > assets()
 		\wp_enqueue_style( 'web-style' );

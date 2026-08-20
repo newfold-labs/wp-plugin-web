@@ -14,7 +14,7 @@ namespace Web;
  *
  * @return string
  */
-function wpforms_upgrade_affiliate_link( $url ) {
+function wpforms_upgrade_affiliate_link( string $url ): string {
 	return 'http://www.shareasale.com/r.cfm?B=837827&U=1258907&M=64312&urllink=' . rawurlencode( $url );
 }
 
@@ -27,7 +27,7 @@ add_filter( 'wpforms_upgrade_link', __NAMESPACE__ . '\\wpforms_upgrade_affiliate
  *
  * @return string
  */
-function aioseo_upgrade_affiliate_link( $url ) {
+function aioseo_upgrade_affiliate_link( string $url ): string {
 	return 'http://www.shareasale.com/r.cfm?B=1491200&U=1258907&M=94778&urllink=' . rawurlencode( $url );
 }
 

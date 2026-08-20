@@ -1,5 +1,5 @@
 import { Button, Title } from "@newfold/ui-component-library";
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { PartyIcon } from '../../components/icons';
 
@@ -9,7 +9,7 @@ const hasRequiredStoreInfo = () =>
 		window?.NFDStoreInfo?.data?.city
 	);
 
-const StoreDetails = () => {
+const StoreDetails = memo( () => {
     const [ hasStoreInfo, setHasStoreInfo ] = useState( hasRequiredStoreInfo );
     const siteKind = window?.NewfoldRuntime?.siteType || 'website';
     const titleText =
@@ -55,6 +55,6 @@ const StoreDetails = () => {
 			) }
 		</div>
 	);
-};
+} );
 
 export default StoreDetails;

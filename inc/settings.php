@@ -11,12 +11,12 @@ namespace Web;
 /**
  * Filter wp revisions according to plugin setting
  *
- * @param int            $num Number of posts to retain (unused).
- * @param WP_Post|object $post Post object (unused).
+ * @param int            $num  Number of posts to retain (unused; required by filter signature).
+ * @param WP_Post|object $post Post object (unused; required by filter signature).
  * @return int
  */
-function nfd_settings_revisions( $num, $post ) {
-	return get_option( 'nfd_wp_post_revisions', 5 );
+function nfd_settings_revisions( int $num, $post ): int { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Callback arity for wp_revisions_to_keep.
+	return (int) get_option( 'nfd_wp_post_revisions', 5 );
 }
 add_filter( 'wp_revisions_to_keep', __NAMESPACE__ . '\\nfd_settings_revisions', 10, 2 );
 

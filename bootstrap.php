@@ -29,25 +29,23 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
  * Initialize coming soon module via container
  */
 $web_module_container = new Container(
-	array(
-		'cache_types' => array( 'browser', 'file', 'skip404' ),
-	)
+	[
+		'cache_types' => [ 'browser', 'file', 'skip404' ],
+	]
 );
 
 // Set plugin to container
 $web_module_container->set(
 	'plugin',
 	$web_module_container->service(
-		function () {
-			return new Plugin(
-				array(
-					'id'           => 'web',
-					'file'         => WEB_PLUGIN_FILE,
-					'brand'        => get_option( 'mm_brand', 'web' ),
-					'install_date' => get_option( 'web_plugin_install_date' ),
-				)
-			);
-		}
+		fn() => new Plugin(
+			[
+				'id'           => 'web',
+				'file'         => WEB_PLUGIN_FILE,
+				'brand'        => get_option( 'mm_brand', 'web' ),
+				'install_date' => get_option( 'web_plugin_install_date' ),
+			]
+		)
 	)
 );
 
@@ -57,7 +55,7 @@ add_filter(
 	function ( $args, $default_args ) {
 
 		$args = wp_parse_args(
-			array(
+			[
 				'admin_app_url'       => admin_url( 'admin.php?page=web#/home' ),
 				'template_h1'         => __( 'Coming Soon!', 'wp-plugin-web' ),
 				'template_h2'         => __( 'A New WordPress Site', 'wp-plugin-web' ),
@@ -86,7 +84,7 @@ add_filter(
 					'</a>'
 				),
 				'template_styles'     => esc_url( WEB_PLUGIN_URL . 'assets/styles/coming-soon.css' ),
-			),
+			],
 			$default_args
 		);
 
@@ -129,26 +127,26 @@ if ( file_exists( $ai_page_designer_bootstrap ) ) {
 $updateurl     = 'https://hiive.cloud/workers/release-api/plugins/newfold-labs/wp-plugin-web'; // Custom API GET endpoint
 $pluginUpdater = new PluginUpdater( WEB_PLUGIN_FILE, $updateurl );
 $pluginUpdater->setDataMap(
-	array(
+	[
 		'version'       => 'version.latest',
 		'download_link' => 'download',
 		'last_updated'  => 'updated',
 		'requires'      => 'requires.wp',
 		'requires_php'  => 'requires.php',
 		'tested'        => 'tested.wp',
-	)
+	]
 );
 $pluginUpdater->setDataOverrides(
-	array(
-		'banners' => array(
+	[
+		'banners' => [
 			'2x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-banner.svg',
 			'1x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-banner.svg',
-		),
-		'icons'   => array(
+		],
+		'icons'   => [
 			'2x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-icon.svg',
 			'1x' => 'https://cdn.hiive.space/marketplace/vendors-assets/web-icon.svg',
-		),
-	)
+		],
+	]
 );
 
 // Handle any upgrade routines (only in the admin)
@@ -176,7 +174,6 @@ require WEB_PLUGIN_DIR . '/inc/AdminBar.php';
 require WEB_PLUGIN_DIR . '/inc/base.php';
 require WEB_PLUGIN_DIR . '/inc/jetpack.php';
 require WEB_PLUGIN_DIR . '/inc/partners.php';
-require WEB_PLUGIN_DIR . '/inc/RestApi/CachingController.php';
 require WEB_PLUGIN_DIR . '/inc/RestApi/SettingsController.php';
 require WEB_PLUGIN_DIR . '/inc/RestApi/rest-api.php';
 require WEB_PLUGIN_DIR . '/inc/settings.php';
@@ -209,7 +206,8 @@ if ( function_exists( 'add_filter' ) ) {
 			}
 
 			// Check for an existing bn_code
-			$bn_code = isset( $parsed_args['headers']['PayPal-Partner-Attribution-Id'] ) ? $parsed_args['headers']['PayPal-Partner-Attribution-Id'] : null;
+			$headers = $parsed_args['headers'] ?? [];
+			$bn_code = is_array( $headers ) ? ( $headers['PayPal-Partner-Attribution-Id'] ?? null ) : null;
 
 			// Ensure we only set when blank, or when using one of our stale codes
 			if ( is_null( $bn_code ) || false !== stripos( $bn_code, 'yith' ) || false !== stripos( $bn_code, 'newfold' ) ) {
@@ -270,7 +268,7 @@ add_action(
  *
  * @return void
  */
-function on_activate() {
+function on_activate(): void {
 	// Clear transients that may contain stale data.
 	delete_transient( 'newfold_marketplace' );
 	delete_transient( 'newfold_notifications' );
@@ -289,7 +287,7 @@ function on_activate() {
  *
  * @return void
  */
-function load_plugin() {
+function load_plugin(): void {
 	if ( is_admin() && WEB_PLUGIN_FILE === get_option( 'nfd_activated_fresh' ) ) {
 		delete_option( 'nfd_activated_fresh' );
 		on_activate();

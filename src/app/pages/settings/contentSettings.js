@@ -1,7 +1,7 @@
 import AppStore from '../../data/store';
 import { webSettingsApiFetch } from '../../util/helpers';
-import { useUpdateEffect } from 'react-use';
-import { useState } from '@wordpress/element';
+import { useUpdateEffect } from 'App/util/hooks';
+import { memo, useState } from '@wordpress/element';
 import { Alert, Container, SelectField } from "@newfold/ui-component-library";
 import { useNotification } from 'App/components/notifications';
 
@@ -154,7 +154,7 @@ const EmptyTrash = ({ setError, notify }) => {
 	);
 }
 
-const ContentSettings = () => {
+const ContentSettings = memo( () => {
 	const [isError, setError] = useState(false);
 
 	let notify = useNotification();
@@ -175,6 +175,6 @@ const ContentSettings = () => {
 			</div>
 		</Container.SettingsField >
 	);
-}
+} );
 
 export default ContentSettings;

@@ -1,3 +1,4 @@
+import { memo } from '@wordpress/element';
 import { 
 	Button,
 	Card,
@@ -8,7 +9,7 @@ import {
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import help from 'App/data/help';
 
-const HelpCard = ({ item }) => {
+const HelpCard = memo( ({ item }) => {
 	return ( 
 		<Card className={`wppw-help-card card-help-${item.name}`}>
 			<Card.Content>
@@ -33,7 +34,7 @@ const HelpCard = ({ item }) => {
 			</Card.Footer>
 		</Card>
 	 );
-}
+} );
 
 const Help = () => {
 	const renderHelpCards = () => {

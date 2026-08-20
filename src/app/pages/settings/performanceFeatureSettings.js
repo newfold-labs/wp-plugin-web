@@ -1,11 +1,11 @@
-import { useState } from '@wordpress/element';
-import { useUpdateEffect } from 'react-use';
+import { memo, useState } from '@wordpress/element';
+import { useUpdateEffect } from 'App/util/hooks';
 import { Alert, ToggleField } from '@newfold/ui-component-library';
 import AppStore from '../../data/store';
 import { featureToggle, updateUI } from '../../util/helpers';
 import { useNotification } from 'App/components/notifications';
 
-const PerformanceFeatureSettings = () => {
+const PerformanceFeatureSettings = memo( () => {
 	const { store, setStore } = useContext( AppStore );
 	const [ performance, setPerformance ] = useState(
 		store.features.performance
@@ -96,6 +96,6 @@ const PerformanceFeatureSettings = () => {
 			) }
 		</div>
 	);
-};
+} );
 
 export default PerformanceFeatureSettings;

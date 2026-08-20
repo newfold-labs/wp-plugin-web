@@ -9,7 +9,11 @@ module.exports = {
         "./node_modules/@newfold/wp-module-*/build/index.js", // all npmjs sourced module builds
         "./node_modules/@newfold-labs/wp-module-*/build/index.js", // all github npm sourced module builds
         "./vendor/newfold-labs/wp-module-*/components/**/*.js", // all composer sourced module components
-        './vendor/newfold-labs/wp-module-*/{src,build}/**/*.js', // js componets which are not in the /components 
+        // Only scan module *source* files. Built bundles (build/*.js) are minified,
+        // which makes Tailwind generate utilities for every class-like string, and
+        // those modules enqueue their own compiled CSS anyway.
+        './vendor/newfold-labs/wp-module-*/src/**/*.js',
+        './vendor/newfold-labs/wp-module-*/assets/js/**/*.js', // e.g. wp-module-notifications components bundled into this app
     ],
     theme: {
         extend: {

@@ -12,10 +12,10 @@
  * Plugin URI:        https://www.networksolutions.com
  * Update URI:        https://github.com/newfold-labs/wp-plugin-web/
  * Description:       WordPress plugin that integrates a WordPress site with the Network Solutions control panel, including performance, security, and update features.
- * Version:           2.3.4
+ * Version:           2.3.5
  * Requires at least: 6.6
  * Requires PHP:      7.4
- * Tested up to:      7.0
+ * Tested up to:      7.0.4
  * Author:            Network Solutions
  * Author URI:        https://www.networksolutions.com
  * Text Domain:       wp-plugin-web
@@ -32,7 +32,7 @@ if ( defined( 'WEB_PLUGIN_VERSION' ) ) {
 }
 
 // Define constants
-define( 'WEB_PLUGIN_VERSION', '2.3.4' );
+define( 'WEB_PLUGIN_VERSION', '2.3.5' );
 define( 'WEB_PLUGIN_FILE', __FILE__ );
 define( 'WEB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WEB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -60,16 +60,16 @@ if ( 'plugins.php' === $pagenow ) {
 require_once WEB_PLUGIN_DIR . '/inc/plugin-nfd-compat-check.php';
 $nfd_plugins_check = new NFD_Plugin_Compat_Check( WEB_PLUGIN_FILE );
 // Defer to Incompatible plugin, self-deactivate
-$nfd_plugins_check->incompatible_plugins = array(
+$nfd_plugins_check->incompatible_plugins = [
 	'The Bluehost Plugin' => 'bluehost-wordpress-plugin/bluehost-wordpress-plugin.php',
-);
+];
 // Deactivate legacy plugin
-$nfd_plugins_check->legacy_plugins = array(
+$nfd_plugins_check->legacy_plugins = [
 	'The MOJO Marketplace'     => 'mojo-marketplace-wp-plugin/mojo-marketplace.php',
 	'The MOJO Plugin'          => 'wp-plugin-mojo/wp-plugin-mojo.php',
 	'The HostGator Plugin'     => 'wp-plugin-hostgator/wp-plugin-hostgator.php',
 	'The Crazy Domains Plugin' => 'wp-plugin-crazy-domains/wp-plugin-crazy-domains.php',
-);
+];
 $pass_nfd_check                    = $nfd_plugins_check->check_plugin_requirements();
 
 // Check PHP version before initializing to prevent errors if plugin is incompatible.

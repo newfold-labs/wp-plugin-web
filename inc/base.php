@@ -12,7 +12,7 @@ namespace Web;
  *
  * @return bool
  */
-function web_has_plugin_install_date() {
+function web_has_plugin_install_date(): bool {
 	return ! empty( get_option( 'web_plugin_install_date', '' ) );
 }
 
@@ -21,7 +21,7 @@ function web_has_plugin_install_date() {
  *
  * @return string
  */
-function web_get_plugin_install_date() {
+function web_get_plugin_install_date(): string {
 	return (string) get_option( 'web_plugin_install_date', gmdate( 'U' ) );
 }
 
@@ -30,7 +30,7 @@ function web_get_plugin_install_date() {
  *
  * @param string $value Date in Unix timestamp format.
  */
-function web_set_plugin_install_date( $value ) {
+function web_set_plugin_install_date( string $value ): void {
 	update_option( 'web_plugin_install_date', $value, true );
 }
 
@@ -40,28 +40,28 @@ function web_set_plugin_install_date( $value ) {
  *
  * @return int
  */
-function web_get_days_since_plugin_install_date() {
-	return absint( ( gmdate( 'U' ) - web_get_plugin_install_date() ) / DAY_IN_SECONDS );
+function web_get_days_since_plugin_install_date(): int {
+	return absint( ( (int) gmdate( 'U' ) - (int) web_get_plugin_install_date() ) / DAY_IN_SECONDS );
 }
 
 /**
  * Basic setup
  */
-function web_setup() {
+function web_setup(): void {
 	if ( ( '' === get_option( 'mm_master_aff' ) || false === get_option( 'mm_master_aff' ) ) && defined( 'MMAFF' ) ) {
 		update_option( 'mm_master_aff', MMAFF );
 	}
 	$install_date = get_option( 'mm_install_date' );
 	if ( empty( $install_date ) ) {
 		update_option( 'mm_install_date', date( 'M d, Y' ) ); // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
-		$event                            = array(
+		$event                            = [
 			't'    => 'event',
 			'ec'   => 'plugin_status',
 			'ea'   => 'installed',
 			'el'   => 'Install date: ' . get_option( 'mm_install_date', date( 'M d, Y' ) ),  // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
 			'keep' => false,
-		);
-		$events                           = get_option( 'mm_cron', array() );
+		];
+		$events                           = get_option( 'mm_cron', [] );
 		$events['hourly'][ $event['ea'] ] = $event;
 		update_option( 'mm_cron', $events );
 	}
@@ -80,10 +80,10 @@ add_action( 'admin_init', __NAMESPACE__ . '\\web_setup' );
 /**
  * Filter the date used in data module
  *
- * @param string $install_date value from hook
- * @return int
+ * @param string $install_date value from hook (unused; required by filter signature)
+ * @return string Unix timestamp.
  */
-function web_install_date_filter( $install_date ) {
+function web_install_date_filter( $install_date ): string { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found -- Callback arity for nfd_install_date_filter.
 	return web_get_plugin_install_date();
 }
 add_filter( 'nfd_install_date_filter', __NAMESPACE__ . '\\web_install_date_filter' );
@@ -93,8 +93,8 @@ add_filter( 'nfd_install_date_filter', __NAMESPACE__ . '\\web_install_date_filte
  *
  * Exampl use: wp_kses( $svg, KSES_ALLOWED_SVG_TAGS );
  */
-const KSES_ALLOWED_SVG_TAGS = array(
-	'svg'  => array(
+const KSES_ALLOWED_SVG_TAGS = [
+	'svg'  => [
 		'class'        => true,
 		'fill'         => true,
 		'height'       => true,
@@ -103,14 +103,14 @@ const KSES_ALLOWED_SVG_TAGS = array(
 		'viewbox'      => true,
 		'width'        => true,
 		'xmlns'        => true,
-	),
-	'g'    => array(
+	],
+	'g'    => [
 		'fill'              => true,
 		'stroke'            => true,
 		'stroke-miterlimit' => true,
 		'stroke-width'      => true,
-	),
-	'rect' => array(
+	],
+	'rect' => [
 		'fill'      => true,
 		'height'    => true,
 		'rx'        => true,
@@ -118,16 +118,16 @@ const KSES_ALLOWED_SVG_TAGS = array(
 		'width'     => true,
 		'x'         => true,
 		'y'         => true,
-	),
-	'text' => array(
+	],
+	'text' => [
 		'fill'        => true,
 		'font-family' => true,
 		'font-size'   => true,
 		'font-weight' => true,
 		'title'       => true,
 		'transform'   => true,
-	),
-	'path' => array(
+	],
+	'path' => [
 		'd'               => true,
 		'fill'            => true,
 		'opacity'         => true,
@@ -136,5 +136,5 @@ const KSES_ALLOWED_SVG_TAGS = array(
 		'stroke-width'    => true,
 		'transform'       => true,
 
-	),
-);
+	],
+];

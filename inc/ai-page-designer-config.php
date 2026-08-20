@@ -19,7 +19,7 @@ class AIPageDesignerDebug {
 	 *
 	 * @return bool
 	 */
-	public static function is_debug_mode() {
+	public static function is_debug_mode(): bool {
 		return \get_option( 'nfd_ai_page_designer_debug_mode', false ) ||
 			( defined( 'WP_DEBUG' ) && WP_DEBUG );
 	}
@@ -30,7 +30,7 @@ class AIPageDesignerDebug {
 	 * @param bool $enabled Enable or disable debug mode
 	 * @return bool True if debug mode is enabled, false otherwise
 	 */
-	public static function enable_debug( $enabled = true ) {
+	public static function enable_debug( bool $enabled = true ): bool {
 		return \update_option( 'nfd_ai_page_designer_debug_mode', $enabled );
 	}
 
@@ -40,8 +40,9 @@ class AIPageDesignerDebug {
 	 * @param string $message The message to log
 	 * @param array  $context The context of the message
 	 */
-	public static function debug_log( $message, $context = array() ) {
+	public static function debug_log( string $message, array $context = [] ): void {
 		if ( self::is_debug_mode() ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional debug logging when AI Page Designer debug mode is enabled.
 			\error_log(
 				\sprintf(
 					'[AI Page Designer] %s %s',
