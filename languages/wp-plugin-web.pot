@@ -412,17 +412,3 @@ msgstr ""
 #: build/2.3.6/index.js:1
 msgid "Add Store Details"
 msgstr ""
-
-#: build/2.3.4/index.js:1
-#: build/2.3.5/150.js:1
-msgid " day."
-msgid_plural " days."
-msgstr[0] ""
-msgstr[1] ""
-
-#: build/2.3.4/index.js:1
-#: build/2.3.5/150.js:1
-msgid " comment at a time."
-msgid_plural " comments at a time."
-msgstr[0] ""
-msgstr[1] ""
