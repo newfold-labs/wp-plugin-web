@@ -47,7 +47,7 @@
         "@types/node": "^25.9.1",
         "@wordpress/env": "^11.12.0",
         "@wordpress/scripts": "^34",
-        "axe-core": "^4.11.3",
+        "axe-core": "^4.13.0",
         "node-fetch": "^2.7.0",
         "tailwindcss": "^3.4.17",
         "yaml-lint": "^1.7.0"
