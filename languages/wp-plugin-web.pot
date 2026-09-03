@@ -9,30 +9,29 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-01-11T20:21:44+00:00\n"
+"POT-Creation-Date: 2026-09-03T07:30:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wp-plugin-web\n"
 
 #. Plugin Name of the plugin
-#: wp-plugin-web.php:11
+#: wp-plugin-web.php
 msgid "Network Solutions Plugin"
 msgstr ""
 
 #. Plugin URI of the plugin
 #. Author URI of the plugin
-#: wp-plugin-web.php:12
-#: wp-plugin-web.php:20
+#: wp-plugin-web.php
 msgid "https://www.networksolutions.com"
 msgstr ""
 
 #. Description of the plugin
-#: wp-plugin-web.php:14
+#: wp-plugin-web.php
 msgid "WordPress plugin that integrates a WordPress site with the Network Solutions control panel, including performance, security, and update features."
 msgstr ""
 
 #. Author of the plugin
-#: wp-plugin-web.php:19
+#: wp-plugin-web.php
 #: inc/Admin.php:118
 #: inc/Admin.php:119
 msgid "Network Solutions"
@@ -78,25 +77,36 @@ msgstr ""
 
 #: inc/Admin.php:63
 #: inc/Admin.php:235
+#: src/app/data/routes.js:34
+#: src/app/pages/home/index.js:21
 msgid "Home"
 msgstr ""
 
 #: inc/Admin.php:64
 #: build/2.3.7/index.js:1
+#: src/app/data/routes.js:41
+#: src/app/pages/home/settingsSection.js:30
+#: src/app/pages/marketplace/index.js:16
 msgid "Marketplace"
 msgstr ""
 
 #: inc/Admin.php:65
 #: inc/Admin.php:236
 #: build/2.3.7/index.js:1
+#: src/app/data/routes.js:57
+#: src/app/pages/home/settingsSection.js:13
+#: src/app/pages/settings/index.js:66
 msgid "Settings"
 msgstr ""
 
 #: inc/Admin.php:72
+#: src/app/data/routes.js:64
 msgid "AI Designer"
 msgstr ""
 
 #: inc/Admin.php:76
+#: src/app/data/routes.js:75
+#: src/app/pages/help/index.js:58
 msgid "Help"
 msgstr ""
 
@@ -190,16 +200,19 @@ msgstr ""
 
 #: inc/widgets/views/site-preview.php:148
 #: build/2.3.7/index.js:1
+#: src/app/pages/settings/comingSoon.js:40
 msgid "Not Live"
 msgstr ""
 
 #: inc/widgets/views/site-preview.php:149
 #: build/2.3.7/index.js:1
+#: src/app/pages/settings/comingSoon.js:44
 msgid "Live"
 msgstr ""
 
 #: inc/widgets/views/site-preview.php:162
 #: build/2.3.7/index.js:1
+#: src/app/pages/settings/comingSoon.js:125
 msgid "Your website is currently displaying a \"Coming Soon\" page."
 msgstr ""
 
@@ -212,6 +225,8 @@ msgid "Preview Site"
 msgstr ""
 
 #: inc/widgets/views/site-preview.php:179
+#: src/app/components/app-nav/index.js:308
+#: src/app/components/site-info/index.js:57
 msgid "View Site"
 msgstr ""
 
@@ -228,187 +243,639 @@ msgid "Enable Coming Soon"
 msgstr ""
 
 #: build/2.3.7/136.js:1
+#: src/app/pages/settings/performanceFeatureSettings.js:80
 msgid "The performance feature provides improvements to loads faster for visitors including cache settings."
 msgstr ""
 
 #: build/2.3.7/136.js:1
+#: src/app/pages/settings/performanceFeatureSettings.js:57
+#: src/app/pages/settings/wonderBlockSettings.js:57
 msgid "Sorry, that is not allowed."
 msgstr ""
 
 #: build/2.3.7/136.js:1
+#: src/app/pages/settings/performanceFeatureSettings.js:58
+#: src/app/pages/settings/wonderBlockSettings.js:58
 msgid "This feature cannot currently be modified."
 msgstr ""
 
 #: build/2.3.7/136.js:1
 #: build/2.3.7/150.js:1
 #: build/2.3.7/index.js:1
+#: src/app/pages/settings/automaticUpdates.js:275
+#: src/app/pages/settings/comingSoon.js:131
+#: src/app/pages/settings/commentSettings.js:239
+#: src/app/pages/settings/contentSettings.js:172
+#: src/app/pages/settings/performanceFeatureSettings.js:91
+#: src/app/pages/settings/wonderBlockSettings.js:99
 msgid "Oops! Something went wrong. Please try again."
 msgstr ""
 
 #: build/2.3.7/150.js:1
+#: src/app/pages/settings/automaticUpdates.js:82
 msgid "Manage All Updates"
 msgstr ""
 
 #: build/2.3.7/150.js:1
+#: src/app/pages/settings/automaticUpdates.js:137
 msgid "WordPress Core"
 msgstr ""
 
 #: build/2.3.7/150.js:1
+#: src/app/pages/settings/automaticUpdates.js:193
 msgid "Plugins"
 msgstr ""
 
 #: build/2.3.7/150.js:1
+#: src/app/pages/settings/automaticUpdates.js:250
 msgid "Themes"
 msgstr ""
 
 #: build/2.3.7/150.js:1
+#: src/app/pages/settings/automaticUpdates.js:265
 msgid "Automatic Updates"
 msgstr ""
 
 #: build/2.3.7/150.js:1
+#: src/app/pages/settings/automaticUpdates.js:266
 msgid "Keeping automatic updates on ensures timely security fixes and the latest features."
 msgstr ""
 
 #: build/2.3.7/150.js:1
+#: src/app/pages/settings/commentSettings.js:85
+#: src/app/pages/settings/commentSettings.js:94
 msgid " day."
 msgid_plural " days."
 msgstr[0] ""
 msgstr[1] ""
 
 #: build/2.3.7/150.js:1
+#: src/app/pages/settings/commentSettings.js:167
 msgid " comment at a time."
 msgid_plural " comments at a time."
 msgstr[0] ""
 msgstr[1] ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:4
 msgid "Chat"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:5
 msgid "Chat with our sales and support team for quick, helpful answers to questions about product features, pricing and more. Our chat agents are available 24/7."
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:10
 msgid "Live Chat"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:16
 msgid "Phone"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:17
 msgid "Speak to our award-winning support team over the phone at 855-834-8495. Our customer service hours are 8:00am - 11:00pm ET."
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:22
 msgid "Call Us"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:27
 msgid "Tweet"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:28
 msgid "Find our team at @netsolcares for updates on our products and support from our team."
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:33
 msgid "Tweet Us"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:38
 msgid "Knowledge Base"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:39
 msgid "Our experts share their experience and well-organized guides to common questions."
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:44
 msgid "Find Answers"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:50
+#: src/app/pages/home/webContentSection.js:12
 msgid "Blog"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:51
 msgid "Learn best practices, get insider tips and find the latest news about Network Solutions."
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:56
 msgid "Learn Stuff"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:62
 msgid "Video Tutorials"
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:63
 msgid "Check out our video library of step-by-step tutorials."
 msgstr ""
 
 #: build/2.3.7/400.js:1
+#: src/app/data/help.js:68
 msgid "Watch Now"
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/settings/comingSoon.js:51
 msgid "Site Status"
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/settings/comingSoon.js:112
 msgid "Coming soon page"
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/settings/comingSoon.js:113
 msgid "Your Coming Soon page lets you hide your site from visitors while you make the magic happen."
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/settingsSection.js:7
 msgid "Settings and Performance"
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/settingsSection.js:8
 msgid "Customize & fine-tune your site."
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/settingsSection.js:12
 msgid "Manage Settings"
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/settingsSection.js:17
 msgid "Manage your site settings. You can adjust automatic updates, comments, revisions and more."
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/data/routes.js:50
+#: src/app/pages/home/settingsSection.js:21
+#: src/app/pages/home/settingsSection.js:22
+#: src/app/pages/settings/index.js:134
 msgid "Performance"
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/settingsSection.js:26
 msgid "Manage site performance and caching settings as well as clear the site cache."
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/settingsSection.js:31
 msgid "Visit Marketplace"
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/settingsSection.js:35
 msgid "Add site services, themes or plugins from the marketplace."
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/storeDetails.js:17
 msgid "Congrats, your store is live!"
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/storeDetails.js:18
 msgid "Congrats, your website is live!"
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/storeDetails.js:20
 msgid "Store Details"
 msgstr ""
 
 #: build/2.3.7/index.js:1
+#: src/app/pages/home/storeDetails.js:21
 msgid "Add Store Details"
+msgstr ""
+
+#: src/app/components/app-nav/index.js:298
+msgid "NS Account"
+msgstr ""
+
+#: src/app/components/app-nav/index.js:308
+#: src/app/components/site-info/index.js:57
+msgid "View Store"
+msgstr ""
+
+#: src/app/components/app-nav/logo.js:31
+msgid "Web WordPress Plugin"
+msgstr ""
+
+#: src/app/components/errorCard/index.js:27
+msgid "Oh No, An Error!"
+msgstr ""
+
+#: src/app/components/errorCard/index.js:32
+msgid "You found an error, please refresh the page and try again!"
+msgstr ""
+
+#: src/app/components/errorCard/index.js:38
+msgid "If the error persists, please contact support."
+msgstr ""
+
+#: src/app/components/errorCard/index.js:48
+msgid " Error code: "
+msgstr ""
+
+#: src/app/components/site-info/index.js:46
+msgid "Network Solutions Account"
+msgstr ""
+
+#: src/app/data/routes.js:82
+#: src/app/pages/admin/index.js:12
+msgid "Admin"
+msgstr ""
+
+#: src/app/data/routes.js:140
+msgid "There's nothing here!"
+msgstr ""
+
+#: src/app/pages/admin/index.js:13
+msgid "Secret page to manage admin features and settings."
+msgstr ""
+
+#: src/app/pages/help/index.js:60
+msgid "We are available 24/7 to help answer questions and solve your problems."
+msgstr ""
+
+#: src/app/pages/home/index.js:23
+msgid "Manage your website settings and content."
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:7
+msgid "Website Content"
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:8
+msgid "Create, manage & sort your story."
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:13
+msgid "New Post"
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:17
+msgid "Write a new blog post."
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:21
+msgid "Pages"
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:22
+msgid "New Page"
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:26
+msgid "Add fresh pages to your website."
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:30
+msgid "Categories"
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:31
+msgid "Manage Categories"
+msgstr ""
+
+#: src/app/pages/home/webContentSection.js:35
+msgid "Organize existing content into categories."
+msgstr ""
+
+#: src/app/pages/home/webHostingSection.js:7
+msgid "Web Hosting"
+msgstr ""
+
+#: src/app/pages/home/webHostingSection.js:8
+msgid "Access & manage your Network Solutions account."
+msgstr ""
+
+#: src/app/pages/home/webHostingSection.js:12
+#: src/app/pages/home/webHostingSection.js:13
+msgid "Manage Network Solutions Account"
+msgstr ""
+
+#: src/app/pages/home/webHostingSection.js:25
+msgid "Manage Network Solutions account products, options and billing."
+msgstr ""
+
+#: src/app/pages/marketplace/index.js:17
+msgid "Explore our marketplace plugins and services."
+msgstr ""
+
+#: src/app/pages/marketplace/index.js:18
+msgid "Oops, there was an error loading the marketplace, please try again later."
+msgstr ""
+
+#: src/app/pages/marketplace/index.js:19
+msgid "Sorry, no marketplace items. Please, try again later."
+msgstr ""
+
+#: src/app/pages/marketplace/index.js:20
+msgid "Load More"
+msgstr ""
+
+#: src/app/pages/marketplace/index.js:23
+msgid "Oops! Something Went Wrong"
+msgstr ""
+
+#: src/app/pages/marketplace/index.js:27
+msgid "An error occurred while loading the content. Please try again later."
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:20
+msgid "Enabled All auto-updates"
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:21
+msgid "Disabled All auto-updates"
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:25
+msgid "Everything will automatically update."
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:26
+msgid "Custom auto-update settings."
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:97
+msgid "Enabled Core auto-updates"
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:98
+msgid "Disabled Core auto-updates"
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:102
+msgid "WordPress will automatically update."
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:103
+msgid "WordPress must be manually updated."
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:153
+msgid "Enabled Plugins auto-update"
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:154
+msgid "Disabled Plugins auto-update"
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:158
+msgid "All plugins will automatically update."
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:159
+msgid "Each plugin must be manually updated."
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:209
+msgid "Enabled Themes auto-update"
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:210
+msgid "Disabled Themes auto-update"
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:215
+msgid "All themes will automatically update."
+msgstr ""
+
+#: src/app/pages/settings/automaticUpdates.js:216
+msgid "Each theme must be manually updated."
+msgstr ""
+
+#: src/app/pages/settings/comingSoon.js:20
+msgid "Coming soon activated"
+msgstr ""
+
+#: src/app/pages/settings/comingSoon.js:21
+msgid "Coming soon deactivated"
+msgstr ""
+
+#: src/app/pages/settings/comingSoon.js:26
+msgid "Coming soon page is active. Site requires login."
+msgstr ""
+
+#: src/app/pages/settings/comingSoon.js:30
+msgid "Coming soon page is not active. Site is live to visitors."
+msgstr ""
+
+#: src/app/pages/settings/comingSoon.js:67
+msgid "Turn off your \"Coming Soon\" page when you are ready to launch your website."
+msgstr ""
+
+#: src/app/pages/settings/comingSoon.js:71
+msgid "Turn on your \"Coming Soon\" page when you need to make major changes to your website."
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:16
+msgid "Disabled old post comments"
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:17
+msgid "Enabled old post comments"
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:22
+msgid "Comments on old posts are disabled."
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:23
+msgid "Comments are allowed on old posts."
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:57
+msgid "Disable comments for older posts"
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:76
+msgid "Comments setting saved "
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:83
+msgid "Comments on posts are disabled after "
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:92
+msgid "Close comments after "
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:159
+msgid "Comments setting saved."
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:165
+msgid "Posts will display "
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:207
+msgid "Display "
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:208
+msgid " comments per page."
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:230
+msgid "Comments"
+msgstr ""
+
+#: src/app/pages/settings/commentSettings.js:231
+msgid "Comments allow visitors to provide feedback and respond to your posts or pages."
+msgstr ""
+
+#: src/app/pages/settings/contentSettings.js:16
+msgid "Post revision setting saved "
+msgstr ""
+
+#: src/app/pages/settings/contentSettings.js:22
+msgid "Posts will save  "
+msgstr ""
+
+#: src/app/pages/settings/contentSettings.js:24
+msgid " revision."
+msgid_plural " revisions."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/app/pages/settings/contentSettings.js:30
+msgid "Saving drafts and updating published content creates revisions. Make changes with confidence, knowing you can take "
+msgstr ""
+
+#: src/app/pages/settings/contentSettings.js:32
+msgid " step back."
+msgid_plural " steps back."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/app/pages/settings/contentSettings.js:67
+msgid "Number of revisions posts can save "
+msgstr ""
+
+#: src/app/pages/settings/contentSettings.js:93
+msgid "Trash setting saved "
+msgstr ""
+
+#: src/app/pages/settings/contentSettings.js:99
+#: src/app/pages/settings/contentSettings.js:139
+msgid "The trash will automatically empty every "
+msgstr ""
+
+#: src/app/pages/settings/contentSettings.js:101
+#: src/app/pages/settings/contentSettings.js:141
+msgid " week."
+msgid_plural " weeks."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/app/pages/settings/contentSettings.js:137
+msgid "Trash emptying frequency "
+msgstr ""
+
+#: src/app/pages/settings/contentSettings.js:163
+msgid "Content Options"
+msgstr ""
+
+#: src/app/pages/settings/contentSettings.js:164
+msgid "Controls for content revisions and how often to empty the trash."
+msgstr ""
+
+#: src/app/pages/settings/index.js:68
+msgid "Manage common settings for your website."
+msgstr ""
+
+#: src/app/pages/settings/index.js:79
+msgid "General Settings"
+msgstr ""
+
+#: src/app/pages/settings/index.js:85
+msgid "Manage common settings for your website"
+msgstr ""
+
+#: src/app/pages/settings/index.js:107
+msgid "Features"
+msgstr ""
+
+#: src/app/pages/settings/index.js:108
+msgid "Customize the available features as you manage your website."
+msgstr ""
+
+#: src/app/pages/settings/index.js:140
+msgid "Optimize your website by managing cache and performance settings"
+msgstr ""
+
+#: src/app/pages/settings/performanceFeatureSettings.js:21
+msgid "Performance Enabled"
+msgstr ""
+
+#: src/app/pages/settings/performanceFeatureSettings.js:22
+msgid "Performance Disabled"
+msgstr ""
+
+#: src/app/pages/settings/performanceFeatureSettings.js:27
+msgid "You need to reload the page to manage Performance."
+msgstr ""
+
+#: src/app/pages/settings/performanceFeatureSettings.js:31
+msgid "Performance will no longer display."
+msgstr ""
+
+#: src/app/pages/settings/wonderBlockSettings.js:20
+msgid "WonderBlocks Enabled"
+msgstr ""
+
+#: src/app/pages/settings/wonderBlockSettings.js:24
+msgid "WonderBlocks Disabled"
+msgstr ""
+
+#: src/app/pages/settings/wonderBlockSettings.js:32
+msgid "Create new content to see WonderBlocks in action."
+msgstr ""
+
+#: src/app/pages/settings/wonderBlockSettings.js:36
+msgid "WonderBlocks will no longer display."
+msgstr ""
+
+#: src/app/pages/settings/wonderBlockSettings.js:88
+msgid "WonderBlocks provides a library of customizable block patterns and page templates."
 msgstr ""
