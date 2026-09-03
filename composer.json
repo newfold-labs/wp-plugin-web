@@ -108,7 +108,7 @@
         "wp-forge/wp-upgrade-handler": "^1.0"
     },
     "require-dev": {
-        "newfold-labs/wp-php-standards": "^1.2.6",
+        "newfold-labs/wp-php-standards": "^2.0.0",
         "phpunit/phpunit": "^9.6",
         "roave/security-advisories": "dev-latest",
         "wp-cli/i18n-command": "^2.6.3",
