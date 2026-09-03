@@ -378,7 +378,7 @@ msgid "Manage Settings"
 msgstr ""
 
 #: build/2.3.7/index.js:1
-msgid "Manage your site settings. You can ajdust automatic updates, comments, revisions and more."
+msgid "Manage your site settings. You can adjust automatic updates, comments, revisions and more."
 msgstr ""
 
 #: build/2.3.7/index.js:1
