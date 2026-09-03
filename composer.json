@@ -112,7 +112,7 @@
         "phpunit/phpunit": "^9.6",
         "roave/security-advisories": "dev-latest",
         "wp-cli/i18n-command": "^2.6.3",
-        "yoast/phpunit-polyfills": "^2.0",
+        "yoast/phpunit-polyfills": "^4.0",
         "wp-phpunit/wp-phpunit": "^7.1.0"
     }
 }
