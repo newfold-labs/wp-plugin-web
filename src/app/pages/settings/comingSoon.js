@@ -108,6 +108,7 @@ const ComingSoon = memo( () => {
 			<div className="nfd-flex nfd-flex-col nfd-gap-6">
 				<ToggleField
 					id="coming-soon-toggle"
+					data-id="coming-soon-toggle"
 					label={__('Coming soon page', 'wp-plugin-web')}
 					description={__(
 						'Your Coming Soon page lets you hide your site from visitors while you make the magic happen.',

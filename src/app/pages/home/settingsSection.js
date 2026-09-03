@@ -14,7 +14,7 @@ const SettingsSection = () => {
 					href={window.NewfoldRuntime.linkTracker.addUtmParams("admin.php?page=web#/settings")}
 					className={"wppw-app-home-settings-action"}
 				>
-					{__('Manage your site settings. You can ajdust automatic updates, comments, revisions and more.', 'wp-plugin-web')}
+					{__('Manage your site settings. You can adjust automatic updates, comments, revisions and more.', 'wp-plugin-web')}
 				</ActionField>
 
 				<ActionField
