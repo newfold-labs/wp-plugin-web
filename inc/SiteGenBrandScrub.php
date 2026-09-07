@@ -23,8 +23,9 @@ namespace Web;
  * The markup does not stay in the onboarding preview either — the selected footer is written to
  * the active theme's `footer` template part, so a finished site ships the link in its footer.
  *
- * Until this is fixed upstream, scrub the markup on the way into the database. The link goes and
- * the copyright text around it stays, so the footer keeps its layout.
+ * Until this is fixed upstream, scrub the markup on the way into the database. The copyright text
+ * up to its year is kept, so the footer keeps its layout, and the link goes along with whatever
+ * followed it.
  */
 class SiteGenBrandScrub {
 
@@ -188,8 +189,7 @@ class SiteGenBrandScrub {
 	/**
 	 * Rewrite a single paragraph that carries a blocked-host link.
 	 *
-	 * `&copy; 2026. <a href="https://bluehost.com/...">Powered by Bluehost</a>.` becomes
-	 * `&copy; 2026.`
+	 * The copyright text that led up to the link is kept; the link and everything after it goes.
 	 *
 	 * @param array $matches Open tag, contents and close tag of one paragraph.
 	 */
@@ -198,7 +198,7 @@ class SiteGenBrandScrub {
 			return $matches[0];
 		}
 
-		return $matches[1] . self::tidy( self::remove_blocked_links( $matches[2] ) ) . $matches[3];
+		return $matches[1] . self::keep_copyright_prefix( $matches[2] ) . $matches[3];
 	}
 
 	/**
@@ -217,22 +217,41 @@ class SiteGenBrandScrub {
 	}
 
 	/**
-	 * Clean up what a removed credit link leaves behind inside a paragraph.
+	 * Reduce a paragraph to the copyright text that led up to the blocked link.
 	 *
-	 * @param string $inner Paragraph contents, with the link already removed.
+	 * Everything from the link onwards is dropped, then the remainder is cut to the end of its
+	 * first year. Trying to repair the punctuation around a removed link instead means guessing
+	 * at layouts we have not seen — `2026 |`, `2026 -`, `2026 .` all read badly — whereas
+	 * anchoring on the year cannot leave a separator dangling whatever the pattern looked like.
+	 *
+	 *     &copy; Copyright 2026 <a href="https://bluehost.com/...">Bluehost</a>.  ->  &copy; Copyright 2026
+	 *     &copy; 2024 - 2026 | <a href="https://bluehost.com/...">Bluehost</a>    ->  &copy; 2024 - 2026
+	 *
+	 * With no year to anchor on there is no copyright fragment to keep, so fall back to the text
+	 * before the link, minus the credit phrase the link used to complete and any trailing
+	 * separator. `force_balance_tags()` closes markup the truncation may have cut through.
+	 *
+	 * @param string $inner Paragraph contents, link included.
 	 */
-	private static function tidy( string $inner ): string {
+	private static function keep_copyright_prefix( string $inner ): string {
 		$inner = (string) preg_replace( '#\s+#', ' ', $inner );
+		$inner = self::truncate_at_blocked_link( $inner );
 
-		// "(c) 2026. Powered by ." -> "(c) 2026. ." — drop the phrase the link used to complete.
-		$inner = (string) preg_replace(
-			'#\b(?:powered|designed|built|hosted|made)\s+by\s*(?=[.,;:]?\s*$)#i',
-			'',
-			$inner
-		);
+		if ( preg_match( '#^.*?\b\d{4}(?:\s*[-–—]\s*\d{4})?#u', $inner, $matches ) ) {
+			$inner = $matches[0];
+		} else {
+			// "Hosted by " -> "" — the phrase only made sense with the link that followed it.
+			$inner = (string) preg_replace(
+				'#\b(?:powered|designed|built|hosted|made)\s+by\s*$#i',
+				'',
+				$inner
+			);
 
-		// "(c) 2026. ." -> "(c) 2026." — drop the punctuation the removal orphaned.
-		$inner = trim( (string) preg_replace( '#([.,;:])\s*[.,;:]#', '$1', $inner ) );
+			// "&copy; Acme | " -> "&copy; Acme" — the separator has nothing left to separate.
+			$inner = (string) preg_replace( '#[\s|/•·,;:–—-]+$#u', '', $inner );
+		}
+
+		$inner = trim( force_balance_tags( $inner ) );
 
 		// If only punctuation survived, empty the paragraph rather than leave a stray mark.
 		if ( ! preg_match( '#[\p{L}\p{N}]#u', wp_strip_all_tags( $inner ) ) ) {
@@ -240,5 +259,23 @@ class SiteGenBrandScrub {
 		}
 
 		return $inner;
+	}
+
+	/**
+	 * Cut a string at the first link pointing to the blocked host.
+	 *
+	 * @param string $html Markup to truncate.
+	 */
+	private static function truncate_at_blocked_link( string $html ): string {
+		$host = preg_quote( self::BLOCKED_HOST, '#' );
+
+		$found = preg_match(
+			'#<a\b[^>]*href\s*=\s*([\'"])[^\'"]*' . $host . '[^\'"]*\1[^>]*>#i',
+			$html,
+			$matches,
+			PREG_OFFSET_CAPTURE
+		);
+
+		return $found ? substr( $html, 0, $matches[0][1] ) : $html;
 	}
 }
