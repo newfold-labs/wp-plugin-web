@@ -17,45 +17,25 @@ test.describe('AI Page Designer', () => {
     // again rather than let whichever spec happens to run first absorb the failure.
     for (let attempt = 0; attempt < 3; attempt++) {
       await newfold.setCapability(capabilities);
-      await auth.navigateToAdminPage(page, 'admin.php?page=web#/ai-designer');
+
+      if (attempt === 0) {
+        await auth.navigateToAdminPage(page, 'admin.php?page=web#/ai-designer');
+      } else {
+        // Must be reload(), as it re-requests the document,
+        // so a capability written since the initial load is actually picked up.
+        await page.reload({ waitUntil: 'domcontentloaded' });
+      }
+
       await page.waitForSelector('#wppw-app-rendered', { timeout: 15000 });
 
-      // Wait properly rather than checking instantaneously: the AI Designer
-      // page is a React.lazy() import, so the mount appears a beat after
-      // #wppw-app-rendered. A bare count() here retries on that race and
-      // makes the diagnostic below fire before the page had a fair chance.
+      // Wait rather than checking instantaneously: the AI Designer page is
+      // a React.lazy() import, so the mount appears a beat after
       try {
         await mount.waitFor({ state: 'attached', timeout: 15000 });
         break;
       } catch (e) {
-        // Genuinely absent after waiting -- fall through and record why.
+        // Genuinely absent after waiting -- fall through and retry.
       }
-
-      // TEMPORARY DIAGNOSTIC -- remove once the first-run capability failure
-      // is understood. Three readings taken at the moment of failure:
-      //   db     - what the options table actually holds
-      //   page   - what this rendered document received
-      //   refetch- a fresh server request on this same context/session,
-      //            which distinguishes a stale browser cache from the server
-      //            genuinely returning no capabilities for this session.
-      const dbCaps = await newfold.logCapabilities();
-      const pageCaps = await page.evaluate(
-        () => window.NewfoldRuntime && window.NewfoldRuntime.capabilities
-      );
-      let refetchCaps = 'n/a';
-      try {
-        const res = await page.request.get(page.url().split('#')[0]);
-        const html = await res.text();
-        const m = html.match(/capabilities":(\[\]|\{[^}]*\})/);
-        refetchCaps = m ? m[1] : 'not-found-in-html';
-      } catch (e) {
-        refetchCaps = `error: ${e.message}`;
-      }
-
-      console.log(`[aipd-diag] attempt=${attempt} url=${page.url()}`);
-      console.log(`[aipd-diag]   db      = ${JSON.stringify(dbCaps)}`);
-      console.log(`[aipd-diag]   page    = ${JSON.stringify(pageCaps)}`);
-      console.log(`[aipd-diag]   refetch = ${refetchCaps}`);
     }
 
     await expect(mount).toBeVisible({ timeout: 15000 });
