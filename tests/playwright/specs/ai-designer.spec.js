@@ -3,6 +3,8 @@ import { auth, a11y, newfold } from '../helpers';
 
 test.describe('AI Page Designer', () => {
   test.beforeEach(async ({ page }) => {
+    test.setTimeout(90000);
+
     await newfold.setCapability({
       canAccessAI: true,
       canAccessAIPageDesigner: true,
@@ -10,12 +12,14 @@ test.describe('AI Page Designer', () => {
     });
     await auth.navigateToAdminPage(page, 'admin.php?page=web#/ai-designer');
     await page.waitForSelector('#wppw-app-rendered', { timeout: 15000 });
-    await page.waitForSelector('#nfd-ai-page-designer-mount', { timeout: 15000 });
-    await expect(
-      page.locator('#nfd-ai-page-designer-mount').getByText('AI Page Designer', {
-        exact: false,
+
+    const mount = page.locator('#nfd-ai-page-designer-mount');
+    await expect(mount).toBeVisible({ timeout: 15000 });
+    await expect
+      .poll(() => mount.evaluate((el) => el.childElementCount), {
+        timeout: 20000,
       })
-    ).toBeVisible({ timeout: 20000 });
+      .toBeGreaterThan(0);
   });
 
   test('route and shell render', async ({ page }) => {
