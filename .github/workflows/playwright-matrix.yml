@@ -136,7 +136,11 @@ jobs:
 
       - name: Patch wp-env Dockerfile for expired Debian Bullseye release
         run: |
-          DOCKERFILE=$(find node_modules/@wordpress/env -name "Dockerfile*" -exec grep -l "apt-get" {} \;)
+          DOCKERFILE=$(grep -rl "apt-get" node_modules/@wordpress/env/lib/ 2>/dev/null | head -1 || true)
+          if [ -z "$DOCKERFILE" ]; then
+            echo "No matching file found — skipping patch, will investigate separately."
+            exit 0
+          fi
           echo "Patching: $DOCKERFILE"
           sed -i 's/apt-get -qy update/apt-get -qy -o Acquire::Check-Valid-Until=false update/' "$DOCKERFILE"
 
