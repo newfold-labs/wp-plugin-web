@@ -3,17 +3,28 @@ import { auth, a11y, newfold } from '../helpers';
 
 test.describe('AI Page Designer', () => {
   test.beforeEach(async ({ page }) => {
-    test.setTimeout(90000);
+    test.setTimeout(120000);
 
-    await newfold.setCapability({
+    const capabilities = {
       canAccessAI: true,
       canAccessAIPageDesigner: true,
       hasAISiteGen: true,
-    });
-    await auth.navigateToAdminPage(page, 'admin.php?page=web#/ai-designer');
-    await page.waitForSelector('#wppw-app-rendered', { timeout: 15000 });
-
+    };
     const mount = page.locator('#nfd-ai-page-designer-mount');
+
+    // On CI the very first admin request of a fresh install renders with an
+    // empty NewfoldRuntime.capabilities. Re-apply the capabilities and load the page
+    // again rather than let whichever spec happens to run first absorb the failure.
+    for (let attempt = 0; attempt < 3; attempt++) {
+      await newfold.setCapability(capabilities);
+      await auth.navigateToAdminPage(page, 'admin.php?page=web#/ai-designer');
+      await page.waitForSelector('#wppw-app-rendered', { timeout: 15000 });
+
+      if (await mount.count()) {
+        break;
+      }
+    }
+
     await expect(mount).toBeVisible({ timeout: 15000 });
     await expect
       .poll(() => mount.evaluate((el) => el.childElementCount), {

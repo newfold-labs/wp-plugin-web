@@ -214,7 +214,6 @@ jobs:
           command: |
             pwd
             ls -la .wp-env*
-            docker builder prune -f
             npx wp-env start --debug
             npx wp-env run cli wp core version
 
@@ -228,19 +227,10 @@ jobs:
 
       - name: Drop broken third-party apt repos on the runner
         run: |
-          # `playwright install --with-deps` runs apt-get update on the RUNNER
-          # itself (not inside the wp-env container). GitHub's image ships
-          # third-party apt sources, and Google's has been serving a
-          # Packages.gz whose checksum does not match its own Release file:
-          #   E: Failed to fetch .../Packages.gz  Hash Sum mismatch
-          # apt fails the whole update on one bad repo, which takes this step
-          # down on every matrix leg. Playwright's OS dependencies come from
-          # Ubuntu's own repos, so these third-party sources are unnecessary
-          # here and safe to remove. Retrying does not help - the bad index is
-          # served from Google's CDN, not cached locally.
-          # Match on content, not filename: the runner image has used more
-          # than one name/URL form for this source. Scoped to sources.list.d so
-          # /etc/apt/sources.list (Ubuntu's own repos) can never be removed.
+          # Playwright's OS dependencies come from Ubuntu's own repos
+          # so these third-party sources are unnecessary here and safe to remove.
+          # Scoped to sources.list.d so /etc/apt/sources.list (Ubuntu's own repos) 
+          # can never be removed.
           sudo grep -rl 'dl\.google\.com' /etc/apt/sources.list.d/ 2>/dev/null \
             | sudo xargs -r rm -fv || true
           sudo apt-get clean
