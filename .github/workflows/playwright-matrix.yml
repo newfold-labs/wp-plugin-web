@@ -138,9 +138,9 @@ jobs:
         if: matrix.phpVersion == '7.4' || matrix.phpVersion == '8.0'
         run: |
           FILE=node_modules/@wordpress/env/lib/runtime/docker/docker-config.js
-          sed -i "s|# Make sure we're working with the latest packages.|# Redirect to permanent archive — bullseye mirrors are EOL/pruned.\nRUN sed -i 's/deb.debian.org/archive.debian.org/g; s/security.debian.org/archive.debian.org/g' /etc/apt/sources.list\n\n# Make sure we're working with the latest packages.|" "$FILE"
+          sed -i "s|# Make sure we're working with the latest packages.|# Redirect to permanent archive — bullseye mirrors are EOL/pruned.\nRUN set -eux; for f in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do [ -e \"\$f\" ] || continue; sed -i 's\|deb.debian.org\|archive.debian.org\|g; s\|security.debian.org\|archive.debian.org\|g' \"\$f\"; done; grep -R . /etc/apt/sources.list /etc/apt/sources.list.d 2>/dev/null \|\| true\n\n# Make sure we're working with the latest packages.|" "$FILE"
           sed -i 's/apt-get -qy update/apt-get -qy -o Acquire::Check-Valid-Until=false update/' "$FILE"
-          grep -n -B2 -A10 "Redirect to permanent archive" "$FILE"
+          grep -n -B2 -A12 "Redirect to permanent archive" "$FILE"
 
       - name: Build JavaScript
         run: npm run build
