@@ -14,6 +14,17 @@ async function globalSetup(config) {
       timeout: 60000,
     });
 
+    // wp-module-data registers the site with Hiive on the first admin request.
+    // On success HiiveConnection::connect() calls SiteCapabilities::clear(),
+    // which deletes the nfd_site_capabilities transient so pre-arming it keeps 
+    // the suite off Hiive entirely.
+    utils.fancyLog('🚫 Throttling Hiive connection for the test run...', 55, 'gray', '');
+    execSync('npx wp-env run cli -- wp transient set nfd_data_connection_throttle 1 3600 || true', {
+      stdio: 'inherit',
+      encoding: 'utf-8',
+      timeout: 60000,
+    });
+
     // Set permalink structure via WP-CLI (runs before browser is created)
     const permalinkStructure = '/%postname%/';
     utils.fancyLog(`🔗 Setting permalink structure to: ${permalinkStructure}`, 55, 'gray', '');
