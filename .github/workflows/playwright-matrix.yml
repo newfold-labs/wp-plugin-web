@@ -167,6 +167,7 @@ jobs:
           command: |
             pwd
             ls -la .wp-env*
+            docker builder prune -f
             npx wp-env start --debug
             npx wp-env run cli wp core version
 
