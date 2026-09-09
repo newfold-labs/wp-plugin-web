@@ -15,6 +15,13 @@ module.exports = {
         './vendor/newfold-labs/wp-module-*/src/**/*.js',
         './vendor/newfold-labs/wp-module-*/assets/js/**/*.js', // e.g. wp-module-notifications components bundled into this app
     ],
+    // The active nav state depends on these, and a miss is silent
+    // so pin them rather than rely on the scanner finding the literals
+    safelist: [
+        'nfd-bg-primary-50',
+        '[&.active]:nfd-bg-primary-50',
+    ],
+
     theme: {
         extend: {
             colors: {

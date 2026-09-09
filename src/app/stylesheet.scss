@@ -25,8 +25,11 @@
     --color-warning-contrast: #FFE3C6;
     --color-error-contrast: #F6D3D3;
     --color-canvas: #FDFDFD;
+}
 
-    // NFD Module Overrides (wp-module-performance, etc.)
+// Network Solutions brand tokens for Newfold module UI
+// (wp-module-performance, coming-soon, next-steps, etc.).
+@mixin nfd-brand-tokens {
     --nfd-color-primary: #1F2044 !important;
     --nfd-color-primary-dark: #191936 !important;
     --nfd-color-primary-light: #2E93EE !important;
@@ -39,19 +42,15 @@
     --nfd-color-body: #363636 !important;
 }
 
-// Network Solutions Brand Override - Higher specificity to override module styles
+// Scoped to this plugin's own admin screens rather than :root.
+body[class*="page_web"] {
+    @include nfd-brand-tokens;
+}
+
+// Higher specificity again inside the app itself, to win over module styles.
 .nfd-root,
 body .nfd-root {
-    --nfd-color-primary: #1F2044 !important;
-    --nfd-color-primary-dark: #191936 !important;
-    --nfd-color-primary-light: #2E93EE !important;
-    --nfd-color-primary-lighter: #CDD8DF !important;
-    --nfd-color-secondary: #FFCF00 !important;
-    --nfd-color-secondary-dark: #ECA93E !important;
-    --nfd-color-secondary-light: #FF9144 !important;
-    --nfd-color-secondary-lighter: #FFF8DB !important;
-    --nfd-color-title: #1F2044 !important;
-    --nfd-color-body: #363636 !important;
+    @include nfd-brand-tokens;
 }
 
 html {
