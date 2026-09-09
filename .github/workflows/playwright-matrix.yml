@@ -229,7 +229,7 @@ jobs:
         run: |
           # Playwright's OS dependencies come from Ubuntu's own repos
           # so these third-party sources are unnecessary here and safe to remove.
-          # Scoped to sources.list.d so /etc/apt/sources.list (Ubuntu's own repos) 
+          # Scoped to sources.list.d so /etc/apt/sources.list (Ubuntu's own repos)
           # can never be removed.
           sudo grep -rl 'dl\.google\.com' /etc/apt/sources.list.d/ 2>/dev/null \
             | sudo xargs -r rm -fv || true
