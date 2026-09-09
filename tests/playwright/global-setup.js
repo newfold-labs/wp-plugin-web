@@ -5,26 +5,6 @@ async function globalSetup(config) {
   utils.fancyLog('Running global setup...', 55, 'gray', '');
   
   try {
-    // work around for the flaky activation of the plugin which causes the AI page designer
-    // spec to fail on the first run due to the nfd_site_capabilities transient not being set.
-    utils.fancyLog('🔥 Consuming plugin fresh-activation flag...', 55, 'gray', '');
-    execSync('npx wp-env run cli -- wp option delete nfd_activated_fresh || true', {
-      stdio: 'inherit',
-      encoding: 'utf-8',
-      timeout: 60000,
-    });
-
-    // wp-module-data registers the site with Hiive on the first admin request.
-    // On success HiiveConnection::connect() calls SiteCapabilities::clear(),
-    // which deletes the nfd_site_capabilities transient so pre-arming it keeps 
-    // the suite off Hiive entirely.
-    utils.fancyLog('🚫 Throttling Hiive connection for the test run...', 55, 'gray', '');
-    execSync('npx wp-env run cli -- wp transient set nfd_data_connection_throttle 1 3600 || true', {
-      stdio: 'inherit',
-      encoding: 'utf-8',
-      timeout: 60000,
-    });
-
     // Set permalink structure via WP-CLI (runs before browser is created)
     const permalinkStructure = '/%postname%/';
     utils.fancyLog(`🔗 Setting permalink structure to: ${permalinkStructure}`, 55, 'gray', '');
