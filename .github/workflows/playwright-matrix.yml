@@ -169,6 +169,10 @@ jobs:
             '{core: $core, phpVersion: $phpVersion, plugins: [$plugin]}' \
             > .wp-env.override.json
 
+      - name: Verify patch applied
+        run: |
+          grep -n -B2 -A2 "apt-get" node_modules/@wordpress/env/lib/runtime/docker/docker-config.js
+          
       - name: Install WordPress
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60  # v4.0.0
         with:
