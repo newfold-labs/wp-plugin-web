@@ -134,15 +134,13 @@ jobs:
       - name: NPM Install
         run: npm install --legacy-peer-deps
 
-      - name: Patch wp-env Dockerfile for expired Debian Bullseye release
+      - name: Patch wp-env Dockerfile for dead Debian bullseye mirrors (PHP 7.4/8.0 only)
+        if: matrix.phpVersion == '7.4' || matrix.phpVersion == '8.0'
         run: |
-          DOCKERFILE=$(grep -rl "apt-get" node_modules/@wordpress/env/lib/ 2>/dev/null | head -1 || true)
-          if [ -z "$DOCKERFILE" ]; then
-            echo "No matching file found — skipping patch, will investigate separately."
-            exit 0
-          fi
-          echo "Patching: $DOCKERFILE"
-          sed -i 's/apt-get -qy update/apt-get -qy -o Acquire::Check-Valid-Until=false update/' "$DOCKERFILE"
+          FILE=node_modules/@wordpress/env/lib/runtime/docker/docker-config.js
+          sed -i "s|# Make sure we're working with the latest packages.|# Redirect to permanent archive — bullseye mirrors are EOL/pruned.\nRUN sed -i 's/deb.debian.org/archive.debian.org/g; s/security.debian.org/archive.debian.org/g' /etc/apt/sources.list\n\n# Make sure we're working with the latest packages.|" "$FILE"
+          sed -i 's/apt-get -qy update/apt-get -qy -o Acquire::Check-Valid-Until=false update/' "$FILE"
+          grep -n -B2 -A10 "Redirect to permanent archive" "$FILE"
 
       - name: Build JavaScript
         run: npm run build
