@@ -134,53 +134,6 @@ jobs:
       - name: NPM Install
         run: npm install --legacy-peer-deps
 
-      - name: Patch wp-env for EOL Debian bullseye (PHP 7.4/8.0 only)
-        if: matrix.phpVersion == '7.4' || matrix.phpVersion == '8.0'
-        run: |
-          python3 - <<'PYEOF'
-          import sys
-
-          p = "node_modules/@wordpress/env/lib/runtime/docker/docker-config.js"
-          s = open(p).read()
-
-          # Anchor on wp-env's own "archived Debian" block. It lives only in the
-          # wordpress (Debian) Dockerfile, so the Alpine cli image is untouched.
-          anchor = "RUN sed -i '/buster-updates/d' /etc/apt/sources.list"
-
-          if "bullseye-security" in s:
-              print("already patched; nothing to do")
-              sys.exit(0)
-
-          if s.count(anchor) != 1:
-              sys.exit("anchor found %d times (expected 1); wp-env layout changed" % s.count(anchor))
-
-          inject = "\n".join([
-              anchor,
-              "",
-              "# bullseye (LTS ended 2026-08-31): its InRelease has expired and the",
-              "# security pool is being pruned. archive.debian.org never carried",
-              "# bullseye-security, so drop that suite and take main/updates from the",
-              "# permanent archive instead.",
-              "RUN sed -i '/bullseye-security/d' /etc/apt/sources.list",
-              "RUN sed -i 's|deb.debian.org/debian bullseye|archive.debian.org/debian bullseye|g' /etc/apt/sources.list",
-              "RUN echo 'Acquire::Check-Valid-Until \"false\";' > /etc/apt/apt.conf.d/99no-check-valid-until",
-          ])
-
-          open(p, "w").write(s.replace(anchor, inject))
-          print("patched ok")
-          PYEOF
-
-      - name: Show patched wp-env Dockerfile (PHP 7.4/8.0 only)
-        if: matrix.phpVersion == '7.4' || matrix.phpVersion == '8.0'
-        env:
-          MATRIX_PHP: ${{ matrix.phpVersion }}
-        run: |
-          node -e '
-            const { wordpressDockerFileContents } = require("./node_modules/@wordpress/env/lib/runtime/docker/docker-config.js");
-            const config = { env: { development: { phpVersion: process.env.MATRIX_PHP, port: 8886 } } };
-            process.stdout.write(wordpressDockerFileContents("development", config));
-          '
-
       - name: Build JavaScript
         run: npm run build
 
@@ -224,18 +177,6 @@ jobs:
           ls -la .wp-env*
           npx wp-env run cli wp core version
           echo "WordPress is ready!"
-
-      - name: Drop broken third-party apt repos on the runner
-        run: |
-          # Playwright's OS dependencies come from Ubuntu's own repos
-          # so these third-party sources are unnecessary here and safe to remove.
-          # Scoped to sources.list.d so /etc/apt/sources.list (Ubuntu's own repos)
-          # can never be removed.
-          sudo grep -rl 'dl\.google\.com' /etc/apt/sources.list.d/ 2>/dev/null \
-            | sudo xargs -r rm -fv || true
-          sudo apt-get clean
-          sudo rm -rf /var/lib/apt/lists/*
-          sudo apt-get update
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
