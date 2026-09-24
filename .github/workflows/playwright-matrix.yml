@@ -31,7 +31,12 @@ jobs:
         id: check
         env:
           EVENT_NAME: ${{ github.event_name }}
-          ACTOR: ${{ github.actor }}
+          # Identify Dependabot by the PR *author*, not github.actor. github.actor is
+          # whoever triggered this particular run, so on a `synchronize` event it is the
+          # pusher (a human pushing a fixup commit, or the human who asked Dependabot to
+          # rebase) rather than Dependabot -- which made the gate fall through and run the
+          # whole matrix on every push after the PR was opened.
+          PR_USER: ${{ github.event.pull_request.user.login }}
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
@@ -41,10 +46,17 @@ jobs:
             echo "Not a PR event; running matrix."
             exit 0
           fi
-          # Not Dependabot: always run
-          if [ "$ACTOR" != "dependabot[bot]" ]; then
+          # Not a Dependabot PR: always run
+          case "$PR_USER" in
+            dependabot[[]bot[]]|dependabot-preview[[]bot[]]) is_dependabot=true ;;
+            *) is_dependabot=false ;;
+          esac
+          case "$PR_HEAD_REF" in
+            dependabot/*) is_dependabot=true ;;
+          esac
+          if [ "$is_dependabot" != "true" ]; then
             echo "run_matrix=true" >> "$GITHUB_OUTPUT"
-            echo "Not Dependabot; running matrix."
+            echo "PR author '$PR_USER' (branch '$PR_HEAD_REF') is not Dependabot; running matrix."
             exit 0
           fi
           # Dependabot PR: only run if newfold-labs is involved (title or branch)
