@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a7b52243d72823930627dad1544d978",
+    "content-hash": "38795fae087c0ecf74428bdade73cc6b",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -320,7 +320,7 @@
             "version": "1.0.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/newfold-labs/wp-module-ai-page-designer.git",
+                "url": "git@github.com:newfold-labs/wp-module-ai-page-designer.git",
                 "reference": "7d0acd3315522fd18b9de9a9a0da6581af85a08e"
             },
             "dist": {
@@ -1910,7 +1910,7 @@
             "version": "dev-main-networksolutions",
             "source": {
                 "type": "git",
-                "url": "https://github.com/newfold-labs/wp-module-onboarding.git",
+                "url": "git@github.com:newfold-labs/wp-module-onboarding.git",
                 "reference": "0428edab529a8deefd4138db28bc5ec3d999de01"
             },
             "dist": {
