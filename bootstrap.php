@@ -117,6 +117,14 @@ add_filter(
 	}
 );
 
+/**
+ * The WonderBlocks footer patterns AI SiteGen returns hard-code a Bluehost credit link, because
+ * the brand is not sent with the content-generation request that produces them. Strip those links
+ * out of the generated markup before it reaches the database.
+ */
+require_once WEB_PLUGIN_DIR . '/inc/SiteGenBrandScrub.php';
+SiteGenBrandScrub::init();
+
 // Load AI Page Designer module
 $ai_page_designer_bootstrap = WEB_PLUGIN_DIR . '/vendor/newfold-labs/wp-module-ai-page-designer/bootstrap.php';
 if ( file_exists( $ai_page_designer_bootstrap ) ) {
