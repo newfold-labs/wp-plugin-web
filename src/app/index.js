@@ -14,7 +14,6 @@ import { store as noticesStore } from '@wordpress/notices';
 import AppRoutes from 'App/data/routes';
 import { AppStoreProvider, AppBootContext } from 'App/data/store';
 import ErrorCard from 'App/components/errorCard';
-import { setActiveSubnav } from 'App/util/helpers';
 import { useHandlePageLoad } from 'App/util/hooks';
 import { AppNav } from 'App/components/app-nav';
 import { NotificationFeed } from 'App/components/notifications';
