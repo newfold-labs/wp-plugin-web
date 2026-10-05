@@ -320,7 +320,7 @@
             "version": "1.0.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/newfold-labs/wp-module-ai-page-designer.git",
+                "url": "git@github.com:newfold-labs/wp-module-ai-page-designer.git",
                 "reference": "7d0acd3315522fd18b9de9a9a0da6581af85a08e"
             },
             "dist": {
