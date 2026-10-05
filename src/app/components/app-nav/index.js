@@ -114,7 +114,7 @@ export const SideNavMenuItem = memo( ({ label, name, icon: Icon = null, path, ac
 				to={path}
 				className={({ isActive }) => {
 					const active = isActive || isHomeActive;
-					return `wppw-app-navitem wppw-app-navitem-${ cleanForSlug( label ) } nfd-flex nfd-items-center nfd-gap-3 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 ${active ? 'active nfd-bg-blue-100' : ''}`;
+					return `wppw-app-navitem wppw-app-navitem-${ cleanForSlug( label ) } nfd-flex nfd-items-center nfd-gap-3 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 ${active ? 'active nfd-bg-primary-50' : ''}`;
 				}}
 			>
 				{Icon &&
@@ -146,7 +146,7 @@ export const SideNavMenuSubItem = memo( ({ label, name, path, action }) => {
 			<NavLink
 				onClick={(action && action instanceof Function) ? action : null}
 				to={path} 
-				className={`wppw-app-subnavitem wppw-app-subnavitem-${ cleanForSlug( label ) } nfd-flex nfd-items-center nfd-gap-3 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-body leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-blue-100 [&.active]:nfd-text-title`}
+				className={`wppw-app-subnavitem wppw-app-subnavitem-${ cleanForSlug( label ) } nfd-flex nfd-items-center nfd-gap-3 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-body leading-none hover:nfd-bg-slate-50 [&.active]:nfd-bg-primary-50 [&.active]:nfd-text-title`}
 			>
 				{label}
 			</NavLink>
@@ -259,7 +259,7 @@ export const TopBarNav = () => {
 					to={page.name}
 					className={({ isActive }) => {
 						const active = isActive || isHomeActive;
-						return `wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 nfd-transition-colors ${active ? 'active nfd-bg-blue-100' : ''}`;
+						return `wppw-app-navitem wppw-app-navitem-${page.title} nfd-flex nfd-items-center nfd-gap-2 nfd-px-3 nfd-py-2 nfd-rounded-md nfd-text-sm nfd-font-medium nfd-text-title leading-none hover:nfd-bg-slate-50 nfd-transition-colors ${active ? 'active nfd-bg-primary-50' : ''}`;
 					}}
 				>
 					{page.Icon && <page.Icon className="nfd-w-5 nfd-h-5" />}
