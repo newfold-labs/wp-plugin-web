@@ -1,8 +1,12 @@
 name: Audit PHP Dependencies
 on:
+  # Only the long-lived branches here: every other branch is covered by the
+  # pull_request trigger below, and listing '**' would run this twice on each
+  # push to a branch that has an open PR.
   push:
     branches:
-      - '**'
+      - main
+      - develop
   pull_request:
     types: [opened, edited, synchronize, reopened, ready_for_review]
   workflow_dispatch:
