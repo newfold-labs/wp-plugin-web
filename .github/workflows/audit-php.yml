@@ -1,0 +1,51 @@
+name: Audit PHP Dependencies
+on:
+  # Only the long-lived branches here: every other branch is covered by the
+  # pull_request trigger below, and listing '**' would run this twice on each
+  # push to a branch that has an open PR.
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  audit:
+    name: Run Composer Audit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Unlike the PHPCS job, this one never executes plugin code, so it is not
+      # tied to the plugin's PHP 7.4 floor.
+      - name: Setup PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2.40.0
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer
+
+      # lint-php.yml only validates on '**.php' changes, so a lockfile-only
+      # commit (a Dependabot bump) would otherwise never be checked for drift
+      # between composer.json and composer.lock.
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      # --locked audits the lock file directly: no install, and therefore no
+      # Satis credentials needed. Abandoned packages are reported but do not
+      # fail the run; this gate is for security advisories.
+      - name: Audit dependencies for security advisories
+        run: composer audit --locked --abandoned=report
