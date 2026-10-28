@@ -50,6 +50,15 @@ const webConfig = {
     },
     resolve: { alias },
     plugins: [new ProvidePlugin(mostCommonImports)],
+    /**
+     * Increase the maximum size of the entrypoint and assets.
+     */
+    performance: {
+        maxEntrypointSize: 512 * 1024,
+        maxAssetSize: 512 * 1024,
+        assetFilter: ( file ) =>
+            /\.(js|css)$/.test( file ) && ! file.endsWith( '-rtl.css' ),
+    },
 };
 const mergedConfig = merge(wpScriptsConfig, webConfig);
 
