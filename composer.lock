@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe3a947835bf4e87cfbd25ad0e01e19d",
+    "content-hash": "61e468eaafb996e02d9aedc6a5c6bf84",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -51,7 +51,8 @@
                 "issues": "https://github.com/colinmollenhour/credis/issues",
                 "source": "https://github.com/colinmollenhour/credis/tree/v1.17.1"
             },
-            "time": "2026-03-03T06:50:28+00:00"
+            "time": "2026-03-03T06:50:28+00:00",
+            "published-time": "2026-03-03T06:52:09+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -121,7 +122,8 @@
             "support": {
                 "source": "https://github.com/doctrine/inflector/tree/master"
             },
-            "time": "2017-07-22T12:18:28+00:00"
+            "time": "2017-07-22T12:18:28+00:00",
+            "published-time": "2017-07-22T12:42:49+00:00"
         },
         {
             "name": "newfold-labs/container",
@@ -746,16 +748,16 @@
         },
         {
             "name": "newfold-labs/wp-module-deactivation",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-deactivation.git",
-                "reference": "9a1f077cf03115e046458dd09adcd7dead79420d"
+                "reference": "8aa8b91279ac4ef6d6b26511a7f538dc0848fcd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-deactivation/zipball/9a1f077cf03115e046458dd09adcd7dead79420d",
-                "reference": "9a1f077cf03115e046458dd09adcd7dead79420d",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-deactivation/zipball/8aa8b91279ac4ef6d6b26511a7f538dc0848fcd3",
+                "reference": "8aa8b91279ac4ef6d6b26511a7f538dc0848fcd3",
                 "shasum": ""
             },
             "require": {
@@ -837,20 +839,20 @@
                 }
             ],
             "description": "A Module for handling WordPress brand plugins and modules deactivations",
-            "time": "2026-09-28T18:45:19+00:00"
+            "time": "2026-11-24T12:39:37+00:00"
         },
         {
             "name": "newfold-labs/wp-module-ecommerce",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-ecommerce.git",
-                "reference": "b5607fea341c3aa9e1450962c35a50cce8a43d3b"
+                "reference": "5b4edf78f9820d7afef069877f12b4cbe0b1eab5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-ecommerce/zipball/b5607fea341c3aa9e1450962c35a50cce8a43d3b",
-                "reference": "b5607fea341c3aa9e1450962c35a50cce8a43d3b",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-ecommerce/zipball/5b4edf78f9820d7afef069877f12b4cbe0b1eab5",
+                "reference": "5b4edf78f9820d7afef069877f12b4cbe0b1eab5",
                 "shasum": ""
             },
             "require": {
@@ -925,7 +927,7 @@
                 }
             ],
             "description": "Brand Agnostic eCommerce Experience",
-            "time": "2026-09-28T19:00:42+00:00"
+            "time": "2026-11-24T06:18:53+00:00"
         },
         {
             "name": "newfold-labs/wp-module-facebook",
@@ -2043,16 +2045,16 @@
         },
         {
             "name": "newfold-labs/wp-module-onboarding-data",
-            "version": "1.2.27+ns",
+            "version": "1.2.28+ns",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-onboarding-data.git",
-                "reference": "6e527b7d19a6d2d89e7aaee3fd63d264b312c977"
+                "reference": "fd4c02f50e644779e8621d08daa289bbeefb84ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-onboarding-data/zipball/6e527b7d19a6d2d89e7aaee3fd63d264b312c977",
-                "reference": "6e527b7d19a6d2d89e7aaee3fd63d264b312c977",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-onboarding-data/zipball/fd4c02f50e644779e8621d08daa289bbeefb84ba",
+                "reference": "fd4c02f50e644779e8621d08daa289bbeefb84ba",
                 "shasum": ""
             },
             "require": {
@@ -2135,7 +2137,7 @@
                 }
             ],
             "description": "A non-toggleable module containing a standardized interface for interacting with Onboarding data.",
-            "time": "2026-08-27T09:43:31+00:00"
+            "time": "2026-09-21T12:37:04+00:00"
         },
         {
             "name": "newfold-labs/wp-module-patterns",
@@ -2776,7 +2778,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-12T18:00:11+00:00"
+            "time": "2025-11-12T18:00:11+00:00",
+            "published-time": "2025-11-12T18:01:06+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -3042,7 +3045,8 @@
             "support": {
                 "source": "https://github.com/wp-cli/mustache.php/tree/v2.14.99"
             },
-            "time": "2025-05-06T16:15:37+00:00"
+            "time": "2025-05-06T16:15:37+00:00",
+            "published-time": "2025-05-06T18:29:58+00:00"
         },
         {
             "name": "wp-cli/mustangostang-spyc",
@@ -3229,16 +3233,16 @@
         },
         {
             "name": "wp-cli/wp-config-transformer",
-            "version": "v1.4.7",
+            "version": "v1.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-config-transformer.git",
-                "reference": "dc99e9eadacd6b9dd091056a98b0868b69a48a28"
+                "reference": "9627eacc7e8c78f31c70b1fbf2507c3e539ceac3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-config-transformer/zipball/dc99e9eadacd6b9dd091056a98b0868b69a48a28",
-                "reference": "dc99e9eadacd6b9dd091056a98b0868b69a48a28",
+                "url": "https://api.github.com/repos/wp-cli/wp-config-transformer/zipball/9627eacc7e8c78f31c70b1fbf2507c3e539ceac3",
+                "reference": "9627eacc7e8c78f31c70b1fbf2507c3e539ceac3",
                 "shasum": ""
             },
             "require": {
@@ -3272,9 +3276,10 @@
             "homepage": "https://github.com/wp-cli/wp-config-transformer",
             "support": {
                 "issues": "https://github.com/wp-cli/wp-config-transformer/issues",
-                "source": "https://github.com/wp-cli/wp-config-transformer/tree/v1.4.7"
+                "source": "https://github.com/wp-cli/wp-config-transformer/tree/v1.4.8"
             },
-            "time": "2026-10-06T06:18:26+00:00"
+            "time": "2026-11-18T09:05:30+00:00",
+            "published-time": "2026-11-18T09:07:26+00:00"
         },
         {
             "name": "wp-forge/collection",
@@ -3311,7 +3316,8 @@
                 "issues": "https://github.com/wp-forge/collection/issues",
                 "source": "https://github.com/wp-forge/collection/tree/1.0.3"
             },
-            "time": "2025-12-01T15:57:49+00:00"
+            "time": "2025-12-01T15:57:49+00:00",
+            "published-time": "2025-12-01T15:58:20+00:00"
         },
         {
             "name": "wp-forge/fluent",
@@ -3348,7 +3354,8 @@
                 "issues": "https://github.com/wp-forge/fluent/issues",
                 "source": "https://github.com/wp-forge/fluent/tree/1.0.1"
             },
-            "time": "2022-08-26T17:38:37+00:00"
+            "time": "2022-08-26T17:38:37+00:00",
+            "published-time": "2022-08-26T17:39:14+00:00"
         },
         {
             "name": "wp-forge/helpers",
@@ -3392,7 +3399,8 @@
                 "issues": "https://github.com/wp-forge/helpers/issues",
                 "source": "https://github.com/wp-forge/helpers/tree/2.0.1"
             },
-            "time": "2025-10-24T15:28:10+00:00"
+            "time": "2025-10-24T15:28:10+00:00",
+            "published-time": "2025-10-24T15:28:49+00:00"
         },
         {
             "name": "wp-forge/wp-htaccess-manager",
@@ -3432,7 +3440,8 @@
                 "issues": "https://github.com/wp-forge/wp-htaccess-manager/issues",
                 "source": "https://github.com/wp-forge/wp-htaccess-manager/tree/1.0.2"
             },
-            "time": "2025-01-16T22:09:14+00:00"
+            "time": "2025-01-16T22:09:14+00:00",
+            "published-time": "2025-01-16T22:09:57+00:00"
         },
         {
             "name": "wp-forge/wp-options",
@@ -3469,7 +3478,8 @@
                 "issues": "https://github.com/wp-forge/wp-options/issues",
                 "source": "https://github.com/wp-forge/wp-options/tree/1.1.1"
             },
-            "time": "2024-05-10T14:57:37+00:00"
+            "time": "2024-05-10T14:57:37+00:00",
+            "published-time": "2024-05-10T14:11:54+00:00"
         },
         {
             "name": "wp-forge/wp-query-builder",
@@ -3514,7 +3524,8 @@
                 "issues": "https://github.com/wp-forge/wp-query-builder/issues",
                 "source": "https://github.com/wp-forge/wp-query-builder/tree/1.0.4"
             },
-            "time": "2024-08-22T21:49:41+00:00"
+            "time": "2024-08-22T21:49:41+00:00",
+            "published-time": "2024-08-22T21:50:03+00:00"
         },
         {
             "name": "wp-forge/wp-update-handler",
@@ -3600,7 +3611,8 @@
                 "issues": "https://github.com/wp-forge/wp-upgrade-handler/issues",
                 "source": "https://github.com/wp-forge/wp-upgrade-handler/tree/1.0.1"
             },
-            "time": "2026-11-06T19:06:07+00:00"
+            "time": "2026-11-06T19:06:07+00:00",
+            "published-time": "2026-11-06T19:07:40+00:00"
         },
         {
             "name": "wpscholar/url",
@@ -3644,7 +3656,8 @@
                 "issues": "https://github.com/wpscholar/url/issues",
                 "source": "https://github.com/wpscholar/url/tree/1.2.5"
             },
-            "time": "2024-12-13T17:40:54+00:00"
+            "time": "2024-12-13T17:40:54+00:00",
+            "published-time": "2024-12-13T17:44:14+00:00"
         }
     ],
     "packages-dev": [
@@ -6580,5 +6593,5 @@
     "platform-overrides": {
         "php": "7.4.0"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }
