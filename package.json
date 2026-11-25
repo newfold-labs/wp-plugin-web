@@ -50,7 +50,7 @@
         "@wordpress/env": "^12.2.0",
         "@wordpress/scripts": "^37",
         "axe-core": "^4.14.1",
-        "node-fetch": "^2.7.0",
+        "node-fetch": "^3.3.2",
         "tailwindcss": "^3.4.17",
         "yaml-lint": "^1.7.0"
     },
